@@ -18,15 +18,18 @@ class Registration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.btnNext.setOnClickListener{
             startActivity(Intent(this,ClinicInfo::class.java))
         }
+
         binding.imgBack.setOnClickListener{
             onBackPressed()
         }
 
+
 //        binding.btnNext.setOnClickListener {
-//
+// 
 //            val doctor_name= "Alauddin Ansari"
 //            val qualification= "MBBS"
 //            val additional_qualification= "MCHJ"

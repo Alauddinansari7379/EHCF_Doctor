@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Appointments.UpComingFragment">
+    tools:context=".Appointments.Upcoming.activity.UpComingFragment">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_gravity="end"
@@ -13,206 +15,25 @@
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
         >
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgRefresh"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/ic_baseline_refresh_24"
             >
 
-        </ImageView>
+        </androidx.appcompat.widget.AppCompatImageView>
     </LinearLayout>
-
-    <androidx.cardview.widget.CardView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCancled"
         android:layout_width="match_parent"
+        android:layout_margin="5dp"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        app:cardCornerRadius="10dp">
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    </androidx.recyclerview.widget.RecyclerView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="July 22, 04:45 AM"
-                    android:textColor="#2A2426"
-                    android:textStyle="bold">
-
-                </TextView>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="15dp"
-                android:background="#E7EDF5">
-
-            </View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Menpany Pooluy"
-                        android:textColor="@color/black"
-                        android:textStyle="bold">
-
-                    </TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Booking Id#1"
-                        android:textColor="#686868"
-                        android:textStyle="bold">
-
-                    </TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Test"
-                        android:textColor="@color/black"
-                        android:textStyle="bold">
-
-                    </TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Completed"
-                        android:textColor="#686868"
-                        android:textStyle="bold">
-
-                    </TextView>
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        app:cardCornerRadius="10dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="July 22, 04:45 AM"
-                    android:textColor="#2A2426"
-                    android:textStyle="bold">
-
-                </TextView>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="15dp"
-                android:background="#E7EDF5">
-
-            </View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Menpany Pooluy"
-                        android:textColor="@color/black"
-                        android:textStyle="bold">
-
-                    </TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Booking Id#1"
-                        android:textColor="#686868"
-                        android:textStyle="bold">
-
-                    </TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Test"
-                        android:textColor="@color/black"
-                        android:textStyle="bold">
-
-                    </TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="Completed"
-                        android:textColor="#686868"
-                        android:textStyle="bold">
-
-                    </TextView>
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
 
 
 </LinearLayout>

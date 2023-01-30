@@ -2,7 +2,9 @@ package com.example.ehcf_doctor.Retrofit
 
 
 import com.example.ehcf.PhoneNumber.ModelReponse.ForgotPasswordResponse
+import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
 import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
+import com.example.ehcf_doctor.ManageSlots.model.ModelManageSlotRes
 import com.example.ehcf_doctor.Profile.modelResponse.ResetPassResponse
 import com.example.ehcf_doctor.Registration.modelResponse.RegistationResponse
 import retrofit2.Call
@@ -30,6 +32,10 @@ interface ApiInterface {
             @Field("fcm_token") fcm_token:String,
             @Field("password") password:String,
             @Field("email") email:String,
+            @Field("opening_time") opening_time:String,
+            @Field("closing_time") closing_time:String,
+            @Field("latitude") latitude:String,
+            @Field("longitude") longitude:String,
     ): Call<RegistationResponse>
 
     @FormUrlEncoded
@@ -59,6 +65,18 @@ interface ApiInterface {
         @Field("id") id:String,
         @Field("password") password:String,
     ): Call<ResetPassResponse>
+
+    @FormUrlEncoded
+    @POST("get_bookings")
+    fun slotManagement(
+        @Field("doctor_id") id:String,
+    ): Call<ModelManageSlotRes>
+
+    @FormUrlEncoded
+    @POST("get_bookings")
+    fun getBooking(
+        @Field("doctor_id") id:String,
+    ): Call<ModelUpComingResponse>
 
 
 

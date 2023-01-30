@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/activity_my_slots_timings_new.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_otpverification.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/layout/activity_pricing_and_services.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_regirstration_test.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_registration_year.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_reset_password.xml" value="0.25" />
@@ -43,6 +44,11 @@
         <entry key="app/src/main/res/layout/fragment_prescription_pending.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_up_coming.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/search_dialog_consolidated_list.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/layout/single_row_cancelled.xml" value="0.24010416666666667" />
+        <entry key="app/src/main/res/layout/single_row_manage_slot.xml" value="0.24010416666666667" />
+        <entry key="app/src/main/res/layout/single_row_upcoming.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/time_dialog.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/menu/bootom_nav_menu.xml" value="0.18333333333333332" />
       </map>
     </option>

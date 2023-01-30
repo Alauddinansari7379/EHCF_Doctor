@@ -13,6 +13,7 @@ import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
 import com.example.ehcf_doctor.MainActivity
 import com.example.ehcf_doctor.ForgotPassword.MobileNumber
 import com.example.ehcf_doctor.Prescription.AddPrescription
+import com.example.ehcf_doctor.Registration.RegirstrationTest
 import com.example.ehcf_doctor.Registration.Registration
 import com.example.ehcf_doctor.databinding.ActivitySignInBinding
 import com.example.myrecyview.apiclient.ApiClient
@@ -56,7 +57,7 @@ class SignIn : AppCompatActivity() {
             startActivity(Intent(this, MobileNumber::class.java))
         }
         binding.tvSignUp.setOnClickListener{
-            startActivity(Intent(this, Registration::class.java))
+            startActivity(Intent(this, RegirstrationTest::class.java))
         }
         binding.btnSignIn.setOnClickListener{
             if (binding.edtPhone.text!!.isEmpty()) {

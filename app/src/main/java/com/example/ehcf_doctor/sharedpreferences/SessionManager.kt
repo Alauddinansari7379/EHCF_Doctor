@@ -17,6 +17,8 @@ class SessionManager(context: Context?) {
         private const val EMAIL="email"
         private const val FCM_TOKEN="fcm_token"
         private const val GENDER="gender"
+        private const val LATITUDE="latitude"
+        private const val LONGITUDE="longitude"
         private const val ID="id"
         private const val C_ID="c_id"
         private const val S_STAT="c_stat"
@@ -125,6 +127,15 @@ class SessionManager(context: Context?) {
         set(gender) {
             prefs.edit().putString(GENDER, gender).apply()
         }
-
+    var latitude: String?
+        get() = prefs.getString(LATITUDE, "")
+        set(latitude) {
+            prefs.edit().putString(LATITUDE, latitude).apply()
+        }
+    var longitude: String?
+        get() = prefs.getString(LONGITUDE, "")
+        set(longitude) {
+            prefs.edit().putString(LONGITUDE, longitude).apply()
+        }
 
 }

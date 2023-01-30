@@ -27,6 +27,9 @@
         android:theme="@style/Theme.EHCF_Doctor"
         tools:targetApi="31">
         <activity
+            android:name=".Registration.RegirstrationTest"
+            android:exported="false" />
+        <activity
             android:name=".Prescription.AddPrescription"
             android:exported="false" />
         <activity
@@ -34,8 +37,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Appointments.Appointments"
             android:exported="false" />
@@ -43,10 +46,10 @@
             android:name=".MySlots.MySlotsTimingsNew"
             android:exported="false" />
         <activity
-            android:name=".ManageSlots.ManageSlotsSeassion"
+            android:name=".ManageSlots.activity.ManageSlotsSeassion"
             android:exported="false" />
         <activity
-            android:name=".ManageSlots.ManageSlots"
+            android:name=".ManageSlots.activity.ManageSlots"
             android:exported="false" />
         <activity
             android:name=".MySlots.MySlotTimings"
@@ -72,7 +75,6 @@
         <activity
             android:name=".Registration.ClinicInfo"
             android:exported="false" />
-
         <activity
             android:name=".Registration.Registration"
             android:exported="false" />

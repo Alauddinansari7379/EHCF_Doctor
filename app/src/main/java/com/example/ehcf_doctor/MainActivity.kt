@@ -15,7 +15,7 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
 import com.example.ehcf_doctor.Dashboard.Dashboard
 import com.example.ehcf_doctor.Login.activity.SignIn
-import com.example.ehcf_doctor.ManageSlots.ManageSlotsSeassion
+import com.example.ehcf_doctor.ManageSlots.activity.ManageSlotsSeassion
 import com.example.ehcf_doctor.MySlots.MySlotsTimingsNew
 import com.example.ehcf_doctor.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView

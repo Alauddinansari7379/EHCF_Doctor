@@ -113,4 +113,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.1'
     implementation 'com.google.firebase:firebase-analytics'
 
+    //circuleImage
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+
 }
