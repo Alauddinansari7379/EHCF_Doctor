@@ -1,16 +1,9 @@
-package com.example.ehcf_doctor.Registration
+package com.example.ehcf_doctor.Registration.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.ehcf.Helper.myToast
-import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.Registration.modelResponse.RegistationResponse
 import com.example.ehcf_doctor.databinding.ActivityRegistrationBinding
-import com.example.myrecyview.apiclient.ApiClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class Registration : AppCompatActivity() {
     private lateinit var binding:ActivityRegistrationBinding
@@ -20,7 +13,7 @@ class Registration : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnNext.setOnClickListener{
-            startActivity(Intent(this,ClinicInfo::class.java))
+            startActivity(Intent(this, ClinicInfo::class.java))
         }
 
         binding.imgBack.setOnClickListener{

@@ -26,10 +26,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
             <androidx.constraintlayout.utils.widget.ImageFilterButton
                 android:id="@+id/drawerClick"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_baseline_dehaze_24">
@@ -43,6 +44,43 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:gravity="end"
+    android:layout_marginEnd="10dp"
+    android:layout_height="wrap_content">
+<!--    <Switch-->
+<!--        android:id="@+id/idSwitch"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@color/black"-->
+<!--        android:checked="false"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        tools:ignore="UseSwitchCompatOrMaterialXml" />-->
+    <Button
+        android:id="@+id/btnOnline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Online"
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/Green"
+        >
+
+    </Button>
+    <Button
+        android:id="@+id/btnOffline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Offline"
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/Red"
+        >
+
+    </Button>
+
+</LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>
 

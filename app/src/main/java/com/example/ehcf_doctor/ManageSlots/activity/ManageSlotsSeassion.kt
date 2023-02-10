@@ -1,25 +1,29 @@
 package com.example.ehcf_doctor.ManageSlots.activity
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import androidx.recyclerview.widget.RecyclerView
+import android.os.Handler
+import android.os.Looper
+import android.view.View
+import androidx.core.os.postDelayed
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
-import com.example.ehcf_doctor.ManageSlots.adapter.AdapterManageSlot
-import com.example.ehcf_doctor.ManageSlots.model.ModelManageSlotRes
-import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.Retrofit.ApiInterface
+import com.example.ehcf_doctor.Login.activity.SignIn
+import com.example.ehcf_doctor.ManageSlots.adapter.AdapterSlotsList
+import com.example.ehcf_doctor.ManageSlots.model.ModelDeleteSlot
+import com.example.ehcf_doctor.ManageSlots.model.ModelSlotList
 import com.example.ehcf_doctor.databinding.ActivityManageSlotsSeassionBinding
+import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
-class ManageSlotsSeassion : AppCompatActivity() {
+class ManageSlotsSeassion : AppCompatActivity(),AdapterSlotsList.DeleteSlot {
     private val context: Context =this@ManageSlotsSeassion
     var progressDialog : ProgressDialog?=null
     var relationList = ArrayList<String>()
@@ -35,19 +39,13 @@ class ManageSlotsSeassion : AppCompatActivity() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
-       // apiCall()
-        relationList.add("Sunday")
-        relationList.add("Monday")
-        relationList.add("Tuesday")
-        relationList.add("Wednesday")
-        relationList.add("Thursday")
-        relationList.add("Friday")
-        relationList.add("Saturday")
-        binding.spinnerDays.adapter =
-            ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, relationList)
+        Handler(Looper.getMainLooper()).postDelayed(300) {
+            apiCall()
+        }
     }
 
-    private fun apiCall(){
+    @SuppressLint("NotifyDataSetChanged")
+    private fun apiCall() {
 
         progressDialog = ProgressDialog(this@ManageSlotsSeassion)
         progressDialog!!.setMessage("Loading..")
@@ -56,35 +54,130 @@ class ManageSlotsSeassion : AppCompatActivity() {
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
 
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            //.baseUrl("https://jsonplaceholder.typicode.com/")
-            .baseUrl("https://ehcf.thedemostore.in/api/customer/")
-            .build()
-            .create(ApiInterface::class.java)
 
-        val retrofitData = retrofitBuilder.slotManagement(sessionManager.id.toString())
-        retrofitData.enqueue(object : Callback<ModelManageSlotRes> {
+        ApiClient.apiService.getTimeSlot(sessionManager.id.toString()).enqueue(object :Callback<ModelSlotList>
+        {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
-                call: Call<ModelManageSlotRes>,
-                response: Response<ModelManageSlotRes>
-            )
-            {
-                val recyclerView = findViewById<RecyclerView>(R.id.rvManageSlot)
-                recyclerView.apply {
-                    adapter = AdapterManageSlot(context, response.body()!!)
+                call: Call<ModelSlotList>,
+                response: Response<ModelSlotList>
+            ) {
+                if (response.body()!!.result.isEmpty()) {
+                    binding.tvNoDataFound.visibility = View.VISIBLE
+                    myToast(this@ManageSlotsSeassion,"No Slot Found")
                     progressDialog!!.dismiss()
 
+                } else {
+                    binding.rvManageSlot.apply {
+                        binding.tvNoDataFound.visibility = View.GONE
+                        // myToast(this@ShuduleTiming, response.body()!!.message)
+                        adapter = AdapterSlotsList(this@ManageSlotsSeassion, response.body()!!,this@ManageSlotsSeassion)
+                        progressDialog!!.dismiss()
+
+                    }
                 }
             }
 
-            override fun onFailure(call: Call<ModelManageSlotRes>, t: Throwable) {
-                t.message?.let { myToast(this@ManageSlotsSeassion, it)
-                    progressDialog!!.dismiss()
+            override fun onFailure(call: Call<ModelSlotList>, t: Throwable) {
 
-                }
             }
+
+
         })
     }
 
-}
+    private fun callAPIDelete(slotId: String){
+        progressDialog = ProgressDialog(this@ManageSlotsSeassion)
+        progressDialog!!.setMessage("Loading..")
+        progressDialog!!.setTitle("Please Wait")
+        progressDialog!!.isIndeterminate = false
+        progressDialog!!.setCancelable(true)
+        progressDialog!!.show()
+
+
+        ApiClient.apiService.deleteSlot(slotId).enqueue(object :Callback<ModelDeleteSlot>
+        {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onResponse(
+                call: Call<ModelDeleteSlot>,
+                response: Response<ModelDeleteSlot>
+            ) {
+                if (response.body()!!.status==1) {
+                    myToast(this@ManageSlotsSeassion,response.body()!!.message)
+                    overridePendingTransition(0, 0)
+                    finish()
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
+                 //   binding.rvManageSlot.adapter!!.notifyDataSetChanged()
+                    // myToast(requireActivity(),"No Data Found")
+                    progressDialog!!.dismiss()
+
+                } else {
+                    myToast(this@ManageSlotsSeassion,response.body()!!.message)
+                }
+            }
+
+
+            override fun onFailure(call: Call<ModelDeleteSlot>, t: Throwable) {
+
+            }
+
+
+        })
+
+
+    }
+     override fun deleteSlotApi(slotId: String) {
+         SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+             .setTitleText("Are you sure want to Delete?")
+             .setCancelText("No")
+             .setConfirmText("Yes")
+             .showCancelButton(true)
+             .setConfirmClickListener { sDialog ->
+                 sDialog.cancel()
+                 callAPIDelete(slotId)
+
+             }
+             .setCancelClickListener { sDialog ->
+                 sDialog.cancel()
+             }
+             .show()
+
+     }
+     override fun updateSlotApi(slotId: String) {
+
+         progressDialog = ProgressDialog(this@ManageSlotsSeassion)
+         progressDialog!!.setMessage("Loading..")
+         progressDialog!!.setTitle("Please Wait")
+         progressDialog!!.isIndeterminate = false
+         progressDialog!!.setCancelable(true)
+         progressDialog!!.show()
+
+
+         ApiClient.apiService.deleteSlot(slotId).enqueue(object :Callback<ModelDeleteSlot>
+         {
+             @SuppressLint("NotifyDataSetChanged")
+             override fun onResponse(
+                 call: Call<ModelDeleteSlot>,
+                 response: Response<ModelDeleteSlot>
+             ) {
+                 if (response.body()!!.status==1) {
+                     myToast(this@ManageSlotsSeassion,response.body()!!.message)
+                     // myToast(requireActivity(),"No Data Found")
+                     progressDialog!!.dismiss()
+                     apiCall()
+                 } else {
+                     myToast(this@ManageSlotsSeassion,response.body()!!.message)
+                 }
+             }
+
+
+             override fun onFailure(call: Call<ModelDeleteSlot>, t: Throwable) {
+
+             }
+
+
+         })
+     }
+
+ }

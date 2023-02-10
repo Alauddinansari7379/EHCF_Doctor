@@ -1,11 +1,9 @@
-package com.example.ehcf_doctor.Registration
+package com.example.ehcf_doctor.Registration.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ehcf_doctor.Login.activity.SignIn
-import com.example.ehcf_doctor.MainActivity
-import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityTermsAndConditionsBinding
 
 class TermsAndConditions : AppCompatActivity() {

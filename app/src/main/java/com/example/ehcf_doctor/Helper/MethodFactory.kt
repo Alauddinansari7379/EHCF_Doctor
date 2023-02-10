@@ -111,6 +111,11 @@ fun changeDateFormat2(date:String):String{
     val out = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
     return out.format(inf.parse(date))
 }
+fun changeDateFormat3(date:String):String{
+    val inf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
+    val out = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
+    return out.format(inf.parse(date).toString())
+}
 
 var currentDate: String = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
 var formattedDate: Int = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date()).toInt()

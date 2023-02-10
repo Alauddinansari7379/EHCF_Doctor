@@ -8,7 +8,7 @@ import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.example.ehcf_doctor.Appointments.Cancelled.activity.CancelledFragment
-import com.example.ehcf_doctor.Appointments.Consulted.ConsultedFragment
+import com.example.ehcf_doctor.Appointments.Consulted.activity.ConsultedFragment
 import com.example.ehcf_doctor.Appointments.Upcoming.activity.UpComingFragment
 import com.example.ehcf_doctor.databinding.ActivityApointmentsBinding
 import com.google.android.material.tabs.TabLayout

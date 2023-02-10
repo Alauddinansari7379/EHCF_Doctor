@@ -12,7 +12,7 @@ import android.util.Log
 import androidx.core.widget.addTextChangedListener
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.PhoneNumber.ModelReponse.ForgotPasswordResponse
-import com.example.ehcf_doctor.Registration.Registration
+import com.example.ehcf_doctor.Registration.activity.Registration
 import com.example.ehcf_doctor.databinding.ActivityOtpverificationBinding
 import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call

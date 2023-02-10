@@ -4,12 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehcf_doctor.ManageSlots.model.ModelManageSlotRes
+import com.example.ehcf_doctor.ManageSlots.model.ModelSlotList
 import com.example.ehcf_doctor.R
 
 
-class AdapterManageSlot(val context: Context, private val list: ModelManageSlotRes) :
+class AdapterManageSlot(val context: Context, private val list: ModelSlotList) :
     RecyclerView.Adapter<AdapterManageSlot.MyViewHolder>() {
 
 
@@ -22,6 +26,9 @@ class AdapterManageSlot(val context: Context, private val list: ModelManageSlotR
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // holder.SrNo.text= "${position+1}"
 
+        holder.slotId.text= "${position+1}"
+        holder.startTime.text= list.result[position].start_time
+        holder.endTime.text= list.result[position].end_time
 //        holder.name.text = list.result[position].category_name.toString()
 //        Picasso.get().load(list.result[position].category_image).into(holder.image)
 
@@ -37,10 +44,10 @@ class AdapterManageSlot(val context: Context, private val list: ModelManageSlotR
     }
 
     open class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        val name: TextView = itemView.findViewById(R.id.tvNameSpeci)
-//        val image: ImageView = itemView.findViewById(R.id.cardSpecia)
-//        val cardView: CardView = itemView.findViewById(R.id.cardView)
-
+        var startTime: Button =itemView.findViewById(R.id.btnStartTimeManage);
+        var endTime: Button =itemView.findViewById(R.id.btnEndTimeManage);
+        var slotId: TextView =itemView.findViewById(R.id.tvSlotNumberManage);
+        var cardView: CardView =itemView.findViewById(R.id.cardManage);
 
     }
 }

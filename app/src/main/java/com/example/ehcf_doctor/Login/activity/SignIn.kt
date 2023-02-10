@@ -10,11 +10,10 @@ import android.util.Log
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
-import com.example.ehcf_doctor.MainActivity
+import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.ForgotPassword.MobileNumber
 import com.example.ehcf_doctor.Prescription.AddPrescription
-import com.example.ehcf_doctor.Registration.RegirstrationTest
-import com.example.ehcf_doctor.Registration.Registration
+import com.example.ehcf_doctor.Registration.activity.RegirstrationTest
 import com.example.ehcf_doctor.databinding.ActivitySignInBinding
 import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
@@ -94,6 +93,7 @@ class SignIn : AppCompatActivity() {
 
                         sessionManager.isLogin = true
                         sessionManager.fcmToken = response.body()!!.result.fcm_token
+                        sessionManager.onlineStatus = response.body()!!.result.online_status
                         sessionManager.password =response.body()!!.result.password
                         sessionManager.doctorName =response.body()!!.result.doctor_name
                         sessionManager.email =response.body()!!.result.email
@@ -119,6 +119,7 @@ class SignIn : AppCompatActivity() {
                         Log.e("Alauddin","sessionManager.gender-${sessionManager.gender}")
                         Log.e("Alauddin","ssionManager.hospitalID-${sessionManager.hospitalID}")
                         Log.e("Alauddin","ssionManager.hospitalID-${sessionManager.hospitalID}")
+                        Log.e("Alauddin","sessionManager.onlineStatus-${sessionManager.onlineStatus}")
 
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP

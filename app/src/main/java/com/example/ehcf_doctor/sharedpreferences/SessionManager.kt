@@ -35,6 +35,7 @@ class SessionManager(context: Context?) {
         private const val PRE_EXISTING_DESEASE="pre_existing_desease"
         private const val PROFILE_PICTURE="profile_picture"
         private const val STATUS="status"
+        private const val ONLINE_STATUS="online_status"
         private const val UPDATED_AT="updated_at"
         private const val WALLET="wallet"
     }
@@ -77,7 +78,13 @@ class SessionManager(context: Context?) {
     var status: String?
         get() = prefs.getString(STATUS, "")
         set(status) {
-            prefs.edit().putString(S_STAT, status).apply()
+            prefs.edit().putString(STATUS, status).apply()
+        }
+
+    var onlineStatus: String?
+        get() = prefs.getString(ONLINE_STATUS, "")
+        set(onlineStatus) {
+            prefs.edit().putString(ONLINE_STATUS, onlineStatus).apply()
         }
     var qualification: String?
         get() = prefs.getString(QUALIFICATION, "")
