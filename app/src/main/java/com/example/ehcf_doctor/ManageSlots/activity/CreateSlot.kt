@@ -73,6 +73,7 @@ class CreateSlot : AppCompatActivity() {
                 DateFormat.getDateInstance().format(newDate.time)
                 val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(newDate.time)
                 binding.tvDate.text = date
+
                 selectedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(newDate.time)
                 Log.e("selectedDate", selectedDate)
             },
@@ -80,6 +81,9 @@ class CreateSlot : AppCompatActivity() {
             newCalendar1[Calendar.MONTH],
             newCalendar1[Calendar.DAY_OF_MONTH]
         )
+        //datePicker.datePicker.minDate = System.currentTimeMillis() - 1000
+        datePicker.datePicker.minDate = System.currentTimeMillis()
+
 
         binding.btnDate.setOnClickListener {
             datePicker.show()
@@ -93,6 +97,8 @@ class CreateSlot : AppCompatActivity() {
         }
 
         binding.btnCreate.setOnClickListener {
+            val startT=binding.tvStartTime.text.toString()
+            val endT=binding.tvEndTime.text.toString()
             if (binding.tvStartTime.text=="00:00:00") {
                 SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("Please select Start Time !")
@@ -115,7 +121,6 @@ class CreateSlot : AppCompatActivity() {
                     .showCancelButton(true)
                     .setConfirmClickListener { sDialog ->
                         sDialog.cancel()
-
                     }
                     .setCancelClickListener { sDialog ->
                         sDialog.cancel()
@@ -124,9 +129,39 @@ class CreateSlot : AppCompatActivity() {
                 return@setOnClickListener
 
             }
-             else {
-                apiCall()
-            }
+             else if (startT==endT && startT<endT ) {
+                 SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                     .setTitleText("Start Time must be grater End Time !")
+                     .setConfirmText("Ok")
+                     .showCancelButton(true)
+                     .setConfirmClickListener { sDialog ->
+                         sDialog.cancel()
+
+                     }
+                     .setCancelClickListener { sDialog ->
+                         sDialog.cancel()
+                     }
+                     .show()
+                 return@setOnClickListener
+             }
+                 else if ( startT>endT ){
+                 SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                     .setTitleText("End Time must be grater Start Time !")
+                     .setConfirmText("Ok")
+                     .showCancelButton(true)
+                     .setConfirmClickListener { sDialog ->
+                         sDialog.cancel()
+
+                     }
+                     .setCancelClickListener { sDialog ->
+                         sDialog.cancel()
+                     }
+                     .show()
+                 return@setOnClickListener
+            }else{
+                 apiCall()
+
+             }
         }
     }
 

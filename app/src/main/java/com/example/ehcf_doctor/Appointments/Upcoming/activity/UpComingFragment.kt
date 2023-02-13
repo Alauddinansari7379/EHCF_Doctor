@@ -141,11 +141,13 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
                 response: Response<ModelUpComingResponse>
             ) {
                 if (response.body()!!.result.isEmpty()) {
-                     myToast(requireActivity(),"No Data Found")
+                    binding.tvNoDataFound.visibility = View.VISIBLE
+                   // myToast(requireActivity(),"No Data Found")
                     progressDialog!!.dismiss()
 
                 } else {
                     binding.rvCancled.apply {
+                        binding.tvNoDataFound.visibility = View.GONE
                         adapter = AdapterUpComing(requireContext(), response.body()!!, this@UpComingFragment)
                         progressDialog!!.dismiss()
 
