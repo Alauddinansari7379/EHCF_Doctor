@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -45,6 +46,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
     def nav_version = "2.5.2"
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -118,7 +120,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.4.0'
     implementation 'com.google.firebase:firebase-appdistribution-api-ktx:16.0.0-beta05'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.1'
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
     implementation 'com.google.firebase:firebase-analytics'
+
 
     //circuleImage
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -130,6 +134,5 @@ dependencies {
 //    implementation 'com.github.f0ris.sweetalert:library:1.6.2'
 //    implementation 'com.github.PonnamKarthik:SearchableSpinner:1.3.1'
 //    implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
-
 
 }

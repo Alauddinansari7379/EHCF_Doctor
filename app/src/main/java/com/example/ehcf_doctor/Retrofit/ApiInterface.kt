@@ -151,4 +151,14 @@ interface ApiInterface {
         @Query("id") id: String?,
         @Query("online_status") online_status: String?,
     ): Call<ModelOnline>
+
+    @POST("create_prescription")
+    fun createPrescription(
+        @Query("booking_id") booking_id: String?,
+        @Query("subjective_information") subjective_information: String?,
+        @Query("objective_information") objective_information: String?,
+        @Query("assessment") assessment: String?,
+        @Query("plan") plan: String?,
+        @Query("doctor_notes") doctor_notes: String?,
+    ): Call<ModelOnline>
 }

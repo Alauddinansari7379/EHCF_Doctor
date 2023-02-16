@@ -11,6 +11,7 @@ import android.os.*
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
@@ -243,5 +244,7 @@ fun covertTimeToText(dataDate: String): String {
     }
     return convTime
 
+//screenshoot Not allow
+   // window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
 
 }

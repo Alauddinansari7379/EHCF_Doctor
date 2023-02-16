@@ -137,7 +137,7 @@
     <!--        app:headerLayout="@layout/drawer_header"-->
     <!--        app:menu="@menu/navigation_menu" />-->
     <include
-        layout="@layout/dravelttest"
+        layout="@layout/drawer"
         android:id="@+id/includedrawar1">
 
     </include>

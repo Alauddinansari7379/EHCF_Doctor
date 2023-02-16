@@ -35,6 +35,7 @@
         <entry key="app/src/main/res/layout/activity_registration_year.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_reset_password.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.27940383461001805" />
         <entry key="app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_update_slot.xml" value="0.25" />
         <entry key="app/src/main/res/layout/creatslot_dialog.xml" value="0.25" />
@@ -51,6 +52,7 @@
         <entry key="app/src/main/res/layout/search_dialog_consolidated_list.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/single_row_cancelled.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_row_manage_slot.xml" value="0.24010416666666667" />
+        <entry key="app/src/main/res/layout/single_row_pending_prescription.xml" value="0.33" />
         <entry key="app/src/main/res/layout/single_row_slot_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/single_row_slot_timing.xml" value="0.28589950111392426" />
         <entry key="app/src/main/res/layout/single_row_upcoming.xml" value="0.25" />

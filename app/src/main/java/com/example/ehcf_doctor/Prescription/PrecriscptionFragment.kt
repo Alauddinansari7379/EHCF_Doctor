@@ -28,11 +28,9 @@ class PrecriscptionFragment : Fragment() {
             pager = binding.viewPager
             tab = binding.tabs
 
-
-
             val adapter = ViewPagerAdapter1(childFragmentManager)
 
-            adapter.addFragment(PrescriptionPendingFragment(), "PrescriptionPending")
+            adapter.addFragment(PrescriptionPendingFragment(), "Prescription Pending")
             adapter.addFragment(PrescribedFragment(), "Prescribed")
             pager.adapter = adapter
             tab.setupWithViewPager(pager)
