@@ -46,6 +46,8 @@ class HomeFragment : Fragment() {
             .addOnCompleteListener { task ->
                 var msg = "Subscribed"
                 if (!task.isSuccessful) {
+
+
                     msg = "Subscribe failed"
                 }
                 Log.d(TAG, msg)
