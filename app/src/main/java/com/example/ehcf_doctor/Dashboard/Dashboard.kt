@@ -33,6 +33,8 @@ class Dashboard : AppCompatActivity() {
 
         binding.imgBack.setOnClickListener {
             onBackPressed()
+
+
         }
 
         val currentDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
