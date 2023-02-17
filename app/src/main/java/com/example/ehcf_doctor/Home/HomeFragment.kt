@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
     @SuppressLint("LogNotTimber")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentHomeBinding.bind(view)
         sessionManager = SessionManager(requireContext())
 
