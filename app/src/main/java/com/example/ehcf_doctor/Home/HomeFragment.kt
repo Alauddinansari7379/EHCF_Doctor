@@ -42,6 +42,7 @@ class HomeFragment : Fragment() {
         doctorname= sessionManager.doctorName.toString()
        binding.tvDoctorName.text= doctorname
         Log.e("DoctorNAme,", "$doctorname")
+        Log.e("DoctorId,", "${sessionManager.id}")
 
         Firebase.messaging.subscribeToTopic("Doctor")
             .addOnCompleteListener { task ->

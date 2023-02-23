@@ -22,7 +22,7 @@
         android:label="Profile" />
     <fragment
         android:id="@+id/fragment_booking"
-        android:name="com.example.ehcf_doctor.BookingFragment"
+        android:name="com.example.ehcf_doctor.Booking.activity.BookingFragment"
         tools:layout="@layout/fragment_booking"
         android:label="fragment_booking2"
         />

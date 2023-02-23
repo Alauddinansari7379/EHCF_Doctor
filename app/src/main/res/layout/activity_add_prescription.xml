@@ -11,15 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="?android:attr/selectableItemBackground"
             android:src="@drawable/ic_baseline_arrow_back_24"
             >
-        </ImageView>
-        <TextView
+        </androidx.appcompat.widget.AppCompatImageView>
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -28,7 +28,7 @@
             android:textColor="@color/black"
             android:text="Add Prescription">
 
-        </TextView>
+        </androidx.appcompat.widget.AppCompatTextView>
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,14 +36,14 @@
         android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:text="Subjective Information">
 
-        </TextView>
+        </androidx.appcompat.widget.AppCompatTextView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -209,6 +209,31 @@
         </EditText>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="Doctor Notes">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="*"
+            android:textColor="#E91E63">
+
+        </TextView>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_margin="10dp"

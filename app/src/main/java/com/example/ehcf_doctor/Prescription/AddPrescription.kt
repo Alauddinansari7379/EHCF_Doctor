@@ -14,6 +14,7 @@ import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.MainActivity.model.ModelOnline
+import com.example.ehcf_doctor.Prescription.model.ModelCreatePrescription
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Registration.modelResponse.ModelSpecilList
 import com.example.ehcf_doctor.Registration.modelResponse.RegistationResponse
@@ -40,6 +41,37 @@ class AddPrescription : AppCompatActivity() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
+        binding.btnAddPrescription.setOnClickListener {
+            if (binding.edtSubjectiveInformation.text.isEmpty()) {
+                binding.edtSubjectiveInformation.error = "Enter SubjectiveInformation"
+                binding.edtSubjectiveInformation.requestFocus()
+                return@setOnClickListener
+            }
+            if (binding.edtObjectiveInformation.text.isEmpty()) {
+                binding.edtObjectiveInformation.error = "Enter ObjectiveInformation"
+                binding.edtObjectiveInformation.requestFocus()
+                return@setOnClickListener
+            }
+            if (binding.edtAssessment.text.isEmpty()) {
+                binding.edtAssessment.error = "Enter Assessment"
+                binding.edtAssessment.requestFocus()
+                return@setOnClickListener
+            }
+            if (binding.edtPlan.text.isEmpty()) {
+                binding.edtPlan.error = "Enter Plan"
+                binding.edtPlan.requestFocus()
+                return@setOnClickListener
+            }
+            if (binding.edtDoctorNotes.text.isEmpty()) {
+                binding.edtDoctorNotes.error = "Enter Doctor Notes"
+                binding.edtDoctorNotes.requestFocus()
+                return@setOnClickListener
+            }else{
+                apiCall()
+
+            }
+
+        }
     }
     private fun apiCall() {
         progressDialog = ProgressDialog(this@AddPrescription)
@@ -56,33 +88,28 @@ class AddPrescription : AppCompatActivity() {
         val doctorNotes=binding.edtDoctorNotes.text.toString()
 
 
-        ApiClient.apiService.createPrescription(bookingId,subjective,objective,assessment,plan,doctorNotes)
-            .enqueue(object : Callback<ModelOnline> {
+        ApiClient.apiService.createPrescription("1",subjective,objective,assessment,plan,doctorNotes)
+            .enqueue(object : Callback<ModelCreatePrescription> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
-                    call: Call<ModelOnline>, response: Response<ModelOnline>
+                    call: Call<ModelCreatePrescription>, response: Response<ModelCreatePrescription>
                 ) {
                     Log.e("Ala", "${response.body()!!}")
-                    Log.e("Ala", response.body()!!.message)
                     Log.e("Ala", "${response.body()!!.status}")
 
                     if (response.body()!!.status == 1) {
-                        myToast(this@AddPrescription, response.body()!!.message)
+                        myToast(this@AddPrescription, response.body()!!.result)
                         progressDialog!!.dismiss()
-                        val intent = Intent(applicationContext, SignIn::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        finish()
-                        startActivity(intent)
+                        onBackPressed()
                     } else {
-                        myToast(this@AddPrescription, "${response.body()!!.message}")
+                        myToast(this@AddPrescription, "${response.body()!!.result}")
                         progressDialog!!.dismiss()
 
                     }
 
                 }
 
-                override fun onFailure(call: Call<ModelOnline>, t: Throwable) {
+                override fun onFailure(call: Call<ModelCreatePrescription>, t: Throwable) {
                     myToast(this@AddPrescription, t.message.toString())
                     progressDialog!!.dismiss()
 

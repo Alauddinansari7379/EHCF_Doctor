@@ -4,9 +4,11 @@ package com.example.ehcf_doctor.Retrofit
 import com.example.ehcf.PhoneNumber.ModelReponse.ForgotPasswordResponse
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
+import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
 import com.example.ehcf_doctor.MainActivity.model.ModelOnline
 import com.example.ehcf_doctor.ManageSlots.model.*
+import com.example.ehcf_doctor.Prescription.model.ModelCreatePrescription
 import com.example.ehcf_doctor.Profile.modelResponse.ModelSpecilist
 import com.example.ehcf_doctor.Profile.modelResponse.ModelUpdateQulification
 import com.example.ehcf_doctor.Profile.modelResponse.ResetPassResponse
@@ -160,5 +162,10 @@ interface ApiInterface {
         @Query("assessment") assessment: String?,
         @Query("plan") plan: String?,
         @Query("doctor_notes") doctor_notes: String?,
-    ): Call<ModelOnline>
+    ): Call<ModelCreatePrescription>
+
+    @POST("get_consultations")
+    fun getConsultation(
+        @Query("doctor_id") doctor_id: String?,
+    ): Call<ModelGetConsultation>
 }

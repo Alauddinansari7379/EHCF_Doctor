@@ -106,7 +106,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.hostFragment)
         val navController = navHostFragment!!.findNavController()
         val popupMenu = PopupMenu(this, null)
-
         popupMenu.inflate(R.menu.bootom_nav_menu)
 
         binding.bottomNavigation1.setupWithNavController(popupMenu.menu, navController)
