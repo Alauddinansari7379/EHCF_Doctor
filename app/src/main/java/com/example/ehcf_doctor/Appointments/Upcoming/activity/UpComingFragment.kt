@@ -16,6 +16,8 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
+import com.example.ehcf_doctor.Booking.adapter.AdapterBooking
+import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Retrofit.ApiInterface
 import com.example.ehcf_doctor.databinding.FragmentUpComingBinding
@@ -55,10 +57,13 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
             sessionManager = SessionManager(requireContext())
 
 
-            apiCall()
+            //apiCall()
+            apiCallGetConsultation()
 
             binding.imgRefresh.setOnClickListener {
-                apiCall()
+                //apiCall()
+                apiCallGetConsultation()
+
 
             }
 
@@ -113,6 +118,45 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
         }
 
     }
+    private fun apiCallGetConsultation() {
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog!!.setMessage("Loading..")
+        progressDialog!!.setTitle("Please Wait")
+        progressDialog!!.isIndeterminate = false
+        progressDialog!!.setCancelable(true)
+
+        progressDialog!!.show()
+
+        ApiClient.apiService.getConsultation(sessionManager.id.toString())
+            .enqueue(object : Callback<ModelGetConsultation> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
+                ) {
+                    if (response.body()!!.result.isEmpty()) {
+                        binding.tvNoDataFound.visibility = View.VISIBLE
+                        // myToast(requireActivity(),"No Data Found")
+                        progressDialog!!.dismiss()
+
+                    } else {
+                        binding.rvCancled.apply {
+                            binding.tvNoDataFound.visibility = View.GONE
+                            adapter = AdapterUpComing(requireContext(), response.body()!!, this@UpComingFragment)
+                            progressDialog!!.dismiss()
+
+                        }
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
+                    myToast(requireActivity(), t.message.toString())
+                    progressDialog!!.dismiss()
+
+                }
+
+            })
+    }
 
     private fun apiCall(){
 
@@ -148,7 +192,7 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
                 } else {
                     binding.rvCancled.apply {
                         binding.tvNoDataFound.visibility = View.GONE
-                        adapter = AdapterUpComing(requireContext(), response.body()!!, this@UpComingFragment)
+                    //    adapter = AdapterUpComing(requireContext(), response.body()!!, this@UpComingFragment)
                         progressDialog!!.dismiss()
 
                     }
@@ -325,7 +369,9 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
                 if (response.body()!!.status==1){
                     myToast(requireActivity(),response.body()!!.message)
                     progressDialog!!.dismiss()
-                    apiCall()
+                //    apiCall()
+                    apiCallGetConsultation()
+
                     progressDialog!!.dismiss()
                 }else{
                     myToast(requireActivity(), response.body()!!.message)
@@ -357,7 +403,9 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
                 if (response.body()!!.status==1){
                     myToast(requireActivity(),response.body()!!.message)
                     progressDialog!!.dismiss()
-                    apiCall()
+                  //  apiCall()
+                    apiCallGetConsultation()
+
                     progressDialog!!.dismiss()
                 }else{
                     myToast(requireActivity(), response.body()!!.message)

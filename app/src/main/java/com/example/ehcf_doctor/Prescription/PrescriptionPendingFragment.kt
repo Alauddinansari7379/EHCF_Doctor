@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
-import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
 import com.example.ehcf_doctor.Prescription.adapter.AdapterPrescription
 import com.example.ehcf_doctor.R

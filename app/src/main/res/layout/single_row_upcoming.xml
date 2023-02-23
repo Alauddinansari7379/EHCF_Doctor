@@ -6,10 +6,13 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardUpcoming"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         app:cardCornerRadius="10dp">
 
         <LinearLayout
@@ -27,17 +30,17 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Start Time-"
-                    android:textColor="#2A2426"
+                    android:text="Appointment date-"
+                    android:textColor="@color/black"
                     android:textStyle="bold">
 
                 </androidx.appcompat.widget.AppCompatTextView>
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvStartTime"
+                    android:id="@+id/tvAppointmentDateUpcoming"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="July 22, 04:45 AM"
-                    android:textColor="#2A2426"
+                    android:text="13-12-2023"
+                    android:textColor="@color/black"
                     android:textStyle="bold">
 
                 </androidx.appcompat.widget.AppCompatTextView>
@@ -57,112 +60,103 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="vertical"
-                    >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Coustmor Name-"
-        android:textColor="#4E4B4B"
-        android:textStyle="bold">
-
-    </androidx.appcompat.widget.AppCompatTextView>
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvCoustmorNmae"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text=""
-        android:textColor="@color/black"
-        android:textStyle="bold">
-
-    </androidx.appcompat.widget.AppCompatTextView>
-
-</LinearLayout>
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgProfile"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/profile"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="#FF000000"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="Booking Id-"
-                            android:textColor="#686868"
-                            android:textStyle="bold">
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Coustmor Name-"
+                                android:textColor="@color/black"
+                                android:textStyle="bold">
 
-                        </androidx.appcompat.widget.AppCompatTextView>
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvBookingId"
-                            android:layout_width="wrap_content"
+                            </androidx.appcompat.widget.AppCompatTextView>
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvCoustmerNameUpcoming"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="16:15"
+                                android:textColor="#686868"
+                                android:textStyle="bold">
+
+                            </androidx.appcompat.widget.AppCompatTextView>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text=""
-                            android:textColor="#686868"
-                            android:textStyle="bold">
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Session Start Time-"
+                                android:textColor="@color/black"
+                                android:textStyle="bold">
 
-                        </androidx.appcompat.widget.AppCompatTextView>
+                            </androidx.appcompat.widget.AppCompatTextView>
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvStartTimeUpcoming"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="16:15"
+                                android:textColor="#686868"
+                                android:textStyle="bold">
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
+                            </androidx.appcompat.widget.AppCompatTextView>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="Title-"
-                            android:textColor="#686868"
-                            android:textStyle="bold">
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Status-"
+                                android:textColor="#4CAF50"
+                                android:textStyle="bold">
 
-                        </androidx.appcompat.widget.AppCompatTextView>
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvTitleCan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="Test"
-                            android:textColor="@color/black"
-                            android:textStyle="bold">
+                            </androidx.appcompat.widget.AppCompatTextView>
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvStatusUpcoming"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Status"
+                                android:textColor="#4CAF50"
+                                android:textStyle="bold">
 
-                        </androidx.appcompat.widget.AppCompatTextView>
+                            </androidx.appcompat.widget.AppCompatTextView>
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:text="Status-"
-                            android:textColor="#4CAF50"
-                            android:textStyle="bold">
-
-                        </androidx.appcompat.widget.AppCompatTextView>
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvStatus"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:textColor="#4CAF50"
-                            android:textStyle="bold">
-
-                        </androidx.appcompat.widget.AppCompatTextView>
-
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -173,25 +167,9 @@
                     android:gravity="end"
                     android:layout_marginBottom="10dp"
                     android:orientation="horizontal">
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="35dp"
-                        android:layout_marginRight="10dp"
-                        android:background="@drawable/corner"
-                        android:backgroundTint="@color/main_color"
-                        android:drawableLeft="@drawable/ic_baseline_add_24"
-                        android:drawableTint="@color/white"
-                        android:padding="5dp"
-                        android:visibility="gone"
-                        android:text="Check Time"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white">
-
-                    </androidx.appcompat.widget.AppCompatButton>
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnConfirm"
+                        android:id="@+id/btnConfirmUpcoming"
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
                         android:layout_marginRight="10dp"
@@ -206,7 +184,22 @@
 
                     </androidx.appcompat.widget.AppCompatButton>
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnStartMetting"
+                        android:id="@+id/btnRejectUpcoming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/corner"
+                        android:backgroundTint="@color/main_color"
+                        android:drawableTint="@color/white"
+                        android:padding="5dp"
+                        android:visibility="gone"
+                        android:text="Reject"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white">
+
+                    </androidx.appcompat.widget.AppCompatButton>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnStartMeetingUpcoming"
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
                         android:layout_marginRight="10dp"
@@ -221,7 +214,22 @@
 
                     </androidx.appcompat.widget.AppCompatButton>
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnReject"
+                        android:id="@+id/btnCheckUpcoming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/corner"
+                        android:backgroundTint="@color/main_color"
+                        android:drawableLeft="@drawable/ic_baseline_add_24"
+                        android:drawableTint="@color/white"
+                        android:padding="5dp"
+                        android:text="Check Time"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white">
+
+                    </androidx.appcompat.widget.AppCompatButton>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnJoinMeeting"
                         android:layout_width="wrap_content"
                         android:layout_height="35dp"
                         android:layout_marginRight="10dp"
@@ -230,7 +238,22 @@
                         android:drawableTint="@color/white"
                         android:padding="5dp"
                         android:visibility="gone"
-                        android:text=" Reject"
+                        android:text="Join Meeting"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white">
+
+                    </androidx.appcompat.widget.AppCompatButton>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnViewUpcoming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/corner"
+                        android:backgroundTint="@color/main_color"
+                        android:drawableLeft="@drawable/ic_baseline_add_24"
+                        android:drawableTint="@color/white"
+                        android:padding="5dp"
+                        android:text="View"
                         android:textAllCaps="false"
                         android:textColor="@color/white">
 

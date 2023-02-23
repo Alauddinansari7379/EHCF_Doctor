@@ -44,13 +44,13 @@ class AdapterBooking(
 
         when(list.result[position].consultation_type){
             "1"->{
-                holder.consultationType.text="Online Consult"
+                holder.consultationType.text="Tele-Consultation"
             }
             "2"->{
-                holder.consultationType.text="Appointment"
+                holder.consultationType.text="Clinic-Visit"
             }
             "3"->{
-                holder.consultationType.text="Home Visit"
+                holder.consultationType.text="Home-Visit"
             }
         }
 

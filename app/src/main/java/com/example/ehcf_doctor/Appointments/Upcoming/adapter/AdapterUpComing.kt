@@ -1,6 +1,9 @@
 package com.example.ehcf_doctor.Appointments.Upcoming.adapter
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +14,16 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehcf.Helper.changeDateFormat2
 import com.example.ehcf.Helper.changeDateFormat3
+import com.example.ehcf_doctor.Appointments.Upcoming.activity.AppointmentDetalis
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
+import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.R
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class AdapterUpComing(
-    val context: Context, private val list: ModelUpComingResponse, val confirmSlot: ConfirmSlot
+    val context: Context, private val list: ModelGetConsultation, val confirmSlot: ConfirmSlot
 ) :
     RecyclerView.Adapter<AdapterUpComing.MyViewHolder>() {
 
@@ -31,14 +36,16 @@ class AdapterUpComing(
     var currentDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Date())
 
 
+    @SuppressLint("LogNotTimber")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // holder.SrNo.text= "${position+1}"
-        Log.e("currentDate","$currentDate")
-        Log.e("startTime","${list.result[position].start_time.toString()}")
-        holder.startTime.text = list.result[position].start_time.toString()
+//        Log.e("currentDate","$currentDate")
+//        Log.e("startTime","${list.result[position].date.toString()}")
+        holder.date.text = list.result[position].date.toString()
         holder.coustmerName.text = list.result[position].customer_name.toString()
-        holder.bookingId.text = list.result[position].id.toString()
-        holder.title.text = list.result[position].title.toString()
+       // holder.bookingId.text = list.result[position].id.toString()
+       // holder.title.text = list.result[position].title.toString()
+        holder.startTime.text = list.result[position].time.toString()
         holder.status.text = list.result[position].status_for_doctor.toString()
 
         holder.btnConfirm.setOnClickListener {
@@ -50,7 +57,7 @@ class AdapterUpComing(
             confirmSlot.alretDilogReject(list.result[position].id.toString(),slug)
         }
         holder.btnCheck.setOnClickListener {
-            confirmSlot.showPopup(list.result[position].start_time.toString())
+            confirmSlot.showPopup(list.result[position].time.toString())
         }
 //        Picasso.get().load(list.result[position].category_image).into(holder.image)
         when (list.result[position].slug) {
@@ -62,14 +69,18 @@ class AdapterUpComing(
             "booking_rejected" -> {
                 holder.cardView.visibility = View.GONE
             }
-            "waiting_for_confirmation" -> {
+            "waiting_for_accept" -> {
                 holder.btnConfirm.visibility = View.VISIBLE
                 holder.btnReject.visibility = View.VISIBLE
                 holder.btnCheck.visibility = View.GONE
+                holder.btnStartMeeting.visibility = View.GONE
 
             }
         }
-        if (list.result[position].start_time.toString()<=currentDate)
+        Log.e("currentDate", currentDate)
+        Log.e("startTime", list.result[position].date+" "+list.result[position].time)
+
+        if (list.result[position].date+" "+list.result[position].time<=currentDate && list.result[position].slug=="booking_confirmed")
         {
                 holder.btnStartMeeting.visibility = View.VISIBLE
                 holder.btnCheck.visibility = View.GONE
@@ -77,9 +88,13 @@ class AdapterUpComing(
                 holder.btnReject.visibility = View.GONE
             }
         holder.btnStartMeeting.setOnClickListener {
-            confirmSlot.videoCall(list.result[position].start_time.toString())
+            confirmSlot.videoCall(list.result[position].time.toString())
         }
-
+        holder.btnView.setOnClickListener {
+            val intent = Intent(context as Activity, AppointmentDetalis::class.java)
+                .putExtra("bookingId",list.result[position].id.toString())
+            context.startActivity(intent)
+        }
         // Glide.with(hol der.image).load(list[position].url).into(holder.image)
 
     }
@@ -91,16 +106,19 @@ class AdapterUpComing(
     }
 
     open class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-          val startTime: TextView = itemView.findViewById(R.id.tvStartTime)
-          val coustmerName: TextView = itemView.findViewById(R.id.tvCoustmorNmae)
-          val bookingId: TextView = itemView.findViewById(R.id.tvBookingId)
-          val title: TextView = itemView.findViewById(R.id.tvTitleCan)
-          val status: TextView = itemView.findViewById(R.id.tvStatus)
-          val btnConfirm: Button = itemView.findViewById(R.id.btnConfirm)
-          val btnCheck: Button = itemView.findViewById(R.id.btnCheck)
-          val btnStartMeeting: Button = itemView.findViewById(R.id.btnStartMetting)
-          val btnReject: Button = itemView.findViewById(R.id.btnReject)
-          val cardView: CardView = itemView.findViewById(R.id.cardView)
+          val date: TextView = itemView.findViewById(R.id.tvAppointmentDateUpcoming)
+          val coustmerName: TextView = itemView.findViewById(R.id.tvCoustmerNameUpcoming)
+         // val bookingId: TextView = itemView.findViewById(R.id.tvBookingId)
+        //  val title: TextView = itemView.findViewById(R.id.tvTitleCan)
+          val startTime: TextView = itemView.findViewById(R.id.tvStartTimeUpcoming)
+          val status: TextView = itemView.findViewById(R.id.tvStatusUpcoming)
+
+          val btnConfirm: Button = itemView.findViewById(R.id.btnConfirmUpcoming)
+          val btnCheck: Button = itemView.findViewById(R.id.btnCheckUpcoming)
+          val btnStartMeeting: Button = itemView.findViewById(R.id.btnStartMeetingUpcoming)
+          val btnReject: Button = itemView.findViewById(R.id.btnRejectUpcoming)
+          val cardView: CardView = itemView.findViewById(R.id.cardUpcoming)
+          val btnView: Button = itemView.findViewById(R.id.btnViewUpcoming)
 //        val image: ImageView = itemView.findViewById(R.id.cardSpecia)
 //        val cardView: CardView = itemView.findViewById(R.id.cardView)
 

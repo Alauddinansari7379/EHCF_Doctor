@@ -2,6 +2,7 @@ package com.example.ehcf_doctor.Retrofit
 
 
 import com.example.ehcf.PhoneNumber.ModelReponse.ForgotPasswordResponse
+import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelAppointmentDatails
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
@@ -168,4 +169,8 @@ interface ApiInterface {
     fun getConsultation(
         @Query("doctor_id") doctor_id: String?,
     ): Call<ModelGetConsultation>
+    @POST("get_consultation_details")
+    fun consultationDetails(
+        @Query("id") id: String?,
+    ): Call<ModelAppointmentDatails>
 }
