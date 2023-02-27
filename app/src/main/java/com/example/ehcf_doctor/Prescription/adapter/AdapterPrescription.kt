@@ -11,10 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ehcf.Helper.changeDateFormat2
-import com.example.ehcf.Helper.changeDateFormat3
-import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
-import com.example.ehcf_doctor.ManageSlots.activity.UpdateSlot
+import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.Prescription.AddPrescription
 import com.example.ehcf_doctor.R
 import java.text.SimpleDateFormat
@@ -22,7 +19,7 @@ import java.util.*
 
 
 class AdapterPrescription(
-    val context: Context, private val list: ModelUpComingResponse
+    val context: Context, private val list: ModelGetConsultation
 ) :
     RecyclerView.Adapter<AdapterPrescription.MyViewHolder>() {
 
@@ -38,12 +35,23 @@ class AdapterPrescription(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // holder.SrNo.text= "${position+1}"
         Log.e("currentDate","$currentDate")
-        Log.e("startTime","${list.result[position].start_time.toString()}")
-        holder.startTime.text = list.result[position].start_time.toString().substring(10,)
-        holder.bookingDate.text = list.result[position].start_time.toString().substring(0,10)
-        holder.coustmerName.text = list.result[position].customer_name.toString()
-        holder.title.text = list.result[position].title.toString()
+        Log.e("startTime","${list.result[position].time.toString()}")
+        holder.startTime.text = list.result[position].time
+        holder.bookingDate.text = list.result[position].date
+        holder.customerName.text = list.result[position].customer_name.toString()
 
+        when (list.result[position].slug) {
+            "completed" -> {
+                // holder.visibility(View.INVISIBLE);
+
+                holder.cardView.visibility = View.VISIBLE
+            }
+            else -> {
+
+                holder.cardView.visibility = View.GONE
+
+            }
+        }
         holder.btnAddPrescription.setOnClickListener {
             val intent = Intent(context as Activity, AddPrescription::class.java)
                 .putExtra("bookingId",list.result[position].id.toString())
@@ -61,9 +69,9 @@ class AdapterPrescription(
     open class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
           val bookingDate: TextView = itemView.findViewById(R.id.tvBookingDatePPending)
           val startTime: TextView = itemView.findViewById(R.id.tvStartTimePPending)
-          val coustmerName: TextView = itemView.findViewById(R.id.tvCoustmorNmaePPending)
-          val title: TextView = itemView.findViewById(R.id.tvTitlePPending)
+          val customerName: TextView = itemView.findViewById(R.id.tvCoustmorNmaePPending)
           val btnAddPrescription: Button = itemView.findViewById(R.id.btnAddPrescriptionPPending)
+          val cardView: CardView = itemView.findViewById(R.id.cardViewPre)
 
 
     }

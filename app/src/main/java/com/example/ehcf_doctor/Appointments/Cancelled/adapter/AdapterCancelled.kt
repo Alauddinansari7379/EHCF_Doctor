@@ -4,17 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
+import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.R
 
 
 class AdapterCancelled(
-    val context: Context, private val list: ModelUpComingResponse
+    val context: Context, private val list: ModelGetConsultation
 ) :
     RecyclerView.Adapter<AdapterCancelled.MyViewHolder>() {
 
@@ -28,16 +27,19 @@ class AdapterCancelled(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // holder.SrNo.text= "${position+1}"
 
-        holder.appointmentDate.text = list.result[position].start_time!!.substring(0,10)
-        holder.totalAmount.text = list.result[position].total_amount.toString()
+        holder.appointmentDate.text = list.result[position].time!!
+        holder.totalAmount.text = list.result[position].total.toString()
         holder.tvStatus.text = list.result[position].status_for_doctor.toString()
-        holder.description.text = list.result[position].description.toString()
+       // holder.description.text = list.result[position].description.toString()
         holder.coustmorName.text = list.result[position].customer_name.toString()
 
         when (list.result[position].slug) {
-            "booking_rejected" -> {
+            "rejected" -> {
+               // holder.visibility(View.INVISIBLE);
+
                 holder.cardView.visibility = View.VISIBLE
             }else->{
+
             holder.cardView.visibility = View.GONE
 
         }
@@ -57,7 +59,7 @@ class AdapterCancelled(
         val appointmentDate: TextView = itemView.findViewById(R.id.tvAppointmentDateCan)
         val coustmorName: TextView = itemView.findViewById(R.id.tvCoustmorNameCan)
         val startTime: TextView = itemView.findViewById(R.id.tvStartTimeCan)
-        val description: TextView = itemView.findViewById(R.id.tvDescriptionCan)
+        //val description: TextView = itemView.findViewById(R.id.tvDescriptionCan)
         val totalAmount: TextView = itemView.findViewById(R.id.tvTotalAmountCan)
         val tvStatus: TextView = itemView.findViewById(R.id.tvStatusCan)
         val profile: ImageView = itemView.findViewById(R.id.imgProfile)

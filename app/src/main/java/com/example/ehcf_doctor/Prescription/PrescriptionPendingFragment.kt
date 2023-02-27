@@ -11,12 +11,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Appointments.Consulted.adapter.AdapterConsulted
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
+import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.Prescription.adapter.AdapterPrescription
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Retrofit.ApiInterface
 import com.example.ehcf_doctor.databinding.FragmentPrescriptionPendingBinding
 import com.example.ehcf_doctor.databinding.FragmentUpComingBinding
+import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,15 +47,13 @@ class PrescriptionPendingFragment : Fragment() {
         sessionManager = SessionManager(requireContext())
 
 
-        apiCall()
-//
-//        binding.imgRefresh.setOnClickListener {
-//            apiCall()
-//
-//        }
+      //  apiCall()
+        apiCallGetConsultation()
+
 
 
     }
+/*
     private fun apiCall(){
 
         progressDialog = ProgressDialog(requireContext())
@@ -106,5 +107,45 @@ class PrescriptionPendingFragment : Fragment() {
             }
         })
     }
+*/
+private fun apiCallGetConsultation() {
+    progressDialog = ProgressDialog(requireContext())
+    progressDialog!!.setMessage("Loading..")
+    progressDialog!!.setTitle("Please Wait")
+    progressDialog!!.isIndeterminate = false
+    progressDialog!!.setCancelable(true)
+
+    progressDialog!!.show()
+
+    ApiClient.apiService.getConsultation(sessionManager.id.toString())
+        .enqueue(object : Callback<ModelGetConsultation> {
+            @SuppressLint("LogNotTimber")
+            override fun onResponse(
+                call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
+            ) {
+                if (response.body()!!.result.isEmpty()) {
+                    binding.tvNoDataFound.visibility = View.VISIBLE
+                    // myToast(requireActivity(),"No Data Found")
+                    progressDialog!!.dismiss()
+
+                } else {
+                    binding.rvCancled.apply {
+                        binding.tvNoDataFound.visibility = View.GONE
+                        adapter = AdapterPrescription(requireContext(), response.body()!!)
+                        progressDialog!!.dismiss()
+
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
+                myToast(requireActivity(), t.message.toString())
+                progressDialog!!.dismiss()
+
+            }
+
+        })
+}
 
 }

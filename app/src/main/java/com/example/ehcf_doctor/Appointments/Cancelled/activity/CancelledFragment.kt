@@ -13,9 +13,11 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Cancelled.adapter.AdapterCancelled
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
+import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Retrofit.ApiInterface
 import com.example.ehcf_doctor.databinding.FragmentCancelledBinding
+import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,13 +41,56 @@ class CancelledFragment : Fragment() {
         sessionManager = SessionManager(requireContext())
         Log.e("Id","${sessionManager.id}")
 
-        apiCall()
+        //apiCall()
+        apiCallGetConsultation()
         binding.imgRefresh.setOnClickListener {
-            apiCall()
+           // apiCall()
+            apiCallGetConsultation()
         }
 
     }
-    private fun apiCall(){
+
+    private fun apiCallGetConsultation() {
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog!!.setMessage("Loading..")
+        progressDialog!!.setTitle("Please Wait")
+        progressDialog!!.isIndeterminate = false
+        progressDialog!!.setCancelable(true)
+
+        progressDialog!!.show()
+
+        ApiClient.apiService.getConsultation(sessionManager.id.toString())
+            .enqueue(object : Callback<ModelGetConsultation> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
+                ) {
+                    if (response.body()!!.result.isEmpty()) {
+                        binding.tvNoDataFound.visibility = View.VISIBLE
+                        // myToast(requireActivity(),"No Data Found")
+                        progressDialog!!.dismiss()
+
+                    } else {
+                        binding.rvCancled.apply {
+                            binding.tvNoDataFound.visibility = View.GONE
+                            adapter = AdapterCancelled(requireContext(), response.body()!!)
+                            progressDialog!!.dismiss()
+
+                        }
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
+                    myToast(requireActivity(), t.message.toString())
+                    progressDialog!!.dismiss()
+
+                }
+
+            })
+    }
+
+   /* private fun apiCall(){
 
         progressDialog = ProgressDialog(requireContext())
         progressDialog!!.setMessage("Loading..")
@@ -89,6 +134,6 @@ class CancelledFragment : Fragment() {
                 }
             }
         })
-    }
+    }*/
 
 }

@@ -88,7 +88,7 @@ class AddPrescription : AppCompatActivity() {
         val doctorNotes=binding.edtDoctorNotes.text.toString()
 
 
-        ApiClient.apiService.createPrescription("1",subjective,objective,assessment,plan,doctorNotes)
+        ApiClient.apiService.createPrescription(bookingId,subjective,objective,assessment,plan,doctorNotes)
             .enqueue(object : Callback<ModelCreatePrescription> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(

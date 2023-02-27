@@ -15,9 +15,11 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Cancelled.adapter.AdapterCancelled
 import com.example.ehcf_doctor.Appointments.Consulted.adapter.AdapterConsulted
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
+import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Retrofit.ApiInterface
 import com.example.ehcf_doctor.databinding.FragmentConsultedBinding
+import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,6 +52,8 @@ class ConsultedFragment : Fragment() {
         val btnOkDialog = view.findViewById<Button>(R.id.btnOkDialog)
         tvTimeCounter = view.findViewById<TextView>(R.id.tvTimeCounter)
 
+
+        apiCallGetConsultation()
 //        binding.btnCall.setOnClickListener {
 //            try {
 //                val options: JitsiMeetConferenceOptions = JitsiMeetConferenceOptions.Builder()
@@ -68,54 +72,44 @@ class ConsultedFragment : Fragment() {
 
 
     }
-    private fun apiCall(){
-
+    private fun apiCallGetConsultation() {
         progressDialog = ProgressDialog(requireContext())
         progressDialog!!.setMessage("Loading..")
         progressDialog!!.setTitle("Please Wait")
         progressDialog!!.isIndeterminate = false
         progressDialog!!.setCancelable(true)
+
         progressDialog!!.show()
-        val id="1"
 
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            //.baseUrl("https://jsonplaceholder.typicode.com/")
-            .baseUrl("https://ehcf.thedemostore.in/api/doctor/")
-            .build()
-            .create(ApiInterface::class.java)
+        ApiClient.apiService.getConsultation(sessionManager.id.toString())
+            .enqueue(object : Callback<ModelGetConsultation> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
+                ) {
+                    if (response.body()!!.result.isEmpty()) {
+                        binding.tvNoDataFound.visibility = View.VISIBLE
+                        // myToast(requireActivity(),"No Data Found")
+                        progressDialog!!.dismiss()
 
-        val retrofitData = retrofitBuilder.getBooking(sessionManager.id.toString())
-        retrofitData.enqueue(object : Callback<ModelUpComingResponse> {
-            override fun onResponse(
-                call: Call<ModelUpComingResponse>,
-                response: Response<ModelUpComingResponse>
-            )
-            {
-                if (response.body()!!.result.isEmpty()) {
-                    binding.tvNoDataFound.visibility = View.VISIBLE
-                    // myToast(requireActivity(),"No Data Found")
+                    } else {
+                        binding.rvCancled.apply {
+                            binding.tvNoDataFound.visibility = View.GONE
+                            adapter = AdapterConsulted(requireContext(), response.body()!!)
+                            progressDialog!!.dismiss()
+
+                        }
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
+                    myToast(requireActivity(), t.message.toString())
                     progressDialog!!.dismiss()
 
                 }
-//                myToast(requireActivity(),response.body()!!.message)
-//                progressDialog!!.dismiss()
 
-//                // val recyclerView = findViewById<RecyclerView>(R.id.rvCancled)
-//                binding.rvCancled.apply {
-//                    adapter = AdapterConsulted(requireContext(), response.body()!!)
-//                    progressDialog!!.dismiss()
-//
-//                }
-            }
-
-            override fun onFailure(call: Call<ModelUpComingResponse>, t: Throwable) {
-                t.message?.let { myToast(requireActivity(), it)
-                    progressDialog!!.dismiss()
-
-                }
-            }
-        })
+            })
     }
 
 }

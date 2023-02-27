@@ -16,7 +16,6 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
-import com.example.ehcf_doctor.Booking.adapter.AdapterBooking
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Retrofit.ApiInterface
@@ -70,7 +69,7 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
 
     }
 
- private fun videoCallFun(startTime:String){
+ private fun videoCallFun(startTime: String, bookingId: String){
      try {
          val options: JitsiMeetConferenceOptions = JitsiMeetConferenceOptions.Builder()
              .setServerURL(URL("https://meet.jit.si"))
@@ -79,6 +78,7 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
              .setVideoMuted(false)
              .build()
          JitsiMeetActivity.launch(requireContext(), options)
+        // completeSlot(bookingId)
      } catch (e: MalformedURLException) {
          e.printStackTrace();
      }
@@ -310,7 +310,7 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
             }
             .show()
     }
-    override fun videoCall(startTime: String){
+    override fun videoCall(startTime: String,bookingId:String){
         SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
             .setTitleText("Are you sure want to Start Meeting?")
             .setCancelText("No")
@@ -323,7 +323,7 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
 //                finish()
 //                startActivity(intent)
 
-                videoCallFun(startTime)
+                videoCallFun(startTime,bookingId)
             }
             .setCancelClickListener { sDialog ->
                 sDialog.cancel()
@@ -404,6 +404,40 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
                     myToast(requireActivity(),response.body()!!.message)
                     progressDialog!!.dismiss()
                   //  apiCall()
+                    apiCallGetConsultation()
+
+                    progressDialog!!.dismiss()
+                }else{
+                    myToast(requireActivity(), response.body()!!.message)
+                    progressDialog!!.dismiss()
+                }
+            }
+            override fun onFailure(call: Call<ModelConfirmSlotRes>, t: Throwable) {
+                myToast(requireActivity(),"${t.message}")
+                progressDialog!!.dismiss()
+
+            }
+
+        })
+    }
+    private fun completeSlot(bookingId: String) {
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog!!.setMessage("Loading..")
+        progressDialog!!.setTitle("Please Wait")
+        progressDialog!!.isIndeterminate = false
+        progressDialog!!.setCancelable(true)
+        progressDialog!!.show()
+        val slug="completed"
+        ApiClient.apiService.confirmSlot(bookingId,slug).enqueue(object : Callback<ModelConfirmSlotRes> {
+            @SuppressLint("LogNotTimber")
+            override fun onResponse(
+                call: Call<ModelConfirmSlotRes>,
+                response: Response<ModelConfirmSlotRes>
+            ) {
+                if (response.body()!!.status==1){
+                    myToast(requireActivity(),response.body()!!.message)
+                    progressDialog!!.dismiss()
+                    //  apiCall()
                     apiCallGetConsultation()
 
                     progressDialog!!.dismiss()

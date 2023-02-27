@@ -49,11 +49,12 @@ class AdapterUpComing(
         holder.status.text = list.result[position].status_for_doctor.toString()
 
         holder.btnConfirm.setOnClickListener {
-            val slug="booking_confirmed"
+            val slug="accepted"
             confirmSlot.alretDilogConfirm(list.result[position].id.toString(),slug)
         }
         holder.btnReject.setOnClickListener {
-            val slug="booking_rejected"
+           // val slug="booking_rejected"
+            val slug="rejected"
             confirmSlot.alretDilogReject(list.result[position].id.toString(),slug)
         }
         holder.btnCheck.setOnClickListener {
@@ -61,13 +62,22 @@ class AdapterUpComing(
         }
 //        Picasso.get().load(list.result[position].category_image).into(holder.image)
         when (list.result[position].slug) {
-            "booking_confirmed" -> {
-                holder.btnCheck.visibility = View.VISIBLE
-                holder.btnConfirm.visibility = View.GONE
-                holder.btnReject.visibility = View.GONE
-            }
-            "booking_rejected" -> {
+//            "booking_confirmed" -> {
+//                holder.btnCheck.visibility = View.VISIBLE
+//                holder.btnConfirm.visibility = View.GONE
+//                holder.btnReject.visibility = View.GONE
+//            }
+            "rejected" -> {
+//                holder.itemView.visibility = View.VISIBLE
+//                holder.itemView.layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
                 holder.cardView.visibility = View.GONE
+
+            }
+            "completed" -> {
+//                holder.itemView.visibility = View.VISIBLE
+//                holder.itemView.layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                holder.cardView.visibility = View.GONE
+
             }
             "waiting_for_accept" -> {
                 holder.btnConfirm.visibility = View.VISIBLE
@@ -80,7 +90,7 @@ class AdapterUpComing(
         Log.e("currentDate", currentDate)
         Log.e("startTime", list.result[position].date+" "+list.result[position].time)
 
-        if (list.result[position].date+" "+list.result[position].time<=currentDate && list.result[position].slug=="booking_confirmed")
+        if (list.result[position].date+" "+list.result[position].time<=currentDate && list.result[position].slug=="accepted")
         {
                 holder.btnStartMeeting.visibility = View.VISIBLE
                 holder.btnCheck.visibility = View.GONE
@@ -88,7 +98,7 @@ class AdapterUpComing(
                 holder.btnReject.visibility = View.GONE
             }
         holder.btnStartMeeting.setOnClickListener {
-            confirmSlot.videoCall(list.result[position].time.toString())
+            confirmSlot.videoCall(list.result[position].date+" "+list.result[position].time,list.result[position].id)
         }
         holder.btnView.setOnClickListener {
             val intent = Intent(context as Activity, AppointmentDetalis::class.java)
@@ -128,7 +138,7 @@ class AdapterUpComing(
         fun alretDilogConfirm(bookingId:String,slug:String)
         fun alretDilogReject(bookingId:String,slug:String)
         fun showPopup(startTime:String)
-        fun videoCall(startTime:String)
+        fun videoCall(startTime:String,bookingId:String)
 
     }
 }

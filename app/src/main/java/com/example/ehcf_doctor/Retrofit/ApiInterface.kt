@@ -95,10 +95,17 @@ interface ApiInterface {
         @Field("doctor_id") id: String,
     ): Call<ModelUpComingResponse>
 
+//    @FormUrlEncoded
+//    @POST("accept_booking")
+//    fun confirmSlot(
+//        @Field("booking_request_id") booking_request_id: String,
+//        @Field("slug") slug: String,
+//    ): Call<ModelConfirmSlotRes>
+
     @FormUrlEncoded
-    @POST("accept_booking")
+    @POST("consultation_status_change")
     fun confirmSlot(
-        @Field("booking_request_id") booking_request_id: String,
+        @Field("consultation_request_id") booking_request_id: String,
         @Field("slug") slug: String,
     ): Call<ModelConfirmSlotRes>
 
