@@ -23,6 +23,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 
 class CancelledFragment : Fragment() {
     private lateinit var binding:FragmentCancelledBinding
@@ -82,12 +84,27 @@ class CancelledFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    myToast(requireActivity(), t.message.toString())
+                    myToast(requireActivity(), "Something went wrong")
                     progressDialog!!.dismiss()
 
                 }
 
             })
+
+    }
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
+        }
     }
 
    /* private fun apiCall(){

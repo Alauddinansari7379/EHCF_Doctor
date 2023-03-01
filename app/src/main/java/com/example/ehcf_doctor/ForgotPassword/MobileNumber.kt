@@ -81,7 +81,7 @@ class MobileNumber : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ForgotPasswordResponse>, t: Throwable) {
-                    myToast(this@MobileNumber,t.message.toString())
+                    myToast(this@MobileNumber, "Something went wrong")
                     progressDialog!!.dismiss()
 
                 }

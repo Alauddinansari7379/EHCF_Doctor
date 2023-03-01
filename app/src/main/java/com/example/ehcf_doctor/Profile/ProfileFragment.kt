@@ -18,6 +18,8 @@ import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 
 class ProfileFragment : Fragment() {
     private lateinit var binding:FragmentProfileBinding
@@ -106,7 +108,7 @@ class ProfileFragment : Fragment() {
 
                     override fun onFailure(call: Call<ResetPassResponse>, t: Throwable) {
                         progressDialog!!.dismiss()
-                        myToast(requireActivity(),"${t.message}")
+                        myToast(requireActivity(), "Something went wrong")
 
                     }
 
@@ -118,4 +120,19 @@ class ProfileFragment : Fragment() {
 
         }
     }
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
+        }
+    }
+
 }

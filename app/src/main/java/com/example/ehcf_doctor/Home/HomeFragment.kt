@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.ktx.messaging
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 import java.io.IOException
 
 class HomeFragment : Fragment() {
@@ -74,6 +76,20 @@ class HomeFragment : Fragment() {
             Log.d(TAG, token)
            // Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
         })
+    }
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
+        }
     }
 
 }

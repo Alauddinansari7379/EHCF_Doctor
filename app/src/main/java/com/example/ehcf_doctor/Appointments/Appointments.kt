@@ -11,8 +11,11 @@ import com.example.ehcf_doctor.Appointments.Cancelled.activity.CancelledFragment
 import com.example.ehcf_doctor.Appointments.Consulted.activity.ConsultedFragment
 import com.example.ehcf_doctor.Appointments.Upcoming.activity.UpComingFragment
 import com.example.ehcf_doctor.databinding.ActivityApointmentsBinding
+import com.giphy.sdk.analytics.GiphyPingbacks.context
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 
 
 class Appointments : AppCompatActivity() {
@@ -68,4 +71,19 @@ class Appointments : AppCompatActivity() {
 
         tab.setupWithViewPager(pager)
     }
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
+        }
+    }
+
 }

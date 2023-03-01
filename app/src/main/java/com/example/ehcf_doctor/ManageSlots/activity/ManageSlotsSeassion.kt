@@ -22,6 +22,8 @@ import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 
 class ManageSlotsSeassion : AppCompatActivity(),AdapterSlotsList.DeleteSlot {
     private val context: Context =this@ManageSlotsSeassion
@@ -79,6 +81,7 @@ class ManageSlotsSeassion : AppCompatActivity(),AdapterSlotsList.DeleteSlot {
             }
 
             override fun onFailure(call: Call<ModelSlotList>, t: Throwable) {
+                myToast(this@ManageSlotsSeassion, "Something went wrong")
 
             }
 
@@ -119,6 +122,7 @@ class ManageSlotsSeassion : AppCompatActivity(),AdapterSlotsList.DeleteSlot {
 
 
             override fun onFailure(call: Call<ModelDeleteSlot>, t: Throwable) {
+                myToast(this@ManageSlotsSeassion, "Something went wrong")
 
             }
 
@@ -173,11 +177,26 @@ class ManageSlotsSeassion : AppCompatActivity(),AdapterSlotsList.DeleteSlot {
 
 
              override fun onFailure(call: Call<ModelDeleteSlot>, t: Throwable) {
+                 myToast(this@ManageSlotsSeassion, "Something went wrong")
 
              }
 
 
          })
      }
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
+        }
+    }
 
  }

@@ -12,6 +12,8 @@ import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentPrecriscptionBinding
 import com.example.ehcf_doctor.databinding.FragmentPrescribedBinding
 import com.google.android.material.tabs.TabLayout
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 
 class PrecriscptionFragment : Fragment() {
     private lateinit var binding:FragmentPrecriscptionBinding
@@ -36,6 +38,20 @@ class PrecriscptionFragment : Fragment() {
             tab.setupWithViewPager(pager)
 
             return (binding.root)
+    }
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
+        }
     }
 
 }

@@ -150,7 +150,7 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    myToast(requireActivity(), t.message.toString())
+                    myToast(requireActivity(), "Something went wrong")
                     progressDialog!!.dismiss()
 
                 }
@@ -204,10 +204,8 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
             }
 
             override fun onFailure(call: Call<ModelUpComingResponse>, t: Throwable) {
-                t.message?.let { myToast(requireActivity(), it)
+                myToast(requireActivity(), "Something went wrong")
                     progressDialog!!.dismiss()
-
-                }
             }
         })
     }
@@ -379,7 +377,7 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
                 }
             }
             override fun onFailure(call: Call<ModelConfirmSlotRes>, t: Throwable) {
-                myToast(requireActivity(),"${t.message}")
+                myToast(requireActivity(), "Something went wrong")
                 progressDialog!!.dismiss()
 
             }
@@ -413,7 +411,7 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
                 }
             }
             override fun onFailure(call: Call<ModelConfirmSlotRes>, t: Throwable) {
-                myToast(requireActivity(),"${t.message}")
+                myToast(requireActivity(), "Something went wrong")
                 progressDialog!!.dismiss()
 
             }
@@ -447,7 +445,7 @@ class UpComingFragment : Fragment(),AdapterUpComing.ConfirmSlot {
                 }
             }
             override fun onFailure(call: Call<ModelConfirmSlotRes>, t: Throwable) {
-                myToast(requireActivity(),"${t.message}")
+                myToast(requireActivity(), "Something went wrong")
                 progressDialog!!.dismiss()
 
             }

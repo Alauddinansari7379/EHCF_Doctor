@@ -104,7 +104,7 @@ class AppointmentDetalis : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ModelAppointmentDatails>, t: Throwable) {
-                    myToast(this@AppointmentDetalis, t.message.toString())
+                    myToast(this@AppointmentDetalis, "Something went wrong")
                     progressDialog!!.dismiss()
 
                 }

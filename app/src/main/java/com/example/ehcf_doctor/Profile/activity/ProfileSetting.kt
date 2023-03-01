@@ -27,6 +27,8 @@ import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 
 class ProfileSetting : AppCompatActivity() {
     private val context: Context =this@ProfileSetting
@@ -122,7 +124,7 @@ class ProfileSetting : AppCompatActivity() {
 
 
                 override fun onFailure(call: Call<ModelUpdateQulification>, t: Throwable) {
-                    myToast(this@ProfileSetting, t.message.toString())
+                    myToast(this@ProfileSetting, "Something went wrong")
                     progressDialog!!.dismiss()
 
                 }
@@ -174,7 +176,7 @@ class ProfileSetting : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ModelSpecilList>, t: Throwable) {
-                    myToast(this@ProfileSetting, t.message.toString())
+                    myToast(this@ProfileSetting, "Something went wrong")
                     progressDialog!!.dismiss()
 
                 }
@@ -227,11 +229,26 @@ class ProfileSetting : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ModelLanguage>, t: Throwable) {
-                    myToast(this@ProfileSetting, t.message.toString())
+                    myToast(this@ProfileSetting, "Something went wrong")
                     //progressDialog!!.dismiss()
 
                 }
 
             })
     }
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
+        }
+    }
+
 }

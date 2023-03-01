@@ -27,6 +27,8 @@ import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -187,7 +189,7 @@ class UpdateSlot : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ModelUpdateSlot>, t: Throwable) {
-                    myToast(this@UpdateSlot,t.message.toString())
+                    myToast(this@UpdateSlot, "Something went wrong")
                     progressDialog!!.dismiss()
 
                 }
@@ -298,4 +300,19 @@ class UpdateSlot : AppCompatActivity() {
             }
         }
     }
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
+        }
+    }
+
 }

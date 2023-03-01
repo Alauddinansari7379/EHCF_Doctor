@@ -15,9 +15,12 @@ import com.example.ehcf.PhoneNumber.ModelReponse.ForgotPasswordResponse
 import com.example.ehcf_doctor.Registration.activity.Registration
 import com.example.ehcf_doctor.databinding.ActivityOtpverificationBinding
 import com.example.myrecyview.apiclient.ApiClient
+import com.giphy.sdk.analytics.GiphyPingbacks.context
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 
 class OTPVerification : AppCompatActivity() {
     private lateinit var binding:ActivityOtpverificationBinding
@@ -91,7 +94,7 @@ class OTPVerification : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ForgotPasswordResponse>, t: Throwable) {
-                    myToast(this@OTPVerification,t.message.toString())
+                    myToast(this@OTPVerification,"Something went wrong")
                     progressDialog!!.dismiss()
 
                 }
@@ -122,5 +125,19 @@ class OTPVerification : AppCompatActivity() {
         }.start()
     }
 
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
+        }
+    }
 
 }

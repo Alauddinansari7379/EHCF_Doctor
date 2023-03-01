@@ -15,6 +15,9 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityDashboardBinding
+import com.giphy.sdk.analytics.GiphyPingbacks.context
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -82,6 +85,20 @@ class Dashboard : AppCompatActivity() {
                     sDialog.cancel()
                 }
                 .show()
+        }
+    }
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,11 +23,16 @@ import com.example.ehcf_doctor.Registration.modelResponse.ModelSpecilList
 import com.example.ehcf_doctor.Retrofit.ApiInterface
 import com.example.ehcf_doctor.databinding.FragmentBookingBinding
 import com.example.myrecyview.apiclient.ApiClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import xyz.teamgravity.checkinternet.CheckInternet
 
 class BookingFragment : Fragment() {
     private lateinit var binding: FragmentBookingBinding
@@ -48,6 +54,12 @@ class BookingFragment : Fragment() {
         sessionManager = SessionManager(requireContext())
 
         apiCallGetConsultation()
+
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.d("", ": coroutine start")
+
+
+        }
     }
 
     private fun apiCallGetConsultation() {
@@ -64,19 +76,20 @@ class BookingFragment : Fragment() {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
                     call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
-                ) {
+                )
+                {
 
                     if (response.body()!!.result.isEmpty()) {
                         binding.tvNoDataFound.visibility = View.VISIBLE
                         // myToast(requireActivity(),"No Data Found")
                         progressDialog!!.dismiss()
 
-                    } else {
+                    }
+                    else {
                         binding.recyclerView.apply {
                             binding.tvNoDataFound.visibility = View.GONE
                             adapter = AdapterBooking(requireContext(), response.body()!!)
                             progressDialog!!.dismiss()
-
 
                         }
                     }
@@ -84,12 +97,26 @@ class BookingFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    myToast(requireActivity(), t.message.toString())
+                    myToast(requireActivity(), "Something went wrong")
                     progressDialog!!.dismiss()
 
                 }
 
             })
+    }
+    override fun onStart() {
+        super.onStart()
+        CheckInternet().check { connected ->
+            if (connected) {
+
+                // myToast(requireActivity(),"Connected")
+            }
+            else {
+                val changeReceiver = NetworkChangeReceiver(context)
+                changeReceiver.build()
+                //  myToast(requireActivity(),"Check Internet")
+            }
+        }
     }
 
 
