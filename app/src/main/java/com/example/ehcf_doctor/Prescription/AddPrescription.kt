@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Login.activity.SignIn
@@ -121,17 +122,24 @@ class AddPrescription : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        CheckInternet().check { connected ->
-            if (connected) {
+        if (isOnline(this)){
+            //  myToast(requireActivity(), "Connected")
+        }else{
+            val changeReceiver = NetworkChangeReceiver(context)
+            changeReceiver.build()
+            //  myToast(requireActivity(), "Not C")
 
-                // myToast(requireActivity(),"Connected")
-            }
-            else {
-                val changeReceiver = NetworkChangeReceiver(context)
-                changeReceiver.build()
-                //  myToast(requireActivity(),"Check Internet")
-            }
         }
+//        CheckInternet().check { connected ->
+//            if (connected) {
+//             //    myToast(requireActivity(),"Connected")
+//            }
+//            else {
+//                val changeReceiver = NetworkChangeReceiver(context)
+//                changeReceiver.build()
+//                //  myToast(requireActivity(),"Check Internet")
+//            }
+//        }
     }
 
 

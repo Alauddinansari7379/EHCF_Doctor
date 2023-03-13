@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Cancelled.adapter.AdapterCancelled
@@ -61,7 +62,7 @@ class CancelledFragment : Fragment() {
 
         progressDialog!!.show()
 
-        ApiClient.apiService.getConsultation(sessionManager.id.toString())
+        ApiClient.apiService.getConsultation(sessionManager.id.toString(),"rejected")
             .enqueue(object : Callback<ModelGetConsultation> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
@@ -94,17 +95,24 @@ class CancelledFragment : Fragment() {
     }
     override fun onStart() {
         super.onStart()
-        CheckInternet().check { connected ->
-            if (connected) {
+        if (isOnline(requireContext())){
+            //  myToast(requireActivity(), "Connected")
+        }else{
+            val changeReceiver = NetworkChangeReceiver(context)
+            changeReceiver.build()
+            //  myToast(requireActivity(), "Not C")
 
-                // myToast(requireActivity(),"Connected")
-            }
-            else {
-                val changeReceiver = NetworkChangeReceiver(context)
-                changeReceiver.build()
-                //  myToast(requireActivity(),"Check Internet")
-            }
         }
+//        CheckInternet().check { connected ->
+//            if (connected) {
+//             //    myToast(requireActivity(),"Connected")
+//            }
+//            else {
+//                val changeReceiver = NetworkChangeReceiver(context)
+//                changeReceiver.build()
+//                //  myToast(requireActivity(),"Check Internet")
+//            }
+//        }
     }
 
    /* private fun apiCall(){

@@ -55,6 +55,17 @@
 
                 </TextView>
             </LinearLayout>
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@drawable/spinner_bg">-->
+
+<!--                <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
+<!--                    android:id="@+id/spinnerOrderNo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    app:hintText="Select Serial Order" />-->
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -450,26 +461,52 @@
 
                 </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
-            <LinearLayout
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                android:id="@+id/spinnerSpecialistTest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:layout_marginTop="5dp"
+                app:smsp_floatingLabelColor="#FF5252"
+                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_gravity="start"
                 android:background="@drawable/corner"
-                android:minHeight="40dp"
-                android:orientation="horizontal">
-                <pl.utkala.searchablespinner.SearchableSpinner
-                    android:id="@+id/spinnerSpecialistTest"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    app:closeText="Close"
-                    android:autofillHints="sdsd"
-                    app:dialogTitle="" />
+                app:smsp_hint="Select Specialist"
+                app:smsp_hintColor="@color/black"
+                app:smsp_isSearchable="true"
+                android:outlineProvider="none"
+                app:smsp_underlineColor="@color/white"
+                app:smsp_itemColor="#512DA8"
+                app:smsp_itemListColor="#7C4DFF"
+                app:smsp_itemListHintBackgroundColor="#808080"
+                app:smsp_itemListHintColor="#FFFFFF"
+                app:smsp_multilineError="false"
+                app:smsp_selectedItemListColor="#FF5252" />
 
-            </LinearLayout>
+
+<!--                <com.androidtrip.plugins.searchablespinner.SearchableSpinner-->
+<!--                    android:id="@+id/spinnerSpecialistTest"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    android:gravity="center_horizontal"-->
+<!--                    app:StartSearchTintColor="@android:color/white"-->
+
+<!--                    app:SearchViewBackgroundColor="@android:color/secondary_text_dark"-->
+<!--                    app:ShowBorders="false"-->
+<!--                    app:RevealEmptyText="Touch to select"-->
+<!--                    app:SpinnerExpandHeight="300dp"/>-->
+
+<!--                app:DoneSearchTintColor="@android:color/holo_purple"-->
+<!--                app:RevealViewBackgroundColor="@android:color/holo_purple"-->
+<!--                <pl.utkala.searchablespinner.SearchableSpinner-->
+<!--                    android:id="@+id/spinnerSpecialistTest"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="45dp"-->
+<!--                    app:closeText="Close"-->
+<!--                    app:RevealEmptyText="Touch to select"-->
+<!--                    android:autofillHints="sdsd"-->
+<!--                    app:dialogTitle="Select Specialist" />-->
+
 
             <LinearLayout
             android:layout_width="match_parent"

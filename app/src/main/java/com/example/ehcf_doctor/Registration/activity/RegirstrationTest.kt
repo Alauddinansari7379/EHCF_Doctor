@@ -15,6 +15,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.core.view.get
+import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Login.activity.SignIn
@@ -154,10 +156,12 @@ class RegirstrationTest : AppCompatActivity() {
         specialistList.add(ModelSpecialist("PHYSIOTHERAPY", 18))
         specialistList.add(ModelSpecialist("UROLOGIST", 19))
 
+        genderList.add(ModelGender("Select Gender", 0))
         genderList.add(ModelGender("Male", 1))
         genderList.add(ModelGender("Female", 2))
         genderList.add(ModelGender("Other", 3))
 
+        langaugeList.add(ModelLanguages("Select Language", 0))
         langaugeList.add(ModelLanguages("English", 1))
         langaugeList.add(ModelLanguages("French", 2))
         langaugeList.add(ModelLanguages("Spanish", 3))
@@ -308,10 +312,10 @@ class RegirstrationTest : AppCompatActivity() {
                 binding.edtExperience.requestFocus()
                 return@setOnClickListener
             }
-            if (binding.spinnerGender.selectedItem == null) {
+            if (binding.spinnerGender.selectedItem.toString() == "Select Gender") {
                 myToast(this, "Select Gender")
             }
-            if (binding.spinnerLanguages.selectedItem == null) {
+            if (binding.spinnerLanguages.selectedItem.toString() == "Select Language") {
                 myToast(this, "Select Language")
             }
             if (binding.edtDescription.text.isEmpty()) {
@@ -458,6 +462,7 @@ class RegirstrationTest : AppCompatActivity() {
                     call: Call<ModelSpecilList>, response: Response<ModelSpecilList>
                 ) {
 
+
                     specilList = response.body()!!;
                     if (specilList != null) {
 
@@ -465,19 +470,24 @@ class RegirstrationTest : AppCompatActivity() {
                         val items = arrayOfNulls<String>(specilList.result!!.size)
 
                         for (i in specilList.result!!.indices) {
+
                             items[i] = specilList.result!![i].categoryName
                         }
                         val adapter: ArrayAdapter<String?> = ArrayAdapter(this@RegirstrationTest,R.layout.simple_list_item_1, items)
-                        binding.spinnerSpecialistTest.adapter = adapter
-                        progressDialog!!.dismiss()
+                         var spProvince: SmartMaterialSpinner<String>? = null
+                         var spEmptyItem: SmartMaterialSpinner<String>? = null
+                        binding.spinnerSpecialistTest.item = items.toMutableList() as List<Any>?
 
+
+
+                        progressDialog!!.dismiss()
 
                         binding.spinnerSpecialistTest.onItemSelectedListener =
                             object : AdapterView.OnItemSelectedListener {
                                 override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
                                     val id = specilList.result!![i].id
                                     specilistId=id.toString()
-                                 //   Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                   // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
                                 }
 
                                 override fun onNothingSelected(adapterView: AdapterView<*>?) {}

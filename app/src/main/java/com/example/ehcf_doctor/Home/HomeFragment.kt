@@ -1,31 +1,42 @@
 package com.example.ehcf_doctor.Home
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.ehcf.Helper.isOnline
+import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterHome
+import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing
+import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentHomeBinding
+import com.example.myrecyview.apiclient.ApiClient
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.ktx.messaging
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
-import xyz.teamgravity.checkinternet.CheckInternet
-import java.io.IOException
 
-class HomeFragment : Fragment() {
+
+class HomeFragment : Fragment(){
     private lateinit var binding:FragmentHomeBinding
     private lateinit var sessionManager: SessionManager
     var doctorname=""
-    private val senderID = "YOUR_SENDER_ID"
+    var progressDialog : ProgressDialog?=null
 
+    private val senderID = "YOUR_SENDER_ID"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +56,14 @@ class HomeFragment : Fragment() {
        binding.tvDoctorName.text= doctorname
         Log.e("DoctorNAme,", "$doctorname")
         Log.e("DoctorId,", "${sessionManager.id}")
+//
+        apiCallGetConsultationWating()
+//        CheckInternet().check { connected ->
+//            if (connected) {
+//               // myToast(requireActivity(), "")
+//            }
+//        }
+
 
         Firebase.messaging.subscribeToTopic("Doctor")
             .addOnCompleteListener { task ->
@@ -59,6 +78,11 @@ class HomeFragment : Fragment() {
 
         getToken()
 
+    }
+    private fun isNetworkConnected(): Boolean {
+        val cm =
+            requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return cm.activeNetworkInfo != null
     }
     @SuppressLint("StringFormatInvalid")
     private fun getToken() {
@@ -77,19 +101,56 @@ class HomeFragment : Fragment() {
            // Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
         })
     }
+    private fun apiCallGetConsultationWating() {
+
+        ApiClient.apiService.getConsultation(sessionManager.id.toString(),"waiting_for_accept")
+            .enqueue(object : Callback<ModelGetConsultation> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
+                ) {
+                    if (response.body()!!.result.isEmpty()) {
+                        // myToast(requireActivity(),"No Data Found")
+
+                    } else {
+                        binding.rvUpcoming.apply {
+                          //  myToast(requireActivity(),"Adapter")
+                            adapter = AdapterHome(requireContext(), response.body()!!,)
+
+                        }
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
+                   // myToast(requireActivity(), "Something went wrong")
+                    progressDialog!!.dismiss()
+
+                }
+
+            })
+    }
+
     override fun onStart() {
         super.onStart()
-        CheckInternet().check { connected ->
-            if (connected) {
+        if (isOnline(requireContext())){
+          //  myToast(requireActivity(), "Connected")
+        }else{
+            val changeReceiver = NetworkChangeReceiver(context)
+            changeReceiver.build()
+          //  myToast(requireActivity(), "Not C")
 
-                // myToast(requireActivity(),"Connected")
-            }
-            else {
-                val changeReceiver = NetworkChangeReceiver(context)
-                changeReceiver.build()
-                //  myToast(requireActivity(),"Check Internet")
-            }
         }
+//        CheckInternet().check { connected ->
+//            if (connected) {
+//             //    myToast(requireActivity(),"Connected")
+//            }
+//            else {
+//                val changeReceiver = NetworkChangeReceiver(context)
+//                changeReceiver.build()
+//                //  myToast(requireActivity(),"Check Internet")
+//            }
+//        }
     }
 
 }

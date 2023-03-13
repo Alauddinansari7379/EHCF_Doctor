@@ -33,25 +33,16 @@ class AdapterConsulted(
         holder.appointmentDate.text = list.result[position].time!!
         holder.totalAmount.text = list.result[position].total.toString()
         holder.tvStatus.text = list.result[position].status_for_doctor.toString()
+        holder.startTime.text = list.result[position].time.toString()
         // holder.description.text = list.result[position].description.toString()
         holder.coustmorName.text = list.result[position].customer_name.toString()
 
-        when (list.result[position].slug) {
-            "completed" -> {
-                // holder.visibility(View.INVISIBLE);
-
-                holder.cardView.visibility = View.VISIBLE
-            }else->{
-
-            holder.cardView.visibility = View.GONE
-
-        }
         }
 
         // Glide.with(hol der.image).load(list[position].url).into(holder.image)
 
 
-    }
+
 
 
     override fun getItemCount(): Int {

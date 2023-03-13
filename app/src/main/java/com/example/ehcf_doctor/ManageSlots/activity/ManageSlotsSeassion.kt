@@ -64,7 +64,10 @@ class ManageSlotsSeassion : AppCompatActivity(),AdapterSlotsList.DeleteSlot {
                 call: Call<ModelSlotList>,
                 response: Response<ModelSlotList>
             ) {
-                if (response.body()!!.result.isEmpty()) {
+                if (response.code()==500){
+                    myToast(this@ManageSlotsSeassion,"Server Error")
+                }
+               else if (response.body()!!.result.isEmpty()) {
                     binding.tvNoDataFound.visibility = View.VISIBLE
                     myToast(this@ManageSlotsSeassion,"No Slot Found")
                     progressDialog!!.dismiss()
@@ -82,6 +85,7 @@ class ManageSlotsSeassion : AppCompatActivity(),AdapterSlotsList.DeleteSlot {
 
             override fun onFailure(call: Call<ModelSlotList>, t: Throwable) {
                 myToast(this@ManageSlotsSeassion, "Something went wrong")
+                progressDialog!!.dismiss()
 
             }
 

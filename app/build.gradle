@@ -47,6 +47,7 @@ android {
 
 dependencies {
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
+    implementation 'com.google.android.support:wearable:2.9.0'
     def nav_version = "2.5.2"
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -129,6 +130,11 @@ dependencies {
 
     //Searchable Spinner
     implementation 'com.github.DonMat:searchablespinner:v1.0.1'
+//    implementation 'com.github.mudassar1:SearchableSpinner:v1.1'
+//    implementation 'com.github.leoncydsilva:SearchableSpinner:1.0.1'
+    implementation 'com.github.chivorns:smartmaterialspinner:1.5.0'
+
+
 
     //Check Internet
     implementation 'com.github.raheemadamboev:check-internet-android:1.1.1'

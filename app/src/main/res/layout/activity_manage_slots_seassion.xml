@@ -10,13 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgBack"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="5dp"
+            android:background="?actionBarItemBackground"
             android:src="@drawable/ic_baseline_arrow_back_24">
-        </ImageView>
+        </androidx.appcompat.widget.AppCompatImageView>
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -29,7 +30,7 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textColor="@color/black"
-                android:text="Manage Slots">
+                android:text="My Slots">
             </TextView>
             <ImageView
                 android:layout_width="25dp"
@@ -40,14 +41,15 @@
                 android:background="@drawable/ic_baseline_notifications_24"
                 android:text="Appointments">
             </ImageView>
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
-                android:backgroundTint="@color/black"
-                android:background="@drawable/ic_baseline_logout_24"
-                android:text="Appointments">
-            </ImageView>
+                android:background="?actionBarItemBackground"
+                android:tint="@color/black"
+                android:src="@drawable/ic_baseline_logout_24"
+               >
+            </androidx.appcompat.widget.AppCompatImageView>
         </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>

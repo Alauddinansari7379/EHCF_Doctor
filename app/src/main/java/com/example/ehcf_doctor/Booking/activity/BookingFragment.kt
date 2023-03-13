@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
@@ -71,7 +72,7 @@ class BookingFragment : Fragment() {
 
         progressDialog!!.show()
 
-        ApiClient.apiService.getConsultation(sessionManager.id.toString())
+        ApiClient.apiService.getConsultation(sessionManager.id.toString(),"")
             .enqueue(object : Callback<ModelGetConsultation> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
@@ -106,17 +107,24 @@ class BookingFragment : Fragment() {
     }
     override fun onStart() {
         super.onStart()
-        CheckInternet().check { connected ->
-            if (connected) {
+        if (isOnline(requireContext())){
+            //  myToast(requireActivity(), "Connected")
+        }else{
+            val changeReceiver = NetworkChangeReceiver(context)
+            changeReceiver.build()
+            //  myToast(requireActivity(), "Not C")
 
-                // myToast(requireActivity(),"Connected")
-            }
-            else {
-                val changeReceiver = NetworkChangeReceiver(context)
-                changeReceiver.build()
-                //  myToast(requireActivity(),"Check Internet")
-            }
         }
+//        CheckInternet().check { connected ->
+//            if (connected) {
+//             //    myToast(requireActivity(),"Connected")
+//            }
+//            else {
+//                val changeReceiver = NetworkChangeReceiver(context)
+//                changeReceiver.build()
+//                //  myToast(requireActivity(),"Check Internet")
+//            }
+//        }
     }
 
 

@@ -175,6 +175,7 @@ interface ApiInterface {
     @POST("get_consultations")
     fun getConsultation(
         @Query("doctor_id") doctor_id: String?,
+        @Query("slug") slug: String?,
     ): Call<ModelGetConsultation>
     @POST("get_consultation_details")
     fun consultationDetails(

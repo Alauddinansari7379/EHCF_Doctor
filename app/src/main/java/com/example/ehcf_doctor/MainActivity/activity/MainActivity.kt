@@ -2,6 +2,7 @@ package com.example.ehcf_doctor.MainActivity.activity
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -18,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
@@ -41,6 +43,7 @@ import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
 import xyz.teamgravity.checkinternet.CheckInternet
 
 class MainActivity : AppCompatActivity() {
+    private  var context:Context=this@MainActivity
     private lateinit var binding: ActivityMainBinding
     private lateinit var sessionManager: SessionManager
     lateinit var navController: NavController
@@ -113,116 +116,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigation1.setupWithNavController(popupMenu.menu, navController)
 
-//        binding.idSwitch.setOnClickListener {
-//            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-//                .setTitleText("Are you sure want to logout?")
-//                .setCancelText("No")
-//                .setConfirmText("Yes")
-//                .showCancelButton(true)
-//                .setConfirmClickListener { sDialog ->
-//                    sDialog.cancel()
-//                    if (binding.tvStatus.text == "Online") {
-//
-//                        // on below line we are setting text
-//                        // if switch is checked.
-//                        onlineid=0
-//                        binding.tvStatus.text = "Online"
-//                    } else {
-//                        onlineid=1
-//                        binding.tvStatus.text = "Offline"
-//
-//                        // on below line we are setting text
-//                        // if switch is unchecked.
-//                        // statusTV.text = "Switch is UnChecked"
-//                    }
-//
-//                }
-//                .setCancelClickListener { sDialog ->
-//                    sDialog.cancel()
-//                }
-//                .show()
-//        }
-
-//        binding.idSwitch.setOnCheckedChangeListener { _, isChecked ->
-//            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-//                .setTitleText("Are you sure want to logout?")
-//                .setCancelText("No")
-//                .setConfirmText("Yes")
-//                .showCancelButton(true)
-//                .setConfirmClickListener { sDialog ->
-//                    sDialog.cancel()
-//                    if (isChecked) {
-//
-//                        // on below line we are setting text
-//                        // if switch is checked.
-//                        onlineid=0
-//                        binding.tvStatus.text = "Online"
-//                    } else {
-//                        onlineid=1
-//                        binding.tvStatus.text = "Offline"
-//
-//                        // on below line we are setting text
-//                        // if switch is unchecked.
-//                        // statusTV.text = "Switch is UnChecked"
-//                    }
-//
-//                }
-//                .setCancelClickListener { sDialog ->
-//                    sDialog.cancel()
-//                }
-//                .show()
-//
-//        }
-
-//        binding.toggleBtn.setOnClickListener { v ->
-//            // Is the toggle on?
-//            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-//                .setTitleText("Are you sure want to Change Status?")
-//                .setCancelText("No")
-//                .setConfirmText("Yes")
-//                .showCancelButton(true)
-//                .setConfirmClickListener { sDialog ->
-//                    sDialog.cancel()
-//
-//                    val on = (v as ToggleButton).isChecked
-//                    if (on) {
-//                        //  binding.toggleBtn.setBackgroundDrawable(resources.getDrawable(R.drawable.corner))
-//                        binding.toggleBtn.setTextColor((resources.getColor(R.color.Green)))
-//                        binding.toggleBtn.textOn="Online"
-//                        myToast(this,"On")
-//                    } else {
-//                        val on = (v as ToggleButton).isChecked.not()
-//
-//                        // binding.toggleBtn.s(resources.getColor(R.color.Red))
-//                        //   binding.toggleBtn.setBackgroundColor(resources.getColor(R.color.Red))
-//                        //  binding.toggleBtn.background = resources.getDrawable(R.drawable.corner)
-//                        binding.toggleBtn.setTextColor((resources.getColor(R.color.Red)))
-//                        binding.toggleBtn.textOff="Offline"
-//                        myToast(this,"off")
-//                    }
-//
-//                }
-//                .setCancelClickListener { sDialog ->
-//                    sDialog.cancel()
-//                }
-//                .show()
-
-
-//            val on = (v as ToggleButton).isChecked
-//            if (on) {
-//              //  binding.toggleBtn.setBackgroundDrawable(resources.getDrawable(R.drawable.corner))
-//                binding.toggleBtn.setTextColor((resources.getColor(R.color.Green)))
-//                binding.toggleBtn.textOn="Online"
-//                    myToast(this,"On")
-//            } else {
-//               // binding.toggleBtn.s(resources.getColor(R.color.Red))
-//             //   binding.toggleBtn.setBackgroundColor(resources.getColor(R.color.Red))
-//              //  binding.toggleBtn.background = resources.getDrawable(R.drawable.corner)
-//                binding.toggleBtn.setTextColor((resources.getColor(R.color.Red)))
-//                binding.toggleBtn.textOff="Offline"
-//                myToast(this,"off")
-//            }
-  //      }
         navController.addOnDestinationChangedListener { _, destination, _ ->
             binding.tvTitle.text = when (destination.id) {
                 R.id.fragment_Home -> "Home"
@@ -238,11 +131,11 @@ class MainActivity : AppCompatActivity() {
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             binding.includedrawar1.tvMySlots.setOnClickListener {
-                startActivity(Intent(this, ManageSlots::class.java))
+                startActivity(Intent(this, ManageSlotsSeassion::class.java))
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             binding.includedrawar1.tvManageSlots.setOnClickListener {
-                startActivity(Intent(this, ManageSlotsSeassion::class.java))
+                startActivity(Intent(this, ManageSlots::class.java))
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             binding.includedrawar1.tvProfileSetting.setOnClickListener {
@@ -325,15 +218,16 @@ private fun apiCallOnline(){
             call: Call<ModelOnline>,
             response: Response<ModelOnline>
         ) {
-            if (response.body()!!.status==1){
+
+            if (response.code()==200){
                 myToast(this@MainActivity, "Now you are Online !")
                 progressDialog!!.dismiss()
                 sessionManager.onlineStatus ="1"
                 binding.btnOnline.visibility=View.VISIBLE
                 binding.btnOffline.visibility=View.GONE
 
-            }else{
-                myToast(this@MainActivity, response.body()!!.message)
+            }else if (response.code()==500){
+                myToast(this@MainActivity, "Server Error")
                 progressDialog!!.dismiss()
             }
 
@@ -361,18 +255,27 @@ private fun apiCallOffline(){
         override fun onResponse(
             call: Call<ModelOnline>,
             response: Response<ModelOnline>
-        ) {
-            if (response.body()!!.status==1){
-                myToast(this@MainActivity, "Now you are Offline !")
-                progressDialog!!.dismiss()
-                sessionManager.onlineStatus ="0"
-                binding.btnOnline.visibility=View.GONE
-                binding.btnOffline.visibility=View.VISIBLE
+        )
+        {
+                if (response.code()==200) {
+                    myToast(this@MainActivity, "Now you are Offline !")
+                    progressDialog!!.dismiss()
+                    sessionManager.onlineStatus = "0"
+                    binding.btnOnline.visibility = View.GONE
+                    binding.btnOffline.visibility = View.VISIBLE
+                }
+                    else if(response.code()==500)
+                    {
+                        myToast(this@MainActivity, "Server Error")
+                        progressDialog!!.dismiss()
 
-            }else{
-                myToast(this@MainActivity, response.body()!!.message)
-                progressDialog!!.dismiss()
-            }
+                    }
+                    else{
+                        myToast(this@MainActivity, "Something went wrong")
+                        progressDialog!!.dismiss()
+                    }
+
+
 
         }
         override fun onFailure(call: Call<ModelOnline>, t: Throwable) {
@@ -385,17 +288,24 @@ private fun apiCallOffline(){
 }
     override fun onStart() {
         super.onStart()
-        CheckInternet().check { connected ->
-            if (connected) {
+        if (isOnline(context)){
+            //  myToast(requireActivity(), "Connected")
+        }else{
+            val changeReceiver = NetworkChangeReceiver(context)
+            changeReceiver.build()
+            //  myToast(requireActivity(), "Not C")
 
-                // myToast(requireActivity(),"Connected")
-            }
-            else {
-                val changeReceiver = NetworkChangeReceiver(context)
-                changeReceiver.build()
-                //  myToast(requireActivity(),"Check Internet")
-            }
         }
+//        CheckInternet().check { connected ->
+//            if (connected) {
+//             //    myToast(requireActivity(),"Connected")
+//            }
+//            else {
+//                val changeReceiver = NetworkChangeReceiver(context)
+//                changeReceiver.build()
+//                //  myToast(requireActivity(),"Check Internet")
+//            }
+//        }
     }
 
 

@@ -33,17 +33,17 @@ class AdapterCancelled(
        // holder.description.text = list.result[position].description.toString()
         holder.coustmorName.text = list.result[position].customer_name.toString()
 
-        when (list.result[position].slug) {
-            "rejected" -> {
-               // holder.visibility(View.INVISIBLE);
-
-                holder.cardView.visibility = View.VISIBLE
-            }else->{
-
-            holder.cardView.visibility = View.GONE
-
-        }
-        }
+//        when (list.result[position].slug) {
+//            "rejected" -> {
+//               // holder.visibility(View.INVISIBLE);
+//
+//                holder.cardView.visibility = View.VISIBLE
+//            }else->{
+//
+//            holder.cardView.visibility = View.GONE
+//
+//        }
+//        }
 
         // Glide.with(hol der.image).load(list[position].url).into(holder.image)
 

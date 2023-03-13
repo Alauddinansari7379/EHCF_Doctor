@@ -1,15 +1,21 @@
 package com.example.ehcf_doctor.Appointments
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
+import cn.pedant.SweetAlert.SweetAlertDialog
+import com.example.ehcf.Helper.isOnline
+import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Cancelled.activity.CancelledFragment
 import com.example.ehcf_doctor.Appointments.Consulted.activity.ConsultedFragment
 import com.example.ehcf_doctor.Appointments.Upcoming.activity.UpComingFragment
+import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.databinding.ActivityApointmentsBinding
 import com.giphy.sdk.analytics.GiphyPingbacks.context
 import com.google.android.material.tabs.TabLayout
@@ -19,7 +25,9 @@ import xyz.teamgravity.checkinternet.CheckInternet
 
 
 class Appointments : AppCompatActivity() {
+    private  var context:Context=this
     private lateinit var binding:ActivityApointmentsBinding
+    private lateinit var sessionManager:SessionManager
     private lateinit var pager: ViewPager // creating object of ViewPager
     private lateinit var tab: TabLayout  // creating object of TabLayout
     private lateinit var bar: Toolbar    // creating object of ToolBar
@@ -32,6 +40,7 @@ class Appointments : AppCompatActivity() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
+        sessionManager=SessionManager(this)
         pager = findViewById(com.example.ehcf_doctor.R.id.viewPager)
         tab = findViewById(com.example.ehcf_doctor.R.id.tabs)
         val adapter = ViewPagerAdapter(supportFragmentManager)
@@ -67,23 +76,48 @@ class Appointments : AppCompatActivity() {
         adapter.addFragment(CancelledFragment(), "Cancelled")
 
         pager.adapter = adapter
-
-
         tab.setupWithViewPager(pager)
+
+        binding.imgLogout.setOnClickListener {
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you sure want to logout?")
+                .setCancelText("No")
+                .setConfirmText("Yes")
+                .showCancelButton(true)
+                .setConfirmClickListener { sDialog ->
+                    sDialog.cancel()
+                    sessionManager.logout()
+                    val intent = Intent(applicationContext, SignIn::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    finish()
+                    startActivity(intent)
+                }
+                .setCancelClickListener { sDialog ->
+                    sDialog.cancel()
+                }
+                .show()
+        }
     }
     override fun onStart() {
         super.onStart()
-        CheckInternet().check { connected ->
-            if (connected) {
+        if (isOnline(this)){
+            //  myToast(requireActivity(), "Connected")
+        }else{
+            val changeReceiver = NetworkChangeReceiver(context)
+            changeReceiver.build()
+            //  myToast(requireActivity(), "Not C")
 
-                // myToast(requireActivity(),"Connected")
-            }
-            else {
-                val changeReceiver = NetworkChangeReceiver(context)
-                changeReceiver.build()
-                //  myToast(requireActivity(),"Check Internet")
-            }
         }
+//        CheckInternet().check { connected ->
+//            if (connected) {
+//             //    myToast(requireActivity(),"Connected")
+//            }
+//            else {
+//                val changeReceiver = NetworkChangeReceiver(context)
+//                changeReceiver.build()
+//                //  myToast(requireActivity(),"Check Internet")
+//            }
+//        }
     }
 
 }

@@ -22,10 +22,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AdapterUpComing(
+class AdapterUpComingAccepted(
     val context: Context, private val list: ModelGetConsultation, val confirmSlot: ConfirmSlot
 ) :
-    RecyclerView.Adapter<AdapterUpComing.MyViewHolder>() {
+    RecyclerView.Adapter<AdapterUpComingAccepted.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -47,6 +47,35 @@ class AdapterUpComing(
        // holder.title.text = list.result[position].title.toString()
         holder.startTime.text = list.result[position].time.toString()
         holder.status.text = list.result[position].status_for_doctor.toString()
+        holder.consultationType.text = list.result[position].consultation_type.toString()
+
+        when (list.result[position].consultation_type) {
+            "1" -> {
+                holder.consultationType.text = "Tele-Consultation"
+
+
+            }
+            "2" -> {
+                holder.consultationType.text = "Clinic-Visit"
+
+
+            }
+            "3" -> {
+                holder.consultationType.text = "Home-Visit"
+
+
+            }
+
+
+//            1 -> {
+//                holder.btnStart.setBackgroundColor(Color.parseColor("#FF0000"))
+//                holder.btnStart.text = "Stop"
+//            }
+//            2 -> {
+//                holder.btnStart.setBackgroundColor(Color.parseColor("#119241"))
+//                holder.btnStart.text = "Done"
+//            }
+        }
 
         holder.btnConfirm.setOnClickListener {
             val slug="accepted"
@@ -60,53 +89,7 @@ class AdapterUpComing(
         holder.btnCheck.setOnClickListener {
             confirmSlot.showPopup(list.result[position].time.toString())
         }
-        when (list.result[position].consultation_type) {
-            "1" -> {
-                holder.consaltationType.text = "Tele-Consultation"
-
-
-            }
-            "2" -> {
-                holder.consaltationType.text = "Clinic-Visit"
-
-
-            }
-            "3" -> {
-                holder.consaltationType.text = "Home-Visit"
-
-
-            }
-        }
 //        Picasso.get().load(list.result[position].category_image).into(holder.image)
-        when (list.result[position].slug) {
-//            "booking_confirmed" -> {
-//                holder.btnCheck.visibility = View.VISIBLE
-//                holder.btnConfirm.visibility = View.GONE
-//                holder.btnReject.visibility = View.GONE
-//            }
-            "rejected" -> {
-//                holder.itemView.visibility = View.VISIBLE
-//                holder.itemView.layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                holder.cardView.visibility = View.GONE
-
-            }
-            "completed" -> {
-//                holder.itemView.visibility = View.VISIBLE
-//                holder.itemView.layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-                holder.cardView.visibility = View.GONE
-
-            }
-            "waiting_for_accept" -> {
-                holder.btnConfirm.visibility = View.VISIBLE
-                holder.btnReject.visibility = View.VISIBLE
-                holder.btnCheck.visibility = View.GONE
-                holder.btnStartMeeting.visibility = View.GONE
-
-            }
-        }
-
-
-
         Log.e("currentDate", currentDate)
         Log.e("startTime", list.result[position].date+" "+list.result[position].time)
 
@@ -121,7 +104,7 @@ class AdapterUpComing(
             && list.result[position].consultation_type=="2")
         {
                 holder.btnStartMeeting.visibility = View.GONE
-                holder.btnCheck.visibility = View.GONE
+                holder.btnCheck.visibility = View.VISIBLE
                 holder.btnConfirm.visibility = View.GONE
                 holder.btnReject.visibility = View.GONE
             }
@@ -158,7 +141,7 @@ class AdapterUpComing(
         //  val title: TextView = itemView.findViewById(R.id.tvTitleCan)
           val startTime: TextView = itemView.findViewById(R.id.tvStartTimeUpcoming)
           val status: TextView = itemView.findViewById(R.id.tvStatusUpcoming)
-          val consaltationType: TextView = itemView.findViewById(R.id.tvConsaltationTypeUpcoming)
+          val consultationType: TextView = itemView.findViewById(R.id.tvConsaltationTypeUpcoming)
 
           val btnConfirm: Button = itemView.findViewById(R.id.btnConfirmUpcoming)
           val btnCheck: Button = itemView.findViewById(R.id.btnCheckUpcoming)

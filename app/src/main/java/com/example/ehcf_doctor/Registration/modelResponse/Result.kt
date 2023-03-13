@@ -14,7 +14,7 @@ data class Result(
     val password: String,
     val phone_number: String,
     val phone_with_code: String,
-    val pre_existing_desease: Any,
+    val pre_existing_desease: String?=null,
     val profile_picture: String,
     val status: String,
     val updated_at: String,

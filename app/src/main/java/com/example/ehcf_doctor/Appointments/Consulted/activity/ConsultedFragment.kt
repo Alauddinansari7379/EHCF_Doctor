@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Cancelled.adapter.AdapterCancelled
@@ -53,9 +54,12 @@ class ConsultedFragment : Fragment() {
 
         val btnOkDialog = view.findViewById<Button>(R.id.btnOkDialog)
         tvTimeCounter = view.findViewById<TextView>(R.id.tvTimeCounter)
+        binding.imgRefresh.setOnClickListener {
+            apiCallGetConsultation()
 
-
+        }
         apiCallGetConsultation()
+
 //        binding.btnCall.setOnClickListener {
 //            try {
 //                val options: JitsiMeetConferenceOptions = JitsiMeetConferenceOptions.Builder()
@@ -74,6 +78,7 @@ class ConsultedFragment : Fragment() {
 
 
     }
+
     private fun apiCallGetConsultation() {
         progressDialog = ProgressDialog(requireContext())
         progressDialog!!.setMessage("Loading..")
@@ -83,7 +88,7 @@ class ConsultedFragment : Fragment() {
 
         progressDialog!!.show()
 
-        ApiClient.apiService.getConsultation(sessionManager.id.toString())
+        ApiClient.apiService.getConsultation(sessionManager.id.toString(), "completed")
             .enqueue(object : Callback<ModelGetConsultation> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
@@ -113,19 +118,27 @@ class ConsultedFragment : Fragment() {
 
             })
     }
+
     override fun onStart() {
         super.onStart()
-        CheckInternet().check { connected ->
-            if (connected) {
+        if (isOnline(requireContext())) {
+            //  myToast(requireActivity(), "Connected")
+        } else {
+            val changeReceiver = NetworkChangeReceiver(context)
+            changeReceiver.build()
+            //  myToast(requireActivity(), "Not C")
 
-                // myToast(requireActivity(),"Connected")
-            }
-            else {
-                val changeReceiver = NetworkChangeReceiver(context)
-                changeReceiver.build()
-                //  myToast(requireActivity(),"Check Internet")
-            }
         }
+//        CheckInternet().check { connected ->
+//            if (connected) {
+//             //    myToast(requireActivity(),"Connected")
+//            }
+//            else {
+//                val changeReceiver = NetworkChangeReceiver(context)
+//                changeReceiver.build()
+//                //  myToast(requireActivity(),"Check Internet")
+//            }
+//        }
     }
 
 }
