@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
     var doctorname = ""
     var id = ""
 
-    var progressDialog: ProgressDialog? = nullNew
+    var progressDialog: ProgressDialog? = null
     var shimmerFrameLayout: ShimmerFrameLayout? = null
 
     private val senderID = "YOUR_SENDER_ID"
