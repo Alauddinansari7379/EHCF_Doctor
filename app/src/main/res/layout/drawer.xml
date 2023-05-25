@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/drawelTest"
+    android:background="@color/white"
+    android:layout_gravity="start"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <!--    <ScrollView-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="wrap_content">-->
+            <!--        <LinearLayout-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:orientation="vertical"-->
+            <!--            android:layout_height="wrap_content">-->
+
+            <!--        </LinearLayout>-->
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="150dp"
+                android:background="@drawable/logo">
+
+            </ImageView>
+            <LinearLayout
+                android:id="@+id/tvDashboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textStyle="bold"
+                    android:text="Dashboard"
+                    android:drawableLeft="@drawable/dashboard">
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvMySlots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textStyle="bold"
+                    android:text="My Slots"
+                    android:drawableLeft="@drawable/appointments">
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvManageSlots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textStyle="bold"
+                    android:text="Manage Slots"
+                    android:drawableLeft="@drawable/appointments">
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvAppointments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="Appointments"
+                    android:drawableLeft="@drawable/mydoctor">
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvPrescripition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="Prescripition"
+                    android:drawableLeft="@drawable/myreport">
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvMyPatients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="My Patients"
+                    android:drawableLeft="@drawable/invoice">
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvInvoice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="Invoices"
+                    android:drawableLeft="@drawable/invoice">
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvProfileSetting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="Profile Settings"
+                    android:drawableLeft="@drawable/profilesetting">
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvPasswordChange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="Password Change"
+                    android:drawableLeft="@drawable/passwordchange">
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvPrivacyTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="Privacy &amp; Terms"
+                    android:drawableLeft="@drawable/privacyterms">
+
+                </TextView>
+                <!--</LinearLayout>-->
+                <!--    </ScrollView>-->
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvLogOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:drawableTint="@color/main_color"
+                    android:text="Logout"
+                    android:drawableLeft="@drawable/ic_baseline_logout_24">
+
+                </TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
+

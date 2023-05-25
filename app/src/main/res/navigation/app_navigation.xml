@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/fragment_Home">
+
+    <fragment
+        android:id="@+id/fragment_Home"
+        android:name="com.example.ehcf_doctor.Home.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        android:label="Home" />
+    <fragment
+        android:id="@+id/fragment_prescription"
+        tools:layout="@layout/fragment_precriscption"
+        android:name="com.example.ehcf_doctor.Prescription.activity.PrecriscptionFragment"
+        android:label="News" />
+    <fragment
+        android:id="@+id/profileFragment"
+        tools:layout="@layout/fragment_profile"
+        android:name="com.example.ehcf_doctor.Profile.ProfileFragment"
+        android:label="Profile" />
+    <fragment
+        android:id="@+id/fragment_booking"
+        android:name="com.example.ehcf_doctor.Booking.activity.BookingFragment"
+        tools:layout="@layout/fragment_booking"
+        android:label="fragment_booking2"
+        />
+</navigation>

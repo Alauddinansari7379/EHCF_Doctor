@@ -1,0 +1,30 @@
+package com.example.ehcf.Upload.model
+
+data class ResultXNew1(
+    val blood_group: String,
+    val created_at: String,
+    val customer_name: String,
+    val email: String,
+    val fcm_token: String,
+    val gender: String,
+    val id: String,
+    val last_active_address: String,
+    val no_of_ratings: String,
+    val overall_ratings: String,
+    val password: String,
+    val patient_id: String,
+    val patient_reports_id: String,
+    val phone_number: String,
+    val phone_with_code: String,
+    val pre_existing_desease: Any,
+    val profile_picture: String,
+    val report: String,
+    val report_1: Any,
+    val report_2: Any,
+    val report_3: String,
+    val report_4: Any,
+    val report_5: Any,
+    val status: String,
+    val updated_at: String,
+    val wallet: String
+)

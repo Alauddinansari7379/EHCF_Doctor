@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "578989039460",
+    "firebase_url": "https://ehcfdoctor-7ac5a-default-rtdb.firebaseio.com",
+    "project_id": "ehcfdoctor-7ac5a",
+    "storage_bucket": "ehcfdoctor-7ac5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578989039460:android:ef0bb67baf247328536471",
+        "android_client_info": {
+          "package_name": "com.example.ehcf_doctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578989039460-2i6qtatcihfocmfnfsp7god9c3280581.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbP6QlZoIn1e28eKQHQGbVKTMionPsoZ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "578989039460-2i6qtatcihfocmfnfsp7god9c3280581.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Invoice.Invoice">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_height="55dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgBack"
+            android:layout_width="40dp"
+            android:layout_height="37dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="?actionBarItemBackground"
+            android:padding="5dp"
+            android:layout_marginStart="10dp"
+
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Invoices"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="10dp">
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/corner"
+            android:hint="Search By Patient Name"
+            android:inputType="text"
+            android:padding="10dp"
+            android:layout_weight="2"
+            android:textColorHint="@color/black"
+            android:textSize="15dp">
+
+
+        </EditText>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="35dp"
+            android:layout_gravity="center"
+            android:layout_height="35dp"
+            android:background="@drawable/baseline_search_24">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+    </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:id="@+id/layoutFilter"
+    android:background="?actionBarItemBackground"
+    android:layout_height="wrap_content">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="Filter By Date "
+        android:textColor="@color/main_color"
+        android:textStyle="bold">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="22/02/2000 "
+        android:textColor="#686868"
+        android:textStyle="bold">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:drawableRight="@drawable/ic_baseline_calendar_month_24"
+        android:drawableTint="#686868"
+        android:textColor="@color/main_color"
+        android:textStyle="bold">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+</LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:gravity="end">
+<LinearLayout
+    android:id="@+id/layoutShowAll"
+    android:layout_width="wrap_content"
+    android:gravity="end"
+    android:background="?actionBarItemBackground"
+    android:layout_height="wrap_content">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginLeft="15dp"
+        android:text="Show All"
+        android:textColor="@color/main_color"
+        android:textStyle="bold">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_baseline_calendar_month_24"
+        android:drawableTint="#686868"
+        android:textStyle="bold">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+</LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerInvoice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/shimmer_effect_my_slot">
+
+                    </include>
+
+                    <include layout="@layout/shimmer_effect_my_slot">
+
+                    </include>
+
+                    <include layout="@layout/shimmer_effect_my_slot">
+
+                    </include>
+
+                    <include layout="@layout/shimmer_effect_my_slot">
+
+                    </include>
+
+                    <include layout="@layout/shimmer_effect_my_slot">
+
+                    </include>
+
+
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvManageSlot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNoDataFound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:text="No Slot Found"
+                    android:textColor="@color/Red"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:visibility="gone">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+            </LinearLayout>
+
+</LinearLayout>

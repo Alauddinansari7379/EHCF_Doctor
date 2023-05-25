@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Appointments.Upcoming.activity.UpComingFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp">
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/corner"
+            android:hint="Search By Patient Name"
+            android:inputType="text"
+            android:padding="10dp"
+            android:layout_weight="2"
+            android:textColorHint="@color/black"
+            android:textSize="15dp">
+
+
+        </EditText>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="35dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_height="35dp"
+            android:background="?actionBarItemBackground"
+            android:src="@drawable/baseline_search_24">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgRefresh"
+            android:layout_width="35dp"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:layout_height="35dp"
+            android:background="?actionBarItemBackground"
+            android:src="@drawable/ic_baseline_refresh_24">
+
+        </androidx.appcompat.widget.AppCompatImageView>
+
+    </LinearLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/shimmer">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            >
+            <include layout="@layout/shimmer_effect">
+            </include>
+
+            <include layout="@layout/shimmer_effect">
+            </include>
+            <include layout="@layout/shimmer_effect">
+            </include>
+            <include layout="@layout/shimmer_effect">
+            </include>
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUpcoming"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNoDataFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Appointment Found"
+            android:visibility="gone"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            >
+
+        </androidx.appcompat.widget.AppCompatTextView>
+    </LinearLayout>
+
+
+</LinearLayout>

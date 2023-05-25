@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_marginTop="15dp"
+    app:circularflow_radiusInDP="40"
+    android:padding="15dp"
+    android:background="@drawable/transplant"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="15dp"
+        android:elevation="5dp"
+        android:backgroundTint="#E3E8E7"
+
+        >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            >
+            <Button
+                android:id="@+id/btnStartTimeCSlot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textAllCaps="false"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:backgroundTint="@color/main_color"
+                android:layout_weight="1"
+                android:text="Start Time"
+                android:textColor="@color/black" />
+
+
+            <Button
+                android:id="@+id/btnEndTimeCSlot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_marginStart="5dp"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/main_color"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="End Time"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutDateFromDilog"
+            android:layout_width="match_parent"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            >
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvStartTimeCSlot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="02:20:00"
+                android:textColor="@color/black" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEndTimeCSlot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="02:40:00"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="40dp"
+            >
+            <Button
+                android:id="@+id/btnDateCSlot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_marginStart="25dp"
+                android:backgroundTint="@color/main_color"
+                android:layout_marginEnd="25dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:text="Date"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            >
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDateCSlot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="01-02-2023"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btnOkDialogNew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Ok"
+        android:textAllCaps="false" />
+
+</LinearLayout>
+    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+</LinearLayout>
