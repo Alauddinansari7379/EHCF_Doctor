@@ -109,6 +109,16 @@ class PrescriptionPendingFragment : Fragment() {
 
 
                     } else if (response.body()!!.result.isEmpty()) {
+
+                            binding.rvCancled.apply {
+                                shimmerFrameLayout?.startShimmer()
+                                binding.rvCancled.visibility = View.VISIBLE
+                                binding.shimmerPrePending.visibility = View.GONE
+                                binding.tvNoDataFound.visibility = View.GONE
+                                adapter = activity?.let { AdapterPrescription(it, response.body()!!) }
+                                progressDialog!!.dismiss()
+
+                            }
                         binding.tvNoDataFound.visibility = View.VISIBLE
                         binding.shimmerPrePending.visibility = View.GONE
                         // myToast(requireActivity(),"No Data Found")

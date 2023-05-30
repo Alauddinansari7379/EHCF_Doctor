@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.ayudevice.ayusynksdk.battery.batteryMeter.BatteryMeterView
+        android:id="@+id/battery_meter_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:batteryMeterColor="@color/full"
+        app:batteryMeterCriticalChargeLevel="15"
+        app:batteryMeterCriticalColor="@color/critical"
+        app:batteryMeterIndicatorColor="@android:color/transparent"
+        app:batteryMeterIsCharging="false"
+        app:batteryMeterTheme="rounded"
+        app:batteryMeterWarningColor="@color/orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_batteryLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
+        android:textSize="9sp"
+        app:layout_constraintBottom_toBottomOf="@id/battery_meter_view"
+        app:layout_constraintEnd_toEndOf="@id/battery_meter_view"
+        app:layout_constraintStart_toStartOf="@id/battery_meter_view"
+        app:layout_constraintTop_toTopOf="@id/battery_meter_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

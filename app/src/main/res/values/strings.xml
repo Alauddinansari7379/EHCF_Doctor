@@ -7,4 +7,42 @@
     <string name="stop_recording">Stop Recoeding</string>
     <string name="start_recording">start recording</string>
 
+    <string name="select_module_label">Select Module</string>
+    <string name="ble_fragment_label">AyuSynkBleSdk</string>
+    <string name="connect_fragment_label">Connect Fragment</string>
+    <string name="ota_fragment_label">Update AyuDevice</string>
+    <string name="usb_fragment_label">AyuSynkUsbSdk</string>
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="select_module_help"><b>Please select which type of device do you have?</b>\n\n For <b>AyuSynk:</b> Select BLE MODULE\n For <b>AyuSynk connection via Dongle:</b> Select USB MODULE\n For <b>AyuLynk</b>: Select USB MODULE</string>
+    <string name="ble_module">BLE Module</string>
+    <string name="usb_module">USB Module</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="device_disconnected">Device disconnected</string>
+    <string name="device_connected">Device connected</string>
+    <string name="device_strength">Connection: %1$s</string>
+    <string name="onlineLiveText">%1$s Online Streaming</string>
+    <string name="shareUrl">Share Url</string>
+    <string name="generate_report">Generate Report</string>
+    <string name="share_reports">Share reports</string>
+    <string name="logsText">%1$s Logs</string>
+    <string name="share_logs">Share logs</string>
+
+    <string name="ota_message">What\'s New \n %1$s</string>
+    <string name="no_updates">No updates</string>
+    <string name="check_update">Check for update</string>
+    <string name="device_update">Update device</string>
+    <string name="cancel">Cancel</string>
+    <string name="test_ota">Enable test ota</string>
+    <string name="upload_started">Upload started</string>
+    <string name="upload_complete">Upload Completed</string>
+    <string name="upload_error">Upload error %1$s</string>
+    <string name="upload_progress">Uploading %1$d</string>
+    <string name="cancel_update">Cancel update</string>
+
 </resources>

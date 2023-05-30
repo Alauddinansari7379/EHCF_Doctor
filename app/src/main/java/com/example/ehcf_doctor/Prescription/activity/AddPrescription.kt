@@ -11,6 +11,7 @@ import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Prescription.adapter.AdapterDigonisis
+import com.example.ehcf_doctor.Prescription.adapter.AdapterLabTest
 import com.example.ehcf_doctor.Prescription.adapter.AdapterOrderDetails
 import com.example.ehcf_doctor.Prescription.model.*
 import com.example.ehcf_doctor.databinding.ActivityAddPrescriptionBinding
@@ -24,22 +25,46 @@ import java.util.ArrayList
 class AddPrescription : AppCompatActivity() {
     private lateinit var binding: ActivityAddPrescriptionBinding
     var bookingId = ""
+    var doctor_notes = ""
+    var subjective_information = ""
+    var objective_information = ""
+    var assessment = ""
+    var plan = ""
+    var registration = ""
     private val context: Context = this@AddPrescription
     private lateinit var sessionManager: SessionManager
     var progressDialog: ProgressDialog? = null
     var isTest = "0"
     private val medicineList = ArrayList<ModelOrderDetails>()
     private val diagnosisList = ArrayList<ModelDigonsis>()
+    private val labTestList = ArrayList<ModelLabTest>()
     var btnId = "0"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddPrescriptionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         bookingId = intent.getStringExtra("bookingId").toString()
+        doctor_notes = intent.getStringExtra("doctor_notes").toString()
+        subjective_information = intent.getStringExtra("subjective_information").toString()
+        objective_information = intent.getStringExtra("objective_information").toString()
+        assessment = intent.getStringExtra("assessment").toString()
+        plan = intent.getStringExtra("plan").toString()
+        registration = intent.getStringExtra("registration").toString()
         btnId = intent.getStringExtra("btnId").toString()
         Log.e("bookingId", bookingId)
 
+
+
+        if (doctor_notes!="null"){
+            binding.edtDoctorNotes.setText(doctor_notes)
+            binding.edtSubjectiveInformation.setText(subjective_information)
+            binding.edtObjectiveInformation.setText(objective_information)
+            binding.edtAssessment.setText(assessment)
+            binding.edtPlan.setText(plan)
+        }
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
@@ -125,6 +150,18 @@ class AddPrescription : AppCompatActivity() {
             binding.edtDiagnosis.text.clear()
         }
 
+        binding.btnAddTest.setOnClickListener {
+            setRecyclerDataLabTest(
+                binding.edtTestName.text.toString(),
+                binding.edtInstructions.text.toString(),
+                binding.edtAfter.text.toString(),
+            )
+            binding.edtTestName.requestFocus()
+            binding.edtTestName.text.clear()
+            binding.edtAfter.text.clear()
+            binding.edtInstructions.text.clear()
+        }
+
     }
 
     private fun setRecyclerDataMedicine(
@@ -144,6 +181,16 @@ class AddPrescription : AppCompatActivity() {
     ) {
         diagnosisList.add(ModelDigonsis(dignosis,desctption))
         binding.rvrecyclerViewDigonis.adapter = AdapterDigonisis(this, diagnosisList)
+
+    }
+
+    private fun setRecyclerDataLabTest(
+        dignosis: String,
+        desctption: String,
+        after: String,
+    ) {
+        labTestList.add(ModelLabTest(dignosis,desctption,after))
+        binding.rvrecyclerViewLabTest.adapter = AdapterLabTest(this, labTestList)
 
     }
 
@@ -215,6 +262,7 @@ class AddPrescription : AppCompatActivity() {
         progressDialog!!.isIndeterminate = false
         progressDialog!!.setCancelable(true)
         // progressDialog!!.show()
+        apiCallLabTest(preId)
 
         for (i in medicineList) {
 
@@ -286,8 +334,54 @@ class AddPrescription : AppCompatActivity() {
                             // progressDialog!!.dismiss()
                         } else if (response.code() == 200) {
                               myToast(this@AddPrescription, response.body()!!.message)
-                            //  progressDialog!!.dismiss()
                             onBackPressed()
+                            //  progressDialog!!.dismiss()
+
+                        } else {
+                            myToast(this@AddPrescription, "${response.body()!!.message}")
+                            progressDialog!!.dismiss()
+
+                        }
+
+                    }
+
+                    override fun onFailure(call: Call<ModeMedicine>, t: Throwable) {
+                        myToast(this@AddPrescription, "Something went wrong")
+                        // progressDialog!!.dismiss()
+
+                    }
+
+                })
+        }
+    }
+    private fun apiCallLabTest(preId: String) {
+        progressDialog = ProgressDialog(this@AddPrescription)
+        progressDialog!!.setMessage("Loading...")
+        progressDialog!!.setTitle("Please Wait")
+        progressDialog!!.isIndeterminate = false
+        progressDialog!!.setCancelable(true)
+        // progressDialog!!.show()
+
+        for (i in labTestList) {
+            ApiClient.apiService.createLabTest(
+                preId,
+                i.testName,
+                i.description,
+                i.after
+                )
+                .enqueue(object : Callback<ModeMedicine> {
+                    @SuppressLint("LogNotTimber")
+                    override fun onResponse(
+                        call: Call<ModeMedicine>,
+                        response: Response<ModeMedicine>
+                    ) {
+
+                        if (response.code() == 500) {
+                            myToast(this@AddPrescription, "Server Error")
+                            // progressDialog!!.dismiss()
+                        } else if (response.code() == 200) {
+                              myToast(this@AddPrescription, response.body()!!.message)
+                            //  progressDialog!!.dismiss()
 
                         } else {
                             myToast(this@AddPrescription, "${response.body()!!.message}")

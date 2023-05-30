@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/SelectModuleFragment">
+
+    <fragment
+        android:id="@+id/ConnectFragment"
+        android:name="com.example.ehcf_doctor.AyuSynk.bluetooth.connect.ConnectFragment"
+        android:label="@string/connect_fragment_label"
+        tools:layout="@layout/fragment_connect">
+
+    </fragment>
+    <fragment
+        android:id="@+id/OTAUpdateFragment"
+        android:name="com.example.ehcf_doctor.AyuSynk.bluetooth.ota.OtaUpdateFragment"
+        android:label="@string/ota_fragment_label"
+        tools:layout="@layout/fragment_ota">
+
+    </fragment>
+    <fragment
+        android:id="@+id/BLEFragment"
+        android:name="com.example.ehcf_doctor.AyuSynk.bluetooth.MainBleFragment"
+        android:label="@string/ble_fragment_label"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_BLEFragment_to_ConnectFragment"
+            app:destination="@id/ConnectFragment" />
+
+        <action
+            android:id="@+id/action_BLEFragment_to_OTAUpdateFragment"
+            app:destination="@id/OTAUpdateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/USBFragment"
+        android:name="com.example.ehcf_doctor.AyuSynk.usb.MainUsbFragment"
+        android:label="@string/usb_fragment_label"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/SelectModuleFragment"
+        android:name="com.example.ehcf_doctor.AyuSynk.SelectModuleFragment"
+        android:label="@string/select_module_label">
+
+        <action
+            android:id="@+id/action_SelectModuleFragment_to_BLEFragment"
+            app:destination="@id/BLEFragment" />
+
+        <action
+            android:id="@+id/action_SelectModuleFragment_to_USBFragment"
+            app:destination="@id/USBFragment" />
+        <action
+            android:id="@+id/action_SelectModuleFragment_to_USBFragment2"
+            app:destination="@id/USBFragment" />
+    </fragment>
+</navigation>

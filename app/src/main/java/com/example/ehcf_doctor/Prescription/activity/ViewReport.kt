@@ -106,7 +106,6 @@ class ViewReport : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        onBackPressed()
     }
     internal inner class FetchImage(var URL: String) : Thread() {
         var bitmap: Bitmap? = null

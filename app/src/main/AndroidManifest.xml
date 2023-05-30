@@ -20,6 +20,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".AyuSynk.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -137,6 +138,10 @@
             android:name=".ForgotPassword.MobileNumber"
             android:exported="false" />
         <activity
+            android:name=".AyuSynk.MainActivity"
+            android:exported="true" />
+
+        <activity
             android:name=".splashScreen.SplashScreen"
             android:exported="true">
             <intent-filter>
@@ -145,6 +150,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <meta-data android:name="com.ayudevice.ayusynksdk.clientId" android:value="cyukmtScnhhthcyS" />
+
+        <provider
+            android:name=".AyuSynk.utils.GenericFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
+
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

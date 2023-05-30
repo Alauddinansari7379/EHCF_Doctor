@@ -25,6 +25,7 @@ import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
+import com.example.ehcf_doctor.AyuSynk.MainActivity
 import com.example.ehcf_doctor.Dashboard.Dashboard
 import com.example.ehcf_doctor.Invoice.Invoice
 import com.example.ehcf_doctor.Login.activity.SignIn
@@ -37,7 +38,7 @@ import com.example.ehcf_doctor.PrivacyTerms.PrivacyTerms
 import com.example.ehcf_doctor.Profile.activity.ProfileSetting
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.ResetPassword
-import com.example.ehcf_doctor.databinding.ActivityMainBinding
+import com.example.ehcf_doctor.databinding.ActivityMainDoctorBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.google.android.material.navigation.NavigationView
 import me.ibrahimsn.lib.SmoothBottomBar
@@ -49,7 +50,7 @@ import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
 
 class MainActivity : AppCompatActivity() {
     private  var context:Context=this@MainActivity
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainDoctorBinding
     private lateinit var sessionManager: SessionManager
     lateinit var navController: NavController
     var progressDialog : ProgressDialog?=null
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainDoctorBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sessionManager = SessionManager(this)
         bottomNav = binding.bottomNavigation1
@@ -172,6 +173,11 @@ class MainActivity : AppCompatActivity() {
             }
             binding.includedrawar1.tvProfileSetting.setOnClickListener {
                 startActivity(Intent(this, ProfileSetting::class.java))
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+
+            binding.includedrawar1.tvAyuSynk.setOnClickListener {
+                startActivity(Intent(this, MainActivity::class.java))
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             binding.includedrawar1.tvAppointments.setOnClickListener {

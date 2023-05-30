@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Invoice.Invoice">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_gravity="center"
@@ -215,7 +216,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_horizontal"
-                    android:text="No Slot Found"
+                    android:text="No Invoice Found"
                     android:textColor="@color/Red"
                     android:textSize="18sp"
                     android:textStyle="bold"

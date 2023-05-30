@@ -54,7 +54,7 @@ class OTPVerification : AppCompatActivity() {
 
         Log.e("otp", otp)
         Log.e("id", id)
-         otpPopup(otp)
+       //  otpPopup(otp)
 
 
 

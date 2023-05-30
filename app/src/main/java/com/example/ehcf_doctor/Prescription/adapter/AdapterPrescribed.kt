@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehcf.Helper.convertTo12Hour
+import com.example.ehcf.Helper.myToast
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing
 import com.example.ehcf_doctor.Prescription.activity.PrescriptionDetails
 import com.example.ehcf_doctor.Prescription.activity.ViewReport
@@ -77,7 +78,7 @@ class AdapterPrescribed(
         val customerName: TextView = itemView.findViewById(R.id.tvDoctorNamePrescribed)
         val startTime: TextView = itemView.findViewById(R.id.tvStartTimePrescribed)
         val endTime: TextView = itemView.findViewById(R.id.tvEndTimePrescribed)
-        val btnViewReport: Button = itemView.findViewById(R.id.btnAddReportPrescribed)
+        val btnViewReport: Button = itemView.findViewById(R.id.btnAddReportPrescribedPre)
         val btnViewPrescription: Button = itemView.findViewById(R.id.btnViewPrescriptionPrescribed)
         //  val btnAddPrescription: Button = itemView.findViewById(R.id.btnAddPrescriptionPPending)
         val cardView: CardView = itemView.findViewById(R.id.cardViewPre)

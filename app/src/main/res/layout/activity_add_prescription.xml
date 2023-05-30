@@ -72,14 +72,14 @@
 
                 </androidx.appcompat.widget.AppCompatTextView>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="*"
                     android:textColor="#E91E63">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
 
             <LinearLayout
@@ -551,7 +551,7 @@
 
         </View>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
@@ -567,7 +567,7 @@
 
         </View>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="start"
@@ -582,7 +582,7 @@
             android:background="@color/black">
 
         </View>
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="start"
@@ -620,14 +620,14 @@
 
                 </androidx.appcompat.widget.AppCompatTextView>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="*"
                     android:textColor="#E91E63">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
 
             <LinearLayout
@@ -657,23 +657,23 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:text="Objective Information">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="*"
                     android:textColor="#E91E63">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
 
             <LinearLayout
@@ -703,23 +703,23 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:text="Assessment">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="*"
                     android:textColor="#E91E63">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
 
             <LinearLayout
@@ -749,23 +749,23 @@
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:text="Plan">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="*"
                     android:textColor="#E91E63">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
 
             <LinearLayout
@@ -806,6 +806,7 @@
                 </CheckBox>
 
             </LinearLayout>
+
 <LinearLayout
     android:layout_width="match_parent"
     android:id="@+id/layoutTest"
@@ -816,6 +817,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp">
 
@@ -825,6 +827,20 @@
             android:layout_height="45dp"
             android:background="@drawable/corner"
             android:hint="Test Name"
+            android:layout_weight="1"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textSize="15dp">
+
+        </EditText>
+        <EditText
+            android:id="@+id/edtAfter"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/corner"
+            android:hint="After"
             android:inputType="text"
             android:padding="10dp"
             android:textSize="15dp">
@@ -853,6 +869,90 @@
         </EditText>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/layoutAddTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAddTest"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/corner"
+                android:drawableTint="@color/white"
+                android:padding="5dp"
+                android:textAllCaps="false"
+                android:backgroundTint="#06612C"
+                android:drawableEnd="@drawable/baseline_add_24"
+                android:text="Add Lab Test"
+                android:textColor="@color/white">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layoutLabTest"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/corner"
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal"
+            >
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:text="Test Name"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/black">
+
+            </View>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:text="Description"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvrecyclerViewLabTest"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llayout3" />
+    </LinearLayout>
+
 </LinearLayout>
 
 

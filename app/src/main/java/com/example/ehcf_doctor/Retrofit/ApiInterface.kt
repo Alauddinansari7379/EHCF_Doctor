@@ -73,7 +73,7 @@ interface ApiInterface {
     @FormUrlEncoded
     @POST("forget_password")
     fun forgotPassword(
-        @Field("phone_number") phone_with_code: String,
+        @Field("phone_with_code") phone_with_code: String,
     ): Call<ModelForgotPass>
 
     //
@@ -234,6 +234,14 @@ interface ApiInterface {
         @Query("prescription_id") prescription_id: String?,
         @Query("diagnosis_name") diagnosis_name: String?,
         @Query("description") description: String?,
+    ): Call<ModeMedicine>
+
+    @POST("create_lab_test")
+    fun createLabTest(
+        @Query("prescription_id") prescription_id: String?,
+        @Query("test_name") test_name: String?,
+        @Query("after") after: String?,
+        @Query("instructions") instructions: String?,
     ): Call<ModeMedicine>
 
     @POST("get_consultations")

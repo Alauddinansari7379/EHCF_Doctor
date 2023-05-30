@@ -49,6 +49,12 @@ class AdapterPrescriptionDetial(
         holder.btnModify.setOnClickListener {
             val intent = Intent(context as Activity, AddPrescription::class.java)
                 .putExtra("bookingId", list.result[position].id)
+                .putExtra("doctor_notes", list.result[position].doctor_notes)
+                .putExtra("subjective_information", list.result[position].subjective_information)
+                .putExtra("objective_information", list.result[position].objective_information)
+                .putExtra("assessment", list.result[position].assessment)
+                .putExtra("plan", list.result[position].plan)
+                .putExtra("registration", list.result[position].registration)
                 .putExtra("btnId", "1")
             context.startActivity(intent)
         }

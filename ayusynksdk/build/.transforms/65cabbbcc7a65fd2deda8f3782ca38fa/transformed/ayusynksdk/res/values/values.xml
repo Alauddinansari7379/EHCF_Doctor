@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="reference" name="batteryMeterStyle"/>
+    <color name="critical">#d84315</color>
+    <color name="full">#ff00c200</color>
+    <color name="orange">#FFA500</color>
+    <color name="white">#FFFFFF</color>
+    <dimen name="battery_meter_intrinsic_size">20dp</dimen>
+    <integer name="objAyuOTA">13</integer>
+    <integer name="objAyuSynkBLE">2</integer>
+    <integer name="objAyuSynkPlayback">3</integer>
+    <integer name="objAyuUsbAudio">10</integer>
+    <integer name="objConstants">7</integer>
+    <integer name="objDenoisePlayer">5</integer>
+    <integer name="objDiagnosis">9</integer>
+    <integer name="objDownload">11</integer>
+    <integer name="objFilters">12</integer>
+    <integer name="objNetwork">8</integer>
+    <integer name="objOnlineStreamer">6</integer>
+    <integer name="objSynkAPI">4</integer>
+    <integer name="objVerifyClient">1</integer>
+    <string name="access_denied">Access denied</string>
+    <string name="app_name">blessed</string>
+    <string name="ble_permission">Android requires %1$s permission for scanning/connecting bluetooth device</string>
+    <string name="client_id_missing">ClientId is missing</string>
+    <string name="client_id_not_found">Please configure &lt;meta-data android:name="com.ayudevice.ayusynksdk.clientId" android:value="YOUR_CLIENT_ID"> in your AndroidManifest.xml file.</string>
+    <string name="cpu_load_error">Cannot start online streaming…Too much background task please close/stop background app/tasks and try again</string>
+    <string name="device_not_connected">Device is not connected</string>
+    <string name="fwUpgrade_channelDesc">Firmware upgrade status</string>
+    <string name="fwUpgrade_channelName">Firmware upgrade</string>
+    <string name="fwUpgrade_errorNotificationTitle">Error</string>
+    <string name="fwUpgrade_error_corrupted_file">Transmitted data are corrupted</string>
+    <string name="fwUpgrade_error_invalid_file">Error while opening the file</string>
+    <string name="fwUpgrade_error_transmission">Error sending the data</string>
+    <string name="fwUpgrade_error_unknown">Unknown Error</string>
+    <string name="fwUpgrade_error_wrong_sdk">Cannot install, server or board must be problem</string>
+    <string name="fwUpgrade_error_wrong_sdk_or_error_transmission">Cannot uploading, server or board must be problem or error transmission</string>
+    <string name="fwUpgrade_notificationTitle">Installing the new firmware</string>
+    <string name="fwUpgrade_upgradeCompleteNotificationContent">Reset the board to update</string>
+    <string name="fwUpgrade_upgradeCompleteNotificationTitle">Installation Completed</string>
+    <string name="location_permission">Android requires %1$s to be turned on for scanning/connecting bluetooth device</string>
+    <string name="record_permission">Android requires RECORD_AUDIO permission for reading data from usb port</string>
+    <string name="report_api_failed">Report generation failed. Please check if audio files are valid</string>
+    <string name="report_validation_failed">Validation check failed</string>
+    <string name="restart_device">Please restart your device and try again</string>
+    <string name="server_error">AyuDevices server error</string>
+    <string name="server_token_invalid">Server token invalid</string>
+    <string name="token_invalid">Token invalid</string>
+    <string name="unable_to_download_file">Unable to download file</string>
+    <string name="usb_device_error">Please check if device connection is proper and OTG option is enable</string>
+    <style name="Widget.BatteryMeter" parent="android:Widget">
+        <item name="batteryMeterColor">?android:colorForeground</item>
+        <item name="batteryMeterTheme">rounded</item>
+    </style>
+    <declare-styleable name="AyuVisualizerView">
+        <attr format="dimension" name="strokeWidth"/>
+        <attr format="color" name="recordColor"/>
+        <attr format="color" name="liveColor"/>
+        <attr format="color" name="streamColor"/>
+        <attr format="color" name="playedColor"/>
+        <attr format="dimension" name="gridWidth"/>
+        <attr format="color" name="gridColor"/>
+        <attr format="integer" name="verticalGridLines"/>
+        <attr format="integer" name="horizontalGridLines"/>
+        <attr format="color" name="xAxisColor"/>
+        <attr format="dimension" name="xAxisWidth"/>
+        <attr format="color" name="yAxisColor"/>
+        <attr format="dimension" name="yAxisWidth"/>
+        <attr format="color" name="verticalSepColor"/>
+        <attr format="dimension" name="verticalSepWidth"/>
+        <attr format="color" name="horizontalSepColor"/>
+        <attr format="dimension" name="horizontalSepWidth"/>
+        <attr format="boolean" name="drawGrid"/>
+    </declare-styleable>
+    <declare-styleable name="BatteryMeterView">
+        <attr format="integer" name="batteryMeterChargeLevel"/>
+        <attr format="integer" name="batteryMeterCriticalChargeLevel"/>
+        <attr format="boolean" name="batteryMeterIsCharging"/>
+
+        
+        <attr format="color" name="batteryMeterColor"/>
+        <attr format="color" name="batteryMeterIndicatorColor"/>
+        <attr format="color" name="batteryMeterChargingColor"/>
+        <attr format="color" name="batteryMeterCriticalColor"/>
+        <attr format="color" name="batteryMeterWarningColor"/>
+        <attr format="color" name="batteryMeterUnknownColor"/>
+
+        <attr format="enum" name="batteryMeterTheme">
+            <enum name="rounded" value="0"/>
+            <enum name="sharp" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>
