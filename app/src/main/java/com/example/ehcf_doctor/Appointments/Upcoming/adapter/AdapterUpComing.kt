@@ -23,7 +23,8 @@ import java.util.*
 
 
 class AdapterUpComing(
-    val context: Context, private val list: ModelGetConsultation, val confirmSlot: ConfirmSlot) :
+    val context: Context, private val list: ModelGetConsultation, val confirmSlot: ConfirmSlot
+) :
     RecyclerView.Adapter<AdapterUpComing.MyViewHolder>() {
 
 
@@ -59,7 +60,11 @@ class AdapterUpComing(
             confirmSlot.alretDilogReject(list.result[position].id.toString(), slug)
         }
         holder.btnCheck.setOnClickListener {
-            confirmSlot.popupRemainingTime(list.result[position].date?.let { it1 -> changeDateFormatNew(it1) } +" "+list.result[position].start_time)
+            confirmSlot.popupRemainingTime(list.result[position].date?.let { it1 ->
+                changeDateFormatNew(
+                    it1
+                )
+            } + " " + list.result[position].start_time)
         }
 
         holder.btnCompleted.setOnClickListener {
@@ -140,6 +145,7 @@ class AdapterUpComing(
             holder.btnReject.visibility = View.GONE
         }
         holder.btnStartMeeting.setOnClickListener {
+            CompanionCoustmorName= list.result[position].customer_name.toString()
             confirmSlot.videoCall(list.result[position].date + " " + list.result[position].start_time, list.result[position].id)
         }
         holder.btnView.setOnClickListener {
@@ -188,5 +194,10 @@ class AdapterUpComing(
         fun videoCall(startTime: String, bookingId: String)
         fun alretDilogCompleted(bookingId: String)
 
+    }
+
+    //member functions
+    companion object {
+        var CompanionCoustmorName = ""
     }
 }

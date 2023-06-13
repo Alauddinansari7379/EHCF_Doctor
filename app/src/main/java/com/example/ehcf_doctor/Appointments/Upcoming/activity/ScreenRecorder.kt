@@ -1,18 +1,34 @@
 package com.example.ehcf_doctor.Appointments.Upcoming.activity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.media.MediaRecorder
 import android.media.projection.MediaProjectionManager
 import android.os.Build
 import android.os.Bundle
+import android.os.SystemClock
+import android.view.View
+import android.widget.Chronometer
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.navigation.NavController
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf_doctor.Appointments.Appointments
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
+import com.example.ehcf_doctor.AudioRecording.Fragment.RecordFragment
+import com.example.ehcf_doctor.AudioRecording.MainActivity
+import com.example.ehcf_doctor.R
+import com.example.ehcf_doctor.databinding.ActivityApointmentsBinding
+import com.example.ehcf_doctor.databinding.ActivityMainRecordingBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.hbisoft.hbrecorder.HBRecorder
 import com.hbisoft.hbrecorder.HBRecorderListener
@@ -21,29 +37,52 @@ import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
+import java.text.SimpleDateFormat
 import java.util.*
 
-class ScreenRecorder : AppCompatActivity(), HBRecorderListener {
+class ScreenRecorder : AppCompatActivity(), HBRecorderListener{
     private val calendar = Calendar.getInstance()
+    private lateinit var binding:ActivityMainRecordingBinding
     var hbRecorder: HBRecorder? = null
-    var startTime=""
-    var bookingId=""
+    var startTime = ""
+    private var is_recording = false
+    private val recording_permission = Manifest.permission.RECORD_AUDIO
+    private var mediaRecorder: MediaRecorder? = null
+    private var record_file: String? = "file"
+    private var chronoTimer: Chronometer? = null
+    var bookingId = ""
+    private var record_file_name: TextView? = null
+    private var navController: NavController? = null
+    private var list_btn: ImageButton? = null
+    private var record_btn: ImageButton? = null
     var ratingPage = false
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityMainRecordingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         hbRecorder = HBRecorder(this, this)
 
         startTime = intent.getStringExtra("startTime").toString()
         bookingId = intent.getStringExtra("bookingId").toString()
+        //   (RecordFragment).
 
 
-        startRecordingScreen()
-
+          //startRecordingScreen()
+        start_recording()
+//        if (checkAudioPermission()) {
+//            //Start Recording Method
+//            RecordFragment.start_recording()
+//            start_re
+//            record_btn!!.setImageDrawable(resources.getDrawable(R.drawable.record_btn_recording))
+//            is_recording = true
+//        }
         //  hbRecorder.stopScreenRecording();
     }
 
@@ -67,7 +106,9 @@ class ScreenRecorder : AppCompatActivity(), HBRecorderListener {
     override fun onResume() {
         super.onResume()
         if (ratingPage) {
-              hbRecorder!!.stopScreenRecording()
+             // hbRecorder!!.stopScreenRecording()
+            stop_recording()
+
             val intent = Intent(this@ScreenRecorder, Appointments::class.java)
                 .putExtra("bookingId", bookingId)
                 .putExtra("vale", "1")
@@ -95,7 +136,7 @@ class ScreenRecorder : AppCompatActivity(), HBRecorderListener {
     }
 
     override fun HBRecorderOnStart() {
-        videoCallFun()
+       // videoCallFun()
 
     }
     override fun HBRecorderOnComplete() {
@@ -104,71 +145,82 @@ class ScreenRecorder : AppCompatActivity(), HBRecorderListener {
 
     override fun HBRecorderOnError(errorCode: Int, reason: String) {}
     override fun HBRecorderOnPause() {}
-    override fun HBRecorderOnResume() {} //    // Set the output path as a String
+    override fun HBRecorderOnResume() {} //    // Set the output path as a Strin
 
-    //// Only use this on devices running Android 9 and lower or you have to add android:requestLegacyExternalStorage="true" in your manifest
-    //// Defaults to - Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)
-    //hbrecorder.setOutputPath(String);
-    //// Set output Uri
-    //// Only use this on devices running Android 10>
-    //// When setting a Uri ensure you pass the same name to HBRecorder as what you set in ContentValues (DISPLAY_NAME and TITLE)
-    //hbRecorder.setOutputUri(Uri);
-    //// Set file name as String
-    //// Defaults to - quality + time stamp. For example HD-2019-08-14-10-09-58.mp4
-    //hbrecorder.setFileName(String);
-    //// Set audio bitrate as int
-    //// Defaults to - 128000
-    //hbrecorder.setAudioBitrate(int);
-    //// Set audio sample rate as int
-    //// Defaults to - 44100
-    //hbrecorder.setAudioSamplingRate(int);
-    //// Enable/Disable audio
-    //// Defaults to true
-    //hbrecorder.isAudioEnabled(boolean);
-    //// Enable/Disable HD Video
-    //// Defaults to true
-    //hbrecorder.recordHDVideo(boolean);
-    //// Get file path as String
-    //hbrecorder.getFilePath();
-    //// Get file name as String
-    //hbrecorder.getFileName();
-    //// Start recording screen by passing it as Intent inside onActivityResult
-    //hbrecorder.startScreenRecording(Intent);
-    //// Pause screen recording (only available for devices running 24>)
-    //hbrecorder.pauseScreenRecording();
-    //// Resume screen recording
-    //hbreccorder.resumeScreenRecording();
-    //// Stop screen recording
-    //hbrecorder.stopScreenRecording();
-    //// Check if recording is in progress
-    //hbrecorder.isBusyRecording();
-    //// Set notification icon by passing, for example R.drawable.myicon
-    //// Defaults to R.drawable.icon
-    //hbrecorder.setNotificationSmallIcon(int);
-    //// Set notification icon using byte array
-    //hbrecorder.setNotificationSmallIcon(byte[]);
-    //// Set notification icon using vector drawable
-    //hbRecorder.setNotificationSmallIconVector(vector);
-    //// Set notification title
-    //// Defaults to "Recording your screen"
-    //hbrecorder.setNotificationTitle(String);
-    //// Set notification description
-    //// Defaults to "Drag down to stop the recording"
-    //hbrecorder.setNotificationDescription(String);
-    //// Set notification stop button text
-    //// Defaults to "STOP RECORDING"
-    //hbrecorder.setNotificationButtonText(String);
-    //// Set output orientation (in degrees)
-    //hbrecorder.setOrientationHint(int);
-    //// Set max output file size
-    //hbrecorder.setMaxFileSize(long);
-    //// Set max time (in seconds)
-    //hbRecorder.setMaxDuration(int);
+
+
+
+    private fun start_recording() {
+//        chronoTimer!!.base = SystemClock.elapsedRealtime()
+//        chronoTimer!!.start()
+        val rec_path =this@ScreenRecorder.getExternalFilesDir("/")!!.absolutePath
+        var simpleDateFormat: SimpleDateFormat? = null
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            simpleDateFormat = SimpleDateFormat("dd_MM_YYYY_hh_mm_ss", Locale.CANADA)
+        }
+        val date = Date()
+        record_file = "voxRec" + simpleDateFormat!!.format(date) + ".3gp"
+//        record_file_name!!.text = "Recording File Name: \n$record_file"
+        mediaRecorder = MediaRecorder()
+        mediaRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
+        mediaRecorder!!.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        mediaRecorder!!.setOutputFile("$rec_path/$record_file")
+        mediaRecorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+        try {
+            mediaRecorder!!.prepare()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        myToast(this@ScreenRecorder,"Meeting Recording Started")
+        mediaRecorder!!.start()
+        videoCallFun()
+
+    }
+
+    private fun stop_recording() {
+     //   chronoTimer!!.stop()
+        is_recording = false
+       // record_file_name!!.text = "Recording Stopped, File Saved: \n$record_file"
+        mediaRecorder!!.stop()
+        mediaRecorder!!.release()
+        mediaRecorder = null
+        myToast(this@ScreenRecorder,"Meeting Recording Save Successfully")
+
+    }
+
+    private fun checkAudioPermission(): Boolean {
+        return if (ActivityCompat.checkSelfPermission(
+               this@ScreenRecorder,
+                recording_permission
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            true
+        } else {
+            ActivityCompat.requestPermissions(
+                this@ScreenRecorder,
+                arrayOf(recording_permission),
+                AUDIO_PERMISSION_CODE
+            )
+            false
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+//        if (is_recording) {
+//            stop_recording()
+//        }
+    }
+
     companion object {
         const val SCREEN_RECORD_REQUEST_CODE = 777
         private const val PERMISSION_REQ_ID_RECORD_AUDIO = 22
         private const val PERMISSION_REQ_POST_NOTIFICATIONS = 33
+        const val AUDIO_PERMISSION_CODE = 89
+
         private const val PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE =
+
             PERMISSION_REQ_ID_RECORD_AUDIO + 1
     }
 }

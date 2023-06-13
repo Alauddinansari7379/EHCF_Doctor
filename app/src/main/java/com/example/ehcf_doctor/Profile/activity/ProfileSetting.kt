@@ -269,7 +269,8 @@ class ProfileSetting : AppCompatActivity() {
                             ArrayAdapter(this@ProfileSetting, R.layout.simple_list_item_1, items)
                         binding.spinnerSpecialist.adapter = adapter
                         progressDialog!!.dismiss()
-                        binding.spinnerSpecialist.setSelection(sessionManager.specialist.toString().toInt())
+
+                        binding.spinnerSpecialist.setSelection(sessionManager.specialist.toString().toInt()-1)
 
 
                         binding.spinnerSpecialist.onItemSelectedListener =
@@ -327,7 +328,9 @@ class ProfileSetting : AppCompatActivity() {
                         val adapter: ArrayAdapter<String?> =
                             ArrayAdapter(this@ProfileSetting, R.layout.simple_list_item_1, items)
                         binding.spinnerState.adapter = adapter
+
                         binding.spinnerState.setSelection(items.indexOf(sessionManager.state.toString()));
+                        Log.e("sdsdsd",sessionManager.state.toString())
 
                         progressDialog!!.dismiss()
 

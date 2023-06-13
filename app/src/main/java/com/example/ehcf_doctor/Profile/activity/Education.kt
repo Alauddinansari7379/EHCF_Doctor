@@ -84,7 +84,7 @@ class Education : AppCompatActivity() {
         Log.e("sessionManager.college.toString()",sessionManager.registration.toString())
         binding.edtRegistration.setText(sessionManager.registration.toString())
 
-        if (sessionManager.pricing!!.isNotEmpty()) {
+        if (sessionManager.registration!!.isNotEmpty()) {
             binding.edtCollege.setText(sessionManager.college.toString())
             binding.edtHospitalName.setText(sessionManager.hospitalName.toString())
             binding.edtHospitalAddress.setText(sessionManager.hospitalAddress.toString())
@@ -104,8 +104,7 @@ class Education : AppCompatActivity() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
-
-        spclistId = intent.getStringExtra("specilistId").toString()
+         spclistId = intent.getStringExtra("specilistId").toString()
         experience = intent.getStringExtra("experience").toString()
         genderId = intent.getStringExtra("genderId").toString()
         clinicName = intent.getStringExtra("clinicName").toString()
@@ -421,6 +420,7 @@ class Education : AppCompatActivity() {
                         sessionManager.state =response.body()!!.result.state
                         sessionManager.hospitalAddress =response.body()!!.result.hos_address
                         sessionManager.registration =response.body()!!.result.registration
+                        sessionManager.specialist =response.body()!!.result.specialist
                         progressDialog!!.dismiss()
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP

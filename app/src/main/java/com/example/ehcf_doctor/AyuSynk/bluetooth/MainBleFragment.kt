@@ -41,7 +41,7 @@ import java.util.*
 class MainBleFragment : Fragment(), AyuDeviceListener, AdapterView.OnItemSelectedListener,
     View.OnClickListener, RecorderListener, OnlineLiveStreamListener, DiagnosisReportUpdateListener,
     AyuLogsListener {
-    private lateinit var binding: FragmentMainBinding
+    private  var binding: FragmentMainBinding?=null
     private var lastRecordedData: ShortArray? = null
     private var recordID = -1
     private var isRecordingPaused = false
@@ -73,7 +73,7 @@ class MainBleFragment : Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 
         }
         if (usb==1){
-            binding.appCompatTextView2.text="Bluetooth"
+            binding!!.appCompatTextView2.text="Bluetooth"
         }else{
             binding!!.appCompatTextView2.text="USB"
 
@@ -442,7 +442,7 @@ class MainBleFragment : Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.root
+        binding!!.root
     }
 
     override fun onDestroy() {

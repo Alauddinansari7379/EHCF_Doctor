@@ -18,15 +18,16 @@ class AdapterLabTest (val context:Context, val list: List<ModelLabTest>):
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
-        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.single_row_add_diagnosis,parent,false))
+        return MyViewHolder(LayoutInflater.from(context).inflate(R.layout.single_row_add_lab_test,parent,false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
       //  holder.SrNo.text= "${position+1}"
       //  holder.refrencecode.text= list[position].referenceCode
-        holder.digonicName.text= list[position].testName
+        holder.testName.text= list[position].testName
         holder.description.text= list[position].description
+        holder.after.text= list[position].after
 
     }
 
@@ -35,7 +36,8 @@ class AdapterLabTest (val context:Context, val list: List<ModelLabTest>):
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val digonicName:TextView=itemView.findViewById(R.id.tvDigonicName)
-        val description:TextView=itemView.findViewById(R.id.tvDescription)
+        val testName:TextView=itemView.findViewById(R.id.TestName)
+        val after:TextView=itemView.findViewById(R.id.After)
+        val description:TextView=itemView.findViewById(R.id.Description)
     }
 }

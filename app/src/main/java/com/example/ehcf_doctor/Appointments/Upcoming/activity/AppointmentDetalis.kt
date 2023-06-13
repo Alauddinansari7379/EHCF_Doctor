@@ -31,6 +31,7 @@ class AppointmentDetalis : AppCompatActivity() {
         setContentView(binding.root)
 
         Log.e("bookingId", bookingId)
+        bookingId=intent.getStringExtra("bookingId").toString()
 
         binding.imgBack.setOnClickListener {
             onBackPressed()
@@ -57,8 +58,10 @@ class AppointmentDetalis : AppCompatActivity() {
                         myToast(this@AppointmentDetalis, "Server Error")
                         progressDialog!!.dismiss()
 
-                    }else if(response.body()!!.result.equals(null)) {
-                         myToast(this@AppointmentDetalis, "No Data Found")
+                    }else if(response.body()!!.status==0) {
+                         myToast(this@AppointmentDetalis, response.body()!!.message)
+                         progressDialog!!.dismiss()
+
                      }
 
                     else{

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/swipeRefreshLayout"
     android:orientation="vertical"
     android:layout_height="wrap_content"
     tools:context=".Prescription.activity.PrescriptionDetails">
+
 
 
     <LinearLayout
@@ -15,121 +15,76 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="55dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgBack"
-                android:layout_width="40dp"
-                android:layout_height="37dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:background="?actionBarItemBackground"
-                android:padding="5dp"
-                android:layout_marginStart="10dp"
-
-                android:src="@drawable/ic_baseline_arrow_back_24"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </androidx.appcompat.widget.AppCompatImageView>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Prescription Details"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </androidx.appcompat.widget.AppCompatTextView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:background="@drawable/namelogo">
-
-                </androidx.appcompat.widget.AppCompatImageView>
-            </LinearLayout>
-
+            android:layout_height="match_parent"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Ratul Das"
-                    android:textColor="@color/main_color"
-                    android:textSize="15dp"
-                    android:textStyle="bold">
+                    android:layout_gravity="center"
+                    android:layout_height="55dp">
 
-                </androidx.appcompat.widget.AppCompatTextView>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgBack"
+                        android:layout_width="40dp"
+                        android:layout_height="37dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:background="?actionBarItemBackground"
+                        android:padding="5dp"
+                        android:layout_marginStart="10dp"
 
-                <androidx.appcompat.widget.AppCompatTextView
+                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </androidx.appcompat.widget.AppCompatImageView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Prescription Detail"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </androidx.appcompat.widget.AppCompatTextView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="BHMS,PGDCR"
-                    android:textColor="#686868"
-                    android:textSize="15dp"
-                    android:textStyle="bold">
+                    android:gravity="end"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnDownloadPrescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/corner"
+                        android:backgroundTint="@color/main_color"
+                        android:drawableLeft="@drawable/baseline_file_download_24"
+                        android:drawableTint="@color/white"
+                        android:text="Download Prescription"
+                        android:padding="3dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white">
 
-                </androidx.appcompat.widget.AppCompatTextView>
+                    </androidx.appcompat.widget.AppCompatButton>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Medical Registration Number:A 9871"
-                    android:textColor="#686868"
-                    android:textSize="15dp"
-                    android:textStyle="bold">
-
-                </androidx.appcompat.widget.AppCompatTextView>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Ratul Das, PALTAN BAZAR"
-                    android:textColor="#686868"
-                    android:textSize="15dp"
-                    android:textStyle="bold">
-
-                </androidx.appcompat.widget.AppCompatTextView>
-            </LinearLayout>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                app:cardCornerRadius="10dp">
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -138,93 +93,14 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content">
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Aleemoddin Syed"
-                            android:textColor="@color/main_color"
-                            android:textSize="15dp"
-                            android:textStyle="bold">
+                            android:layout_height="130dp"
+                            android:background="@drawable/namelogo">
 
-                        </androidx.appcompat.widget.AppCompatTextView>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:text="73941V1"
-                            android:textColor="@color/main_color"
-                            android:textSize="15dp"
-                            android:textStyle="bold">
-
-                        </androidx.appcompat.widget.AppCompatTextView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="15dp"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="35 yrs,Male"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold">
-
-                        </androidx.appcompat.widget.AppCompatTextView>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="end"
-                            android:text="29/12/2022"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold">
-
-                        </androidx.appcompat.widget.AppCompatTextView>
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="15dp"
-                        android:background="#D3D0D0">
-
-                    </View>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp">
-
-                        <androidx.constraintlayout.utils.widget.ImageFilterView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:background="@drawable/rx">
-
-                        </androidx.constraintlayout.utils.widget.ImageFilterView>
-
+                        </androidx.appcompat.widget.AppCompatImageView>
                     </LinearLayout>
 
                     <LinearLayout
@@ -233,36 +109,627 @@
                         android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tvNote"
+                            android:id="@+id/tvDoctorNamePreDetial"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Livolta-Fort 2tab x 30 days"
+                            android:text="Ratul Das"
+                            android:textColor="@color/main_color"
+                            android:textSize="15dp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAddressPreDetial"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text=""
                             android:textColor="#686868"
                             android:textSize="15dp"
                             android:textStyle="bold">
 
                         </androidx.appcompat.widget.AppCompatTextView>
 
+
                     </LinearLayout>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="15dp"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvCoustmorNamePreDet"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Aleemoddin Syed"
+                                    android:textColor="@color/main_color"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:text="UHID:"
+                                    android:textColor="@color/main_color"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:text="EHCFP"
+                                    android:textColor="@color/main_color"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/UHID"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="end"
+                                    android:text="1"
+                                    android:textColor="@color/main_color"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="15dp"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvGenderPreDetial"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Male"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvDatePreDetialPreDetial"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="end"
+                                    android:text="29/12/2022"
+                                    android:textColor="@color/black"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:background="#D3D0D0">
+
+                            </View>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="15dp">
+
+                                <androidx.constraintlayout.utils.widget.ImageFilterView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:background="@drawable/rx">
+
+                                </androidx.constraintlayout.utils.widget.ImageFilterView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/Notes"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Public Notes"
+                                    android:textColor="#000000"
+                                    android:inputType="textMultiLine"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:gravity="start"
+                                    android:layout_marginStart="15dp"
+                                    android:background="@drawable/black_dot"
+                                    >
+
+                                </androidx.appcompat.widget.AppCompatImageView>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvPublicNote"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginStart="15dp"
+                                    android:text="Livolta-Fort 2tab x 30 days"
+                                    android:textColor="#686868"
+                                    android:inputType="textMultiLine"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+
+                            </LinearLayout>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:background="#D3D0D0">
+
+                            </View>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Diagnosis"
+                                    android:textColor="#000000"
+                                    android:inputType="textMultiLine"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/top_curve_heading"
+                                    android:orientation="horizontal">
+
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="@dimen/_110sdp"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center"
+                                        android:layout_weight="1"
+                                        android:text="Diagnosis Name"
+                                        android:textColor="@color/_324754"
+                                        android:textSize="14sp" />
+                                    <androidx.viewpager.widget.ViewPager
+                                        android:layout_width="1dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/black"
+                                        >
+
+                                    </androidx.viewpager.widget.ViewPager>
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="@dimen/_110sdp"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center"
+                                        android:layout_weight="1"
+                                        android:text="Description"
+                                        android:textColor="@color/_324754"
+                                        android:textSize="14sp" />
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerViewDiagonosis"
+                                android:layout_width="match_parent"
+                                android:layout_margin="5dp"
+                                android:layout_height="wrap_content"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:background="#D3D0D0">
+
+                            </View>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Medicines"
+                                    android:textColor="#000000"
+                                    android:inputType="textMultiLine"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+
+                            </LinearLayout>
+
+                            <HorizontalScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="@dimen/_10sdp"
+                                android:scrollbars="none">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="30dp"
+                                        android:background="@drawable/top_curve_heading"
+                                        android:orientation="horizontal">
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="@dimen/_150sdp"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:text="Medicine Name"
+                                            android:textColor="@color/_324754"
+                                            android:textSize="14sp" />
+                                        <androidx.viewpager.widget.ViewPager
+                                            android:layout_width="1dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/black"
+                                            >
+
+                                        </androidx.viewpager.widget.ViewPager>
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="@dimen/_100sdp"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:text="Timing"
+                                            android:textColor="@color/_324754"
+                                            android:textSize="14sp" />
+                                        <androidx.viewpager.widget.ViewPager
+                                            android:layout_width="1dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/black"
+                                            >
+
+                                        </androidx.viewpager.widget.ViewPager>
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="@dimen/_100sdp"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:text="Intake"
+                                            android:textColor="@color/_324754"
+                                            android:textSize="14sp" />
+                                        <androidx.viewpager.widget.ViewPager
+                                            android:layout_width="1dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/black"
+                                            >
+
+                                        </androidx.viewpager.widget.ViewPager>
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="@dimen/_100sdp"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:text="Frequency"
+                                            android:textColor="@color/_324754"
+                                            android:textSize="14sp" />
+                                        <androidx.viewpager.widget.ViewPager
+                                            android:layout_width="1dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/black"
+                                            >
+
+                                        </androidx.viewpager.widget.ViewPager>
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="@dimen/_150sdp"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:text="Duration"
+                                            android:textColor="@color/_324754"
+                                            android:textSize="14sp" />
+
+
+                                    </LinearLayout>
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/recyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_margin="5dp"
+                                        android:layout_height="wrap_content"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                                    </androidx.recyclerview.widget.RecyclerView>
+
+                                    <!--                                    <androidx.recyclerview.widget.RecyclerView-->
+                                    <!--                                        android:layout_width="match_parent"-->
+                                    <!--                                        android:layout_height="match_parent"-->
+                                    <!--                                        android:nestedScrollingEnabled="false"-->
+                                    <!--                                        tools:listitem="@layout/transation_item" />-->
+                                </LinearLayout>
+                            </HorizontalScrollView>
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:background="#D3D0D0">
+
+                            </View>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="horizontal">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_weight="1"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Lab Tests"
+                                    android:textColor="#000000"
+                                    android:inputType="textMultiLine"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text=""
+                                    android:textColor="#000000"
+                                    android:inputType="textMultiLine"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@drawable/top_curve_heading"
+                                android:orientation="horizontal">
+
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="@dimen/_110sdp"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:text="Test Name"
+                                    android:textColor="@color/_324754"
+                                    android:textSize="14sp" />
+                                <androidx.viewpager.widget.ViewPager
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/black"
+                                    >
+
+                                </androidx.viewpager.widget.ViewPager>
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="@dimen/_110sdp"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:text="After"
+                                    android:textColor="@color/_324754"
+                                    android:textSize="14sp" />
+                                <androidx.viewpager.widget.ViewPager
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/black"
+                                    >
+
+                                </androidx.viewpager.widget.ViewPager>
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:text="Instructions"
+                                    android:textColor="@color/_324754"
+                                    android:textSize="14sp" />
+
+
+                            </LinearLayout>
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerViewLabTest"
+                                android:layout_width="match_parent"
+                                android:layout_margin="5dp"
+                                android:layout_height="wrap_content"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="15dp"
+                                android:background="#D3D0D0">
+
+                            </View>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Advice"
+                                    android:textColor="#000000"
+                                    android:inputType="textMultiLine"
+                                    android:textSize="15sp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvSubjective"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Subj"
+                                    android:textColor="#686868"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/tvObjective"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginTop="5dp"
+                                    android:text="objective Information"
+                                    android:textColor="#686868"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/Assessment"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginTop="5dp"
+                                    android:text="assesment"
+                                    android:textColor="#686868"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/Plan"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginTop="5dp"
+                                    android:text="plan"
+                                    android:textColor="#686868"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold">
+
+                                </androidx.appcompat.widget.AppCompatTextView>
+
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
-
-
-        </LinearLayout>
-    </ScrollView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_margin="5dp"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

@@ -25,6 +25,8 @@ import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
+import com.example.ehcf_doctor.AudioRecording.AudioRecordingList
+import com.example.ehcf_doctor.AudioRecording.Fragment.RecordListFragment
 import com.example.ehcf_doctor.AyuSynk.MainActivity
 import com.example.ehcf_doctor.Dashboard.Dashboard
 import com.example.ehcf_doctor.Invoice.Invoice
@@ -94,6 +96,11 @@ class MainActivity : AppCompatActivity() {
         } else{
             binding.btnOnline.visibility=View.GONE
             binding.btnOffline.visibility=View.VISIBLE
+        }
+
+        binding.tvTitle.setOnClickListener {
+            startActivity(Intent(this@MainActivity, com.example.ehcf_doctor.AudioRecording.MainActivity::class.java))
+
         }
 
 //        val refreshListener = SwipeRefreshLayout.OnRefreshListener {
@@ -178,6 +185,11 @@ class MainActivity : AppCompatActivity() {
 
             binding.includedrawar1.tvAyuSynk.setOnClickListener {
                 startActivity(Intent(this, MainActivity::class.java))
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+
+            binding.includedrawar1.tvRecordList.setOnClickListener {
+                startActivity(Intent(this, RecordListFragment::class.java))
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             binding.includedrawar1.tvAppointments.setOnClickListener {

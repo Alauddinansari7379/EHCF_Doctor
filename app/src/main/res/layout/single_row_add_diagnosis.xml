@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="@dimen/_2sdp"
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,6 +22,13 @@
             android:text="Digonic Name"
             android:textColor="@color/black"
             android:textStyle="bold" />
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            >
+
+        </androidx.viewpager.widget.ViewPager>
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDescription"
             android:layout_width="match_parent"

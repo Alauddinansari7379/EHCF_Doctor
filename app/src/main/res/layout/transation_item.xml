@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/black_dot">
+
+            </androidx.appcompat.widget.AppCompatImageView>
+
+            <TextView
+                android:id="@+id/amt"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="amount"
+                android:textColor="@color/_324754"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/paymentStatus"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="amount"
+                    android:textColor="@color/_324754"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/payMethod"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="match_parent"
+                 android:gravity="center"
+                android:text="method"
+                android:textColor="@color/_324754"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/orderNum"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="order_no"
+                android:textColor="@color/_324754"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tansNum"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="match_parent"
+                 android:gravity="center"
+                android:text="transaction_id"
+                android:textColor="@color/_324754"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/table_titlebg" />
+    </LinearLayout>

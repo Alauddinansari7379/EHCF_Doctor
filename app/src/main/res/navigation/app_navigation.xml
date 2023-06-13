@@ -26,4 +26,6 @@
         tools:layout="@layout/fragment_booking"
         android:label="fragment_booking2"
         />
+
+
 </navigation>

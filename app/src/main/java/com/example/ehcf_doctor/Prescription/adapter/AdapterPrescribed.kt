@@ -57,7 +57,9 @@ class AdapterPrescribed(
 
         holder.btnViewPrescription.setOnClickListener {
             val intent = Intent(context as Activity, PrescriptionDetails::class.java)
-            .putExtra("Id",list.result[position].pid.toString())
+            .putExtra("Id",list.result[position].pid)
+            .putExtra("customerName",list.result[position].customer_name)
+            .putExtra("date",list.result[position].date)
             context.startActivity(intent)
 
         }

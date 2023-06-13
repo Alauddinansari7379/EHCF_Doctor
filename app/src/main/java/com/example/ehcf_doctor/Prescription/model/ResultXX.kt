@@ -11,7 +11,7 @@ data class ResultXX(
     val id: Int,
     val patient_id: String,
     val payment_mode: String,
-    val customer_name: String,
+    val customer_name: String?=null,
     val category_name: String,
     val rating: String,
     val start_time: String,

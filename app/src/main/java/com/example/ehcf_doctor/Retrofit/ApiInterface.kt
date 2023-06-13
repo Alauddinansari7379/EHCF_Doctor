@@ -270,7 +270,7 @@ interface ApiInterface {
     @POST("view_prescription")
     fun getPrescriptionDetial(
         @Query("id") id: String?,
-    ): Call<ModelPreDetails>
+    ): Call<ModelPreDetJava>
 
     @POST("get_patients")
     fun getPatients(

@@ -206,8 +206,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:visibility="gone"
-                android:layout_marginBottom="8dp"
+                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
                 >
                 <TextView
@@ -220,6 +219,27 @@
                     android:textStyle="bold"
                     android:text="AyuSynk"
                     android:drawableLeft="@drawable/profilesetting">
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tvRecordList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:padding="5dp"
+                    android:textStyle="bold"
+                    android:text="Audio List"
+                    android:drawableLeft="@drawable/invoice">
 
                 </TextView>
             </LinearLayout>

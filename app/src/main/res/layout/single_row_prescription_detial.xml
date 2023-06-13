@@ -1,291 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginBottom="41dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="NotSibling">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:background="@drawable/namelogo">
-
-            </androidx.appcompat.widget.AppCompatImageView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Medicines"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="1dp"
+            android:gravity="start"
+            android:inputType="textMultiLine"
+            android:text="Medicines"
+            android:textColor="#686868"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/Timing"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="2dp">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvCoustmorNamePreDet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Ratul Das"
-                android:textColor="@color/main_color"
-                android:textSize="15dp"
-                android:textStyle="bold">
+        </androidx.appcompat.widget.AppCompatTextView>
 
-            </androidx.appcompat.widget.AppCompatTextView>
-
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvAddressPreDetial"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Ratul Das, PALTAN BAZAR"
-                android:textColor="#686868"
-                android:textSize="15dp"
-                android:textStyle="bold">
-
-            </androidx.appcompat.widget.AppCompatTextView>
-        </LinearLayout>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Intake"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            app:cardCornerRadius="10dp">
+            android:gravity="start"
+            android:inputType="textMultiLine"
+            android:text="Intake"
+            android:textColor="#686868"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/Frequency"
+            app:layout_constraintStart_toEndOf="@+id/Timing"
+            tools:layout_editor_absoluteY="4dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        </androidx.appcompat.widget.AppCompatTextView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:orientation="horizontal">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Frequency"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:inputType="textMultiLine"
+            android:text="Frequency"
+            android:textColor="#686868"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/Duration"
+            app:layout_constraintStart_toEndOf="@+id/Intake"
+            tools:layout_editor_absoluteY="0dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDoctorPreDeat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Aleemoddin Syed"
-                        android:textColor="@color/main_color"
-                        android:textSize="15dp"
-                        android:textStyle="bold">
+        </androidx.appcompat.widget.AppCompatTextView>
 
-                    </androidx.appcompat.widget.AppCompatTextView>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Duration"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:inputType="textMultiLine"
+            android:text="Duration"
+            android:textColor="#686868"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Frequency"
+            tools:layout_editor_absoluteY="0dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvRegistrationPreDetial"
+        </androidx.appcompat.widget.AppCompatTextView>
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="73941V1"
-                        android:textColor="@color/main_color"
-                        android:textSize="15dp"
-                        android:textStyle="bold">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Timing"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:gravity="start"
+            android:inputType="textMultiLine"
+            android:text="Timing"
+            android:textColor="#686868"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/Intake"
+            app:layout_constraintStart_toEndOf="@+id/Medicines"
+            app:layout_constraintTop_toTopOf="parent">
 
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvMalePreDet"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Male"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"
-                        android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="29/12/2022"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"
-                        android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:background="#D3D0D0">
-
-                </View>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp">
-
-                    <androidx.constraintlayout.utils.widget.ImageFilterView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:background="@drawable/rx">
-
-                    </androidx.constraintlayout.utils.widget.ImageFilterView>
-
-                </LinearLayout>
+        </androidx.appcompat.widget.AppCompatTextView>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/subjectiveInformation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Livolta-Fort 2tab x 30 days"
-                        android:textColor="#686868"
-                        android:inputType="textMultiLine"
-                        android:textSize="15dp"
-                        android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/objectiveInformation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Livolta-Fort 2tab x 30 days"
-                        android:textColor="#686868"
-                        android:inputType="textMultiLine"
-                        android:textSize="15dp"
-                        android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/assessment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Livolta-Fort 2tab x 30 days"
-                        android:textColor="#686868"
-                        android:inputType="textMultiLine"
-                        android:textSize="15dp"
-                        android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/plan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Livolta-Fort 2tab x 30 days"
-                        android:textColor="#686868"
-                        android:inputType="textMultiLine"
-                        android:textSize="15dp"
-                        android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:orientation="vertical">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/doctor_notes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Livolta-Fort 2tab x 30 days"
-                        android:textColor="#686868"
-                        android:inputType="textMultiLine"
-                        android:textSize="15dp"
-                        android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                </LinearLayout>
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </LinearLayout>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnModifyPrescptionDet"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginStart="15dp"
-        android:backgroundTint="@color/main_color"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="center"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        android:background="@drawable/corner"
-        android:text="Modify Prescription">
-    </androidx.appcompat.widget.AppCompatButton>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 

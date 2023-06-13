@@ -9,6 +9,7 @@
 
     <string name="select_module_label">Select Module</string>
     <string name="ble_fragment_label">AyuSynkBleSdk</string>
+    <string name="recordheart">recordheart</string>
     <string name="connect_fragment_label">Connect Fragment</string>
     <string name="ota_fragment_label">Update AyuDevice</string>
     <string name="usb_fragment_label">AyuSynkUsbSdk</string>

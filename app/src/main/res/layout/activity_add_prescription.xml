@@ -208,41 +208,39 @@
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/corner"
-                    android:layout_marginRight="5dp"
-                    android:orientation="horizontal"
-                    >
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/top_curve_heading"
+                    android:orientation="horizontal">
+
+
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_gravity="start"
+                        android:layout_width="@dimen/_110sdp"
+                        android:layout_height="match_parent"
                         android:gravity="center"
                         android:layout_weight="1"
-                        android:padding="2dp"
                         android:text="Diagnosis"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-                    <View
+                        android:textColor="@color/_324754"
+                        android:textSize="14sp" />
+                    <androidx.viewpager.widget.ViewPager
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="@color/black">
+                        android:background="@color/black"
+                        >
 
-                    </View>
+                    </androidx.viewpager.widget.ViewPager>
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_gravity="start"
+                        android:layout_width="@dimen/_110sdp"
+                        android:layout_height="match_parent"
                         android:gravity="center"
                         android:layout_weight="1"
-                        android:padding="2dp"
                         android:text="Description"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
+                        android:textColor="@color/_324754"
+                        android:textSize="14sp" />
+
 
                 </LinearLayout>
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvrecyclerViewDigonis"
@@ -527,72 +525,71 @@
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:background="@drawable/corner"
-        android:layout_marginRight="5dp"
-        android:orientation="horizontal"
-        >
+        android:layout_marginHorizontal="5dp"
+
+        android:background="@drawable/top_curve_heading"
+        android:orientation="horizontal">
+
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="start"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:layout_weight="1"
-            android:padding="2dp"
             android:text="Medicine Name"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-        <View
+            android:textColor="@color/_324754"
+            android:textSize="14sp" />
+        <androidx.viewpager.widget.ViewPager
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/black">
+            android:background="@color/black"
+            >
 
-        </View>
-
+        </androidx.viewpager.widget.ViewPager>
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:layout_weight="1"
-            android:gravity="center"
             android:text="Timing"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-
-        <View
+            android:textColor="@color/_324754"
+            android:textSize="14sp" />
+        <androidx.viewpager.widget.ViewPager
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/black">
+            android:background="@color/black"
+            >
 
-        </View>
-
+        </androidx.viewpager.widget.ViewPager>
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="start"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="5dp"
+            android:layout_weight="1"
             android:text="Frequency"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-        <View
+            android:textColor="@color/_324754"
+            android:textSize="14sp" />
+        <androidx.viewpager.widget.ViewPager
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/black">
+            android:background="@color/black"
+            >
 
-        </View>
+        </androidx.viewpager.widget.ViewPager>
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_gravity="start"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="match_parent"
             android:gravity="center"
-            android:padding="5dp"
+            android:layout_weight="1"
             android:text="Duration"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
+            android:textColor="@color/_324754"
+            android:textSize="14sp" />
+
 
     </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvrecyclerView"
@@ -906,41 +903,54 @@
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/corner"
-            android:layout_marginRight="5dp"
-            android:orientation="horizontal"
-            >
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/top_curve_heading"
+            android:orientation="horizontal">
+
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="start"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:padding="2dp"
                 android:text="Test Name"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-            <View
+                android:textColor="@color/_324754"
+                android:textSize="14sp" />
+            <androidx.viewpager.widget.ViewPager
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/black">
+                android:background="@color/black"
+                >
 
-            </View>
+            </androidx.viewpager.widget.ViewPager>
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="start"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:padding="2dp"
+                android:text="After"
+                android:textColor="@color/_324754"
+                android:textSize="14sp" />
+            <androidx.viewpager.widget.ViewPager
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                >
+
+            </androidx.viewpager.widget.ViewPager>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
                 android:text="Description"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+                android:textColor="@color/_324754"
+                android:textSize="14sp" />
+
 
         </LinearLayout>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvrecyclerViewLabTest"

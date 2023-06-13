@@ -65,7 +65,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     var closingTimeList = ArrayList<ModelCloseTime>()
     var specialistList = ArrayList<ModelSpecialist>()
     var genderList = ArrayList<ModelGender>()
-    var langaugeList = ArrayList<ModelLanguages>()
     var countryCodeNew = "91"
     var firstName = ""
     var lastName = ""
@@ -93,8 +92,11 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     var specilistId = ""
     var degree = ""
     var langauge1 = ""
+    var langaugeList = ArrayList<String>()
     var langauges2 = ""
     var langauges3 = ""
+    var langauges4 = ""
+    var langauges5 = ""
     var degreeList =ModelDegreeJava()
     private var specilList = ModelSpecilList();
     private var languageList = ModelLanguage();
@@ -398,6 +400,12 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 return@setOnClickListener
             }
 
+            if (binding.edtRegistrationNumber.text.isEmpty()) {
+                binding.edtRegistrationNumber.error = "Please enter RegistrationNumber"
+                binding.edtRegistrationNumber.requestFocus()
+                return@setOnClickListener
+            }
+
 
 //            if (binding.spinnerQualification.selectedItem.toString() == "Select Your Degree") {
 //                myToast(this@RegirstrationTest, "Please Select Your Qualification!")
@@ -460,6 +468,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 binding.edtConfirmPassword.error = "Password Miss Match"
                 binding.edtConfirmPassword.requestFocus()
                 return@setOnClickListener
+
             } else {
                 firstName = binding.edtFirstName.text.toString().trim()
                 lastName = binding.edtLastName.text.toString().trim()
@@ -470,7 +479,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 slotInterval = binding.edtSlotInterval.text.toString().trim()
                 exprince = binding.edtExperience.text.toString().trim()
                 description = binding.edtDescription.text.toString().trim()
-                description = binding.edtRegistrationNumber.text.toString().trim()
+                regstrationNumber = binding.edtRegistrationNumber.text.toString().trim()
 
                 lattitude = "11.854369"
                 longitude = "32.856965"
@@ -1016,15 +1025,20 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
     override fun OnMultiSpinnerItemSelected(chosenItems: MutableList<String>?) {
         for (i in chosenItems!!.indices) {
-            langauge1 = chosenItems[0]
-            langauges2 = chosenItems[1]
-            langauges3 = chosenItems[2]
-            Log.e("chosenItems", chosenItems[i])
+//            langauge1 = chosenItems[0]
+//            langauges2 = chosenItems[1]
+//            langauges3 = chosenItems[2]
+//            langauges4 = chosenItems[4]
+//            langauges5 = chosenItems[5]
+
 
         }
+        langaugeList.add(chosenItems.toString())
+
+
         Log.e("langauges", langauge1)
         Log.e("langauges", langauges2)
-        Log.e("langauges", langauges3)
+        Log.e("langaugeList", langaugeList.toString())
     }
 
 }

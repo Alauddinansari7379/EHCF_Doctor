@@ -15,6 +15,7 @@ import com.ayudevice.ayusynksdk.ble.constants.DeviceStrength
 import com.ayudevice.ayusynksdk.ble.listener.AyuDeviceListener
 import com.ayudevice.ayusynksdk.ble.listener.DeviceScanListener
 import com.example.ehcf.Helper.myToast
+import com.example.ehcf_doctor.AyuSynk.NewUI.RecordHeartSound
 import com.example.ehcf_doctor.AyuSynk.bluetooth.connect.DeviceListAdapter.OnListInteractionListener
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentConnectBinding
@@ -42,10 +43,20 @@ class ConnectFragment : Fragment(), DeviceScanListener, OnListInteractionListene
         AyuSynk.getBleInstance().setAyuDeviceListener(object : AyuDeviceListener {
             override fun deviceConnectionStrength(strength: DeviceStrength) {}
             override fun deviceConnectionState(state: DeviceConnectionState) {
+
                 if (state == DeviceConnectionState.DEVICE_CONNECTED) {
                     myToast(requireActivity(),"Device Connected")
+                   // NavHostFragment.findNavController(this@ConnectFragment).navigate(R.id.BLEFragment)
 
-                    NavHostFragment.findNavController(this@ConnectFragment).navigate(R.id.BLEFragment)
+                    if (RecordHeartSound.FragmentValue.recordHeartSound =="1"){
+                        NavHostFragment.findNavController(this@ConnectFragment).navigate(R.id.RecordHeart)
+
+                    }
+
+                    else{
+                        NavHostFragment.findNavController(this@ConnectFragment).navigate(R.id.BLEFragment)
+
+                    }
 
                     //   if (activity != null) activity!!.onBackPressed()
 

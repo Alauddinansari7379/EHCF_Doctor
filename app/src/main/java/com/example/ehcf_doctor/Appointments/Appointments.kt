@@ -48,8 +48,12 @@ class Appointments : AppCompatActivity() {
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         binding = ActivityApointmentsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }

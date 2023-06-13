@@ -1,28 +1,33 @@
 package com.example.ehcf_doctor.Appointments.Upcoming.activity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.Context
 import android.content.Intent
-import android.media.projection.MediaProjectionManager
+import android.content.pm.PackageManager
+import android.media.MediaRecorder
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Chronometer
+import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing
+import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing.Companion.CompanionCoustmorName
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComingAccepted
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
@@ -38,6 +43,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
 import java.text.ParseException
@@ -51,6 +57,15 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
     var hbRecorder: HBRecorder? = null
     private val SCREEN_RECORD_REQUEST_CODE = 777
     private val PERMISSION_REQ_ID_RECORD_AUDIO = 22
+    private var is_recording = false
+    private val recording_permission = Manifest.permission.RECORD_AUDIO
+    private var mediaRecorder: MediaRecorder? = null
+    private var record_file: String? = "file"
+    private var chronoTimer: Chronometer? = null
+    private var record_file_name: TextView? = null
+    private var navController: NavController? = null
+    private var list_btn: ImageButton? = null
+    private var record_btn: ImageButton? = null
     private val PERMISSION_REQ_POST_NOTIFICATIONS = 33
     private val RESULT_OK = 100
     private val PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE = PERMISSION_REQ_ID_RECORD_AUDIO + 1
@@ -130,9 +145,50 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
 //        }
 //    }
 
+    private fun stop_recording() {
+     //   chronoTimer!!.stop()
+        is_recording = false
+       // record_file_name!!.text = "Recording Stopped, File Saved: \n$record_file"
+        mediaRecorder!!.stop()
+        mediaRecorder!!.release()
+        mediaRecorder = null
+        myToast(requireActivity(),"Recording Stopped")
+    }
+
+    private fun checkAudioPermission(): Boolean {
+        return if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                recording_permission
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            true
+        } else {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(recording_permission),
+                AUDIO_PERMISSION_CODE
+            )
+            false
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+//        if (is_recording) {
+//           // stop_recording()
+//        }
+    }
+
+    companion object {
+        const val AUDIO_PERMISSION_CODE = 89
+    }
     override fun onResume() {
         super.onResume()
         if (ratingPage) {
+            if (is_recording){
+                stop_recording()
+
+            }
             completeSlot(bookingId)
           //  hbRecorder!!.stopScreenRecording()
             //  val intent = Intent(context as Activity, RatingNew::class.java)
@@ -347,8 +403,6 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
 
     private fun apiCallGetConsultationAccepted1() {
 
-
-
         ApiClient.apiService.getConsultation(sessionManager.id.toString(), "accepted")
             .enqueue(object : Callback<ModelGetConsultation> {
                 @SuppressLint("LogNotTimber")
@@ -423,6 +477,7 @@ private fun recordMeeting(startTime: String, bookingId: String)
 //
 //                startActivity(intent)
 
+
     val intent = Intent(context as Activity, ScreenRecorder::class.java)
         .putExtra("startTime", startTime)
         .putExtra("bookingId", bookingId)
@@ -437,6 +492,36 @@ private fun recordMeeting(startTime: String, bookingId: String)
 //        }
 //        .show()
 }
+    private fun start_recording(startTime: String, bookingId: String) {
+//        chronoTimer!!.base = SystemClock.elapsedRealtime()
+//        chronoTimer!!.start()
+        val rec_path =requireActivity().getExternalFilesDir("/")!!.absolutePath
+        var simpleDateFormat: SimpleDateFormat? = null
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            simpleDateFormat = SimpleDateFormat("dd_MM_YYYY_hh_mm_ss", Locale.CANADA)
+        }
+        val date = Date()
+        record_file = CompanionCoustmorName +" "+ simpleDateFormat!!.format(date) + ".3gp"
+//        record_file_name!!.text = "Recording File Name: \n$record_file"
+        mediaRecorder = MediaRecorder()
+        mediaRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
+        mediaRecorder!!.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        mediaRecorder!!.setOutputFile("$rec_path/$record_file")
+        mediaRecorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+
+       // Log.e("AudiorFile",mediaRecorder!!.setOutputFile("$rec_path/$record_file").toString())
+        try {
+            mediaRecorder!!.prepare()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        mediaRecorder!!.start()
+        is_recording = true
+        myToast(requireActivity(),"Meeting Recording Started")
+        videoCallFun(startTime,bookingId)
+
+    }
 
     @SuppressLint("LogNotTimber")
 
@@ -472,11 +557,15 @@ private fun recordMeeting(startTime: String, bookingId: String)
             .showCancelButton(true)
             .setConfirmClickListener { sDialog ->
                 sDialog.cancel()
+
+
+                start_recording(startTime,bookingId)
+
 //                val intent = Intent(applicationContext, SignIn::class.java)
 //                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
 //                finish()
 //                startActivity(intent)
-                recordMeeting(startTime,bookingId)
+           //     recordMeeting(startTime,bookingId)
 
             }
             .setCancelClickListener { sDialog ->
@@ -638,8 +727,8 @@ private fun recordMeeting(startTime: String, bookingId: String)
                         progressDialog!!.dismiss()
 
                     } else if (response.body()!!.status == 1) {
-                        apiCallGetConsultationAccepted1()
-//                        (activity as Appointments).refresh()
+                       // apiCallGetConsultationAccepted1()
+                       (activity as Appointments).refresh()
 
                         //  myToast(requireActivity(),response.body()!!.message)
                         progressDialog!!.dismiss()

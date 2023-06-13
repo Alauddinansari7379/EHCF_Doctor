@@ -24,6 +24,7 @@ data class Result(
     val gender: String?=null,
     val hospital_id: String,
     val pricing: String,
+    val reg_no: String,
     val clinic_address: String,
     val clinic_address_one: String,
     val clinic_address_two: String,

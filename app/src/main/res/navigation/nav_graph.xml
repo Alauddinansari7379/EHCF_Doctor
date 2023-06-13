@@ -34,6 +34,14 @@
             app:destination="@id/OTAUpdateFragment" />
     </fragment>
     <fragment
+        android:id="@+id/RecordHeart"
+        android:name="com.example.ehcf_doctor.AyuSynk.NewUI.RecordHeartSound"
+        android:label="@string/recordheart"
+        tools:layout="@layout/fragment_record_heart_sound">
+
+
+    </fragment>
+    <fragment
         android:id="@+id/USBFragment"
         android:name="com.example.ehcf_doctor.AyuSynk.usb.MainUsbFragment"
         android:label="@string/usb_fragment_label"
@@ -53,5 +61,11 @@
         <action
             android:id="@+id/action_SelectModuleFragment_to_USBFragment2"
             app:destination="@id/USBFragment" />
+        <action
+            android:id="@+id/action_SelectModuleFragment_to_RecordHeart"
+            app:destination="@id/RecordHeart" />
+        <action
+            android:id="@+id/action_SelectModuleFragment_to_ConnectFragment"
+            app:destination="@id/ConnectFragment" />
     </fragment>
 </navigation>

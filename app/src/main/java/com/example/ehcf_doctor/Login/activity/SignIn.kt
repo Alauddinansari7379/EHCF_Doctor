@@ -135,7 +135,7 @@ class SignIn : AppCompatActivity() {
                         sessionManager.college =response.body()!!.result.college
                         sessionManager.hospitalName =response.body()!!.result.hos_name
                         sessionManager.hospitalAddress =response.body()!!.result.hos_address
-                        sessionManager.registration =response.body()!!.result.registration
+                        sessionManager.registration =response.body()!!.result.reg_no
 
                         Log.e("Alauddin","sessionManager.fcmToken-${sessionManager.fcmToken}")
                         Log.e("Alauddin","sessionManager.password-${sessionManager.password}")
@@ -148,6 +148,8 @@ class SignIn : AppCompatActivity() {
                         Log.e("Alauddin","ssionManager.hospitalID-${sessionManager.hospitalID}")
                         Log.e("Alauddin","ssionManager.hospitalID-${sessionManager.hospitalID}")
                         Log.e("Alauddin","sessionManager.onlineStatus-${sessionManager.onlineStatus}")
+                        Log.e("Alauddin","sessionManager.registration-${sessionManager.registration}")
+                        Log.e("Alauddin","sessionManager.specialist-${sessionManager.specialist}")
 
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP

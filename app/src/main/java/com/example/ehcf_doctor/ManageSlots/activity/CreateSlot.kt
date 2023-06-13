@@ -192,35 +192,37 @@ class CreateSlot : AppCompatActivity() {
                     .show()
                 return@setOnClickListener
 
-            } else if (startT == endT && startT < endT) {
-                SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                    .setTitleText("Start Time must be grater End Time !")
-                    .setConfirmText("Ok")
-                    .showCancelButton(true)
-                    .setConfirmClickListener { sDialog ->
-                        sDialog.cancel()
-
-                    }
-                    .setCancelClickListener { sDialog ->
-                        sDialog.cancel()
-                    }
-                    .show()
-                return@setOnClickListener
-            } else if (startT > endT) {
-                SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                    .setTitleText("End Time must be grater Start Time !")
-                    .setConfirmText("Ok")
-                    .showCancelButton(true)
-                    .setConfirmClickListener { sDialog ->
-                        sDialog.cancel()
-
-                    }
-                    .setCancelClickListener { sDialog ->
-                        sDialog.cancel()
-                    }
-                    .show()
-                return@setOnClickListener
             }
+
+//            else if (startT == endT && startT < endT) {
+//                SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+//                    .setTitleText("Start Time must be grater End Time !")
+//                    .setConfirmText("Ok")
+//                    .showCancelButton(true)
+//                    .setConfirmClickListener { sDialog ->
+//                        sDialog.cancel()
+//
+//                    }
+//                    .setCancelClickListener { sDialog ->
+//                        sDialog.cancel()
+//                    }
+//                    .show()
+//                return@setOnClickListener
+//            } else if (startT > endT) {
+//                SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+//                    .setTitleText("End Time must be grater Start Time !")
+//                    .setConfirmText("Ok")
+//                    .showCancelButton(true)
+//                    .setConfirmClickListener { sDialog ->
+//                        sDialog.cancel()
+//
+//                    }
+//                    .setCancelClickListener { sDialog ->
+//                        sDialog.cancel()
+//                    }
+//                    .show()
+//                return@setOnClickListener
+        //    }
             else if (consultationTypeId=="0") {
                 myToast(this@CreateSlot,"Select Consultation Type")
                 return@setOnClickListener
@@ -258,7 +260,7 @@ class CreateSlot : AppCompatActivity() {
                     else if (response.body()!!.status==1) {
                         myToast(this@CreateSlot, "${response.body()!!.message}")
                         progressDialog!!.dismiss()
-                        SweetAlertDialog(this@CreateSlot, SweetAlertDialog.WARNING_TYPE)
+                        SweetAlertDialog(this@CreateSlot, SweetAlertDialog.SUCCESS_TYPE)
                             .setTitleText(response.body()!!.message)
                             .setConfirmText("Ok")
                             //.setCancelText("Ok")
