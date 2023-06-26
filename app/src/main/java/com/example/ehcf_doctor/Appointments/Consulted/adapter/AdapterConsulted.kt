@@ -16,6 +16,7 @@ import com.example.ehcf_doctor.Appointments.Upcoming.activity.AppointmentDetalis
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.R
+import com.example.ehcf_doctor.Rating.Rating
 
 
 class AdapterConsulted(
@@ -37,12 +38,23 @@ class AdapterConsulted(
         holder.appointmentDate.text = list.result[position].date!!
         holder.totalAmount.text = list.result[position].total.toString()
         holder.tvStatus.text = list.result[position].status_for_doctor.toString()
-        holder.startTime.text = convertTo12Hour(list.result[position].start_time.toString())
-        holder.endTime.text = list.result[position].end_time.toString()
+        if (list.result[position].start_time!=null){
+            holder.startTime.text = convertTo12Hour(list.result[position].start_time.toString())
+            holder.endTime.text = convertTo12Hour(list.result[position].end_time.toString())
+        }
+
         // holder.description.text = list.result[position].description.toString()
         holder.coustmorName.text = list.result[position].customer_name.toString()
         holder.slag.text = list.result[position].slug.toString()
 
+        if (list.result[position].customer_rating=="0"){
+            holder.btnSubmitReview.visibility=View.VISIBLE
+        }
+        holder.btnSubmitReview.setOnClickListener {
+            val intent = Intent(context as Activity, Rating::class.java)
+                .putExtra("meetingId",list.result[position].id.toString())
+            context.startActivity(intent)
+        }
         when (list.result[position].consultation_type) {
             "1" -> {
                 holder.consultationTypeCan.text = "Tele-Consultation"
@@ -82,6 +94,7 @@ class AdapterConsulted(
         //val description: TextView = itemView.findViewById(R.id.tvDescriptionCan)
         val totalAmount: TextView = itemView.findViewById(R.id.tvTotalAmountCan)
         val tvStatus: TextView = itemView.findViewById(R.id.tvStatusCan)
+        val btnSubmitReview: Button = itemView.findViewById(R.id.btnSubmitReview)
         val profile: ImageView = itemView.findViewById(R.id.imgProfile)
         val cardView: CardView = itemView.findViewById(R.id.cardViewCan)
 

@@ -93,17 +93,17 @@ class MainUsbFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         binding!!.btnShare.setOnClickListener(this)
         binding!!.btnReport.setOnClickListener(this)
         binding!!.btnReportShare.setOnClickListener(this)
-        binding!!.btnUpdateDevice.visibility = View.INVISIBLE
+      //  binding!!.btnUpdateDevice.visibility = View.INVISIBLE
         binding!!.btnOnlineStream.text = getString(R.string.onlineLiveText, "Start")
         binding!!.btnOnlineStream.setOnClickListener(this)
         binding!!.btnShareUrl.setOnClickListener(this)
-        binding!!.notifications.movementMethod = ScrollingMovementMethod()
+       // binding!!.notifications.movementMethod = ScrollingMovementMethod()
         AyuSynk.getUsbInstance().setOnlineStreamerListener(this)
         AyuSynk.getUsbInstance().setLogsListener(this)
         AyuSynk.getUsbInstance().showLogs(true)
-        binding!!.btnLogs.text = getString(R.string.logsText, "Disable")
-        binding!!.btnLogs.setOnClickListener(this)
-        binding!!.btnShareLogs.setOnClickListener(this)
+//        binding!!.btnLogs.text = getString(R.string.logsText, "Disable")
+//        binding!!.btnLogs.setOnClickListener(this)
+//        binding!!.btnShareLogs.setOnClickListener(this)
         AyuSynk.getUsbInstance().registerUsbDeviceConnectionReceiver()
     }
 
@@ -260,7 +260,7 @@ class MainUsbFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
             }
             R.id.btn_report -> {
                 binding!!.btnReport.isEnabled = false
-                binding!!.progressBarReport.visibility = View.VISIBLE
+              //  binding!!.progressBarReport.visibility = View.VISIBLE
                 binding!!.btnReportShare.isEnabled = false
                 val soundData = SoundData(fileFromLastRecordedAudio, LocationType.Heart.aortic)
                 AyuSynk.getUsbInstance()
@@ -277,16 +277,16 @@ class MainUsbFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
                     AyuSynk.getUsbInstance().stopOnlineStreaming()
                 }
             }
-            R.id.btn_logs -> if (binding!!.btnLogs.text.toString().lowercase(Locale.getDefault())
-                    .contains("enable")
-            ) {
-                binding!!.btnLogs.text = getString(R.string.logsText, "Disable")
-                AyuSynk.getUsbInstance().showLogs(true)
-            } else {
-                binding!!.btnLogs.text = getString(R.string.logsText, "Enable")
-                AyuSynk.getUsbInstance().showLogs(false)
-            }
-            R.id.btn_shareLogs -> shareMessage(AyuSynk.getBleInstance().logs)
+//            R.id.btn_logs -> if (binding!!.btnLogs.text.toString().lowercase(Locale.getDefault())
+//                    .contains("enable")
+//            ) {
+//                binding!!.btnLogs.text = getString(R.string.logsText, "Disable")
+//                AyuSynk.getUsbInstance().showLogs(true)
+//            } else {
+//                binding!!.btnLogs.text = getString(R.string.logsText, "Enable")
+//                AyuSynk.getUsbInstance().showLogs(false)
+//            }
+//            R.id.btn_shareLogs -> shareMessage(AyuSynk.getBleInstance().logs)
         }
     }
 
@@ -342,7 +342,7 @@ class MainUsbFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
 
     override fun reportGenerated(soundFile: SoundFile) {
         binding!!.btnReport.isEnabled = true
-        binding!!.progressBarReport.visibility = View.GONE
+      //  binding!!.progressBarReport.visibility = View.GONE
         binding!!.btnReportShare.isEnabled = true
         binding!!.btnReportShare.tag = soundFile
         Toast.makeText(context, "Reports generated", Toast.LENGTH_SHORT).show()
@@ -350,14 +350,14 @@ class MainUsbFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
 
     override fun onReportGenerationError(error: String) {
         binding!!.btnReport.isEnabled = true
-        binding!!.progressBarReport.visibility = View.GONE
+      //  binding!!.progressBarReport.visibility = View.GONE
         Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
     }
 
     override fun logs(message: String) {
-        if (binding != null) {
-            binding!!.notifications.append(message)
-        }
+//        if (binding != null) {
+//            binding!!.notifications.append(message)
+//        }
     }
 
     override fun onDestroyView() {

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.ayudevice.ayusynksdk.AyuSynk
 import com.example.ehcf_doctor.AyuSynk.NewUI.RecordHeartSound
 import com.example.ehcf_doctor.R
@@ -34,14 +35,26 @@ class SelectModuleFragment : Fragment() {
             navigateToConnectScreen(this@SelectModuleFragment, view)
         }
         binding!!.btnUsb.setOnClickListener { v: View? ->
+
             NavHostFragment.findNavController(this@SelectModuleFragment)
                 .navigate(R.id.action_SelectModuleFragment_to_USBFragment)
         }
-        binding!!.btnRecordHeart.setOnClickListener { v: View? ->
-            NavHostFragment.findNavController(this@SelectModuleFragment)
-                .navigate(R.id.action_SelectModuleFragment_to_RecordHeart)
+        binding!!.imgBack.setOnClickListener {
+            SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you want to exit ?")
+                .setConfirmText("Yes")
+                .setCancelText("No")
+                .showCancelButton(true)
+                .setConfirmClickListener { sDialog ->
+                    sDialog.cancel()
+                    startActivity(Intent(requireContext(),com.example.ehcf_doctor.MainActivity.activity.MainActivity::class.java))
+                }
+                .setCancelClickListener { sDialog ->
+                    sDialog.cancel()
+                }
+                .show()
         }
-    }
+     }
     fun navigateToConnectScreen(fragment: Fragment?, view: View?) {
         RecordHeartSound.FragmentValue.recordHeartSound ="1"
         // Check if Location services are on because they are required to make scanning work for SDK < 31

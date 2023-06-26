@@ -39,7 +39,7 @@
                     android:id="@+id/tvAppointmentDateCan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="13-12-2023"
+                    android:text="00-00-0000"
                     android:textColor="@color/black"
                     android:textStyle="bold">
 
@@ -125,7 +125,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="16:15"
+                            android:text="00:00"
                             android:textColor="#686868"
                             android:textStyle="bold">
 
@@ -150,7 +150,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="16:15"
+                            android:text="00:00"
                             android:textColor="#686868"
                             android:textStyle="bold">
 
@@ -257,6 +257,32 @@
                         </androidx.appcompat.widget.AppCompatTextView>
 
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="end"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnSubmitReview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="10dp"
+                            android:visibility="gone"
+                            android:background="@drawable/corner"
+                            android:backgroundTint="@color/main_color"
+                            android:drawableTint="@color/white"
+                            android:padding="5dp"
+                            android:text="Submit Review"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white">
+
+                        </androidx.appcompat.widget.AppCompatButton>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 </LinearLayout>
 

@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ehcf_doctor.Appointments.Appointments
 import com.example.ehcf_doctor.MyPatient.activity.PatientHistory
 import com.example.ehcf_doctor.MyPatient.activity.PatientReport
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
@@ -20,11 +20,9 @@ import java.util.*
 
 
 class AdapterMyPatient(
-    val context: Context, private val list: ModelMyPatient
+    val context: Context, private val list: ModelMyPatient,    val comment:CommentList
 ) :
     RecyclerView.Adapter<AdapterMyPatient.MyViewHolder>() {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(context).inflate(R.layout.single_row_my_patient, parent, false)
@@ -40,6 +38,11 @@ class AdapterMyPatient(
         holder.email.text = list.result[position].email
         //  holder.doctorName.text = list.result[position].n.toString()
 
+        if (list.result[position].overall_ratings!=null){
+            holder.ratingBar.rating= list.result[position].overall_ratings.toFloat()
+            holder.overAllRating.text= list.result[position].overall_ratings
+            holder.tvNoOfrating.text= list.result[position].no_of_ratings
+        }
 
         holder.viewHistory.setOnClickListener {
             val intent = Intent(context as Activity, PatientHistory::class.java)
@@ -47,6 +50,9 @@ class AdapterMyPatient(
             context.startActivity(intent)
         }
 
+        holder.tvRatingReview.setOnClickListener {
+            comment.commentList(list.result[position].id)
+        }
         holder.viewReport.setOnClickListener {
             val intent = Intent(context as Activity, PatientReport::class.java)
                 .putExtra("Id", list.result[position].id.toString())
@@ -64,10 +70,16 @@ class AdapterMyPatient(
         val name: TextView = itemView.findViewById(R.id.tvNameMyPatient)
         val mobileNumber: TextView = itemView.findViewById(R.id.tvMobileNumberMyPatient)
         val email: TextView = itemView.findViewById(R.id.tvEmailMyPatient)
+        val overAllRating: TextView = itemView.findViewById(R.id.tvOverAllRating)
+        val tvNoOfrating: TextView = itemView.findViewById(R.id.tvNoOfrating)
+        val tvRatingReview: TextView = itemView.findViewById(R.id.tvRatingReview)
         val cardView: CardView = itemView.findViewById(R.id.cardViewPre)
         val viewHistory: Button = itemView.findViewById(R.id.btnViewHistory)
         val viewReport: Button = itemView.findViewById(R.id.btnViewReports)
+        val ratingBar: RatingBar = itemView.findViewById(R.id.ratingBarDProfile)
 
     }
-
+    interface CommentList {
+        fun commentList(id: String)
+    }
 }

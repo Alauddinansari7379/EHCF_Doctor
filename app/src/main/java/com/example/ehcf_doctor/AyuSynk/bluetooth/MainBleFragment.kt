@@ -93,14 +93,14 @@ class MainBleFragment : Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
         binding!!.btnOnlineStream.text = getString(R.string.onlineLiveText, "Start")
         binding!!.btnOnlineStream.setOnClickListener(this)
         binding!!.btnShareUrl.setOnClickListener(this)
-        binding!!.notifications.movementMethod = ScrollingMovementMethod()
+      //  binding!!.notifications.movementMethod = ScrollingMovementMethod()
         AyuSynk.getBleInstance().setOnlineStreamerListener(this)
         AyuSynk.getBleInstance().setLogsListener(this)
         AyuSynk.getBleInstance().showLogs(true)
-        binding!!.btnLogs.text = getString(R.string.logsText, "Disable")
-        binding!!.btnLogs.setOnClickListener(this)
-        binding!!.btnShareLogs.setOnClickListener(this)
-        binding!!.btnUpdateDevice.setOnClickListener(this)
+//        binding!!.btnLogs.text = getString(R.string.logsText, "Disable")
+//        binding!!.btnLogs.setOnClickListener(this)
+//        binding!!.btnShareLogs.setOnClickListener(this)
+//        binding!!.btnUpdateDevice.setOnClickListener(this)
     }
 
     fun navigateToConnectScreen(fragment: Fragment?, view: View?) {
@@ -206,7 +206,7 @@ class MainBleFragment : Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
         deviceBatteryUpdate(AyuSynk.getBleInstance().currentBatteryLevel)
         binding!!.btnRecord.isEnabled = true
         binding!!.btnOnlineStream.isEnabled = true
-        binding!!.btnUpdateDevice.isEnabled = true
+      //  binding!!.btnUpdateDevice.isEnabled = true
         binding!!.customBatteryMeter.visibility = View.VISIBLE
         binding!!.deviceState.setText(R.string.device_connected)
         binding!!.deviceStrength.visibility = View.VISIBLE
@@ -217,7 +217,7 @@ class MainBleFragment : Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
     private fun onDeviceDisconnected() {
         binding!!.btnRecord.isEnabled = false
         binding!!.btnOnlineStream.isEnabled = false
-        binding!!.btnUpdateDevice.isEnabled = false
+      //  binding!!.btnUpdateDevice.isEnabled = false
         binding!!.customBatteryMeter.visibility = View.INVISIBLE
         binding!!.deviceState.setText(R.string.device_disconnected)
         binding!!.deviceStrength.visibility = View.INVISIBLE
@@ -339,13 +339,13 @@ class MainBleFragment : Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
             }
             R.id.btn_report -> {
                 binding!!.btnReport.isEnabled = false
-                binding!!.progressBarReport.visibility = View.VISIBLE
+               // binding!!.progressBarReport.visibility = View.VISIBLE
                 binding!!.btnReportShare.isEnabled = false
                 val soundData = SoundData(fileFromLastRecordedAudio, LocationType.unknown)
                 AyuSynk.getBleInstance()
                     .generateDiagnosisReport(SoundFile(soundData, SoundType.HEART))
             }
-            R.id.btn_updateDevice -> navigateToOTAScreen(this@MainBleFragment)
+          //  R.id.btn_updateDevice -> navigateToOTAScreen(this@MainBleFragment)
             R.id.btn_shareUrl -> shareMessage(AyuSynk.getBleInstance().liveStreamUrl)
             R.id.btn_reportShare -> shareReports(binding!!.btnReportShare.tag as SoundFile)
             R.id.btn_onlineStream -> {
@@ -357,16 +357,16 @@ class MainBleFragment : Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
                     AyuSynk.getBleInstance().stopOnlineStreaming()
                 }
             }
-            R.id.btn_logs -> if (binding!!.btnLogs.text.toString().lowercase(Locale.getDefault())
-                    .contains("enable")
-            ) {
-                binding!!.btnLogs.text = getString(R.string.logsText, "Disable")
-                AyuSynk.getBleInstance().showLogs(true)
-            } else {
-                binding!!.btnLogs.text = getString(R.string.logsText, "Enable")
-                AyuSynk.getBleInstance().showLogs(false)
-            }
-            R.id.btn_shareLogs -> shareMessage(AyuSynk.getBleInstance().logs)
+//            R.id.btn_logs -> if (binding!!.btnLogs.text.toString().lowercase(Locale.getDefault())
+//                    .contains("enable")
+//            ) {
+//                binding!!.btnLogs.text = getString(R.string.logsText, "Disable")
+//                AyuSynk.getBleInstance().showLogs(true)
+//            } else {
+//                binding!!.btnLogs.text = getString(R.string.logsText, "Enable")
+//                AyuSynk.getBleInstance().showLogs(false)
+//            }
+//            R.id.btn_shareLogs -> shareMessage(AyuSynk.getBleInstance().logs)
         }
     }
 
@@ -422,7 +422,7 @@ class MainBleFragment : Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 
     override fun reportGenerated(soundFile: SoundFile) {
         binding!!.btnReport.isEnabled = true
-        binding!!.progressBarReport.visibility = View.GONE
+      //  binding!!.progressBarReport.visibility = View.GONE
         binding!!.btnReportShare.isEnabled = true
         binding!!.btnReportShare.tag = soundFile
         Toast.makeText(context, "Reports generated", Toast.LENGTH_SHORT).show()
@@ -430,14 +430,14 @@ class MainBleFragment : Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 
     override fun onReportGenerationError(error: String) {
         binding!!.btnReport.isEnabled = true
-        binding!!.progressBarReport.visibility = View.GONE
+       // binding!!.progressBarReport.visibility = View.GONE
         Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
     }
 
     override fun logs(message: String) {
-        if (binding != null) {
-            binding!!.notifications.append(message)
-        }
+//        if (binding != null) {
+//            binding!!.notifications.append(message)
+//        }
     }
 
     override fun onDestroyView() {

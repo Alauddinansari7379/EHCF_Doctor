@@ -1,6 +1,6 @@
 package com.example.ehcf_doctor.AyuSynk.bluetooth.connect
 
-import android.os.Build
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +15,11 @@ import com.ayudevice.ayusynksdk.ble.constants.DeviceStrength
 import com.ayudevice.ayusynksdk.ble.listener.AyuDeviceListener
 import com.ayudevice.ayusynksdk.ble.listener.DeviceScanListener
 import com.example.ehcf.Helper.myToast
-import com.example.ehcf_doctor.AyuSynk.NewUI.RecordHeartSound
+import com.example.ehcf_doctor.AyuSynk.NewUI.Recorder
 import com.example.ehcf_doctor.AyuSynk.bluetooth.connect.DeviceListAdapter.OnListInteractionListener
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentConnectBinding
+
 
 class ConnectFragment : Fragment(), DeviceScanListener, OnListInteractionListener {
     private var binding: FragmentConnectBinding? = null
@@ -45,18 +46,17 @@ class ConnectFragment : Fragment(), DeviceScanListener, OnListInteractionListene
             override fun deviceConnectionState(state: DeviceConnectionState) {
 
                 if (state == DeviceConnectionState.DEVICE_CONNECTED) {
-                    myToast(requireActivity(),"Device Connected")
-                   // NavHostFragment.findNavController(this@ConnectFragment).navigate(R.id.BLEFragment)
-
-                    if (RecordHeartSound.FragmentValue.recordHeartSound =="1"){
-                        NavHostFragment.findNavController(this@ConnectFragment).navigate(R.id.RecordHeart)
-
-                    }
-
-                    else{
-                        NavHostFragment.findNavController(this@ConnectFragment).navigate(R.id.BLEFragment)
-
-                    }
+                    myToast(requireActivity(), "Device Connected")
+                     NavHostFragment.findNavController(this@ConnectFragment).navigate(R.id.RecorderFragment)
+ //                    if (RecordHeartSound.FragmentValue.recordHeartSound == "1") {
+//                        NavHostFragment.findNavController(this@ConnectFragment)
+//                            .navigate(R.id.RecordHeart)
+//
+//                    } else {
+//                        NavHostFragment.findNavController(this@ConnectFragment)
+//                            .navigate(R.id.BLEFragment)
+//
+//                    }
 
                     //   if (activity != null) activity!!.onBackPressed()
 
@@ -74,10 +74,20 @@ class ConnectFragment : Fragment(), DeviceScanListener, OnListInteractionListene
         })
 
         binding!!.imgBack.setOnClickListener {
-            NavHostFragment.findNavController(this@ConnectFragment).navigate(R.id.BLEFragment)
-
+            NavHostFragment.findNavController(this@ConnectFragment).navigate(R.id.SelectModuleFragment)
         }
     }
+
+
+//    fun onBackPressed() {
+//        val fragment: Myfragment =
+//            getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT) as Myfragment
+//        if (fragment.allowBackPressed()) { // and then you define a method allowBackPressed with the logic to allow back pressed or not
+//            super.onBackPressed()
+//        }
+//    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

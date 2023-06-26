@@ -3,12 +3,15 @@ package com.example.ehcf_doctor.AyuSynk.NewUI
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +21,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
-import cn.pedant.SweetAlert.SweetAlertDialog
 import com.ayudevice.ayusynksdk.AyuSynk
 import com.ayudevice.ayusynksdk.ble.constants.DeviceConnectionState
 import com.ayudevice.ayusynksdk.ble.constants.DeviceStrength
@@ -35,98 +36,41 @@ import com.ayudevice.ayusynksdk.report.constants.LocationType
 import com.ayudevice.ayusynksdk.report.constants.SoundType
 import com.ayudevice.ayusynksdk.report.listener.DiagnosisReportUpdateListener
 import com.ayudevice.ayusynksdk.utils.logs.AyuLogsListener
+import com.example.ehcf.Helper.myToast
 import com.example.ehcf_doctor.AyuSynk.NewUI.RecordHeartSound.FragmentValue.Companion.recordHeartSound
 import com.example.ehcf_doctor.AyuSynk.utils.GenUtil
 import com.example.ehcf_doctor.R
+import com.example.ehcf_doctor.databinding.FragmentLiveStreamBinding
 import com.example.ehcf_doctor.databinding.FragmentRecordHeartSoundBinding
 import java.io.File
 import java.io.IOException
 import java.util.*
 
 
-class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelectedListener,
+class LiveStream : Fragment(), AyuDeviceListener, AdapterView.OnItemSelectedListener,
     View.OnClickListener, RecorderListener, OnlineLiveStreamListener, DiagnosisReportUpdateListener,
     AyuLogsListener {
-    private lateinit var binding: FragmentRecordHeartSoundBinding
+    private lateinit var binding: FragmentLiveStreamBinding
     private var lastRecordedData: ShortArray? = null
     private var recordID = -1
-    var progressDialog : ProgressDialog?=null
-    private var waitTimer: CountDownTimer? = null
+    var progressDialog: ProgressDialog? = null
+
     private var isRecordingPaused = false
-    val usb=1
+    val usb = 1
     private var isPlayingRecordedSound = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_record_heart_sound, container, false)
+        return inflater.inflate(R.layout.fragment_live_stream, container, false)
     }
 
     @SuppressLint("LogNotTimber")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentRecordHeartSoundBinding.bind(view)
-
-        binding.tvAortic.setTextColor(Color.parseColor("#9F367A"))
-        binding.viewAortic.setBackgroundColor(Color.parseColor("#9F367A"))
-        binding.layoutAortic.setOnClickListener {
-             binding.tvAortic.setTextColor(Color.parseColor("#9F367A"))
-             binding.viewAortic.setBackgroundColor(Color.parseColor("#9F367A"))
-             binding.ayuVisualizerView.setBackgroundResource(R.drawable.aortic)
-
-            binding.tvTricuspid.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewTricuspid.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            binding.tvPulmonary.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewPulmonary.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            binding.tvMetral.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewMetral.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-
-        }
-        binding.layoutTricuspid.setOnClickListener {
-             binding.tvTricuspid.setTextColor(Color.parseColor("#9F367A"))
-             binding.viewTricuspid.setBackgroundColor(Color.parseColor("#9F367A"))
-             binding.ayuVisualizerView.setBackgroundResource(R.drawable.tricuspid)
-
-            binding.tvAortic.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewAortic.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            binding.tvPulmonary.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewPulmonary.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            binding.tvMetral.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewMetral.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-
-        }
-        binding.layoutPulmonary.setOnClickListener {
-             binding.tvPulmonary.setTextColor(Color.parseColor("#9F367A"))
-             binding.viewPulmonary.setBackgroundColor(Color.parseColor("#9F367A"))
-             binding.ayuVisualizerView.setBackgroundResource(R.drawable.pulmonary)
+        binding = FragmentLiveStreamBinding.bind(view)
 
 
-
-            binding.tvAortic.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewAortic.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            binding.tvTricuspid.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewTricuspid.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            binding.tvMetral.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewMetral.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-
-
-
-
-        }
-        binding.layoutMetral.setOnClickListener {
-             binding.tvMetral.setTextColor(Color.parseColor("#9F367A"))
-             binding.viewMetral.setBackgroundColor(Color.parseColor("#9F367A"))
-             binding.ayuVisualizerView.setBackgroundResource(R.drawable.metral)
-
-
-            binding.tvAortic.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewAortic.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            binding.tvTricuspid.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewTricuspid.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-            binding.tvPulmonary.setTextColor(Color.parseColor("#FF000000"))
-            binding.viewPulmonary.setBackgroundColor(Color.parseColor("#FFFFFFFF"))
-
-        }
         val adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.filters_array, android.R.layout.simple_spinner_item
@@ -139,26 +83,7 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
         AyuSynk.getBleInstance().setRecordingTimeLimit(10)
 
         binding!!.imgBack.setOnClickListener {
-            NavHostFragment.findNavController(this@RecordHeartSound).navigate(R.id.RecorderFragment)
-
-        }
-
-        binding!!.imgDelete.setOnClickListener {
-            SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("Are you want Delete?")
-                .setConfirmText("Yes")
-                .setCancelText("No")
-                .showCancelButton(true)
-                .setConfirmClickListener { sDialog ->
-                    sDialog.cancel()
-                    val soundData = SoundData(fileFromLastRecordedAudio, LocationType.unknown)
-                    soundData.audioFile.delete()
-                 }
-                .setCancelClickListener { sDialog ->
-                    sDialog.cancel()
-                }
-                .show()
-
+            NavHostFragment.findNavController(this@LiveStream).navigate(R.id.RecorderFragment)
         }
 
 //        if (usb==1){
@@ -168,11 +93,54 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 //
 //        }
 
-          AyuSynk.getBleInstance().showLogs(false);
-        binding!!.btnConnect.setOnClickListener { view1: View? ->
-            if (binding!!.btnConnect.tag as Int == 2) AyuSynk.getBleInstance()
-                .disconnect() else navigateToConnectScreen(this@RecordHeartSound, view)
+
+        binding.imgNofilter.setOnClickListener {
+            var filterType: FilterType? = null
+            filterType = FilterType.NO_FILTER
+            if (filterType != null) AyuSynk.getBleInstance().changeFilter(filterType)
+            binding!!.imgNofilter.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.main_color)
+            binding!!.imgHeartFilter.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.black)
+            binding!!.imgLungFilter.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.black)
+
+            myToast(requireActivity(), "No Filter")
         }
+
+        binding.imgHeartFilter.setOnClickListener {
+            var filterType: FilterType? = null
+            filterType = FilterType.HEART
+            if (filterType != null) AyuSynk.getBleInstance().changeFilter(filterType)
+            binding!!.imgNofilter.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.black)
+            binding!!.imgHeartFilter.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.main_color)
+            binding!!.imgLungFilter.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.black)
+            myToast(requireActivity(), "Heart Sound Filter Enabled")
+
+        }
+
+        binding.imgLungFilter.setOnClickListener {
+            var filterType: FilterType? = null
+            filterType = FilterType.LUNG
+            if (filterType != null) AyuSynk.getBleInstance().changeFilter(filterType)
+            binding!!.imgNofilter.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.black)
+            binding!!.imgHeartFilter.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.black)
+            binding!!.imgLungFilter.backgroundTintList =
+                ContextCompat.getColorStateList(requireContext(), R.color.main_color)
+            myToast(requireActivity(), "Lung Sound Filter Enabled")
+        }
+//        var filterType: FilterType? = null
+//              filterType = FilterType.NO_FILTER
+//           filterType = FilterType.HEART
+//           filterType = FilterType.LUNG
+//
+//        if (filterType != null) AyuSynk.getBleInstance().changeFilter(filterType)
+
         binding!!.btnRecord.setOnClickListener(this)
         binding!!.btnPause.setOnClickListener(this)
         binding!!.btnPlay1x.setOnClickListener(this)
@@ -182,7 +150,7 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
         binding!!.btnOnlineStream.text = getString(R.string.onlineLiveText, "Start")
         binding!!.btnOnlineStream.setOnClickListener(this)
         binding!!.btnShareUrl.setOnClickListener(this)
-       // binding!!.notifications.movementMethod = ScrollingMovementMethod()
+        // binding!!.notifications.movementMethod = ScrollingMovementMethod()
         AyuSynk.getBleInstance().setOnlineStreamerListener(this)
         AyuSynk.getBleInstance().setLogsListener(this)
         AyuSynk.getBleInstance().showLogs(true)
@@ -191,14 +159,33 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 //        binding!!.btnShareLogs.setOnClickListener(this)
 //        binding!!.btnUpdateDevice.setOnClickListener(this)
     }
+    private fun timeCounter() {
+        object : CountDownTimer(12000, 1000) {
+
+            // Callback function, fired on regular interval
+            @SuppressLint("SetTextI18n")
+            override fun onTick(millisUntilFinished: Long) {
+//                binding.btnSendOTP.backgroundTintList =
+//                    ColorStateList.valueOf(resources.getColor(R.color.shimmer_color));
+                binding.timeCounter.text = "00"+":" + millisUntilFinished / 1000 +"S"
+            }
+
+            override fun onFinish() {
+//                binding.btnSendOTP.isClickable = true
+//                binding.btnSendOTP.setBackgroundColor(Color.parseColor("#9F367A"))
+
+            }
+        }.start()
+    }
     class FragmentValue {
-         companion object {
+        companion object {
             var recordHeartSound = ""
             val companyLocation = ""
         }
     }
+
     fun navigateToConnectScreen(fragment: Fragment?, view: View?) {
-        recordHeartSound="1"
+        recordHeartSound = "1"
         // Check if Location services are on because they are required to make scanning work for SDK < 31
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
             if (checkLocationServices()) {
@@ -206,7 +193,8 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
                     .requestBluetoothPermission(
                         activity, 11
                     ) else {
-                    NavHostFragment.findNavController(fragment!!).navigate(R.id.action_BLEFragment_to_ConnectFragment)
+                    NavHostFragment.findNavController(fragment!!)
+                        .navigate(R.id.action_BLEFragment_to_ConnectFragment)
                 }
             }
         } else {
@@ -214,28 +202,10 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
                 .requestBluetoothPermission(
                     activity, 11
                 ) else {
-                 NavHostFragment.findNavController(fragment!!)
+                NavHostFragment.findNavController(fragment!!)
                     .navigate(R.id.action_BLEFragment_to_ConnectFragment)
             }
         }
-    }
-
-
-    private fun timeCounter() {
-        waitTimer = object : CountDownTimer(12000, 1000){
-            override fun onTick(millisUntilFinished: Long) {
-                //called every 300 milliseconds, which could be used to
-                //send messages or some other action
-                binding.timeCounter.text = "00"+":" + millisUntilFinished / 1000 +"S"
-
-            }
-
-            override fun onFinish() {
-                //After 60000 milliseconds (60 sec) finish current
-                //if you would like to execute something when time finishes
-            }
-        }.start()
-
     }
 
     private fun checkLocationServices(): Boolean {
@@ -307,12 +277,11 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 
     private fun setDeviceStrength(strength: DeviceStrength) {
         if (binding != null) {
-            if (strength == DeviceStrength.DEVICE_SIGNAL_WEAK){
+            if (strength == DeviceStrength.DEVICE_SIGNAL_WEAK) {
                 binding.deviceStrength.setTextColor(Color.parseColor("#FFB71C1C"))
                 binding!!.deviceStrength.text =
                     getString(R.string.device_strength, "weak")
-            }
-            else{
+            } else {
                 binding.deviceStrength.setTextColor(Color.parseColor("#FF1B5E20"))
                 binding!!.deviceStrength.text =
                     getString(R.string.device_strength, "strong")
@@ -330,8 +299,7 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
         binding!!.imageConnected.visibility = View.VISIBLE
         binding!!.deviceState.setText(R.string.device_connected)
         binding!!.deviceStrength.visibility = View.VISIBLE
-        binding!!.btnConnect.setText(R.string.disconnect)
-        binding!!.btnConnect.tag = 2
+
     }
 
     private fun onDeviceDisconnected() {
@@ -341,26 +309,21 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
         binding!!.customBatteryMeter.visibility = View.INVISIBLE
         binding!!.deviceState.setText(R.string.device_disconnected)
         binding!!.deviceStrength.visibility = View.INVISIBLE
-        binding!!.btnConnect.setText(R.string.connect)
-        binding!!.btnConnect.tag = 1
+
     }
 
     private fun setUiForRecording() {
-        if(waitTimer != null) {
-            waitTimer?.cancel()
-            waitTimer = null
-        }
         if (!isRecordingPaused) binding!!.ayuVisualizerView.clear() // Clear visualizer view before starting new recording
         binding!!.btnRecord.isEnabled = false
-        binding.btnPause.visibility=View.VISIBLE
-        binding.btnRecord.visibility=View.GONE
+        binding.btnPause.visibility = View.VISIBLE
+        binding.btnRecord.visibility = View.GONE
         binding!!.btnShare.isEnabled = false
         binding!!.btnPlay1x.isEnabled = false
         binding!!.btnReport.isEnabled = false
         binding!!.btnPause.isEnabled = true
-        binding!!.appCompatTextView4.text = "Recording In Progress..."
         timeCounter()
-    }
+       // binding.ayuVisualizerView(Color.parseColor("#FFB71C1C"))
+     }
 
     private fun setUIForPlaying() {
         binding!!.ayuVisualizerView.clear() // Clear visualizer view before starting new recording
@@ -370,24 +333,25 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 
     private fun setUIForPlayingComplete() {
         isPlayingRecordedSound = false
-        binding.btnRecord.visibility=View.VISIBLE
-        binding.btnPause.visibility=View.GONE
-        binding.layoutPlay.visibility=View.VISIBLE
-       // binding.layoutRecord.visibility=View.GONE
-        binding!!.btnRecord.isEnabled = AyuSynk.getBleInstance().isDeviceConnected == DeviceConnectionState.DEVICE_CONNECTED
+        binding.btnRecord.visibility = View.VISIBLE
+        binding.btnPause.visibility = View.GONE
+        binding.layoutPlay.visibility = View.VISIBLE
+        // binding.layoutRecord.visibility=View.GONE
+        binding!!.btnRecord.isEnabled =
+            AyuSynk.getBleInstance().isDeviceConnected == DeviceConnectionState.DEVICE_CONNECTED
         binding!!.btnPause.isEnabled = false
         binding!!.btnShare.isEnabled = true
         binding!!.btnPlay1x.isEnabled = true
         binding!!.btnReport.isEnabled = true
-        binding!!.appCompatTextView4.text = "Live Stream in Progress..."
-
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
         var filterType: FilterType? = null
-        if (position == 0) filterType = FilterType.NO_FILTER
-        else if (position == 1) filterType = FilterType.HEART
-        else if (position == 2) filterType = FilterType.LUNG
+        when (position) {
+            0 -> filterType = FilterType.NO_FILTER
+            1 -> filterType = FilterType.HEART
+            2 -> filterType = FilterType.LUNG
+        }
         if (filterType != null) AyuSynk.getBleInstance().changeFilter(filterType)
     }
 
@@ -412,7 +376,7 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
     private val fileFromLastRecordedAudio: File?
         private get() {
             if (lastRecordedData != null) {
-                 val file = File(GenUtil.getSaveDir("1", context), "recorded.wav")
+                val file = File(GenUtil.getSaveDir("1", context), "recorded.wav")
                 try {
                     return AyuFileGenerator.saveFile(lastRecordedData, file)
                 } catch (e: IOException) {
@@ -464,8 +428,8 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
                 if (lastRecordedData != null) setUIForPlayingComplete() else {
                     binding!!.btnRecord.isEnabled = true
                     binding!!.btnPause.isEnabled = false
-                    binding.btnRecord.visibility=View.VISIBLE
-                    binding.btnPause.visibility=View.GONE
+                    binding.btnRecord.visibility = View.VISIBLE
+                    binding.btnPause.visibility = View.GONE
                 }
             }
             R.id.btn_play1x -> playLastRecordedData()
@@ -482,15 +446,15 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
                 progressDialog!!.show()
 
                 binding!!.btnReport.isEnabled = false
-              //  binding!!.progressBarReport.visibility = View.VISIBLE
+                //  binding!!.progressBarReport.visibility = View.VISIBLE
                 binding!!.btnReportShare.isEnabled = false
                 val soundData = SoundData(fileFromLastRecordedAudio, LocationType.unknown)
-                AyuSynk.getBleInstance().generateDiagnosisReport(SoundFile(soundData, SoundType.HEART))
+                AyuSynk.getBleInstance()
+                    .generateDiagnosisReport(SoundFile(soundData, SoundType.HEART))
             }
-             R.id.btn_shareUrl -> shareMessage(AyuSynk.getBleInstance().liveStreamUrl)
+            R.id.btn_shareUrl -> shareMessage(AyuSynk.getBleInstance().liveStreamUrl)
             R.id.btn_reportShare -> shareReports(binding!!.btnReportShare.tag as SoundFile)
             R.id.btn_onlineStream -> {
-                binding!!.progressBarStream.visibility = View.VISIBLE
                 binding!!.btnOnlineStream.isEnabled = false
                 if (!AyuSynk.getBleInstance().isStreamingOnline) {
                     AyuSynk.getBleInstance().startOnlineStreaming()
@@ -507,7 +471,7 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 //                binding!!.btnLogs.text = getString(R.string.logsText, "Enable")
 //                AyuSynk.getBleInstance().showLogs(false)
 //            }
-     //       R.id.btn_shareLogs -> shareMessage(AyuSynk.getBleInstance().logs)
+   //         R.id.btn_shareLogs -> shareMessage(AyuSynk.getBleInstance().logs)
         }
     }
 
@@ -528,12 +492,10 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
             binding!!.btnOnlineStream.text = getString(R.string.onlineLiveText, "Start")
             binding!!.btnShareUrl.isEnabled = false
         }
-        binding!!.progressBarStream.visibility = View.GONE
         binding!!.btnOnlineStream.isEnabled = true
     }
 
     override fun onOnlineStreamError(error: String) {
-        binding!!.progressBarStream.visibility = View.GONE
         binding!!.btnOnlineStream.isEnabled = true
         Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
     }
@@ -565,7 +527,7 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 
     override fun reportGenerated(soundFile: SoundFile) {
         binding!!.btnReport.isEnabled = true
-     //   binding!!.progressBarReport.visibility = View.GONE
+        //   binding!!.progressBarReport.visibility = View.GONE
         binding!!.btnReportShare.isEnabled = true
         binding!!.btnReportShare.tag = soundFile
         binding!!.btnReportShare.backgroundTintList =
@@ -577,7 +539,7 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
 
     override fun onReportGenerationError(error: String) {
         binding!!.btnReport.isEnabled = true
-       // binding!!.progressBarReport.visibility = View.GONE
+        // binding!!.progressBarReport.visibility = View.GONE
         Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
     }
 

@@ -46,8 +46,11 @@ class AdapterUpComing(
         holder.coustmerName.text = list.result[position].customer_name.toString()
         // holder.bookingId.text = list.result[position].id.toString()
         // holder.title.text = list.result[position].title.toString()
-        holder.startTime.text = convertTo12Hour(list.result[position].start_time.toString())
-        holder.endTime.text = convertTo12Hour(list.result[position].end_time.toString())
+        if(list.result[position].start_time.toString()!="null"){
+            holder.startTime.text = convertTo12Hour(list.result[position].start_time.toString())
+            holder.endTime.text = convertTo12Hour(list.result[position].end_time.toString())
+        }
+
         holder.status.text = list.result[position].status_for_doctor.toString()
 
         holder.btnConfirm.setOnClickListener {

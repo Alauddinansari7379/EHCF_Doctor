@@ -23,6 +23,7 @@ import com.example.ehcf_doctor.Appointments.Consulted.activity.ConsultedFragment
 import com.example.ehcf_doctor.Appointments.Upcoming.activity.UpComingFragment
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
 import com.example.ehcf_doctor.Login.activity.SignIn
+import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.databinding.ActivityApointmentsBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.giphy.sdk.analytics.GiphyPingbacks.context
@@ -55,7 +56,7 @@ class Appointments : AppCompatActivity() {
 
 
         binding.imgBack.setOnClickListener {
-            onBackPressed()
+            startActivity(Intent(this@Appointments, MainActivity::class.java))
         }
         sessionManager = SessionManager(this)
         pager = findViewById(com.example.ehcf_doctor.R.id.viewPager)
@@ -138,6 +139,12 @@ class Appointments : AppCompatActivity() {
         finish()
         startActivity(intent)
         overridePendingTransition(0, 0)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this@Appointments, MainActivity::class.java))
+
     }
     private fun completeSlot(bookingId: String) {
         val slug = "completed"

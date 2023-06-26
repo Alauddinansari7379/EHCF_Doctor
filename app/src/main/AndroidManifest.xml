@@ -31,6 +31,10 @@
         android:theme="@style/Theme.EHCF_Doctor"
         tools:targetApi="31">
         <activity
+            android:name=".AyuSynk.NewUI.Recorder"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
             android:name=".AudioRecording.AudioRecordingList"
             android:exported="false" />
         <activity
@@ -61,7 +65,7 @@
             android:name=".PrivacyTerms.PrivacyTerms"
             android:exported="false" />
         <activity
-            android:name=".Rating.RatingNew"
+            android:name=".Rating.Rating"
             android:exported="false" />
         <activity
             android:name=".Prescription.activity.ViewReport"
@@ -136,11 +140,11 @@
         <activity
             android:name=".ForgotPassword.MobileNumber"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".AyuSynk.MainActivity"-->
-<!--            android:exported="true" />-->
+         <activity
+         android:name=".AyuSynk.MainActivity"
+         android:exported="true" />
         <activity
-            android:name=".AyuSynk.MainActivity"
+            android:name=".splashScreen.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

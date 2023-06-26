@@ -21,4 +21,5 @@
         android:name="com.example.ehcf_doctor.AudioRecording.Fragment.RecordListFragment"
         android:label="fragment_record_list"
         tools:layout="@layout/fragment_record_list" />
+
 </navigation>

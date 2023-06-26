@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvTitle.setOnClickListener {
-            startActivity(Intent(this@MainActivity, com.example.ehcf_doctor.AudioRecording.MainActivity::class.java))
+          //  startActivity(Intent(this@MainActivity, com.example.ehcf_doctor.AudioRecording.MainActivity::class.java))
 
         }
 

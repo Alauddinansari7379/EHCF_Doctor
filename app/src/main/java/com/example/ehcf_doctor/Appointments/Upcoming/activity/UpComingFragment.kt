@@ -32,6 +32,7 @@ import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComingAcce
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.R
+import com.example.ehcf_doctor.Rating.Rating
 import com.example.ehcf_doctor.databinding.FragmentUpComingBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -198,7 +199,6 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
             //.putExtra("meetingId", meetingId)
             //  (context as Activity).startActivity(intent)
             // startActivity(Intent(requireContext(),Rating::class.java))
-            ratingPage = false
         }
 
     }
@@ -728,9 +728,13 @@ private fun recordMeeting(startTime: String, bookingId: String)
 
                     } else if (response.body()!!.status == 1) {
                        // apiCallGetConsultationAccepted1()
-                       (activity as Appointments).refresh()
-
-                        //  myToast(requireActivity(),response.body()!!.message)
+                      // (activity as Appointments).refresh()
+                        val intent = Intent(context as Activity, Rating::class.java)
+                            .putExtra("meetingId", bookingId)
+                        (context as Activity).startActivity(intent)
+                        ratingPage = false
+                      //  (activity as Appointments).refresh()
+                          myToast(requireActivity(),response.body()!!.message)
                         progressDialog!!.dismiss()
                         //  apiCall()
 

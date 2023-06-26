@@ -14,6 +14,7 @@ import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
 import com.example.ehcf_doctor.MainActivity.model.ModelOnline
 import com.example.ehcf_doctor.ManageSlots.model.*
 import com.example.ehcf_doctor.MyPatient.model.ModelAllReport
+import com.example.ehcf_doctor.MyPatient.model.ModelCommentList
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.Prescription.model.*
 import com.example.ehcf_doctor.PrivacyTerms.model.ModelPrivacyPolicies
@@ -23,6 +24,7 @@ import com.example.ehcf_doctor.Profile.modelResponse.ModelState
 import com.example.ehcf_doctor.Profile.modelResponse.ModelUpdateNameEmail
 import com.example.ehcf_doctor.Profile.modelResponse.ModelYear
 import com.example.ehcf_doctor.Profile.modelResponse.ResetPassResponse
+import com.example.ehcf_doctor.Rating.ModelRating
 import com.example.ehcf_doctor.Registration.modelResponse.ModelDegreeJava
 import com.example.ehcf_doctor.Registration.modelResponse.ModelLanguage
 import com.example.ehcf_doctor.Registration.modelResponse.ModelOTP
@@ -276,6 +278,10 @@ interface ApiInterface {
     fun getPatients(
         @Query("doctor_id") id: String?,
     ): Call<ModelMyPatient>
+    @GET("customer_all_comments")
+    fun customerAllComments(
+        @Query("patient_id") doctor_id:String
+    ): Call<ModelCommentList>
 
     @POST("pending_prescription")
     fun pendingPre(
@@ -389,6 +395,13 @@ interface ApiInterface {
     fun checkPhone(
         @Query("phone_with_code") phone_with_code: String?,
     ): Call<ModelOTP>
+
+    @POST("customer_consultation_rating")
+    fun rating(
+        @Query("id") id: String?,
+        @Query("rating") rating: String?,
+        @Query("comments") comments: String?,
+    ): Call<ModelRating>
 
 
 }

@@ -41,6 +41,31 @@
 
 
     </fragment>
+
+    <fragment
+        android:id="@+id/LungsSound"
+        android:name="com.example.ehcf_doctor.AyuSynk.NewUI.LungsSoundFragment"
+        android:label="@string/recordheart"
+        tools:layout="@layout/fragment_lungs_sound">
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/LiveStream"
+        android:name="com.example.ehcf_doctor.AyuSynk.NewUI.LiveStream"
+        android:label="@string/LiveStream"
+        tools:layout="@layout/fragment_live_stream">
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/RecorderFragment"
+        android:name="com.example.ehcf_doctor.AyuSynk.NewUI.Recorder"
+        android:label="@string/recordheart"
+        tools:layout="@layout/activity_recorder">
+
+
+    </fragment>
     <fragment
         android:id="@+id/USBFragment"
         android:name="com.example.ehcf_doctor.AyuSynk.usb.MainUsbFragment"
