@@ -65,6 +65,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     var closingTimeList = ArrayList<ModelCloseTime>()
     var specialistList = ArrayList<ModelSpecialist>()
     var genderList = ArrayList<ModelGender>()
+    var followUpList = ArrayList<ModelGender>()
     var countryCodeNew = "91"
     var firstName = ""
     var lastName = ""
@@ -89,6 +90,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     var regstrationNumber = ""
     var langaugeId = ""
     var genderId = ""
+    var followUpDay = ""
     var specilistId = ""
     var degree = ""
     var langauge1 = ""
@@ -97,7 +99,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     var langauges3 = ""
     var langauges4 = ""
     var langauges5 = ""
-    var degreeList =ModelDegreeJava()
+    var degreeList = ModelDegreeJava()
     private var specilList = ModelSpecilList();
     private var languageList = ModelLanguage();
     var test_spinner: Spinner? = null
@@ -130,11 +132,11 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             onBackPressed()
         }
 
-            Log.e("Log", "countryCode-$countryCodeNew")
-            Log.e("Ala", "doctorName-$specilistId")
-            Log.e("Ala", "qualification-$degree")
+        Log.e("Log", "countryCode-$countryCodeNew")
+        Log.e("Ala", "doctorName-$specilistId")
+        Log.e("Ala", "qualification-$degree")
 
-            //List for storing text content for displaying it in the Spinner.
+        //List for storing text content for displaying it in the Spinner.
 
         //Setting Multi Selection Spinner without image.
         binding.spinnerMultiSpinner.setAdapterWithOutImage(this, contentList, this)
@@ -288,6 +290,12 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
         genderList.add(ModelGender("Female", 2))
         genderList.add(ModelGender("Other", 3))
 
+        followUpList.add(ModelGender("Select FollowUp Day", 0))
+        followUpList.add(ModelGender("7", 7))
+        followUpList.add(ModelGender("8", 8))
+        followUpList.add(ModelGender("9", 9))
+        followUpList.add(ModelGender("10", 10))
+
 //        langaugeList.add(ModelLanguages("Select Language", 0))
 //        langaugeList.add(ModelLanguages("English", 1))
 //        langaugeList.add(ModelLanguages("French", 2))
@@ -341,7 +349,24 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
-       binding.edtPassword.addTextChangedListener(object : TextWatcher {
+
+        binding.spinnerFollowUp.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapterView: AdapterView<*>?,
+                    view: View,
+                    i: Int,
+                    l: Long
+                ) {
+                    if (followUpList.size > 0) {
+                        followUpDay = followUpList[i].id.toString()
+                        Log.e(ContentValues.TAG, "followUpDay: $followUpDay")
+                    }
+                }
+
+                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+            }
+        binding.edtPassword.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
             override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
                 // get the password when we start typing
@@ -359,6 +384,9 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             ArrayAdapter<ModelOpenTime>(context, R.layout.simple_list_item_1, openingTimeList)
         binding.spinnerClose.adapter =
             ArrayAdapter<ModelCloseTime>(context, R.layout.simple_list_item_1, closingTimeList)
+
+        binding.spinnerFollowUp.adapter =
+            ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, followUpList)
 
         binding.spinnerCountryCode.setOnCountryChangeListener {
             val countryCode = binding.spinnerCountryCode.selectedCountryCodeWithPlus
@@ -509,7 +537,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             }
 
             // Get new FCM registration token
-             fcmToken = task.result
+            fcmToken = task.result
 
             // Log and toast
             val msg = getString(R.string.channel_id, fcmToken)
@@ -517,6 +545,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             // Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
         })
     }
+
     private fun subscribed() {
         Firebase.messaging.subscribeToTopic("Doctor")
             .addOnCompleteListener { task ->
@@ -527,6 +556,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 Log.d(ContentValues.TAG, msg)
             }
     }
+
     fun validatepass(password: String) {
 
         // check for pattern
@@ -572,6 +602,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
         }
     }
+
     private val PASSWORD_PATTERN: Pattern = Pattern.compile(
         "^" +
                 "(?=.*[@#$%^&+=])" +  // at least 1 special character
@@ -580,6 +611,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 "$"
 
     )
+
     private fun validatePassword(): Boolean {
         val passwordInput: String = binding.edtPassword.text.toString().trim()
         // if password field is empty
@@ -595,6 +627,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             true
         }
     }
+
     private fun isValidPassword(password: String): Boolean {
         if (password.length < 8) return false
         if (password.firstOrNull { it.isDigit() } == null) return false
@@ -604,6 +637,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
         return true
     }
+
     private fun apiCallOTP(phoneWithCodeNew: String) {
 
         progressDialog = ProgressDialog(this@RegirstrationTest)
@@ -700,8 +734,8 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             when (requestCode) {
                 REQUEST_CODE_IMAGE -> {
                     selectedImageUri = data?.data
-                   // binding.imageView.setImageURI(selectedImageUri)
-                    binding.imageView.visibility=View.VISIBLE
+                    // binding.imageView.setImageURI(selectedImageUri)
+                    binding.imageView.visibility = View.VISIBLE
                 }
             }
         }
@@ -762,7 +796,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
         //  binding.progressBar.progress = 0
         val body = UploadRequestBody(file, "image", this)
         val langauges = "$langauge1,$langauges2,$langauges3"
-            Log.e("log,", langauges)
+        Log.e("log,", langauges)
         ApiClient.apiService.register(
             doctorName,
             degree,
@@ -784,7 +818,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             description,
             regstrationNumber,
             MultipartBody.Part.createFormData("reg_cer", file.name, body),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json")
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"), followUpDay
         )
             .enqueue(object : Callback<ModelRegistrationNew> {
                 @SuppressLint("LogNotTimber")
@@ -798,7 +832,8 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                         subscribed()
                         progressDialog!!.dismiss()
                         val intent = Intent(applicationContext, SignIn::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                         finish()
                         startActivity(intent)
                     } else {
@@ -834,43 +869,50 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                     call: Call<ModelSpecilList>, response: Response<ModelSpecilList>
                 ) {
 
+                    if (response.code() == 500) {
+                        myToast(this@RegirstrationTest, "Specialist getting field")
+                    } else {
+                        specilList = response.body()!!;
+                        if (specilList != null) {
 
-                    specilList = response.body()!!;
-                    if (specilList != null) {
+                            //spinner code start
+                            val items = arrayOfNulls<String>(specilList.result!!.size)
 
-                        //spinner code start
-                        val items = arrayOfNulls<String>(specilList.result!!.size)
+                            for (i in specilList.result!!.indices) {
 
-                        for (i in specilList.result!!.indices) {
+                                items[i] = specilList.result!![i].categoryName
+                            }
+                            val adapter: ArrayAdapter<String?> =
+                                ArrayAdapter(
+                                    this@RegirstrationTest,
+                                    R.layout.simple_list_item_1,
+                                    items
+                                )
+                            var spProvince: SmartMaterialSpinner<String>? = null
+                            var spEmptyItem: SmartMaterialSpinner<String>? = null
+                            binding.spinnerSpecialistTest.item = items.toMutableList() as List<Any>?
 
-                            items[i] = specilList.result!![i].categoryName
-                        }
-                        val adapter: ArrayAdapter<String?> =
-                            ArrayAdapter(this@RegirstrationTest, R.layout.simple_list_item_1, items)
-                        var spProvince: SmartMaterialSpinner<String>? = null
-                        var spEmptyItem: SmartMaterialSpinner<String>? = null
-                        binding.spinnerSpecialistTest.item = items.toMutableList() as List<Any>?
 
 
+                            progressDialog!!.dismiss()
 
-                        progressDialog!!.dismiss()
+                            binding.spinnerSpecialistTest.onItemSelectedListener =
+                                object : AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        adapterView: AdapterView<*>?,
+                                        view: View,
+                                        i: Int,
+                                        l: Long
+                                    ) {
+                                        val id = specilList.result!![i].id
+                                        specilistId = id.toString()
+                                        // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                    }
 
-                        binding.spinnerSpecialistTest.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onItemSelected(
-                                    adapterView: AdapterView<*>?,
-                                    view: View,
-                                    i: Int,
-                                    l: Long
-                                ) {
-                                    val id = specilList.result!![i].id
-                                    specilistId = id.toString()
-                                    // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                    override fun onNothingSelected(adapterView: AdapterView<*>?) {}
                                 }
 
-                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-                            }
-
+                        }
                     }
                 }
 
@@ -882,6 +924,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
             })
     }
+
     private fun apiCallQulificationSpinner() {
         progressDialog = ProgressDialog(this@RegirstrationTest)
         progressDialog!!.setMessage("Loading..")
@@ -897,44 +940,50 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 override fun onResponse(
                     call: Call<ModelDegreeJava>, response: Response<ModelDegreeJava>
                 ) {
+                    if (response.code() == 500) {
+                        myToast(this@RegirstrationTest, "Degree list getting field")
+                    } else {
+                        degreeList = response.body()!!;
+                        if (degreeList != null) {
+
+                            //spinner code start
+                            val items = arrayOfNulls<String>(degreeList.result!!.size)
+
+                            for (i in degreeList.result!!.indices) {
+
+                                items[i] = degreeList.result!![i].degree
+                            }
+                            val adapter: ArrayAdapter<String?> =
+                                ArrayAdapter(
+                                    this@RegirstrationTest,
+                                    R.layout.simple_list_item_1,
+                                    items
+                                )
+                            var spProvince: SmartMaterialSpinner<String>? = null
+                            var spEmptyItem: SmartMaterialSpinner<String>? = null
+                            binding.spinnerDegree.item = items.toMutableList() as List<Any>?
 
 
-                    degreeList = response.body()!!;
-                    if (degreeList != null) {
 
-                        //spinner code start
-                        val items = arrayOfNulls<String>(degreeList.result!!.size)
+                            progressDialog!!.dismiss()
 
-                        for (i in degreeList.result!!.indices) {
+                            binding.spinnerDegree.onItemSelectedListener =
+                                object : AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        adapterView: AdapterView<*>?,
+                                        view: View,
+                                        i: Int,
+                                        l: Long
+                                    ) {
+                                        degree = degreeList.result!![i].degree
+                                        degree = degree
+                                        // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                    }
 
-                            items[i] = degreeList.result!![i].degree
-                        }
-                        val adapter: ArrayAdapter<String?> =
-                            ArrayAdapter(this@RegirstrationTest, R.layout.simple_list_item_1, items)
-                        var spProvince: SmartMaterialSpinner<String>? = null
-                        var spEmptyItem: SmartMaterialSpinner<String>? = null
-                        binding.spinnerDegree.item = items.toMutableList() as List<Any>?
-
-
-
-                        progressDialog!!.dismiss()
-
-                        binding.spinnerDegree.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onItemSelected(
-                                    adapterView: AdapterView<*>?,
-                                    view: View,
-                                    i: Int,
-                                    l: Long
-                                ) {
-                                    degree = degreeList.result!![i].degree
-                                    degree = degree
-                                    // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                    override fun onNothingSelected(adapterView: AdapterView<*>?) {}
                                 }
 
-                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-                            }
-
+                        }
                     }
                 }
 
@@ -962,21 +1011,27 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 override fun onResponse(
                     call: Call<ModelLanguage>, response: Response<ModelLanguage>
                 ) {
+                    if (response.code() == 500) {
+                        myToast(this@RegirstrationTest, "Language list getting field")
+                    } else {
+                        languageList = response.body()!!
 
-                    languageList = response.body()!!
+                        if (languageList != null) {
 
-                    if (languageList != null) {
+                            //spinner code start
+                            val items = arrayOfNulls<String>(languageList.result!!.size)
 
-                        //spinner code start
-                        val items = arrayOfNulls<String>(languageList.result!!.size)
+                            for (i in languageList.result!!.indices) {
+                                items[i] = languageList.result!![i].name
+                                languageList.result!![i].name?.let { contentList.add(it) }
+                            }
 
-                        for (i in languageList.result!!.indices) {
-                            items[i] = languageList.result!![i].name
-                            languageList.result!![i].name?.let { contentList.add(it) }
-                        }
-
-                        val adapter: ArrayAdapter<String?> =
-                            ArrayAdapter(this@RegirstrationTest, R.layout.simple_list_item_1, items)
+                            val adapter: ArrayAdapter<String?> =
+                                ArrayAdapter(
+                                    this@RegirstrationTest,
+                                    R.layout.simple_list_item_1,
+                                    items
+                                )
 //                        binding.spinnerLanguages.adapter = adapter
 //                        //  progressDialog!!.dismiss()
 //
@@ -997,6 +1052,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 //                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
 //                            }
 
+                        }
                     }
                 }
 

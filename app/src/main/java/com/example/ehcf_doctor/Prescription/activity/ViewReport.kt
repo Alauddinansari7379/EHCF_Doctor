@@ -69,20 +69,9 @@ class ViewReport : AppCompatActivity() {
         Log.e("reportData",reportData)
         val baseUrl="https://ehcf.thedemostore.in/uploads/"
 
-        if (reportData=="null"){
-            SweetAlertDialog(this@ViewReport, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("No Report Found")
-                .setConfirmText("Ok")
-                //.setCancelText("Ok")
-                .showCancelButton(true)
-                .setConfirmClickListener { sDialog ->
-                    sDialog.cancel()
-                   onBackPressed()
-                }
-                .setCancelClickListener { sDialog ->
-                    sDialog.cancel()
-                }
-                .show()
+        if (reportData.contains("png") || reportData.contains("jpeg") ||  reportData.contains("jpg")) {
+            val url="https://ehcf.thedemostore.in/uploads/$reportData"
+            FetchImage(url).start()
            // myToast(this,"No Report Found")
         }else{
             startActivity(

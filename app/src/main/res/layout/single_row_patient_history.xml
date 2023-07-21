@@ -39,7 +39,7 @@
                     android:id="@+id/tvAppointmentDateHome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="13-12-2023"
+                    android:text="00-00-0000"
                     android:textColor="@color/black"
                     android:textStyle="bold">
 
@@ -70,8 +70,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/profile"
-                        app:civ_border_width="2dp"
-                        app:civ_border_color="#FF000000"/>
+                          />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -100,7 +99,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="16:15"
+                                android:text="00:00"
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 
@@ -125,7 +124,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="16:15"
+                                android:text="00:00"
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 
@@ -150,7 +149,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="16:15"
+                                android:text="00:00"
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 
@@ -175,7 +174,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="Home"
+                                android:text=""
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 
@@ -200,7 +199,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="Home"
+                                android:text=""
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 
@@ -225,7 +224,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="Home"
+                                android:text="00"
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 

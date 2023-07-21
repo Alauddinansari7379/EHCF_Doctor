@@ -14,6 +14,7 @@ import com.example.ehcf.Helper.convertTo12Hour
 import com.example.ehcf_doctor.Appointments.Upcoming.activity.AppointmentDetalis
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.R
+import com.squareup.picasso.Picasso
 
 
 class AdapterCancelled(
@@ -30,26 +31,41 @@ class AdapterCancelled(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // holder.SrNo.text= "${position+1}"
+        try {
+            if (list.result[position].profile_picture!!.isNotEmpty()) {
+                Picasso.get()
+                    .load("https://ehcf.thedemostore.in/uploads/${list.result[position].profile_picture}")
+                    .placeholder(R.drawable.profile).error(R.drawable.profile).into(holder.profile);
 
-        holder.appointmentDate.text = list.result[position].date
-        holder.totalAmount.text = list.result[position].total.toString()
-        holder.tvStatus.text = list.result[position].status_for_doctor
-        holder.startTime.text = convertTo12Hour(list.result[position].start_time.toString())
-        holder.endTime.text = convertTo12Hour(list.result[position].end_time.toString())
-       // holder.description.text = list.result[position].description.toString()
-        holder.coustmorName.text = list.result[position].customer_name.toString()
 
-        when (list.result[position].consultation_type) {
-            "1" -> {
-                holder.tvConsultationTypeCan.text = "Tele-Consultation"
             }
-            "2" -> {
-                holder.tvConsultationTypeCan.text = "Clinic-Visit"
+
+            holder.appointmentDate.text = list.result[position].date
+            holder.totalAmount.text = list.result[position].total.toString()
+            holder.tvStatus.text = list.result[position].status_for_doctor
+            if (list.result[position].start_time != null) {
+                holder.startTime.text = convertTo12Hour(list.result[position].start_time.toString())
+                holder.endTime.text = convertTo12Hour(list.result[position].end_time.toString())
             }
-            "3" -> {
-                holder.tvConsultationTypeCan.text = "Home-Visit"
+
+            // holder.description.text = list.result[position].description.toString()
+            if (list.result[position].member_name != null) {
+                holder.coustmorName.text = list.result[position].member_name
+
+            } else {
+                holder.coustmorName.text = list.result[position].customer_name.toString()
             }
-        }
+            when (list.result[position].consultation_type) {
+                "1" -> {
+                    holder.tvConsultationTypeCan.text = "Tele-Consultation"
+                }
+                "2" -> {
+                    holder.tvConsultationTypeCan.text = "Clinic-Visit"
+                }
+                "3" -> {
+                    holder.tvConsultationTypeCan.text = "Home-Visit"
+                }
+            }
 //        when (list.result[position].slug) {
 //            "rejected" -> {
 //               // holder.visibility(View.INVISIBLE);
@@ -62,17 +78,19 @@ class AdapterCancelled(
 //        }
 //        }
 
-        holder.cardView.setOnClickListener {
-            val intent = Intent(context as Activity, AppointmentDetalis::class.java)
-                .putExtra("bookingId", list.result[position].id.toString())
-            context.startActivity(intent)
+            holder.cardView.setOnClickListener {
+                val intent = Intent(context as Activity, AppointmentDetalis::class.java)
+                    .putExtra("bookingId", list.result[position].id.toString())
+                context.startActivity(intent)
+            }
+
+            // Glide.with(hol der.image).load(list[position].url).into(holder.image)
+
+        }catch (e:Exception){
+            e.printStackTrace()
         }
 
-        // Glide.with(hol der.image).load(list[position].url).into(holder.image)
-
     }
-
-
     override fun getItemCount(): Int {
         return list.result.size
 

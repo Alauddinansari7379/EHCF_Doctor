@@ -14,6 +14,8 @@ data class Result(
     val plan: String,
     val category_name: String,
     val customer_name: String,
+    val profile_image: String,
+    val member_name: String,
     val doctor_name: String,
     val start_time: String,
     val end_time: String,

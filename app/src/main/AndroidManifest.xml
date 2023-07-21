@@ -12,12 +12,18 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+
+
 
     <application
         android:name=".AyuSynk.MyApplication"
@@ -30,6 +36,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EHCF_Doctor"
         tools:targetApi="31">
+        <activity
+            android:name=".HealthCube.activity.AppToEzdx"
+             android:launchMode="singleTask"
+            android:exported="true" />
+        <activity
+            android:name=".HealthCube.activity.Patients"
+            android:exported="false" />
+        <activity
+            android:name=".HealthCube.activity.Visit"
+            android:exported="false" />
+        <activity
+            android:name=".HealthCube.activity.AddPatient"
+            android:exported="false"
+          />
+        <activity
+            android:name=".HealthCube.activity.Bluetooth"
+            android:exported="false" />
+        <activity
+            android:name=".Prescription.activity.ReportList"
+            android:exported="false" />
+        <activity
+            android:name=".Helper.CustomDatepickerdemo"
+            android:exported="false" />
         <activity
             android:name=".AyuSynk.NewUI.Recorder"
             android:exported="false"
@@ -140,9 +169,9 @@
         <activity
             android:name=".ForgotPassword.MobileNumber"
             android:exported="false" />
-         <activity
-         android:name=".AyuSynk.MainActivity"
-         android:exported="true" />
+        <activity
+            android:name=".AyuSynk.MainActivity"
+            android:exported="true" />
         <activity
             android:name=".splashScreen.SplashScreen"
             android:exported="true">

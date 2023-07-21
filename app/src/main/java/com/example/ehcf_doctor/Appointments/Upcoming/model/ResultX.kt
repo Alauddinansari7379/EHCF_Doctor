@@ -6,6 +6,7 @@ data class ResultX(
     val created_at: String,
     val customer_comments: Any,
     val customer_name: String,
+    val member_name: String,
     val customer_rating: String,
     val date: String?=null,
     val doctor_id: String,

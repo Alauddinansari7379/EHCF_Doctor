@@ -1,14 +1,18 @@
 package com.example.ehcf_doctor.MyPatient.activity
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.ehcf.Helper.myToast
-import com.example.ehcf.Testing.Interface.apiInterface
+import com.example.ehcf.Testing.Interface.ApiInterfaceHelthCube
+import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterPatientHistory
+import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ModelPatientHistoryX
 import com.example.ehcf_doctor.databinding.ActivityPatientHistoryBinding
+import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,11 +23,13 @@ class PatientHistory : AppCompatActivity() {
     private lateinit var binding: ActivityPatientHistoryBinding
     var progressDialog: ProgressDialog? = null
     var id = ""
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPatientHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sessionManager = SessionManager(this)
 
         binding.imgBack.setOnClickListener {
             onBackPressed()
@@ -41,46 +47,32 @@ class PatientHistory : AppCompatActivity() {
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
 
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            //.baseUrl("https://jsonplaceholder.typicode.com/")
-            .baseUrl("https://ehcf.thedemostore.in/api/customer/")
-            .build()
-            .create(apiInterface::class.java)
+        ApiClient.apiService.patientHistory(sessionManager.id.toString())
+            .enqueue(object : Callback<ModelPatientHistoryX> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelPatientHistoryX>, response: Response<ModelPatientHistoryX>
+                ) {
 
-//        val retrofitData =retrofitBuilder.getUser()
-//        retrofitData.enqueue(object : Callback<List<User>?> {
-//            override fun onResponse(call: Call<List<User>?>, response: Response<List<User>?>) {
-//                val recyclerView= findViewById<RecyclerView>(R.id.recyclerView)
-//
-//                recyclerView.apply {
-//                    adapter=Adapter(context,response.body()!!)
-//                }
-//            }
+                try {
 
-        val retrofitData = retrofitBuilder.patientHistory(id)
-        retrofitData.enqueue(object : Callback<ModelPatientHistoryX> {
-            override fun onResponse(
-                call: Call<ModelPatientHistoryX>,
-                response: Response<ModelPatientHistoryX>
-            ) {
-                if (response.code() == 500) {
-                    myToast(this@PatientHistory, "Server Error")
+                    if (response.code() == 500) {
+                        myToast(this@PatientHistory, "Server Error")
 
-                } else if (response.body()!!.result.isEmpty()) {
-                    myToast(this@PatientHistory, "No Appointment Found")
-                    progressDialog!!.dismiss()
-
-                } else {
-                    binding.rvPtientHistory.apply {
-                        response.body()!!.result.size.toString()
-                        Log.e("Size", response.body()!!.result.size.toString())
-                        //  myToast(requireActivity(),"Adapter")
-                        adapter = AdapterPatientHistory(this@PatientHistory, response.body()!!)
+                    } else if (response.body()!!.result.isEmpty()) {
+                        myToast(this@PatientHistory, "No Appointment Found")
                         progressDialog!!.dismiss()
 
+                    } else {
+                        binding.rvPtientHistory.apply {
+                            response.body()!!.result.size.toString()
+                            Log.e("Size", response.body()!!.result.size.toString())
+                            //  myToast(requireActivity(),"Adapter")
+                            adapter = AdapterPatientHistory(this@PatientHistory, response.body()!!)
+                            progressDialog!!.dismiss()
 
-                    }
+
+                        }
 //                        binding.rvManageSlot.apply {
 //                            binding.tvNoDataFound.visibility = View.GONE
 //                            shimmerFrameLayout?.startShimmer()
@@ -91,7 +83,13 @@ class PatientHistory : AppCompatActivity() {
 //                            progressDialog!!.dismiss()
 //
 //                        }
+                    }
                 }
+                    catch (e: Exception) {
+                        progressDialog!!.dismiss()
+                        myToast(this@PatientHistory, "Something went wrong")
+                        e.printStackTrace()
+                    }
             }
 
             override fun onFailure(call: Call<ModelPatientHistoryX>, t: Throwable) {

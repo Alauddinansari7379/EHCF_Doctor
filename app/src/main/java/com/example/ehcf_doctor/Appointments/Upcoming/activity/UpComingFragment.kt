@@ -14,11 +14,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Chronometer
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -31,8 +29,8 @@ import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing.Com
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComingAccepted
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
+import com.example.ehcf_doctor.Prescription.activity.AddPrescription
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.Rating.Rating
 import com.example.ehcf_doctor.databinding.FragmentUpComingBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -69,6 +67,8 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
     private var record_btn: ImageButton? = null
     private val PERMISSION_REQ_POST_NOTIFICATIONS = 33
     private val RESULT_OK = 100
+    private val MY_PERMISSIONS_RECORD_AUDIO = 1
+
     private val PERMISSION_REQ_ID_WRITE_EXTERNAL_STORAGE = PERMISSION_REQ_ID_RECORD_AUDIO + 1
     private val hasPermissions = false
 
@@ -81,6 +81,8 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
     var endTime = ""
     var hours = ""
     var minutes = ""
+    val RECORD_AUDIO_PERMISSION_REQUEST_CODE = 1
+
     var secondsNew = ""
     private var diffTime = 0L
     private var diffTimeSeconds = 0L
@@ -116,7 +118,6 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
         shimmerFrameLayout!!.startShimmer();
 
         hbRecorder = HBRecorder(requireContext(), this)
-
 
 
         //apiCall()
@@ -264,6 +265,42 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
             dialog?.dismiss()
         }
     }
+    private fun requestAudioPermissions(startTime: String, bookingId: String) {
+
+// Check if the microphone permission is granted
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // Request the permission
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.RECORD_AUDIO),
+                RECORD_AUDIO_PERMISSION_REQUEST_CODE
+            )
+        } else {
+            start_recording(startTime, bookingId)
+            // Permission is already granted
+            // You can perform microphone related operations here
+        }
+
+    }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray
+    ) {
+        when (requestCode) {
+            RECORD_AUDIO_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted, you can perform microphone related operations here
+                } else {
+                    requestAudioPermissions("startTime", bookingId)
+                    // Permission denied, handle accordingly (e.g., show a message or disable microphone functionality)
+                }
+                return
+            }
+        }
+    }
+
 
 
     private fun videoCallFun(startTime: String, bookingId: String) {
@@ -551,15 +588,13 @@ private fun recordMeeting(startTime: String, bookingId: String)
     override fun videoCall(startTime: String, bookingId: String) {
         SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
           //  .setTitleText("Are you sure want to Start Meeting?")
-            .setTitleText("Are you want to Record Meeting?")
+            .setTitleText("Are you want to Start Meeting?")
             .setCancelText("No")
             .setConfirmText("Yes")
             .showCancelButton(true)
             .setConfirmClickListener { sDialog ->
                 sDialog.cancel()
-
-
-                start_recording(startTime,bookingId)
+                requestAudioPermissions(startTime,bookingId)
 
 //                val intent = Intent(applicationContext, SignIn::class.java)
 //                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -570,7 +605,7 @@ private fun recordMeeting(startTime: String, bookingId: String)
             }
             .setCancelClickListener { sDialog ->
                 sDialog.cancel()
-                videoCallFun(startTime, bookingId)
+               // videoCallFun(startTime, bookingId)
 
             }
             .show()
@@ -717,7 +752,7 @@ private fun recordMeeting(startTime: String, bookingId: String)
         val slug = "completed"
         ApiClient.apiService.confirmSlot(bookingId, slug)
             .enqueue(object : Callback<ModelConfirmSlotRes> {
-                @SuppressLint("LogNotTimber")
+                @SuppressLint("LogNotTimber", "SuspiciousIndentation")
                 override fun onResponse(
                     call: Call<ModelConfirmSlotRes>,
                     response: Response<ModelConfirmSlotRes>
@@ -729,11 +764,11 @@ private fun recordMeeting(startTime: String, bookingId: String)
                     } else if (response.body()!!.status == 1) {
                        // apiCallGetConsultationAccepted1()
                       // (activity as Appointments).refresh()
-                        val intent = Intent(context as Activity, Rating::class.java)
-                            .putExtra("meetingId", bookingId)
+                        (activity as Appointments).refresh()
+                        val intent = Intent(context as Activity, AddPrescription::class.java)
+                            .putExtra("bookingId", bookingId)
                         (context as Activity).startActivity(intent)
                         ratingPage = false
-                      //  (activity as Appointments).refresh()
                           myToast(requireActivity(),response.body()!!.message)
                         progressDialog!!.dismiss()
                         //  apiCall()

@@ -13,13 +13,15 @@
     <string name="connect_fragment_label">Connect Fragment</string>
     <string name="ota_fragment_label">Update AyuDevice</string>
     <string name="usb_fragment_label">AyuSynkUsbSdk</string>
-
+    <string name="lbl_select_date">Select Date</string>
+    <string name="tv_invalidDateMessage">Invalid Date</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
     <string name="select_module_help"><b>Please select which type of device do you have?</b>\n\n For <b>AyuSynk:</b> Select BLE MODULE\n For <b>AyuSynk connection via Dongle:</b> Select USB MODULE\n For <b>AyuLynk</b>: Select USB MODULE</string>
     <string name="ble_module">BLE Module</string>
     <string name="usb_module">USB Module</string>
+    <string name="text_notification_enabled">Notification Enabled</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="connect">Connect</string>
@@ -46,5 +48,29 @@
     <string name="upload_progress">Uploading %1$d</string>
     <string name="cancel_update">Cancel update</string>
     <string name="LiveStream" />
+
+
+    \\
+    <string name="BTconnFail">Connection Failed</string>
+    <string name="BTConnected">Device Connected</string>
+    <string name="BTDisConnected">Disconnect</string>
+    <string name="sBTdevNF">"Bluetooth device not found!"</string>
+    <string name="sBTstaNF">Status: Bluetooth not found</string>
+    <string name="BTEnable">Bluetooth enabled</string>
+    <string name="sBTturON">Bluetooth turned on</string>
+    <string name="BTisON">Bluetooth is already on</string>
+    <string name="sEnabled">Bluetooth ON</string>
+    <string name="sDisabled">Bluetooth OFF</string>
+    <string name="sBTdisabl">Bluetooth disabled</string>
+    <string name="BTnotOn">Please turned on Bluetooth</string>
+    <string name="lt_bluetooth_status">Bluetooth status</string>
+    <string name="BTturOff">Bluetooth turned off</string>
+    <string name="cConnet">Connecting…</string>
+    <string name="ErrSockCrea">Socket creation failed</string>
+    <string name="DisStart">Scanning started</string>
+    <string name="show_paired_devices">Show Paired Devices</string>
+    <string name="DisStop">Scanning stopped</string>
+    <string name="status">"Status: "</string>
+    <string name="discover_new_devices">Discover new device</string>
 
 </resources>

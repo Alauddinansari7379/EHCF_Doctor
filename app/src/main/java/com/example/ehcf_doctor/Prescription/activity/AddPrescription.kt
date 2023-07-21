@@ -1,49 +1,98 @@
 package com.example.ehcf_doctor.Prescription.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.ProgressDialog
+import android.content.ContentValues
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import com.example.ehcf.Helper.changeDateFormat4
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.DatePickerDialogWithMaxMinRange
+import com.example.ehcf_doctor.Helper.Util
 import com.example.ehcf_doctor.Prescription.adapter.AdapterDigonisis
 import com.example.ehcf_doctor.Prescription.adapter.AdapterLabTest
 import com.example.ehcf_doctor.Prescription.adapter.AdapterOrderDetails
 import com.example.ehcf_doctor.Prescription.model.*
+import com.example.ehcf_doctor.R
+import com.example.ehcf_doctor.Rating.Rating
+import com.example.ehcf_doctor.Registration.modelResponse.ModelGender
 import com.example.ehcf_doctor.databinding.ActivityAddPrescriptionBinding
 import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
-import java.util.ArrayList
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddPrescription : AppCompatActivity() {
     private lateinit var binding: ActivityAddPrescriptionBinding
     var bookingId = ""
     var doctor_notes = ""
+    var mydilaog: Dialog? = null
     var subjective_information = ""
     var objective_information = ""
+    private var calendar: Calendar? = null
+
     var assessment = ""
     var plan = ""
+    var timing = ""
+    var intake = ""
+    var fraquency = ""
+    var duration = ""
+    var followUpDate = ""
     var registration = ""
+    var currentDate = ""
+    var timingList = ArrayList<ModelGender>()
+    var intakeList = ArrayList<ModelGender>()
+    var fraquencyList = ArrayList<ModelGender>()
+    var DurationList = ArrayList<ModelGender>()
     private val context: Context = this@AddPrescription
     private lateinit var sessionManager: SessionManager
     var progressDialog: ProgressDialog? = null
     var isTest = "0"
+    private var maxDate: String? = null
+    private var minDate: String? = null
     private val medicineList = ArrayList<ModelOrderDetails>()
     private val diagnosisList = ArrayList<ModelDigonsis>()
     private val labTestList = ArrayList<ModelLabTest>()
     var btnId = "0"
+
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddPrescriptionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        calendar = Calendar.getInstance()
 
+        val dateList = getCurrentDateAndNextTenDays()
+        for (date in dateList) {
+            Log.e("sd", date.toString())
+        }
+        maxDate = changeDateFormat4(dateList[9].toString())
+
+        Log.e("NewFor", changeDateFormat4(dateList[9].toString()))
+
+        currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
+        binding.tvFollowUPdate.text = currentDate
+        minDate = currentDate
 
 
         bookingId = intent.getStringExtra("bookingId").toString()
@@ -58,22 +107,22 @@ class AddPrescription : AppCompatActivity() {
 
 
 
-        if (doctor_notes!="null"){
+        if (doctor_notes != "null") {
             binding.edtDoctorNotes.setText(doctor_notes)
-            binding.edtSubjectiveInformation.setText(subjective_information)
-            binding.edtObjectiveInformation.setText(objective_information)
-            binding.edtAssessment.setText(assessment)
-            binding.edtPlan.setText(plan)
+//            binding.edtSubjectiveInformation.setText(subjective_information)
+//            binding.edtObjectiveInformation.setText(objective_information)
+//            binding.edtAssessment.setText(assessment)
+//            binding.edtPlan.setText(plan)
         }
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
 
         binding.checkTest.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked){
-                binding.layoutTest.visibility=View.VISIBLE
-            } else{
-                binding.layoutTest.visibility=View.GONE
+            if (isChecked) {
+                binding.layoutTest.visibility = View.VISIBLE
+            } else {
+                binding.layoutTest.visibility = View.GONE
 
             }
         }
@@ -88,26 +137,6 @@ class AddPrescription : AppCompatActivity() {
             if (binding.checkTest.isChecked) {
                 isTest = "1"
             }
-            if (binding.edtSubjectiveInformation.text.isEmpty()) {
-                binding.edtSubjectiveInformation.error = "Enter SubjectiveInformation"
-                binding.edtSubjectiveInformation.requestFocus()
-                return@setOnClickListener
-            }
-            if (binding.edtObjectiveInformation.text.isEmpty()) {
-                binding.edtObjectiveInformation.error = "Enter ObjectiveInformation"
-                binding.edtObjectiveInformation.requestFocus()
-                return@setOnClickListener
-            }
-            if (binding.edtAssessment.text.isEmpty()) {
-                binding.edtAssessment.error = "Enter Assessment"
-                binding.edtAssessment.requestFocus()
-                return@setOnClickListener
-            }
-            if (binding.edtPlan.text.isEmpty()) {
-                binding.edtPlan.error = "Enter Plan"
-                binding.edtPlan.requestFocus()
-                return@setOnClickListener
-            }
             if (binding.edtDoctorNotes.text.isEmpty()) {
                 binding.edtDoctorNotes.error = "Enter Doctor Notes"
                 binding.edtDoctorNotes.requestFocus()
@@ -118,26 +147,131 @@ class AddPrescription : AppCompatActivity() {
                 apiCall()
 
             }
-
         }
+
+            timingList.add(ModelGender("Select Timing", 0))
+            timingList.add(ModelGender("Morning", 7))
+            timingList.add(ModelGender("Afternoon", 8))
+            timingList.add(ModelGender("Evening", 9))
+            timingList.add(ModelGender("Night", 10))
+
+            binding.edtTiming.adapter =
+                ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, timingList)
+
+
+            binding.edtTiming.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+                    if (timingList.size > 0) {
+                        timing = timingList[i].name.toString()
+
+                        Log.e(ContentValues.TAG, "timing: $timing")
+                    }
+                }
+
+                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+            }
+
+
+            intakeList.add(ModelGender("Select Intake", 0))
+            intakeList.add(ModelGender("After Food", 7))
+            intakeList.add(ModelGender("Before Food", 8))
+
+
+            binding.edtIntake.adapter =
+                ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, intakeList)
+
+
+            binding.edtIntake.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+                    if (intakeList.size > 0) {
+                        intake = intakeList[i].name.toString()
+
+                        Log.e(ContentValues.TAG, "intake: $intake")
+                    }
+                }
+
+                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+            }
+
+            fraquencyList.add(ModelGender("Select Frequency", 0))
+            fraquencyList.add(ModelGender("Daily", 7))
+            fraquencyList.add(ModelGender("After 1 Day", 8))
+            fraquencyList.add(ModelGender("After 2 Day", 8))
+
+
+            binding.edtFrequency.adapter =
+                ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, fraquencyList)
+
+
+            binding.edtFrequency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+                    if (fraquencyList.size > 0) {
+                        fraquency = fraquencyList[i].name.toString()
+
+                        Log.e(ContentValues.TAG, "fraquency: $fraquency")
+                    }
+                }
+
+                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+            }
+            DurationList.add(ModelGender("Select Duration", 0))
+            DurationList.add(ModelGender("Till next consultation", 7))
+            DurationList.add(ModelGender("After 1 Week", 8))
+            DurationList.add(ModelGender("After 2 Week", 8))
+
+
+            binding.edtDuration.adapter =
+                ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, DurationList)
+
+
+            binding.edtDuration.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+                    if (DurationList.size > 0) {
+                        duration = DurationList[i].name.toString()
+
+                        Log.e(ContentValues.TAG, "duration: $duration")
+                    }
+                }
+
+                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+            }
+
+//            if (binding.edtSubjectiveInformation.text.isEmpty()) {
+//                binding.edtSubjectiveInformation.error = "Enter SubjectiveInformation"
+//                binding.edtSubjectiveInformation.requestFocus()
+//                return@setOnClickListener
+//            }
+//            if (binding.edtObjectiveInformation.text.isEmpty()) {
+//                binding.edtObjectiveInformation.error = "Enter ObjectiveInformation"
+//                binding.edtObjectiveInformation.requestFocus()
+//                return@setOnClickListener
+//            }
+//            if (binding.edtAssessment.text.isEmpty()) {
+//                binding.edtAssessment.error = "Enter Assessment"
+//                binding.edtAssessment.requestFocus()
+//                return@setOnClickListener
+//            }
+//            if (binding.edtPlan.text.isEmpty()) {
+//                binding.edtPlan.error = "Enter Plan"
+//                binding.edtPlan.requestFocus()
+//                return@setOnClickListener
+//            }
+
+
+
         binding.tvTitle.setOnClickListener {
             //apiCallDiagnosis()
         }
         binding.btnAddMedicine.setOnClickListener {
             setRecyclerDataMedicine(
                 binding.edtMedicineName.text.toString(),
-                binding.edtTiming.text.toString(),
-                binding.edtIntake.text.toString(),
-                binding.edtFrequency.text.toString(),
-                binding.edtDuration.text.toString(),
-            )
+                timing,
+                intake,
+                fraquency,
+                duration,)
             binding.llayout3.visibility = View.VISIBLE
             binding.edtMedicineName.text.clear()
-            binding.edtTiming.text.clear()
-            binding.edtIntake.text.clear()
-            binding.edtFrequency.text.clear()
-            binding.edtDuration.text.clear()
-            binding.edtMedicineName.requestFocus()
+             binding.edtMedicineName.requestFocus()
         }
         binding.btnAddDiagnosis.setOnClickListener {
             setRecyclerDataDiagnosis(
@@ -162,7 +296,167 @@ class AddPrescription : AppCompatActivity() {
             binding.edtInstructions.text.clear()
         }
 
+
+//        mydilaog?.setCanceledOnTouchOutside(false)
+//        mydilaog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        val newCalendar1 = Calendar.getInstance()
+//        val datePicker = DatePickerDialog(
+//            this,
+//            { _, year, monthOfYear, dayOfMonth ->
+//                val newDate = Calendar.getInstance()
+//                newDate[year, monthOfYear] = dayOfMonth
+//                DateFormat.getDateInstance().format(newDate.time)
+//                // val Date = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(newDate.time)
+//                 followUpDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(newDate.time)
+//                binding.tvFollowUPdate.text = followUpDate
+//
+//                Log.e(ContentValues.TAG, "onCreate: >>>>>>>>>>>>>>>>>>>>>>$followUpDate")
+//            },
+//            newCalendar1[Calendar.YEAR],
+//            newCalendar1[Calendar.MONTH],
+//            newCalendar1[Calendar.DAY_OF_MONTH]
+//        )
+//
+        binding.tvFollowUPdate.setOnClickListener {
+            // datePicker.show()
+            openDatePickerWithMaxAndMindate(minDate!!, maxDate!!)
+
+        }
+
     }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun getCurrentDateAndNextTenDays(): List<Date> {
+        val currentDate = Calendar.getInstance().time
+        val calendar = Calendar.getInstance()
+        calendar.time = currentDate
+
+        val dates = mutableListOf<Date>()
+
+        for (i in 1..10) {
+            calendar.add(Calendar.DATE, 1)
+            val nextDate = calendar.time
+
+            dates.add(nextDate)
+        }
+        return dates
+    }
+
+    private var datePickerListener =
+        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            calendar?.let {
+                it[Calendar.YEAR] = year
+                it[Calendar.MONTH] = monthOfYear
+                it[Calendar.DAY_OF_MONTH] = dayOfMonth
+            }
+            binding.tvFollowUPdate!!.text = Util.getDate(calendar!!.time)
+        }
+
+    private fun openDatePickerWithMaxAndMindate(minDate: String, maxDate: String) {
+        try {
+            val minYear: Int
+            val minMonth: Int
+            val minDay: Int
+            val maxYear: Int
+            val maxMonth: Int
+            val maxDay: Int
+//            var emptyInvalidDate = true
+//            emptyInvalidDate = !(! binding.tvSelectMaxDatePicker!!.text.toString().equals("", ignoreCase = true) || binding.tvSelectMinDatePicker!!.text.toString() != null
+//                        && ! binding.tvSelectMinDatePicker!!.text.toString().equals("", ignoreCase = true))
+//            emptyInvalidDate = binding.tvSelectMaxDatePicker!!.text.toString().equals(getString(R.string.lbl_select_date), ignoreCase = true) ||
+//                    binding.tvSelectMinDatePicker!!.text.toString().equals(getString(R.string.lbl_select_date), ignoreCase = true)
+//            if (emptyInvalidDate) {
+//                val alert = AlertDialog.Builder(context!!).apply {
+//                    setTitle(getString(R.string.app_name))
+//                    setMessage(getString(R.string.tv_invalidDateMessage))
+//                    setPositiveButton("Ok") { dialog, which -> }
+//                }.show()
+
+//            } else {
+            minDay = minDate.split("-").toTypedArray()[0].toInt()
+            minMonth = minDate.split("-").toTypedArray()[1].toInt() - 1
+            minYear = minDate.split("-").toTypedArray()[2].toInt()
+            maxDay = maxDate.split("-").toTypedArray()[0].toInt()
+            maxMonth = maxDate.split("-").toTypedArray()[1].toInt() - 1
+            maxYear = maxDate.split("-").toTypedArray()[2].toInt()
+
+            val maxDateCalendar = Calendar.getInstance().also {
+                it[Calendar.YEAR] = maxYear
+                it[Calendar.MONTH] = maxMonth
+                it[Calendar.DAY_OF_MONTH] = maxDay
+            }
+
+            val minDateCalendar = Calendar.getInstance().also {
+                it[Calendar.YEAR] = minYear
+                it[Calendar.MONTH] = minMonth
+                it[Calendar.DAY_OF_MONTH] = minDay
+            }
+
+            if (binding.tvFollowUPdate!!.text.toString()
+                    .equals(getString(R.string.lbl_select_date), ignoreCase = true)
+            ) {
+                calendar = Calendar.getInstance()
+            } else {
+                val selectedDate = binding.tvFollowUPdate!!.text.toString()
+                calendar?.let {
+                    it[Calendar.DAY_OF_MONTH] = selectedDate.split("-").toTypedArray()[0].toInt()
+                    it[Calendar.MONTH] = selectedDate.split("-").toTypedArray()[1].toInt() - 1
+                    it[Calendar.YEAR] = selectedDate.split("-").toTypedArray()[2].toInt()
+                }
+
+            }
+            if (minDateCalendar.after(calendar)) {
+                DatePickerDialogWithMaxMinRange(
+                    context,
+                    datePickerListener,
+                    minDateCalendar,
+                    maxDateCalendar,
+                    minDateCalendar
+                ).show()
+            } else if (maxDateCalendar.before(calendar)) {
+                DatePickerDialogWithMaxMinRange(
+                    context,
+                    datePickerListener,
+                    minDateCalendar,
+                    maxDateCalendar,
+                    maxDateCalendar
+                ).show()
+            } else {
+                DatePickerDialogWithMaxMinRange(
+                    context,
+                    datePickerListener,
+                    minDateCalendar,
+                    maxDateCalendar,
+                    calendar!!
+                ).show()
+            }
+
+        } catch (e: Throwable) {
+            // Have suppressed the exception
+            e.printStackTrace()
+        }
+    }
+
+//        followUpList.add(ModelGender("Select FollowUp Day", 0))
+//        followUpList.add(ModelGender("7", 7))
+//        followUpList.add(ModelGender("8", 8))
+//        followUpList.add(ModelGender("9", 9))
+//        followUpList.add(ModelGender("10", 10))
+//
+//        binding.spinnerFollowUp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+//                if (followUpList.size > 0) {
+//                    followUpDay = followUpList[i].id.toString()
+//
+//                    Log.e(ContentValues.TAG, "followUpDay: $followUpDay")
+//                }
+//            }
+//
+//            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+//        }
+//        binding.spinnerFollowUp.adapter =
+//            ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, followUpList)
+//    }
 
     private fun setRecyclerDataMedicine(
         medicineName: String,
@@ -175,11 +469,12 @@ class AddPrescription : AppCompatActivity() {
         binding.rvrecyclerView.adapter = AdapterOrderDetails(this, medicineList)
 
     }
+
     private fun setRecyclerDataDiagnosis(
         dignosis: String,
         desctption: String,
     ) {
-        diagnosisList.add(ModelDigonsis(dignosis,desctption))
+        diagnosisList.add(ModelDigonsis(dignosis, desctption))
         binding.rvrecyclerViewDigonis.adapter = AdapterDigonisis(this, diagnosisList)
 
     }
@@ -189,7 +484,7 @@ class AddPrescription : AppCompatActivity() {
         desctption: String,
         after: String,
     ) {
-        labTestList.add(ModelLabTest(dignosis,desctption,after))
+        labTestList.add(ModelLabTest(dignosis, desctption, after))
         binding.rvrecyclerViewLabTest.adapter = AdapterLabTest(this, labTestList)
 
     }
@@ -202,49 +497,56 @@ class AddPrescription : AppCompatActivity() {
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
 
-        val subjective = binding.edtSubjectiveInformation.text.toString()
-        val objective = binding.edtObjectiveInformation.text.toString()
-        val assessment = binding.edtAssessment.text.toString()
-        val plan = binding.edtPlan.text.toString()
+//        val subjective = binding.edtSubjectiveInformation.text.toString()
+//        val objective = binding.edtObjectiveInformation.text.toString()
+//        val assessment = binding.edtAssessment.text.toString()
+//        val plan = binding.edtPlan.text.toString()
         val doctorNotes = binding.edtDoctorNotes.text.toString()
         Log.e("test", isTest)
 
 
         ApiClient.apiService.createPrescription(
             bookingId,
-            subjective,
-            objective,
-            assessment,
-            plan,
+            "null",
+            "null",
+            "null",
+            "null",
             doctorNotes,
             isTest,
             binding.edtTestName.text.toString(),
             binding.edtInstructions.text.toString(),
-            "5"
+            "5",
+            currentDate,
+            binding.tvFollowUPdate!!.text.toString()
         )
             .enqueue(object : Callback<ModelPreJava> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
                     call: Call<ModelPreJava>, response: Response<ModelPreJava>
                 ) {
+                    try {
 
-                    if (response.code() == 500) {
-                        myToast(this@AddPrescription, "Server Error")
-                        progressDialog!!.dismiss()
-                    } else if (response.code() == 200) {
-                        myToast(this@AddPrescription, response.body()!!.result)
-                        val preId=response.body()!!.data.id.toString()
-                       // Log.e("Iddddddd",preId)
-                        progressDialog!!.dismiss()
-                        apiCallDiagnosis(preId)
+                        if (response.code() == 500) {
+                            myToast(this@AddPrescription, "Server Error")
+                            progressDialog!!.dismiss()
+                        } else if (response.code() == 200) {
+                            myToast(this@AddPrescription, response.body()!!.result)
+                            val preId = response.body()!!.data.id.toString()
+                            // Log.e("Iddddddd",preId)
+                            progressDialog!!.dismiss()
+                            apiCallDiagnosis(preId)
 
-                    } else {
-                        myToast(this@AddPrescription, "${response.body()!!.result}")
-                        progressDialog!!.dismiss()
+                        } else {
+                            myToast(this@AddPrescription, "${response.body()!!.result}")
+                            progressDialog!!.dismiss()
 
+                        }
+                    } catch (e: Exception) {
+                        myToast(this@AddPrescription, "Something went wrong")
+                        e.printStackTrace()
                     }
-
                 }
+
 
                 override fun onFailure(call: Call<ModelPreJava>, t: Throwable) {
                     myToast(this@AddPrescription, "Something went wrong")
@@ -286,6 +588,9 @@ class AddPrescription : AppCompatActivity() {
                             myToast(this@AddPrescription, "Server Error")
                             // progressDialog!!.dismiss()
                         } else if (response.code() == 200) {
+                            val intent = Intent(context as Activity, Rating::class.java)
+                                .putExtra("meetingId", bookingId)
+                            (context as Activity).startActivity(intent)
                             //  myToast(this@AddPrescription, response.body()!!.result)
                             //  progressDialog!!.dismiss()
 
@@ -306,6 +611,7 @@ class AddPrescription : AppCompatActivity() {
                 })
         }
     }
+
     private fun apiCallDiagnosis(preId: String) {
         progressDialog = ProgressDialog(this@AddPrescription)
         progressDialog!!.setMessage("Loading...")
@@ -333,7 +639,7 @@ class AddPrescription : AppCompatActivity() {
                             myToast(this@AddPrescription, "Server Error")
                             // progressDialog!!.dismiss()
                         } else if (response.code() == 200) {
-                              myToast(this@AddPrescription, response.body()!!.message)
+                            myToast(this@AddPrescription, response.body()!!.message)
                             onBackPressed()
                             //  progressDialog!!.dismiss()
 
@@ -354,6 +660,7 @@ class AddPrescription : AppCompatActivity() {
                 })
         }
     }
+
     private fun apiCallLabTest(preId: String) {
         progressDialog = ProgressDialog(this@AddPrescription)
         progressDialog!!.setMessage("Loading...")
@@ -366,9 +673,9 @@ class AddPrescription : AppCompatActivity() {
             ApiClient.apiService.createLabTest(
                 preId,
                 i.testName,
+                i.after,
                 i.description,
-                i.after
-                )
+            )
                 .enqueue(object : Callback<ModeMedicine> {
                     @SuppressLint("LogNotTimber")
                     override fun onResponse(
@@ -380,7 +687,10 @@ class AddPrescription : AppCompatActivity() {
                             myToast(this@AddPrescription, "Server Error")
                             // progressDialog!!.dismiss()
                         } else if (response.code() == 200) {
-                              myToast(this@AddPrescription, response.body()!!.message)
+                            myToast(this@AddPrescription, response.body()!!.message)
+                            val intent = Intent(context as Activity, Rating::class.java)
+                                .putExtra("meetingId", bookingId)
+                            (context as Activity).startActivity(intent)
                             //  progressDialog!!.dismiss()
 
                         } else {
@@ -409,18 +719,18 @@ class AddPrescription : AppCompatActivity() {
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
 
-        val subjective = binding.edtSubjectiveInformation.text.toString()
-        val objective = binding.edtObjectiveInformation.text.toString()
-        val assessment = binding.edtAssessment.text.toString()
-        val plan = binding.edtPlan.text.toString()
+//        val subjective = binding.edtSubjectiveInformation.text.toString()
+//        val objective = binding.edtObjectiveInformation.text.toString()
+//        val assessment = binding.edtAssessment.text.toString()
+//        val plan = binding.edtPlan.text.toString()
         val doctorNotes = binding.edtDoctorNotes.text.toString()
         Log.e("test", isTest)
 
 
         ApiClient.apiService.modifyPrescrption(
             bookingId,
-            subjective,
-            objective,
+            "null",
+            "null",
             assessment,
             plan,
             isTest,

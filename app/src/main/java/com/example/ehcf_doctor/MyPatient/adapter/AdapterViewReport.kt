@@ -25,7 +25,12 @@ class AdapterViewReport(private val list: ModelGetAllReport, val context: Contex
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-         holder.reportCount.text= "${position+1}"
+        if(list.result[position].title!=null){
+            holder.reportCount.text= list.result[position].title.toString()
+
+        }
+
+
         holder.btnViewReport.setOnClickListener {
             val intent = Intent(context as Activity, ViewReport::class.java)
                 .putExtra("report",list.result[position].report.toString())

@@ -1,14 +1,18 @@
 package com.example.ehcf_doctor.MyPatient.activity
 
+import android.Manifest.permission.CALL_PHONE
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
@@ -24,6 +28,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+
 
 class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
     private var context: Context = this@MyPatient
@@ -45,6 +50,10 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
             onBackPressed()
         }
 
+        callPermission()
+
+
+
         binding.imgRefresh.setOnClickListener {
             overridePendingTransition(0, 0)
             finish()
@@ -64,6 +73,39 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
         apiCallMyPatient()
     }
 
+    private fun callPermission(){
+        if (ContextCompat.checkSelfPermission(this@MyPatient, CALL_PHONE) === PackageManager.PERMISSION_GRANTED) {
+          //  startActivity(callIntent)
+          //  myToast(this,"Call Permission Granted")
+        } else {
+            requestPermissions(arrayOf(CALL_PHONE), 1)
+        }
+    }
+//    fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<String?>?, grantResults: IntArray
+//    ) {
+//        if (permissions != null) {
+//            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        }
+//        when (requestCode) {
+//            MY_PERMISSIONS_REQUEST_CALL_PHONE -> {
+//
+//                // If request is cancelled, the result arrays are empty.
+//                if (grantResults.size > 0
+//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+//                ) {
+//
+//                    // permission was granted, yay! Do the phone call
+//                } else {
+//
+//                    // permission denied, boo! Disable the
+//                    // functionality that depends on this permission.
+//                }
+//                return
+//            }
+//        }
+//    }
     private fun apiCallMyPatient() {
         progressDialog = ProgressDialog(this@MyPatient)
         progressDialog!!.setMessage("Loading...")
@@ -181,6 +223,7 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
         progressDialog!!.isIndeterminate = false
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
+
         var view = layoutInflater.inflate(R.layout.comment_list_dialog, null)
         dialog = Dialog(this)
         val btnOkDialog = view!!.findViewById<Button>(R.id.btnOkDialogNew)

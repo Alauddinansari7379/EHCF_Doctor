@@ -32,12 +32,14 @@ class PrescriptionDetails : AppCompatActivity() {
     private var progressDialog: ProgressDialog? = null
     var id = ""
     var customerName = ""
+    var memberName = ""
     var resultDate = ""
     var objective = ""
     var subjectiv = ""
     var doctorNote = ""
     var assesment = ""
     var plan = ""
+    var followUp = ""
     private lateinit var sessionManager: SessionManager
 
     var date = ""
@@ -52,13 +54,14 @@ class PrescriptionDetails : AppCompatActivity() {
         }
         id = intent.getStringExtra("Id").toString()
         customerName = intent.getStringExtra("customerName").toString()
-        Log.e("predetialid", id)
+         Log.e("predetialid", id)
 
         Log.e("NewDate", resultDate)
 
         apiCallPreDet()
+             binding.tvCoustmorNamePreDet.text = customerName
+
         binding.tvDoctorNamePreDetial.text = sessionManager.doctorName
-        binding.tvCoustmorNamePreDet.text = customerName
         binding.UHID.text = id
         val refreshListener = SwipeRefreshLayout.OnRefreshListener {
             overridePendingTransition(0, 0)
@@ -158,6 +161,9 @@ class PrescriptionDetails : AppCompatActivity() {
                                 subjectiv = i.subjectiveInformation
                                 objective = i.objectiveInformation
                                 plan = i.plan
+                                if (i.end_follow_up_date!=null){
+                                    followUp = i.end_follow_up_date
+                                 }
 
                             }
                             changeDateFormatFromAnother(date)
@@ -167,6 +173,7 @@ class PrescriptionDetails : AppCompatActivity() {
                             binding.tvObjective.text = objective
                             binding.Plan.text = plan
                             binding.Assessment.text = assesment
+                            binding.followUpdate.text = followUp
 
 
                         }

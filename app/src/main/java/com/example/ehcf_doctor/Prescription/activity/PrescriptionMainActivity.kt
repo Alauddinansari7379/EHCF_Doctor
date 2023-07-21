@@ -37,7 +37,6 @@ class PrescriptionMainActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        binding.btnHelp.setOnClickListener {
 
 //            val callIntent = Intent(Intent.ACTION_CALL)
 //            callIntent.data = Uri.parse("tel:123456789")
@@ -56,7 +55,7 @@ class PrescriptionMainActivity : AppCompatActivity() {
 //        if (binding.tabs.isFocusable){
 //            binding.tabs.backgroundTintList=RED.toInt().toString()
 //        }
-        }
+
         pager = findViewById(R.id.viewPager)
         tab = findViewById(R.id.tabs)
         val adapter = ViewPagerAdapter(supportFragmentManager)

@@ -2,6 +2,8 @@ package com.example.ehcf_doctor.MainActivity.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -12,8 +14,12 @@ import android.os.Looper
 import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -25,16 +31,17 @@ import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
-import com.example.ehcf_doctor.AudioRecording.AudioRecordingList
 import com.example.ehcf_doctor.AudioRecording.Fragment.RecordListFragment
 import com.example.ehcf_doctor.AyuSynk.MainActivity
 import com.example.ehcf_doctor.Dashboard.Dashboard
+import com.example.ehcf_doctor.HealthCube.activity.Bluetooth
+import com.example.ehcf_doctor.Helper.CustomDatepickerdemo
 import com.example.ehcf_doctor.Invoice.Invoice
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.MainActivity.model.ModelOnline
 import com.example.ehcf_doctor.ManageSlots.activity.CreateSlot
 import com.example.ehcf_doctor.ManageSlots.activity.MySlot
-import com.example.ehcf_doctor.MyPatient.activity.MyPatient
+ import com.example.ehcf_doctor.MyPatient.activity.MyPatient
 import com.example.ehcf_doctor.Prescription.activity.PrescriptionMainActivity
 import com.example.ehcf_doctor.PrivacyTerms.PrivacyTerms
 import com.example.ehcf_doctor.Profile.activity.ProfileSetting
@@ -43,6 +50,7 @@ import com.example.ehcf_doctor.ResetPassword
 import com.example.ehcf_doctor.databinding.ActivityMainDoctorBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import me.ibrahimsn.lib.SmoothBottomBar
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,11 +66,15 @@ class MainActivity : AppCompatActivity() {
     var progressDialog : ProgressDialog?=null
     lateinit var bottomNav: SmoothBottomBar
     var onlineid=1
-
     private lateinit var navigationView: NavigationView
     private lateinit var appBarConfiguration: AppBarConfiguration
-
     lateinit var drawerLayout: DrawerLayout
+
+    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
+    private val notificationManager: NotificationManager by lazy {
+        getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    }
+
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +83,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         sessionManager = SessionManager(this)
         bottomNav = binding.bottomNavigation1
+
+
+
+
+        requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            refreshUI()
+            if (it) {
+              //  myToast(this@MainActivity,"Permission Granted")
+                //  showDummyNotification()
+            } else {
+                Snackbar.make(
+                    findViewById<View>(android.R.id.content).rootView, "Please grant Notification permission from App Settings",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
 
 
         if (sessionManager.pricing.isNullOrEmpty()) {
@@ -99,7 +127,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvTitle.setOnClickListener {
-          //  startActivity(Intent(this@MainActivity, com.example.ehcf_doctor.AudioRecording.MainActivity::class.java))
+            startActivity(Intent(this@MainActivity, CustomDatepickerdemo::class.java))
 
         }
 
@@ -145,6 +173,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 .show()
         }
+
+
         // binding.toggleBtn.setBackgroundColor(resources.getColor(R.color.Red))
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.hostFragment)
@@ -185,6 +215,11 @@ class MainActivity : AppCompatActivity() {
 
             binding.includedrawar1.tvAyuSynk.setOnClickListener {
                 startActivity(Intent(this, MainActivity::class.java))
+                drawerLayout.closeDrawer(GravityCompat.START)
+            }
+
+            binding.includedrawar1.tvHealthCube.setOnClickListener {
+                startActivity(Intent(this, Bluetooth::class.java))
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
 
@@ -270,6 +305,38 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    @SuppressLint("MissingPermission")
+    private fun showDummyNotification() {
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Congratulations! 🎉🎉🎉")
+            .setContentText("Notification Enabled in the Doctor App")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(1, builder.build())
+        }
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel() {
+        val channel = NotificationChannel(
+            CHANNEL_ID,
+            "Important Notification Channel",
+            NotificationManager.IMPORTANCE_HIGH,
+        ).apply {
+            description = "This notification contains important announcement, etc."
+        }
+        notificationManager.createNotificationChannel(channel)
+    }
+    companion object {
+        const val CHANNEL_ID = "dummy_channel"
+    }
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun refreshUI() {
+             if (notificationManager.areNotificationsEnabled()) "TRUE" else "FALSE"
+    }
+
     var doubleBackToExitPressedOnce = false
 
     override fun onBackPressed() {
@@ -327,7 +394,15 @@ private fun apiCallOnline(){
 
     })
 }
-private fun apiCallOffline(){
+
+    fun refreshMain() {
+        val intent = Intent(this@MainActivity, com.example.ehcf_doctor.MainActivity.activity.MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        finish()
+        startActivity(intent)
+    }
+
+    private fun apiCallOffline(){
     progressDialog = ProgressDialog(this@MainActivity)
     progressDialog!!.setMessage("Loading..")
     progressDialog!!.setTitle("Please Wait")

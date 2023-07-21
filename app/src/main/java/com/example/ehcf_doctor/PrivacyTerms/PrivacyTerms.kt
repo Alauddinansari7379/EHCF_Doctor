@@ -4,19 +4,12 @@ import android.app.ProgressDialog
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.webkit.WebViewClient
 import com.example.ehcf.Helper.myToast
-import com.example.ehcf.Testing.Interface.apiInterface
+import com.example.ehcf.Testing.Interface.ApiInterfaceHelthCube
 import com.example.ehcf.sharedpreferences.SessionManager
-import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing
 import com.example.ehcf_doctor.PrivacyTerms.adapter.AdapterPrivacyPolicies
 import com.example.ehcf_doctor.PrivacyTerms.model.ModelPrivacyPolicies
-import com.example.ehcf_doctor.Profile.modelResponse.ModelUpdateNameEmail
-import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityPrivacyTermsBinding
-import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,7 +71,7 @@ class PrivacyTerms : AppCompatActivity() {
             //.baseUrl("https://jsonplaceholder.typicode.com/")
             .baseUrl("https://ehcf.thedemostore.in/api/")
             .build()
-            .create(apiInterface::class.java)
+            .create(ApiInterfaceHelthCube::class.java)
 
 //        val retrofitData =retrofitBuilder.getUser()
 //        retrofitData.enqueue(object : Callback<List<User>?> {

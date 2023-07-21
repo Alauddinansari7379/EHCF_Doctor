@@ -134,6 +134,49 @@
 
 
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Follow Up"
+                            android:textColor="@color/main_color"
+                            android:textSize="15dp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="Till:"
+                            android:textColor="@color/main_color"
+                            android:textSize="15dp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/followUpdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:text="20/02/2023"
+                            android:textColor="@color/main_color"
+                            android:textSize="15dp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
@@ -634,6 +677,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="1dp"
                                 android:layout_marginLeft="15dp"
+                                android:visibility="gone"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="15dp"
                                 android:background="#D3D0D0">
@@ -643,6 +687,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="5dp"
+                                android:visibility="gone"
                                 android:orientation="vertical">
 
                                 <androidx.appcompat.widget.AppCompatTextView
@@ -665,6 +710,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
+                                android:visibility="gone"
                                 android:orientation="vertical">
 
                                 <androidx.appcompat.widget.AppCompatTextView

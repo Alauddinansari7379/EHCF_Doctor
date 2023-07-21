@@ -1,35 +1,39 @@
 package com.example.ehcf_doctor.Home
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+ import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterHome
-import com.example.ehcf_doctor.AudioRecording.MainActivity
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
+import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentHomeBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
-import kotlinx.coroutines.launch
+ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
-import java.io.File
 import java.util.*
 
 
@@ -61,14 +65,13 @@ class HomeFragment : Fragment() {
 //        if (sessionManager.clinicAddress=="null"){
 //
 //        }
+// Setup our BluetoothManager
+        // Setup our BluetoothManager
+        val refreshListener = SwipeRefreshLayout.OnRefreshListener {
 
-
-//        audioRecorder.create {
-//            this.destFile = this.destFile
-//            this.recordConfig = recordConfig
-//            this.audioSource = audioSource
-//        }
-
+            (activity as MainActivity).refreshMain()
+        }
+        binding.swipeRefreshLayout.setOnRefreshListener(refreshListener)
 
         binding.cardTotalBooking.setOnClickListener {
             startActivity(Intent(requireContext(), Appointments::class.java))

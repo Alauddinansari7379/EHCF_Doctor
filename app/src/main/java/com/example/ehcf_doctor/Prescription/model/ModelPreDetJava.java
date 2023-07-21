@@ -117,6 +117,13 @@ public class DoctorNote {
     @SerializedName("clinic_name")
     @Expose
     private String clinicName;
+    @SerializedName("start_follow_up_date")
+    @Expose
+    private String start_follow_up_date;
+
+    @SerializedName("end_follow_up_date")
+    @Expose
+    private String end_follow_up_date;
 
     public String getId() {
         return id;
@@ -152,6 +159,13 @@ public class DoctorNote {
 
     public String getPlan() {
         return plan;
+    }
+    public String getEnd_follow_up_date() {
+        return end_follow_up_date;
+    }
+
+    public void setEnd_follow_up_date(String end_follow_up_date) {
+        this.end_follow_up_date = end_follow_up_date;
     }
 
     public void setPlan(String plan) {

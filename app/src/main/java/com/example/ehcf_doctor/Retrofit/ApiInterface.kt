@@ -2,6 +2,7 @@ package com.example.ehcf_doctor.Retrofit
 
 
 import com.example.ehcf.Upload.model.ModelGetAllReport
+import com.example.ehcf.report.model.ModelGetTest
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelAppointmentDatails
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
@@ -16,14 +17,10 @@ import com.example.ehcf_doctor.ManageSlots.model.*
 import com.example.ehcf_doctor.MyPatient.model.ModelAllReport
 import com.example.ehcf_doctor.MyPatient.model.ModelCommentList
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
+import com.example.ehcf_doctor.MyPatient.model.ModelPatientHistoryX
 import com.example.ehcf_doctor.Prescription.model.*
 import com.example.ehcf_doctor.PrivacyTerms.model.ModelPrivacyPolicies
-import com.example.ehcf_doctor.Profile.modelResponse.ModelCity
-import com.example.ehcf_doctor.Profile.modelResponse.ModelProfileUpdate
-import com.example.ehcf_doctor.Profile.modelResponse.ModelState
-import com.example.ehcf_doctor.Profile.modelResponse.ModelUpdateNameEmail
-import com.example.ehcf_doctor.Profile.modelResponse.ModelYear
-import com.example.ehcf_doctor.Profile.modelResponse.ResetPassResponse
+import com.example.ehcf_doctor.Profile.modelResponse.*
 import com.example.ehcf_doctor.Rating.ModelRating
 import com.example.ehcf_doctor.Registration.modelResponse.ModelDegreeJava
 import com.example.ehcf_doctor.Registration.modelResponse.ModelLanguage
@@ -70,7 +67,9 @@ interface ApiInterface {
         @Query("reg_no") reg_no: String,
         @Part reg_cer: MultipartBody.Part,
         @Part("desc") desc: RequestBody,
-    ): Call<ModelRegistrationNew>
+        @Query("follow_up") follow_up: String,
+
+        ): Call<ModelRegistrationNew>
 
     @FormUrlEncoded
     @POST("forget_password")
@@ -160,12 +159,15 @@ interface ApiInterface {
     @GET("specialist_category")
     fun specialistCategoryTest(
     ): Call<ModelSpecilList>
+
     @GET("get_degree")
     fun getDegree(
     ): Call<ModelDegreeJava>
+
     @GET("get_year")
     fun getYear(
     ): Call<ModelYear>
+
     @GET("get_state")
     fun getState(
     ): Call<ModelState>
@@ -173,6 +175,7 @@ interface ApiInterface {
     @GET("get_languages")
     fun languageList(
     ): Call<ModelLanguage>
+
     @GET("get_city")
     fun getCity(
     ): Call<ModelCity>
@@ -221,7 +224,10 @@ interface ApiInterface {
         @Query("test_name") test_name: String?,
         @Query("instructions") instructions: String?,
         @Query("status") status: String?,
+        @Query("start_follow_up_date") start_follow_up_date: String?,
+        @Query("end_follow_up_date") end_follow_up_date: String?,
     ): Call<ModelPreJava>
+
     @POST("create_prescription_items")
     fun createMedicine(
         @Query("prescription_id") booking_id: String?,
@@ -231,6 +237,12 @@ interface ApiInterface {
         @Query("frequency") plan: String?,
         @Query("duration") doctor_notes: String?,
     ): Call<ModeMedicine>
+
+    @POST("get_test")
+    fun getTest(
+        @Query("customer_prescription") customer_prescription: String?,
+    ): Call<ModelGetTest>
+
     @POST("create_diagnosis")
     fun createDiagnosis(
         @Query("prescription_id") prescription_id: String?,
@@ -273,14 +285,18 @@ interface ApiInterface {
     fun getPrescriptionDetial(
         @Query("id") id: String?,
     ): Call<ModelPreDetJava>
-
+    @POST("p_history")
+    fun patientHistory(
+        @Query("patient_id") id: String,
+    ): Call<ModelPatientHistoryX>
     @POST("get_patients")
     fun getPatients(
         @Query("doctor_id") id: String?,
     ): Call<ModelMyPatient>
+
     @GET("customer_all_comments")
     fun customerAllComments(
-        @Query("patient_id") doctor_id:String
+        @Query("patient_id") doctor_id: String
     ): Call<ModelCommentList>
 
     @POST("pending_prescription")
@@ -391,6 +407,7 @@ interface ApiInterface {
         @Query("is_test") is_test: String?,
         @Query("doctor_notes") doctor_notes: String?,
     ): Call<ModelModify>
+
     @POST("check_phone")
     fun checkPhone(
         @Query("phone_with_code") phone_with_code: String?,
@@ -403,5 +420,14 @@ interface ApiInterface {
         @Query("comments") comments: String?,
     ): Call<ModelRating>
 
+
+    @Multipart
+    @Headers("Accept: application/json")
+    @POST("profile_picture")
+    fun profilePicture(
+        @Query("id") id: String,
+        @Part image: MultipartBody.Part,
+        @Part("desc") desc: RequestBody,
+        ): Call<ModelProfilePic>
 
 }

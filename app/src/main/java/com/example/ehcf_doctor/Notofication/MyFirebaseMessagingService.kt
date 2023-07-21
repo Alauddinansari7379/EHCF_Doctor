@@ -1,5 +1,6 @@
 package com.example.ehcf_doctor.Notofication
 
+import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -11,6 +12,8 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import com.example.ehcf_doctor.Appointments.Appointments
+import com.example.ehcf_doctor.Appointments.Upcoming.activity.AppointmentDetalis
 import com.example.ehcf_doctor.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -18,6 +21,7 @@ import com.google.firebase.messaging.RemoteMessage
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private val tag = "FirebaseMessagingService"
+
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
@@ -67,7 +71,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-
+        NotificationValue="1"
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.drapp)
             .setContentTitle(title)
@@ -78,6 +82,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.notify(0, notificationBuilder.build())
 
     }
+
+         companion object {
+            var NotificationValue = ""
+     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private fun setupNotificationChannels(

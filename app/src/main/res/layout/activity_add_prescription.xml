@@ -361,10 +361,61 @@
                         </androidx.appcompat.widget.AppCompatTextView>
                     </LinearLayout>
 
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <Spinner
+                        android:id="@+id/edtTiming"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/corner"
+                        android:hint="Timing"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:textSize="15dp">
+                    </Spinner>
+
+                    <Spinner
+                        android:id="@+id/edtIntake"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/corner"
+                        android:hint="Intake"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:textSize="15dp">
+
+                    </Spinner>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_marginStart="10dp"
                         android:weightSum="1">
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -388,6 +439,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_marginStart="5dp"
                         android:weightSum="1">
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -417,39 +469,14 @@
                     android:layout_marginRight="10dp"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/edtTiming"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/corner"
-                        android:hint="Timing"
-                        android:inputType="text"
-                        android:padding="10dp"
-                        android:textSize="15dp">
-                    </EditText>
 
-                    <EditText
-                        android:id="@+id/edtIntake"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/corner"
-                        android:hint="Intake"
-                        android:inputType="text"
-                        android:padding="10dp"
-                        android:textSize="15dp">
-
-                    </EditText>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <EditText
+                        <Spinner
                             android:id="@+id/edtFrequency"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
@@ -461,7 +488,7 @@
                             android:padding="10dp"
                             android:textSize="15dp">
 
-                        </EditText>
+                        </Spinner>
                     </LinearLayout>
 
                     <LinearLayout
@@ -469,7 +496,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1">
 
-                        <EditText
+                        <Spinner
                             android:id="@+id/edtDuration"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
@@ -481,7 +508,7 @@
                             android:padding="10dp"
                             android:textSize="15dp">
 
-                        </EditText>
+                        </Spinner>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -602,7 +629,7 @@
         app:layout_constraintTop_toBottomOf="@id/llayout3" />
 </LinearLayout>
 
-            <LinearLayout
+          <!--  <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -784,12 +811,13 @@
 
                 </EditText>
 
-            </LinearLayout>
+            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="start">
 
@@ -964,7 +992,64 @@
     </LinearLayout>
 
 </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="Select Follow Up Date"                    android:textColor="@color/black"
+                    android:textStyle="bold">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="*"
+                    android:textColor="#E91E63">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+            </LinearLayout>
+
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:layout_marginStart="10dp"
+                     android:textSize="12sp"
+                    android:layout_marginTop="3dp"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="Follow Up End Date-">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvFollowUPdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:layout_marginStart="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                     android:drawableRight="@drawable/ic_baseline_calendar_month_24"
+                    android:textStyle="bold"
+                     android:text="22/07/2023">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

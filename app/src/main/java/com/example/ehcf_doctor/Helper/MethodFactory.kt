@@ -126,6 +126,11 @@ fun changeDateFormat1(date: String): String {
     val out = SimpleDateFormat("dd-MM-yyyy")
     return out.format(inf.parse(date))
 }
+fun changeDateFormat4(date: String): String {
+    val inf = SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy")
+    val out = SimpleDateFormat("dd-MM-yyyy")
+    return out.format(inf.parse(date))
+}
 
 fun changeDateFormatNew(date: String): String {
     val inf = SimpleDateFormat("yyyy-MM-dd")

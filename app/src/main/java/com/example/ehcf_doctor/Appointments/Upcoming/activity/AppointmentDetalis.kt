@@ -7,6 +7,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.ehcf.Helper.convertTo12Hour
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelAppointmentDatails
@@ -67,8 +68,17 @@ class AppointmentDetalis : AppCompatActivity() {
                     else{
 
                          binding.tvDate.text = response.body()!!.result.date
-                         binding.tvTime.text = response.body()!!.result.start_time
-                         binding.tvCustomerName.text = response.body()!!.result.customer_name
+                         if (response.body()!!.result.start_time!=null){
+                             binding.tvTime.text = convertTo12Hour(response.body()!!.result.start_time)
+
+                         }
+                         if (response.body()!!.result.member_name!=null){
+                             binding.tvCustomerName.text = response.body()!!.result.member_name
+                         }
+                         else{
+                             binding.tvCustomerName.text = response.body()!!.result.customer_name
+
+                         }
                          when (response.body()!!.result.consultation_type) {
                              "1" -> {
                                  binding.tvConsultationType.text = "Tele-Consultation"
@@ -87,6 +97,9 @@ class AppointmentDetalis : AppCompatActivity() {
                              }
                              "2" -> {
                                  binding.tvPaymentMode.text = "Online"
+                             }
+                             "5"->{
+                                 binding.tvPaymentMode.text="Free"
                              }
                          }
                          binding.tvTotalAmount.text = response.body()!!.result.total

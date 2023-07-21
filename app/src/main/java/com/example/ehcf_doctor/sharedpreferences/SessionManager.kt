@@ -47,7 +47,7 @@ class SessionManager(context: Context?) {
         private const val HOSPITAL_NAME = "hos_name"
         private const val HOSPITAL_ADDRESS = "hos_address"
         private const val REGISTRATION = "registration"
-        private const val SPECIALIST = "specialist"
+         private const val SPECIALIST = "specialist"
         private const val CLINIC_ADDRESS_ONE = "clinic_address_one"
         private const val CLINIC_ADDRESS_TWO = "clinic_address_two"
         private const val CITY = "city"
@@ -233,6 +233,12 @@ class SessionManager(context: Context?) {
         get() = prefs.getString(REGISTRATION, "")
         set(registration) {
             prefs.edit().putString(REGISTRATION, registration).apply()
+        }
+
+    var profilePic: String?
+        get() = prefs.getString(PROFILE_PICTURE, "")
+        set(profilePic) {
+            prefs.edit().putString(PROFILE_PICTURE, profilePic).apply()
         }
 
 }

@@ -5,10 +5,7 @@
         android:id="@+id/fragment_Home"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="Home"/>
-    <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/profilenew"
-        android:title="Profile"/>
+
 
     <item
         android:id="@+id/fragment_prescription"
@@ -18,4 +15,8 @@
         android:id="@+id/fragment_booking"
         android:icon="@drawable/calendar"
         android:title="Booking"/>
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/profilenew"
+        android:title="Profile"/>
 </menu>

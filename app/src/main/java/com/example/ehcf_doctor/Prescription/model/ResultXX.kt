@@ -16,6 +16,8 @@ data class ResultXX(
     val rating: String,
     val start_time: String,
     val end_time: String,
+    val profile_image: String,
+    val member_name: String,
     val doctor_name: String,
     val rtest: String,
     val slot_id: String,
