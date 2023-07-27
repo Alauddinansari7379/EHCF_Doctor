@@ -34,7 +34,10 @@ import com.example.ehcf_doctor.Appointments.Appointments
 import com.example.ehcf_doctor.AudioRecording.Fragment.RecordListFragment
 import com.example.ehcf_doctor.AyuSynk.MainActivity
 import com.example.ehcf_doctor.Dashboard.Dashboard
+import com.example.ehcf_doctor.HealthCube.activity.AppToEdzxJava
+import com.example.ehcf_doctor.HealthCube.activity.AppToEzdxNew
 import com.example.ehcf_doctor.HealthCube.activity.Bluetooth
+import com.example.ehcf_doctor.HealthCube.activity.PatientList
 import com.example.ehcf_doctor.Helper.CustomDatepickerdemo
 import com.example.ehcf_doctor.Invoice.Invoice
 import com.example.ehcf_doctor.Login.activity.SignIn
@@ -220,6 +223,7 @@ class MainActivity : AppCompatActivity() {
 
             binding.includedrawar1.tvHealthCube.setOnClickListener {
                 startActivity(Intent(this, Bluetooth::class.java))
+               // startActivity(Intent(this, AppToEzdxNew::class.java))
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
 

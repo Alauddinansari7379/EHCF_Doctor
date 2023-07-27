@@ -76,7 +76,7 @@ class Bluetooth : AppCompatActivity() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
-        bluethootPermission()
+     //   bluethootPermission()
 
 //        binding.cardSearch.setOnClickListener {
 //            val a = listOf("a", "b", "ab", "ba", "abc")
@@ -85,11 +85,11 @@ class Bluetooth : AppCompatActivity() {
 //        }
 
         binding.cardRegister.setOnClickListener {
-            startActivity(Intent(this@Bluetooth, AppToEzdx::class.java))
+            startActivity(Intent(this@Bluetooth, AddPatient::class.java))
         }
 
         binding.cardSearch.setOnClickListener {
-            startActivity(Intent(this@Bluetooth, Patients::class.java))
+            startActivity(Intent(this@Bluetooth, PatientList::class.java))
         }
         mBluetoothStatus!!.setOnClickListener {
             if (mBluetoothStatus!!.text == "Disconnect") {

@@ -9,6 +9,7 @@ import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.Dashboard.model.ModelDashboard
 import com.example.ehcf_doctor.ForgotPassword.modelReponse.ModelForgotPass
+import com.example.ehcf_doctor.HealthCube.Model.ModelHealthCubeReg
 import com.example.ehcf_doctor.Invoice.model.ModelInvoice
 import com.example.ehcf_doctor.Invoice.model.ModelInvoiceDetial
 import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
@@ -294,6 +295,11 @@ interface ApiInterface {
         @Query("doctor_id") id: String?,
     ): Call<ModelMyPatient>
 
+    @POST("healthcube_patient_list")
+    fun healthcubePatientList(
+        @Query("doctor_id") id: String?,
+    ): Call<ModelMyPatient>
+
     @GET("customer_all_comments")
     fun customerAllComments(
         @Query("patient_id") doctor_id: String
@@ -419,6 +425,23 @@ interface ApiInterface {
         @Query("rating") rating: String?,
         @Query("comments") comments: String?,
     ): Call<ModelRating>
+
+    @POST("patient_healthcube")
+    fun patientHealthcubeReg(
+        @Query("name") name: String?,
+        @Query("gender") gender: String?,
+        @Query("city") city: String?,
+        @Query("state") state: String?,
+        @Query("dob") dob: String?,
+        @Query("country") country: String?,
+        @Query("phone") phone: String?,
+        @Query("operator_phone") operator_phone: String?,
+        @Query("external_patient_id") external_patient_id: String?,
+        @Query("test_list") test_list: ArrayList<String>,
+        @Query("zipcode") zipcode: String?,
+        @Query("email") email: String?,
+        @Query("doctor_id") doctor_id: String?,
+    ): Call<ModelHealthCubeReg>
 
 
     @Multipart

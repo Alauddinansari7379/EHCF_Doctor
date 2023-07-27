@@ -46,59 +46,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/purple_500"
-        android:orientation="vertical">
 
-    </LinearLayout>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-80dp"
-        android:elevation="20dp"
-        android:gravity="center">
-
-        <LinearLayout
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:background="@drawable/circle"
-            android:backgroundTint="@color/main_color"
-            android:gravity="center">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgProfileNew"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/profile"
-                android:backgroundTint="@color/white" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="-35dp"
-            android:layout_marginTop="-40dp"
-            android:elevation="25dp"
-            android:gravity="center">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imgProfile"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/photo_camera"
-                android:tint="@color/white"
-                app:civ_border_color="@color/white"
-                app:civ_border_width="4dp"
-                app:civ_circle_background_color="@color/white" />
-
-
-        </LinearLayout>
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -110,254 +58,294 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/layMen"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/corner"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/man"
-                android:backgroundTint="@color/main_color"
-                android:gravity="center"
-                android:text="Men">
-
-            </androidx.appcompat.widget.AppCompatImageView>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvMale"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutRegister"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:gravity="center"
-                android:text="Men">
-
-            </androidx.appcompat.widget.AppCompatTextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layWomen"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/corner"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/woman"
-                android:backgroundTint="@color/main_color"
-                android:gravity="center"
-                android:text="Men">
-
-            </androidx.appcompat.widget.AppCompatImageView>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvFemale"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:gravity="center"
-                android:text="Women">
-
-            </androidx.appcompat.widget.AppCompatTextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layOther"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/corner"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/gender_neutral"
-                android:backgroundTint="@color/main_color"
-                android:gravity="center"
-                android:text="Men">
-
-            </androidx.appcompat.widget.AppCompatImageView>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvOther"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:gravity="center"
-                android:text="Other">
-
-            </androidx.appcompat.widget.AppCompatTextView>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edtName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Name*"
-            android:textSize="14sp">
-
-        </androidx.appcompat.widget.AppCompatEditText>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Country    :"
-                android:textStyle="bold">
-
-            </androidx.appcompat.widget.AppCompatTextView>
-
-            <LinearLayout
-                android:id="@+id/layoutPhoneWithCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="horizontal">
-
-                <com.hbb20.CountryCodePicker
-                    android:id="@+id/spinnerCountryCode"
+                android:orientation="vertical"
+                 android:layout_height="wrap_content">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:padding="5dp"
-                    app:ccp_showFlag="false"
-                    app:ccp_showFullName="true"
-                    app:ccp_showNameCode="false"
-                    app:ccp_showPhoneCode="false"
-                    app:ccp_textSize="15sp" />
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-            </LinearLayout>
-        </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/layMen"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/corner"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/man"
+                            android:backgroundTint="@color/main_color"
+                            android:gravity="center"
+                            android:text="Men">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mobile # *    :"
-                android:textStyle="bold">
+                        </androidx.appcompat.widget.AppCompatImageView>
 
-            </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvMale"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:gravity="center"
+                            android:text="Men">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" +91"
-                android:textColor="@color/black"
-                android:textStyle="bold">
+                        </androidx.appcompat.widget.AppCompatTextView>
+                    </LinearLayout>
 
-            </androidx.appcompat.widget.AppCompatTextView>
+                    <LinearLayout
+                        android:id="@+id/layWomen"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/corner"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/woman"
+                            android:backgroundTint="@color/main_color"
+                            android:gravity="center"
+                            android:text="Men">
+
+                        </androidx.appcompat.widget.AppCompatImageView>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvFemale"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:gravity="center"
+                            android:text="Women">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/corner"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/gender_neutral"
+                            android:backgroundTint="@color/main_color"
+                            android:gravity="center"
+                            android:text="Men">
+
+                        </androidx.appcompat.widget.AppCompatImageView>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvOther"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:gravity="center"
+                            android:text="Other">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name*"
+                        android:textSize="14sp">
+
+                    </androidx.appcompat.widget.AppCompatEditText>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Country    :"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <LinearLayout
+                            android:id="@+id/layoutPhoneWithCode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+                            <com.hbb20.CountryCodePicker
+                                android:id="@+id/spinnerCountryCode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:padding="5dp"
+                                app:ccp_showFlag="false"
+                                app:ccp_showFullName="true"
+                                app:ccp_showNameCode="false"
+                                app:ccp_showPhoneCode="false"
+                                app:ccp_textSize="15sp" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mobile # *    :"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" +91"
+                            android:textColor="@color/black"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/edtMobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint=""
+                                android:inputType="number"
+                                android:maxLength="12"
+                                android:textSize="14sp">
+
+                            </androidx.appcompat.widget.AppCompatEditText>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edtMobile"
+                    android:id="@+id/edtAge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint=""
-                    android:inputType="number"
-                    android:maxLength="12"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:hint="Age(Year)"
+                    android:inputType="numberDecimal"
+                    android:maxLength="2"
                     android:textSize="14sp">
 
                 </androidx.appcompat.widget.AppCompatEditText>
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/exchange">
+
+                </androidx.appcompat.widget.AppCompatImageView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDOB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/ic_baseline_calendar_month_24"
+                    android:drawableTint="@color/main_color"
+                    android:hint="Date Of Birth*"
+                    android:textSize="14sp">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+
 
             </LinearLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="List of Diagnostic Tests">
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/edtAge"
+                </androidx.appcompat.widget.AppCompatTextView>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="#E91E63"
+                    android:text="*">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+            </LinearLayout>
+             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewTest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:hint="Age(Year)"
-                android:inputType="numberDecimal"
-                android:maxLength="2"
-                android:textSize="14sp">
+                android:layout_margin="5dp"
+                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
-            </androidx.appcompat.widget.AppCompatEditText>
+            </androidx.recyclerview.widget.RecyclerView>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/exchange">
-
-            </androidx.appcompat.widget.AppCompatImageView>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvDOB"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:drawableRight="@drawable/ic_baseline_calendar_month_24"
-                android:drawableTint="@color/main_color"
-                android:hint="Date Of Birth*"
-                android:textSize="14sp">
-
-            </androidx.appcompat.widget.AppCompatTextView>
-
-
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
+            <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
          android:layout_marginTop="10dp"
@@ -441,11 +429,27 @@
     </androidx.appcompat.widget.AppCompatEditText>
 
 </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                android:textIsSelectable="true" />
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:id="@+id/btnSave"
         android:layout_height="wrap_content"
         android:text="Save"
+        android:textAllCaps="false"
+        android:layout_margin="10dp">
+
+    </com.google.android.material.button.MaterialButton>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:id="@+id/btnMoveEzdx"
+        android:layout_height="wrap_content"
+        android:text="Redirect Ezdx"
+        android:visibility="gone"
         android:textAllCaps="false"
         android:layout_margin="10dp">
 
