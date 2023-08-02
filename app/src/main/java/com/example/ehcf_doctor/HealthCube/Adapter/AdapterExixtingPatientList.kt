@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehcf_doctor.HealthCube.activity.AddPatient
-import com.example.ehcf_doctor.HealthCube.activity.HealthCubeTestHistory
 import com.example.ehcf_doctor.HealthCube.activity.PatientList
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.R
@@ -21,10 +20,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AdapterPatientList(
+class AdapterExixtingPatientList(
     val context: Context, private val list: ModelMyPatient,
 ) :
-    RecyclerView.Adapter<AdapterPatientList.MyViewHolder>() {
+    RecyclerView.Adapter<AdapterExixtingPatientList.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(context).inflate(R.layout.single_row_my_patient_list, parent, false)
@@ -49,22 +48,15 @@ class AdapterPatientList(
 
 
             holder.viewReport.setOnClickListener {
-                PatientList.Diagnostic ="1"
+                PatientList.Exsting ="1"
                 val intent = Intent(context as Activity, AddPatient::class.java)
-                    .putExtra("id", list.result[position].id)
                     .putExtra("customer_name", list.result[position].name)
                     .putExtra("phone_number", list.result[position].phone)
                     .putExtra("email", list.result[position].email)
                     .putExtra("gender", list.result[position].gender)
                     .putExtra("dob", list.result[position].dob)
+                    .putExtra("patient_id", list.result[position].patient_id)
                 context.startActivity(intent)
-            }
-
-            holder.btnViewHistoryHealth.setOnClickListener {
-                 val intent = Intent(context as Activity, HealthCubeTestHistory::class.java)
-                    .putExtra("id", list.result[position].id)
-                    .putExtra("customer_name", list.result[position].name)
-                 context.startActivity(intent)
             }
         }catch (e:Exception){
             e.printStackTrace()
@@ -83,7 +75,6 @@ class AdapterPatientList(
          val tvMobileNumberPHis: TextView = itemView.findViewById(R.id.tvMobileNumberPHis)
           val cardView: CardView = itemView.findViewById(R.id.cardViewPre)
          val viewReport: Button = itemView.findViewById(R.id.btnViewReports)
-         val btnViewHistoryHealth: Button = itemView.findViewById(R.id.btnViewHistoryHealth)
         val imgProfile: ImageView = itemView.findViewById(R.id.imgProfile)
 
     }

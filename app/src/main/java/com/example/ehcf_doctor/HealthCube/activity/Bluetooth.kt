@@ -3,6 +3,7 @@ package com.example.ehcf_doctor.HealthCube.activity
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
@@ -22,9 +23,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.ehcf.Helper.currentDate
 import com.example.ehcf.Helper.myToast
+import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.HealthCube.Adapter.AdapterPatientList
+import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityMainBluethootBinding
+import com.example.myrecyview.apiclient.ApiClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 import java.util.*
@@ -32,6 +41,8 @@ import java.util.*
 
 class Bluetooth : AppCompatActivity() {
     private val TAG = Bluetooth::class.java.simpleName
+    var progressDialog: ProgressDialog? = null
+    private lateinit var sessionManager: SessionManager
     private lateinit var binding: ActivityMainBluethootBinding
 
     // GUI Components
@@ -59,6 +70,7 @@ class Bluetooth : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBluethootBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sessionManager = SessionManager(this)
 
         mBluetoothStatus = findViewById<View>(R.id.bluetooth_status) as TextView
         mReadBuffer = findViewById<View>(R.id.read_buffer) as TextView
@@ -76,29 +88,35 @@ class Bluetooth : AppCompatActivity() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
-     //   bluethootPermission()
+
+       binding.tvupdateDate.text= currentDate
+        //   bluethootPermission()
 
 //        binding.cardSearch.setOnClickListener {
 //            val a = listOf("a", "b", "ab", "ba", "abc")
 //            val b = a.distinctBy { it.length } // ["a", "ab", "abc"
 //            Log.e("List",b.toString())
 //        }
-
+        apiCallMyPatient()
         binding.cardRegister.setOnClickListener {
             startActivity(Intent(this@Bluetooth, AddPatient::class.java))
+        }
+
+        binding.cardExixting.setOnClickListener {
+            startActivity(Intent(this@Bluetooth, ExistingPatientList::class.java))
         }
 
         binding.cardSearch.setOnClickListener {
             startActivity(Intent(this@Bluetooth, PatientList::class.java))
         }
-        mBluetoothStatus!!.setOnClickListener {
-            if (mBluetoothStatus!!.text == "Disconnect") {
-                refresh()
-                bluetoothOff()
-
-            }
-
-        }
+//        mBluetoothStatus!!.setOnClickListener {
+//            if (mBluetoothStatus!!.text == "Disconnect") {
+//                refresh()
+//                bluetoothOff()
+//
+//            }
+//
+//        }
         // btCancel()
 //        mDevicesListViewNew!!.adapter = mBTArrayAdapterNew // assign model to view
 //        mDevicesListViewNew!!.onItemClickListener = mDeviceClickListener
@@ -117,113 +135,159 @@ class Bluetooth : AppCompatActivity() {
 //        btnOkDialog.setOnClickListener {
 //            dialog?.dismiss()
 //        }
-        checkBTPermissions()
+     //   checkBTPermissions()
 
-        if (!mBTAdapter!!.isEnabled) {
-            bluetoothOn()
-        } else {
-            //  Toast.makeText(applicationContext, getString(R.string.BTisON), Toast.LENGTH_SHORT).show()
-        }
-        // Ask for location permission if not already allowed
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) ActivityCompat.requestPermissions(
-            this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 1
-        )
-
-        mHandler = object : Handler(Looper.getMainLooper()) {
-            @SuppressLint("SuspiciousIndentation")
-            override fun handleMessage(msg: Message) {
-                if (msg.what == MESSAGE_READ) {
-                    var readMessage: String? = null
-                    readMessage = String((msg.obj as ByteArray), StandardCharsets.UTF_8)
-                    mReadBuffer!!.text = readMessage
-                }
-                if (msg.what == CONNECTING_STATUS) {
-                    var sConnected: CharArray
-                    if (msg.arg1 == 1) {
-                        mBluetoothStatus!!.text = getString(R.string.BTDisConnected)
-                        mBluetoothStatus!!.setTextColor(Color.parseColor("#F44336"))
-                        //+ msg.obj
-                        Log.e(" msg.obj", msg.obj.toString())
-
-                        binding.discover.visibility = View.GONE
-                        binding.devicesListView.visibility = View.GONE
-                        binding.tvDeviceName.text = msg.obj.toString()
-                        binding.tvSrNo.text = msg.obj.toString()
-                        binding.imgBlue.backgroundTintList = ColorStateList.valueOf(
-                            ContextCompat.getColor(
-                                this@Bluetooth,
-                                R.color.main_color
-                            )
-                        )
-                        binding.imgInfo.backgroundTintList = ColorStateList.valueOf(
-                            ContextCompat.getColor(
-                                this@Bluetooth,
-                                R.color.main_color
-                            )
-                        )
-                        binding.imgBell.backgroundTintList = ColorStateList.valueOf(
-                            ContextCompat.getColor(
-                                this@Bluetooth,
-                                R.color.main_color
-                            )
-                        )
-
-                    } else
-                    //mBluetoothStatus!!.text = getString(R.string.BTconnFail)
-                        myToast(this@Bluetooth, "${getString(R.string.BTconnFail)}")
-                }
-            }
-        }
-        if (mBTArrayAdapter == null) {
-            // Device does not support Bluetooth
-            mBluetoothStatus!!.text = getString(R.string.sBTstaNF)
-            Toast.makeText(applicationContext, getString(R.string.sBTdevNF), Toast.LENGTH_SHORT)
-                .show()
-        } else {
-//            mLED1!!.setOnClickListener {
-//                if (mConnectedThread != null) //First check to make sure thread created
-//                    mConnectedThread!!.write("1")
+//        if (!mBTAdapter!!.isEnabled) {
+//            bluetoothOn()
+//        } else {
+//            //  Toast.makeText(applicationContext, getString(R.string.BTisON), Toast.LENGTH_SHORT).show()
+//        }
+//        // Ask for location permission if not already allowed
+//        if (ContextCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.ACCESS_COARSE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED
+//        ) ActivityCompat.requestPermissions(
+//            this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION), 1
+//        )
+//
+//        mHandler = object : Handler(Looper.getMainLooper()) {
+//            @SuppressLint("SuspiciousIndentation")
+//            override fun handleMessage(msg: Message) {
+//                if (msg.what == MESSAGE_READ) {
+//                    var readMessage: String? = null
+//                    readMessage = String((msg.obj as ByteArray), StandardCharsets.UTF_8)
+//                    mReadBuffer!!.text = readMessage
+//                }
+//                if (msg.what == CONNECTING_STATUS) {
+//                    var sConnected: CharArray
+//                    if (msg.arg1 == 1) {
+//                        mBluetoothStatus!!.text = getString(R.string.BTDisConnected)
+//                        mBluetoothStatus!!.setTextColor(Color.parseColor("#F44336"))
+//                        //+ msg.obj
+//                        Log.e(" msg.obj", msg.obj.toString())
+//
+//                        binding.discover.visibility = View.GONE
+//                        binding.devicesListView.visibility = View.GONE
+//                        binding.tvDeviceName.text = msg.obj.toString()
+//                        binding.tvSrNo.text = msg.obj.toString()
+//                        binding.imgBlue.backgroundTintList = ColorStateList.valueOf(
+//                            ContextCompat.getColor(
+//                                this@Bluetooth,
+//                                R.color.main_color
+//                            )
+//                        )
+//                        binding.imgInfo.backgroundTintList = ColorStateList.valueOf(
+//                            ContextCompat.getColor(
+//                                this@Bluetooth,
+//                                R.color.main_color
+//                            )
+//                        )
+//                        binding.imgBell.backgroundTintList = ColorStateList.valueOf(
+//                            ContextCompat.getColor(
+//                                this@Bluetooth,
+//                                R.color.main_color
+//                            )
+//                        )
+//
+//                    } else
+//                    //mBluetoothStatus!!.text = getString(R.string.BTconnFail)
+//                        myToast(this@Bluetooth, "${getString(R.string.BTconnFail)}")
+//                }
 //            }
-            mScanBtn!!.setOnClickListener {
-                bluetoothOn()
-            }
-            mOffBtn!!.setOnClickListener {
-                bluetoothOff()
-            }
-            mListPairedDevicesBtn!!.setOnClickListener {
-                listPairedDevices()
-            }
-            mDiscoverBtn!!.setOnClickListener {
-                discover()
-            }
-        }
+//        }
+//        if (mBTArrayAdapter == null) {
+//            // Device does not support Bluetooth
+//            mBluetoothStatus!!.text = getString(R.string.sBTstaNF)
+//            Toast.makeText(applicationContext, getString(R.string.sBTdevNF), Toast.LENGTH_SHORT)
+//                .show()
+//        } else {
+////            mLED1!!.setOnClickListener {
+////                if (mConnectedThread != null) //First check to make sure thread created
+////                    mConnectedThread!!.write("1")
+////            }
+//            mScanBtn!!.setOnClickListener {
+//                bluetoothOn()
+//            }
+//            mOffBtn!!.setOnClickListener {
+//                bluetoothOff()
+//            }
+//            mListPairedDevicesBtn!!.setOnClickListener {
+//                listPairedDevices()
+//            }
+//            mDiscoverBtn!!.setOnClickListener {
+//                discover()
+//            }
+//        }
     }
 
-    private var requestBluetooth = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            //granted
-            bluetoothOn()
-        }else{
-            //deny
-        }
+    private fun apiCallMyPatient() {
+        progressDialog = ProgressDialog(this@Bluetooth)
+        progressDialog!!.setMessage("Loading...")
+        progressDialog!!.setTitle("Please Wait")
+        progressDialog!!.isIndeterminate = false
+        progressDialog!!.setCancelable(true)
+        // progressDialog!!.show()
+
+        ApiClient.apiService.healthcubePatientList(sessionManager.id.toString())
+            .enqueue(object : Callback<ModelMyPatient> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelMyPatient>, response: Response<ModelMyPatient>
+                ) {
+                    try {
+                        if (response.code() == 500) {
+                            progressDialog!!.dismiss()
+
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.tvTotal.text= response.body()!!.result.size.toString()
+                            Log.e("Size",response.body()!!.result.size.toString())
+                            // myToast(requireActivity(),"No Data Found")
+                            progressDialog!!.dismiss()
+
+                        } else {
+                            binding.tvTotal.text= response.body()!!.result.size.toString()
+                            Log.e("Size",response.body()!!.result.size.toString())
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+
+                override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
+                    progressDialog!!.dismiss()
+
+                }
+
+            })
     }
+
+    private var requestBluetooth =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                //granted
+                bluetoothOn()
+            } else {
+                //deny
+            }
+        }
     private val requestMultiplePermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             permissions.entries.forEach {
                 Log.d("test006", "${it.key} = ${it.value}")
             }
         }
+
     private fun bluethootPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            requestMultiplePermissions.launch(arrayOf(
-                Manifest.permission.BLUETOOTH_SCAN,
-                Manifest.permission.BLUETOOTH_CONNECT))
-        }
-        else{
+            requestMultiplePermissions.launch(
+                arrayOf(
+                    Manifest.permission.BLUETOOTH_SCAN,
+                    Manifest.permission.BLUETOOTH_CONNECT
+                )
+            )
+        } else {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             requestBluetooth.launch(enableBtIntent)
         }

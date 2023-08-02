@@ -10,6 +10,7 @@ data class Result(
     val name: String,
     val phone: String,
     val dob: String,
+    val patient_id: String,
     val id: String,
     val last_active_address: String,
     val no_of_ratings: String,

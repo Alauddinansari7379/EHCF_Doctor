@@ -1,13 +1,14 @@
 package com.example.ehcf_doctor.HealthCube.activity
 
-import android.annotation.SuppressLint
+ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.HealthCube.Adapter.AdapterPatientList
@@ -19,6 +20,7 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class PatientList : AppCompatActivity() {
     private var context: Context = this@PatientList
@@ -63,6 +65,8 @@ class PatientList : AppCompatActivity() {
     }
 companion object{
     var Diagnostic=""
+    var Exsting=""
+    var TestHistory=""
 }
 
     //    fun onRequestPermissionsResult(
@@ -104,7 +108,13 @@ companion object{
                 override fun onResponse(
                     call: Call<ModelMyPatient>, response: Response<ModelMyPatient>
                 ) {
-                    if (response.body()!!.result.isEmpty()) {
+                    try{
+                    if (response.code() == 500) {
+                        myToast(this@PatientList, "Server Error")
+                        binding.shimmerMyPatient.visibility = View.GONE
+                        progressDialog!!.dismiss()
+
+                    } else if (response.body()!!.result.isEmpty()) {
                         binding.tvNoDataFound.visibility = View.VISIBLE
                         binding.shimmerMyPatient.visibility = View.GONE
                         // myToast(requireActivity(),"No Data Found")
@@ -122,7 +132,12 @@ companion object{
 
                         }
                     }
+                }catch (e:Exception){
+                        myToast(this@PatientList, "Something went wrong")
+                        e.printStackTrace()
                 }
+                }
+
 
                 override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
                     myToast(this@PatientList, "Something went wrong")
@@ -133,8 +148,7 @@ companion object{
 
             })
     }
-
-    private fun apiCallSearchMyPatient() {
+     private fun apiCallSearchMyPatient() {
         progressDialog = ProgressDialog(this@PatientList)
         progressDialog!!.setMessage("Loading...")
         progressDialog!!.setTitle("Please Wait")
@@ -148,35 +162,36 @@ companion object{
                 override fun onResponse(
                     call: Call<ModelMyPatient>, response: Response<ModelMyPatient>
                 ) {
-                    if (response.code() == 500) {
-                        myToast(this@PatientList, "Server Error")
-                        binding.shimmerMyPatient.visibility = View.GONE
-                        progressDialog!!.dismiss()
+                    try {
+                        if (response.code() == 500) {
+                            myToast(this@PatientList, "Server Error")
+                            binding.shimmerMyPatient.visibility = View.GONE
+                            progressDialog!!.dismiss()
 
-                    } else if (response.body()!!.status == 0) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmerMyPatient.visibility = View.GONE
-                        myToast(this@PatientList, "${response.body()!!.message}")
-                        progressDialog!!.dismiss()
+                        } else if (response.body()!!.status == 0) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmerMyPatient.visibility = View.GONE
+                            myToast(this@PatientList, "${response.body()!!.message}")
+                            progressDialog!!.dismiss()
 
-                    } else if (response.body()!!.result.isEmpty()) {
-                        binding.recyclerView.adapter =
-                            AdapterPatientList(this@PatientList, response.body()!!)
-                        binding.recyclerView.adapter!!.notifyDataSetChanged()
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmerMyPatient.visibility = View.GONE
-                        myToast(this@PatientList, "No Patient Found")
-                        progressDialog!!.dismiss()
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.recyclerView.adapter =
+                                AdapterPatientList(this@PatientList, response.body()!!)
+                            binding.recyclerView.adapter!!.notifyDataSetChanged()
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmerMyPatient.visibility = View.GONE
+                            myToast(this@PatientList, "No Patient Found")
+                            progressDialog!!.dismiss()
 
-                    } else {
-                        binding.recyclerView.adapter =
-                            AdapterPatientList(this@PatientList, response.body()!!)
-                        binding.recyclerView.adapter!!.notifyDataSetChanged()
-                        binding.tvNoDataFound.visibility = View.GONE
-                        shimmerFrameLayout?.startShimmer()
-                        binding.recyclerView.visibility = View.VISIBLE
-                        binding.shimmerMyPatient.visibility = View.GONE
-                        progressDialog!!.dismiss()
+                        } else {
+                            binding.recyclerView.adapter =
+                                AdapterPatientList(this@PatientList, response.body()!!)
+                            binding.recyclerView.adapter!!.notifyDataSetChanged()
+                            binding.tvNoDataFound.visibility = View.GONE
+                            shimmerFrameLayout?.startShimmer()
+                            binding.recyclerView.visibility = View.VISIBLE
+                            binding.shimmerMyPatient.visibility = View.GONE
+                            progressDialog!!.dismiss()
 //                        binding.rvManageSlot.apply {
 //                            binding.tvNoDataFound.visibility = View.GONE
 //                            shimmerFrameLayout?.startShimmer()
@@ -187,6 +202,11 @@ companion object{
 //                            progressDialog!!.dismiss()
 //
 //                        }
+                        }
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        myToast(this@PatientList, "Something went wrong")
+
                     }
                 }
 

@@ -10,6 +10,7 @@ import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.Dashboard.model.ModelDashboard
 import com.example.ehcf_doctor.ForgotPassword.modelReponse.ModelForgotPass
 import com.example.ehcf_doctor.HealthCube.Model.ModelHealthCubeReg
+import com.example.ehcf_doctor.HealthCube.Model.ModelTestHistory
 import com.example.ehcf_doctor.Invoice.model.ModelInvoice
 import com.example.ehcf_doctor.Invoice.model.ModelInvoiceDetial
 import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
@@ -300,6 +301,17 @@ interface ApiInterface {
         @Query("doctor_id") id: String?,
     ): Call<ModelMyPatient>
 
+    @POST("get_healthcube_report")
+    fun healthCubeReportHistory(
+        @Query("id") id: String?,
+        @Query("doctor_id") doctor_id: String?,
+    ): Call<ModelTestHistory>
+
+    @POST("healthcube_exsisting_patient")
+    fun healthcubeExsistingpatient(
+        @Query("doctor_id") id: String?,
+    ): Call<ModelMyPatient>
+
     @GET("customer_all_comments")
     fun customerAllComments(
         @Query("patient_id") doctor_id: String
@@ -441,6 +453,30 @@ interface ApiInterface {
         @Query("zipcode") zipcode: String?,
         @Query("email") email: String?,
         @Query("doctor_id") doctor_id: String?,
+        @Query("patient_id") patient_id: String?,
+    ): Call<ModelHealthCubeReg>
+
+    @POST("healthcube_report_insert")
+    fun healthcubeReportInsert(
+        @Query("patient_health_cubes_id") patient_health_cubes_id: String?,
+        @Query("test_name") test_name: String?,
+        @Query("doctor_id") doctor_id: String?,
+        @Query("temperature") temperature: String?,
+        @Query("weight") weight: String?,
+        @Query("bmi") bmi: String?,
+        @Query("metabolism") metabolism: String?,
+        @Query("body_water") body_water: String?,
+        @Query("body_fat") body_fat: String?,
+        @Query("bone_mass") bone_mass: String?,
+        @Query("protein") protein: String?,
+         @Query("visceralfat") visceralfat: String?,
+        @Query("bodyage") bodyage: String?,
+        @Query("musclemass") musclemass: String?,
+        @Query("lbm") lbm: String?,
+        @Query("obesity") obesity: String?,
+        @Query("height") height: String?,
+        @Query("diastolic") diastolic: String?,
+        @Query("systolic") systolic: String?,
     ): Call<ModelHealthCubeReg>
 
 

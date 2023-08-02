@@ -32,14 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/imgProfile"
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/profile"
-
-                        />
-                    <LinearLayout
+                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -54,7 +47,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvNameMyPatient"
+                                android:id="@+id/tvNameMyPatientHistory"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
@@ -73,11 +66,11 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvMobileNumberPHis"
+                                android:id="@+id/tvTestNameHistory"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="1234567890"
+                                android:text="blood test"
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 
@@ -89,61 +82,27 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvEmailMyPatient"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="email"
-                                android:textColor="#2E7798"
-                                android:textStyle="bold">
-
-                            </androidx.appcompat.widget.AppCompatTextView>
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:gravity="end"
                             android:orientation="horizontal">
 
                              <androidx.appcompat.widget.AppCompatButton
-                                android:id="@+id/btnViewHistoryHealth"
+                                android:id="@+id/btnViewReportHistory"
                                 android:layout_width="wrap_content"
                                 android:layout_height="35dp"
                                  android:layout_marginBottom="5dp"
-
                                  android:layout_marginRight="10dp"
                                 android:background="@drawable/corner"
                                 android:backgroundTint="@color/main_color"
                                  android:drawableTint="@color/white"
                                 android:padding="5dp"
                                 android:drawablePadding="@dimen/_3sdp"
-                                android:text="Tests History"
+                                android:text="View Report"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white">
 
                             </androidx.appcompat.widget.AppCompatButton>
-                             <androidx.appcompat.widget.AppCompatButton
-                                android:id="@+id/btnViewReports"
-                                android:layout_width="wrap_content"
-                                android:layout_height="35dp"
-                                android:layout_marginRight="10dp"
-                                android:background="@drawable/corner"
-                                android:backgroundTint="@color/main_color"
-                                 android:drawableTint="@color/white"
-                                android:padding="5dp"
-                                android:drawablePadding="@dimen/_3sdp"
-                                android:text="New Diagnostic Tests"
-                                android:textAllCaps="false"
-                                android:textColor="@color/white">
-
-                            </androidx.appcompat.widget.AppCompatButton>
-                        </LinearLayout>
+                         </LinearLayout>
 
                     </LinearLayout>
                 </LinearLayout>

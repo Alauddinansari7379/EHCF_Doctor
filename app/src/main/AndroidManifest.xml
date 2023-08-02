@@ -38,8 +38,9 @@
         android:theme="@style/Theme.EHCF_Doctor"
         tools:targetApi="31">
         <activity
-            android:name=".HealthCube.activity.Ma"
+            android:name=".HealthCube.activity.ExistingPatientList"
             android:exported="false" />
+
         <activity
             android:name=".HealthCube.activity.PatientList"
             android:exported="false" />
@@ -48,24 +49,22 @@
             android:exported="false" />
         <activity
             android:name=".HealthCube.activity.AppToEzdxNew"
-             android:exported="false">
-        </activity>
+            android:exported="false">
 
+        </activity>
         <activity
             android:name=".HealthCube.activity.AddPatient"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
 
         </activity>
-         <activity
+        <activity
             android:name=".HealthCube.activity.Patients"
             android:exported="false" />
         <activity
-            android:name=".HealthCube.activity.Visit"
+            android:name=".HealthCube.activity.HealthCubeTestHistory"
             android:exported="false" />
-
-
-         <activity
+        <activity
             android:name=".HealthCube.activity.Bluetooth"
             android:exported="false" />
         <activity

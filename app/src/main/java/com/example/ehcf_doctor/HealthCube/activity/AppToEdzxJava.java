@@ -1,5 +1,7 @@
 package com.example.ehcf_doctor.HealthCube.activity;
 
+import static com.google.firebase.messaging.Constants.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -46,11 +48,12 @@ public class AppToEdzxJava extends AppCompatActivity {
     // these tests will be highlighted in the Ezdx app
     String hightlightTests = "[\"PULSE_OXIMETER\",\"WEIGHT\",\"BLOOD_PRESSURE\",\"CHOLESTEROL\",\"CHIKUNGUNYA\",\"SYPHILIS\",\"LIPID_PROFILE\",\"HBA1C\"]";
 
-    String sampleUserId = "+919246549300";  // TODO Add your user-id here sample id (+91XXXXXXXXXX). Get this from HC Admin ** DONT GIVE SPACE BETWEEN THE CODE AND PHONE NO. **
+   // String sampleUserId = "+919246549300";  // TODO Add your user-id here sample id (+91XXXXXXXXXX). Get this from HC Admin ** DONT GIVE SPACE BETWEEN THE CODE AND PHONE NO. **
+    String sampleUserId = "+919392595905";  // TODO Add your user-id here sample id (+91XXXXXXXXXX). Get this from HC Admin ** DONT GIVE SPACE BETWEEN THE CODE AND PHONE NO. **
     String secretKey = "a1fc979a-03d6-4ca6-9196-d7192873d4a8";   // TODO Add your secret-key here. Get this from HC admin
 
-    //    public static final String ezdxPackageName = "com.healthcubed.ezdx.ezdx.demo";  // pointing to demo environment, For your testing
-    public static final String ezdxPackageName = "com.healthcubed.ezdx.ezdx";  // pointing to production environment, Your production app needs to point to this package
+        public static final String ezdxPackageName = "com.healthcubed.ezdx.ezdx.demo";  // pointing to demo environment, For your testing
+  //  public static final String ezdxPackageName = "com.healthcubed.ezdx.ezdx";  // pointing to production environment, Your production app needs to point to this package
 
     Button btnlaunchEzdx;
     TextView tvResult;
@@ -117,6 +120,9 @@ public class AppToEdzxJava extends AppCompatActivity {
         super.onNewIntent(intent);
 
         Toast.makeText(this, "OnNewIntent called", Toast.LENGTH_SHORT).show();
+
+     //   Log.d(TAG, "onNewIntent: ",);
+
 
         // ** In case of ECG test, rendering entire byte array data of PDF report in TextView will go out of memory
         // this needs to be handled by dumping the byte array in a file

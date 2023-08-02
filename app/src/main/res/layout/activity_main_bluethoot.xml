@@ -10,8 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@color/main_color"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:background="@color/main_color">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgBack"
@@ -22,8 +22,8 @@
             android:layout_marginTop="20dp"
             android:background="?actionBarItemBackground"
             android:padding="5dp"
-            android:tint="@color/white"
             android:src="@drawable/ic_baseline_arrow_back_24"
+            android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -51,10 +51,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:visibility="gone"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
+        android:visibility="gone"
         app:cardCornerRadius="10dp">
 
         <LinearLayout
@@ -116,17 +116,19 @@
                                 android:textStyle="bold">
 
                             </androidx.appcompat.widget.AppCompatTextView>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                 android:gravity="end"
+                                android:layout_height="wrap_content"
                                 android:layout_marginEnd="10dp"
-                                 android:layout_height="wrap_content">
+                                android:gravity="end">
+
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:layout_width="@dimen/value_25dp"
                                     android:layout_height="25dp"
                                     android:layout_marginStart="10dp"
-                                    android:backgroundTint="@color/main_color"
-                                    android:background="@drawable/ic_baseline_edit_24">
+                                    android:background="@drawable/ic_baseline_edit_24"
+                                    android:backgroundTint="@color/main_color">
 
                                 </androidx.appcompat.widget.AppCompatImageView>
 
@@ -233,8 +235,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
                         android:layout_marginEnd="10dp"
+                        android:layout_weight="1.5"
                         android:gravity="end"
                         android:orientation="horizontal">
 
@@ -243,8 +245,8 @@
                             android:layout_width="@dimen/value_25dp"
                             android:layout_height="25dp"
                             android:layout_marginStart="10dp"
-                            android:backgroundTint="@color/btn_desable"
-                            android:background="@drawable/bluetooth_new">
+                            android:background="@drawable/bluetooth_new"
+                            android:backgroundTint="@color/btn_desable">
 
                         </androidx.appcompat.widget.AppCompatImageView>
 
@@ -253,8 +255,8 @@
                             android:layout_width="@dimen/value_25dp"
                             android:layout_height="25dp"
                             android:layout_marginStart="10dp"
-                            android:backgroundTint="@color/btn_desable"
-                            android:background="@drawable/info">
+                            android:background="@drawable/info"
+                            android:backgroundTint="@color/btn_desable">
 
                         </androidx.appcompat.widget.AppCompatImageView>
 
@@ -263,8 +265,8 @@
                             android:layout_width="@dimen/value_25dp"
                             android:layout_height="25dp"
                             android:layout_marginStart="10dp"
-                            android:backgroundTint="@color/btn_desable"
-                            android:background="@drawable/ringing">
+                            android:background="@drawable/ringing"
+                            android:backgroundTint="@color/btn_desable">
 
                         </androidx.appcompat.widget.AppCompatImageView>
                     </LinearLayout>
@@ -281,8 +283,8 @@
         android:id="@+id/devices_list_view"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:duplicateParentState="false"
         android:choiceMode="singleChoice"
+        android:duplicateParentState="false"
         android:visibility="gone" />
 
     <LinearLayout
@@ -360,6 +362,7 @@
 
         </LinearLayout>
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -370,311 +373,372 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="#E6F1FA"
-            android:layout_marginBottom="5dp"
-            app:cardCornerRadius="10dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Patient"
-                    android:textColor="@color/main_color"
-                    android:textStyle="bold">
-
-                </androidx.appcompat.widget.AppCompatTextView>
-            </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_height="wrap_content">
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardRegister"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="30dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/main_color"
-        app:cardCornerRadius="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="100dp"
-                android:backgroundTint="@color/white"
-                android:background="@drawable/ic_baseline_person_add_alt_1_24"
-                android:layout_height="100dp">
-            </androidx.appcompat.widget.AppCompatImageView>
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:gravity="center"
-                    android:text="Register"
-                    android:layout_marginBottom="5dp"
-
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:textStyle="bold">
-
-                </androidx.appcompat.widget.AppCompatTextView>
-            </LinearLayout>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardSearch"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="30dp"
-        android:layout_weight="1"
-        android:backgroundTint="@color/main_color"
-        app:cardCornerRadius="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="100dp"
-                android:backgroundTint="@color/white"
-                android:background="@drawable/baseline_person_search_24"
-                android:layout_height="100dp">
-            </androidx.appcompat.widget.AppCompatImageView>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:gravity="center"
-                    android:layout_marginBottom="5dp"
-                    android:text="Search"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:textStyle="bold">
-
-                </androidx.appcompat.widget.AppCompatTextView>
-            </LinearLayout>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-             android:layout_marginBottom="10dp"
-            app:cardCornerRadius="2dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                 android:orientation="vertical"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Center Statistics"
-                    android:textColor="@color/main_color"
-                    android:textStyle="bold">
-
-                </androidx.appcompat.widget.AppCompatTextView>
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Last Updated on : "
-                        android:textSize="12sp"
-                         android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="12/07/2023"
-                        android:textSize="12sp"
-                         android:textStyle="bold">
-
-                    </androidx.appcompat.widget.AppCompatTextView>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-            </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="60dp"
-            android:layout_height="wrap_content">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                     android:layout_weight="1"
-                     android:layout_marginBottom="5dp"
-                      app:cardCornerRadius="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:background="@drawable/corner"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                 android:gravity="center"
-                                android:text="Total tests done"
-                                android:layout_marginBottom="5dp"
-                                 android:textSize="12sp"
-                                android:textStyle="bold">
-
-                            </androidx.appcompat.widget.AppCompatTextView>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                 android:gravity="center"
-                                android:text="00"
-                                android:textColor="@color/main_color"
-                                android:layout_marginBottom="5dp"
-                                 android:textSize="18sp"
-                                android:textStyle="bold">
-
-                            </androidx.appcompat.widget.AppCompatTextView>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
+                android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="5dp"
+                    android:backgroundTint="#E6F1FA"
                     app:cardCornerRadius="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:background="@drawable/corner"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp">
+
+                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardRegister"
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:layout_margin="20dp"
+                             android:layout_weight="1"
+                            android:backgroundTint="@color/main_color"
+                            app:cardCornerRadius="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/ic_baseline_person_add_alt_1_24"
+                                    android:backgroundTint="@color/white">
+
+                                </androidx.appcompat.widget.AppCompatImageView>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp"
+                                        android:backgroundTint="@color/white"
+                                        android:gravity="center"
+                                        android:text="Register"
+
+                                        android:textColor="@color/white"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold">
+
+                                    </androidx.appcompat.widget.AppCompatTextView>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardExixting"
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:layout_margin="20dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/main_color"
+                            app:cardCornerRadius="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/verify"
+                                    android:backgroundTint="@color/white">
+
+                                </androidx.appcompat.widget.AppCompatImageView>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp"
+                                        android:backgroundTint="@color/white"
+                                        android:gravity="center"
+                                        android:text="Existing"
+                                        android:textColor="@color/white"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold">
+
+                                    </androidx.appcompat.widget.AppCompatTextView>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:layout_margin="20dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/main_color"
+                            app:cardCornerRadius="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:background="@drawable/baseline_person_search_24"
+                                    android:backgroundTint="@color/white">
+
+                                </androidx.appcompat.widget.AppCompatImageView>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="5dp"
+                                        android:backgroundTint="@color/white"
+                                        android:gravity="center"
+                                        android:text="Search"
+                                        android:textColor="@color/white"
+                                        android:textSize="12sp"
+                                        android:textStyle="bold">
+
+                                    </androidx.appcompat.widget.AppCompatTextView>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical">
 
-
-                        <LinearLayout
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center">
+                            android:text="Center Statistics"
+                            android:textColor="@color/main_color"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Total patient registered"
-                                android:layout_marginBottom="5dp"
+                                android:text="Last Updated on : "
                                 android:textSize="12sp"
                                 android:textStyle="bold">
 
                             </androidx.appcompat.widget.AppCompatTextView>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center">
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
+                                android:id="@+id/tvupdateDate"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="00"
-                                android:textColor="@color/main_color"
-                                android:layout_marginBottom="5dp"
-                                android:textSize="18sp"
+                                android:text="00/00/0000"
+                                android:textSize="12sp"
                                 android:textStyle="bold">
 
                             </androidx.appcompat.widget.AppCompatTextView>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="60dp"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:layout_margin="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="10dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/corner"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center">
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:gravity="center"
+                                            android:text="Total tests done"
+                                            android:textSize="12sp"
+                                            android:textStyle="bold">
+
+                                        </androidx.appcompat.widget.AppCompatTextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center">
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:id="@+id/tvTotelTest"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:gravity="center"
+                                            android:text="30"
+                                            android:textColor="@color/main_color"
+                                            android:textSize="18sp"
+                                            android:textStyle="bold">
+
+                                        </androidx.appcompat.widget.AppCompatTextView>
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:layout_margin="5dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="10dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/corner"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center">
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:gravity="center"
+                                            android:text="Total patient registered"
+                                            android:textSize="12sp"
+                                            android:textStyle="bold">
+
+                                        </androidx.appcompat.widget.AppCompatTextView>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center">
+
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:id="@+id/tvTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="5dp"
+                                            android:gravity="center"
+                                            android:text="00"
+                                            android:textColor="@color/main_color"
+                                            android:textSize="18sp"
+                                            android:textStyle="bold">
+
+                                        </androidx.appcompat.widget.AppCompatTextView>
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
                         </LinearLayout>
+
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
             </LinearLayout>
 
         </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-</LinearLayout>
     </ScrollView>
 
 </LinearLayout>

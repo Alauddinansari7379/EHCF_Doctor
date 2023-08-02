@@ -1,8 +1,6 @@
 package com.example.ehcf.Testing.Interface
 
-import com.example.ehcf_doctor.HealthCube.Model.DataModal
 import com.example.ehcf_doctor.HealthCube.Model.ModelRegister
-import com.example.ehcf_doctor.MyPatient.model.ModelPatientHistoryX
 import com.example.ehcf_doctor.PrivacyTerms.model.ModelPrivacyPolicies
 import com.example.ehcf_doctor.Registration.modelResponse.ModelSpecilList
 import retrofit2.Call
@@ -28,12 +26,12 @@ interface ApiInterfaceHelthCube {
     fun specialistCategory(): Call<ModelSpecilList>
 
 
-    @Headers("content-type: application/json")
-    @POST("api/v1/patients")
-    fun createPost(
-        @Header("access_token") access_token: String,
-        @Body dataModal: DataModal?,
-     ): Call<DataModal?>?
+//    @Headers("content-type: application/json")
+//    @POST("api/v1/patients")
+//    fun createPost(
+//        @Header("access_token") access_token: String,
+//        @Body dataModal: DataModal?,
+//     ): Call<DataModal?>?
 
 
 //    @GET("api/Profiles/GetProfile?id={id}")
@@ -42,11 +40,11 @@ interface ApiInterfaceHelthCube {
 //        @Header("Authorization") authHeader: String?
 //    ): Call<UserProfile?>?
 
-    @Headers("content-type: application/json")
-    @POST("api/v1/patients")
-    fun registrationHealthCube(
-        @Header("access_token") access_token: String,
-        @Body dataModal: DataModal?,
+//    @Headers("content-type: application/json")
+//    @POST("api/v1/patients")
+//    fun registrationHealthCube(
+//        @Header("access_token") access_token: String,
+//        @Body dataModal: DataModal?,
 
 //        @Query("firstName") firstName: String,
 //        @Query("dob") dob: String,
@@ -60,7 +58,7 @@ interface ApiInterfaceHelthCube {
 //        @Query("operatorPhoneNumber") operatorPhoneNumber: String,
 //        @Query("externalPatientId") externalPatientId: String,
 //        @Query("testList") testList:  List<String>,
-    ): Call<ModelRegister>
+ //   ): Call<ModelRegister>
 
 //    @POST("register")
 //    fun getRegister(): Call<ModelRegisteration>
