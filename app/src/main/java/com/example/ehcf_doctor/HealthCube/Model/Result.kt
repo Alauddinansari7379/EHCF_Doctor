@@ -7,7 +7,7 @@ data class Result(
     val dob: String,
     val doctor_id: String,
     val email: String,
-    val external_patient_id: String,
+    val externalPatientId: String,
     val gender: String,
     val id: Int,
     val name: String,

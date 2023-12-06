@@ -53,7 +53,9 @@ class MobileNumber : AppCompatActivity() {
     }
 
     private fun apiCallForgotPassword() {
-        phoneNumber = binding.edtPhone.text.toString()
+        val   phoneNumberNew = binding.edtPhone.text.toString()
+        val code="91"
+        phoneNumber = code+phoneNumberNew
         progressDialog = ProgressDialog(this@MobileNumber)
         progressDialog!!.setMessage("Loading..")
         progressDialog!!.setTitle("Please Wait")

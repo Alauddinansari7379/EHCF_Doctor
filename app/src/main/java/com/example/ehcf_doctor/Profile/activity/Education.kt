@@ -63,7 +63,7 @@ class Education : AppCompatActivity() {
     private var registration = ""
     private var registrationYear = ""
     var degreeList = ModelDegreeJava()
-    var yearList =ModelYear()
+    var yearList = ModelYear()
 
     private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,16 +72,17 @@ class Education : AppCompatActivity() {
         setContentView(binding.root)
         sessionManager = SessionManager(this)
 
-        apiCallYearSpinner()
+        apiCallRegistrationYearSpinner()
+        apiCallYearOfComSpinner()
         apiCallDegreeSpinner()
 
 //        binding.btnUpdate.setOnClickListener {
 //          //  startActivity(Intent(this, TermsAndConditions::class.java))
 //        }
-        Log.e("sessionManager.college.toString()",sessionManager.college.toString())
-        Log.e("sessionManager.college.toString()",sessionManager.hospitalName.toString())
-        Log.e("sessionManager.college.toString()",sessionManager.hospitalAddress.toString())
-        Log.e("sessionManager.college.toString()",sessionManager.registration.toString())
+        Log.e("sessionManager.college.toString()", sessionManager.college.toString())
+        Log.e("sessionManager.college.toString()", sessionManager.hospitalName.toString())
+        Log.e("sessionManager.college.toString()", sessionManager.hospitalAddress.toString())
+        Log.e("sessionManager.college.toString()", sessionManager.registration.toString())
         binding.edtRegistration.setText(sessionManager.registration.toString())
 
         if (sessionManager.registration!!.isNotEmpty()) {
@@ -104,7 +105,7 @@ class Education : AppCompatActivity() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
-         spclistId = intent.getStringExtra("specilistId").toString()
+        spclistId = intent.getStringExtra("specilistId").toString()
         experience = intent.getStringExtra("experience").toString()
         genderId = intent.getStringExtra("genderId").toString()
         clinicName = intent.getStringExtra("clinicName").toString()
@@ -132,8 +133,6 @@ class Education : AppCompatActivity() {
         Log.e("services", services)
 
 
-
-
 //        degreeList.add(ModelDegree("Select Your Degree"))
 //        degreeList.add(ModelDegree("MBBS"))
 //        degreeList.add(ModelDegree("MS"))
@@ -145,8 +144,6 @@ class Education : AppCompatActivity() {
 //        degreeList.add(ModelDegree("BUMS"))
 //        degreeList.add(ModelDegree("BSMS"))
 //        degreeList.add(ModelDegree("BNYS"))
-
-
 
 
         binding.btnUpdate.setOnClickListener {
@@ -219,7 +216,8 @@ class Education : AppCompatActivity() {
             }
         }
     }
-    private fun apiCallYearSpinner() {
+
+    private fun apiCallRegistrationYearSpinner() {
         progressDialog = ProgressDialog(this@Education)
         progressDialog!!.setMessage("Loading..")
         progressDialog!!.setTitle("Please Wait")
@@ -235,57 +233,61 @@ class Education : AppCompatActivity() {
                     call: Call<ModelYear>, response: Response<ModelYear>
                 ) {
 
+                    try {
+                        yearList = response.body()!!;
+                        if (degreeList != null) {
 
-                    yearList = response.body()!!;
-                    if (degreeList != null) {
+                            //spinner code start
+                            val items = arrayOfNulls<String>(yearList.result!!.size)
 
-                        //spinner code start
-                        val items = arrayOfNulls<String>(yearList.result!!.size)
+                            for (i in yearList.result!!.indices) {
 
-                        for (i in yearList.result!!.indices) {
+                                items[i] = yearList.result!![i].year
+                            }
+                            val adapter: ArrayAdapter<String?> =
+                                ArrayAdapter(
+                                    this@Education,
+                                    com.example.ehcf_doctor.R.layout.simple_list_item_1,
+                                    items
+                                )
+                            var spProvince: SmartMaterialSpinner<String>? = null
+                            var spEmptyItem: SmartMaterialSpinner<String>? = null
+                            binding.spinnerYearOfCom.adapter = adapter
+                            binding.spinnerRegistrationYear.adapter = adapter
 
-                            items[i] = yearList.result!![i].year
+                            binding.spinnerRegistrationYear.setSelection(
+                                items.indexOf(
+                                    sessionManager.registrationYear.toString()
+                                )
+                            );
+
+                            progressDialog!!.dismiss()
+
+
+                            binding.spinnerRegistrationYear.onItemSelectedListener =
+                                object : AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        adapterView: AdapterView<*>?,
+                                        view: View,
+                                        i: Int,
+                                        l: Long
+                                    ) {
+                                        registrationYear = yearList.result!![i].year
+                                        registrationYear = registrationYear
+
+                                        Log.e("Year", sessionManager.registrationYear.toString())
+                                        Log.e("Year", sessionManager.yearOfCompletion.toString())
+                                        // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                    }
+
+                                    override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+                                }
+
                         }
-                        val adapter: ArrayAdapter<String?> =
-                            ArrayAdapter(this@Education, com.example.ehcf_doctor.R.layout.simple_list_item_1, items)
-                        var spProvince: SmartMaterialSpinner<String>? = null
-                        var spEmptyItem: SmartMaterialSpinner<String>? = null
-                        binding.spinnerYearOfCom.adapter = adapter
-                        binding.spinnerRegistrationYear.adapter = adapter
-
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        myToast(this@Education, "Something went wrong")
                         progressDialog!!.dismiss()
-
-                        binding.spinnerYearOfCom.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onItemSelected(
-                                    adapterView: AdapterView<*>?,
-                                    view: View,
-                                    i: Int,
-                                    l: Long
-                                ) {
-                                    yearOfCom = yearList.result!![i].year
-                                    yearOfCom = yearOfCom
-                                    // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
-                                }
-
-                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-                            }
-                        binding.spinnerRegistrationYear.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onItemSelected(
-                                    adapterView: AdapterView<*>?,
-                                    view: View,
-                                    i: Int,
-                                    l: Long
-                                ) {
-                                    registrationYear = yearList.result!![i].year
-                                    registrationYear = registrationYear
-                                    // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
-                                }
-
-                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-                            }
-
                     }
                 }
 
@@ -297,6 +299,83 @@ class Education : AppCompatActivity() {
 
             })
     }
+
+    private fun apiCallYearOfComSpinner() {
+        progressDialog = ProgressDialog(this@Education)
+        progressDialog!!.setMessage("Loading..")
+        progressDialog!!.setTitle("Please Wait")
+        progressDialog!!.isIndeterminate = false
+        progressDialog!!.setCancelable(true)
+
+        //  progressDialog!!.show()
+
+        ApiClient.apiService.getYear()
+            .enqueue(object : Callback<ModelYear> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelYear>, response: Response<ModelYear>
+                ) {
+
+                    try {
+                        yearList = response.body()!!;
+                        if (degreeList != null) {
+
+                            //spinner code start
+                            val items = arrayOfNulls<String>(yearList.result!!.size)
+
+                            for (i in yearList.result!!.indices) {
+
+                                items[i] = yearList.result!![i].year
+                            }
+                            val adapter: ArrayAdapter<String?> =
+                                ArrayAdapter(
+                                    this@Education,
+                                    com.example.ehcf_doctor.R.layout.simple_list_item_1,
+                                    items
+                                )
+                            var spProvince: SmartMaterialSpinner<String>? = null
+                            var spEmptyItem: SmartMaterialSpinner<String>? = null
+                            binding.spinnerYearOfCom.adapter = adapter
+
+                            binding.spinnerYearOfCom.setSelection(items.indexOf(sessionManager.yearOfCompletion.toString()));
+
+                            progressDialog!!.dismiss()
+
+                            binding.spinnerYearOfCom.onItemSelectedListener =
+                                object : AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        adapterView: AdapterView<*>?,
+                                        view: View,
+                                        i: Int,
+                                        l: Long
+                                    ) {
+                                        yearOfCom = yearList.result!![i].year
+                                        yearOfCom = yearOfCom
+
+                                        // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                    }
+
+                                    override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+                                }
+
+
+                        }
+                    } catch (e: Exception) {
+                        myToast(this@Education, "Something went wrong")
+                        progressDialog!!.dismiss()
+                        e.printStackTrace()
+                    }
+                }
+
+                override fun onFailure(call: Call<ModelYear>, t: Throwable) {
+                    myToast(this@Education, "Something went wrong")
+                    progressDialog!!.dismiss()
+
+                }
+
+            })
+    }
+
     private fun apiCallDegreeSpinner() {
         progressDialog = ProgressDialog(this@Education)
         progressDialog!!.setMessage("Loading..")
@@ -312,7 +391,7 @@ class Education : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<ModelDegreeJava>, response: Response<ModelDegreeJava>
                 ) {
-
+                    try{
 
                     degreeList = response.body()!!;
                     if (degreeList != null) {
@@ -325,12 +404,16 @@ class Education : AppCompatActivity() {
                             items[i] = degreeList.result!![i].degree
                         }
                         val adapter: ArrayAdapter<String?> =
-                            ArrayAdapter(this@Education, com.example.ehcf_doctor.R.layout.simple_list_item_1, items)
+                            ArrayAdapter(
+                                this@Education,
+                                com.example.ehcf_doctor.R.layout.simple_list_item_1,
+                                items
+                            )
                         var spProvince: SmartMaterialSpinner<String>? = null
                         var spEmptyItem: SmartMaterialSpinner<String>? = null
                         binding.spinnerDegree.adapter = adapter
                         binding.spinnerDegree.setSelection(items.indexOf(sessionManager.qualification.toString()));
-                     //   binding.spinnerDegree.setSelection(sessionManager.qualification.toString().toInt())
+                        //   binding.spinnerDegree.setSelection(sessionManager.qualification.toString().toInt())
 
                         progressDialog!!.dismiss()
 
@@ -349,7 +432,12 @@ class Education : AppCompatActivity() {
 
                                 override fun onNothingSelected(adapterView: AdapterView<*>?) {}
                             }
+                    }
 
+                    }catch (e:Exception){
+                        myToast(this@Education, "Something went wrong")
+                        progressDialog!!.dismiss()
+                        e.printStackTrace()
                     }
                 }
 
@@ -398,40 +486,56 @@ class Education : AppCompatActivity() {
             .enqueue(object : Callback<ModelProfileUpdate> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
-                    call: Call<ModelProfileUpdate>, response: Response<ModelProfileUpdate>
+                    call: Call<ModelProfileUpdate>,
+                    response: Response<ModelProfileUpdate>
                 ) {
-                    if (response.code() == 500) {
-                        myToast(this@Education, "Server Error")
-                    }
-                   else if (response.body()!!.status == 1) {
-                        myToast(this@Education, response.body()!!.message)
-                        sessionManager.clinicAddress = response.body()!!.result.clinic_address
-                        sessionManager.clinicAddressOne = response.body()!!.result.clinic_address_one
-                        sessionManager.clinicAddressTwo = response.body()!!.result.clinic_address_two
-                        sessionManager.clinicAddress = response.body()!!.result.clinic_address
-                        sessionManager.pricing = response.body()!!.result.pricing
-                        sessionManager.experience =response.body()!!.result.experience
-                        sessionManager.clinicName =response.body()!!.result.clinic_name
-                        sessionManager.address =response.body()!!.result.address
-                        sessionManager.services =response.body()!!.result.services
-                        sessionManager.college =response.body()!!.result.college
-                        sessionManager.hospitalName =response.body()!!.result.hos_name
-                        sessionManager.city =response.body()!!.result.city
-                        sessionManager.state =response.body()!!.result.state
-                        sessionManager.hospitalAddress =response.body()!!.result.hos_address
-                        sessionManager.registration =response.body()!!.result.registration
-                        sessionManager.specialist =response.body()!!.result.specialist
-                        progressDialog!!.dismiss()
-                        val intent = Intent(applicationContext, MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        finish()
-                        startActivity(intent)
 
-                    } else {
-                        myToast(this@Education, response.body()!!.message)
+                    try {
+                        if (response.code() == 500) {
+                            myToast(this@Education, "Server Error")
+                        } else if (response.body()!!.status == 1) {
+                            myToast(this@Education, response.body()!!.message)
+                            sessionManager.clinicAddress =
+                                response.body()!!.result.clinic_address
+                            sessionManager.clinicAddressOne =
+                                response.body()!!.result.clinic_address_one
+                            sessionManager.clinicAddressTwo =
+                                response.body()!!.result.clinic_address_two
+                            sessionManager.clinicAddress =
+                                response.body()!!.result.clinic_address
+                            sessionManager.pricing = response.body()!!.result.pricing
+                            sessionManager.experience = response.body()!!.result.experience
+                            sessionManager.clinicName = response.body()!!.result.clinic_name
+                            sessionManager.address = response.body()!!.result.address
+                            sessionManager.services = response.body()!!.result.services
+                            sessionManager.college = response.body()!!.result.college
+                            sessionManager.hospitalName = response.body()!!.result.hos_name
+                            sessionManager.city = response.body()!!.result.city
+                            sessionManager.state = response.body()!!.result.state
+                            sessionManager.hospitalAddress =
+                                response.body()!!.result.hos_address
+                            sessionManager.registration = response.body()!!.result.registration
+                            sessionManager.specialist = response.body()!!.result.specialist
+                            sessionManager.yearOfCompletion = response.body()!!.result.yearofcom
+                            sessionManager.registrationYear = response.body()!!.result.reg_year
+                            progressDialog!!.dismiss()
+                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            finish()
+                            startActivity(intent)
+
+                        } else {
+                            myToast(this@Education, response.body()!!.message)
+                        }
+                    }catch (e:Exception){
+                        myToast(this@Education, "Something went wrong")
+                        progressDialog!!.dismiss()
+                        e.printStackTrace()
                     }
 
                 }
+
                 override fun onFailure(call: Call<ModelProfileUpdate>, t: Throwable) {
                     myToast(this@Education, "Something went wrong")
                     progressDialog!!.dismiss()

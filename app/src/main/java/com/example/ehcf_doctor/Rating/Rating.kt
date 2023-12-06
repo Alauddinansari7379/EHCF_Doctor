@@ -6,17 +6,17 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.RatingBar
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
 import com.example.ehcf_doctor.R
- import com.example.ehcf_doctor.databinding.ActivityRatingNewBinding
+import com.example.ehcf_doctor.databinding.ActivityRatingNewBinding
 import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,7 +39,7 @@ class Rating : AppCompatActivity() {
         setContentView(binding.root)
         binding.imgBack.setOnClickListener {
             startActivity(Intent(this@Rating,Appointments::class.java))
-            onBackPressed()
+           // onBackPressed()
         }
         meetingId = intent.getStringExtra("meetingId").toString()
         Log.e("meetingId", meetingId)
@@ -68,7 +68,11 @@ class Rating : AppCompatActivity() {
         }
 
     }
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        startActivity(Intent(this@Rating,Appointments::class.java))
 
+    }
     private fun apiCallRating() {
         val comment =binding.edtComment.text.toString()
         progressDialog = ProgressDialog(this@Rating)

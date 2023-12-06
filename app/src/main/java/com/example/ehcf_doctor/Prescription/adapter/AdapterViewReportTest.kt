@@ -41,7 +41,10 @@ class AdapterViewReportTest(
             holder.tvAfter.text = list.result[position].after
             holder.tvInstraction.text = list.result[position].instructions
             //holder.tvReportMemberName.text = list.result[position].
-
+            if (list.result[position].test_report==null){
+                holder.btnViewReport.visibility=View.GONE
+                holder.tvReportNotUploaded.visibility=View.VISIBLE
+            }
 
 //        holder.doctorName.text = list.result[position].doctor_name.toString()
 //        holder.startTime.text = list.result[position].time
@@ -107,6 +110,7 @@ class AdapterViewReportTest(
         val tvTestNAme: TextView = itemView.findViewById(R.id.tvTestNAme)
         val tvAfter: TextView = itemView.findViewById(R.id.tvAfter)
         val tvInstraction: TextView = itemView.findViewById(R.id.tvInstraction)
+        val tvReportNotUploaded: TextView = itemView.findViewById(R.id.tvReportNotUploaded)
         val cardView: CardView = itemView.findViewById(R.id.cardViewViewRe)
 
 

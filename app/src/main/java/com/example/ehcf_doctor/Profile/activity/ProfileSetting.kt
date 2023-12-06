@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.postDelayed
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.AutoComplete.AutoSuggestAdapter
 import com.example.ehcf_doctor.Profile.modelResponse.ModelCity
 import com.example.ehcf_doctor.Profile.modelResponse.ModelCityList
 import com.example.ehcf_doctor.Profile.modelResponse.ModelState
@@ -74,7 +75,8 @@ class ProfileSetting : AppCompatActivity() {
         genderList.add(ModelGender("Female", 2))
         genderList.add(ModelGender("Other", 3))
 
-        binding.spinnerGender.adapter = ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, genderList)
+        binding.spinnerGender.adapter =
+            ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, genderList)
         binding.spinnerGender.setSelection(sessionManager.gender.toString().toInt())
 
 
@@ -255,40 +257,51 @@ class ProfileSetting : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<ModelSpecilList>, response: Response<ModelSpecilList>
                 ) {
+                    try {
 
-                    specilList = response.body()!!;
-                    if (specilList != null) {
+                        specilList = response.body()!!;
+                        if (specilList != null) {
 
-                        //spinner code start
-                        val items = arrayOfNulls<String>(specilList.result!!.size)
+                            //spinner code start
+                            val items = arrayOfNulls<String>(specilList.result!!.size)
 
-                        for (i in specilList.result!!.indices) {
-                            items[i] = specilList.result!![i].categoryName
-                        }
-                        val adapter: ArrayAdapter<String?> =
-                            ArrayAdapter(this@ProfileSetting, R.layout.simple_list_item_1, items)
-                        binding.spinnerSpecialist.adapter = adapter
-                        progressDialog!!.dismiss()
+                            for (i in specilList.result!!.indices) {
+                                items[i] = specilList.result!![i].categoryName
+                            }
+                            val adapter: ArrayAdapter<String?> =
+                                ArrayAdapter(
+                                    this@ProfileSetting,
+                                    R.layout.simple_list_item_1,
+                                    items
+                                )
+                            binding.spinnerSpecialist.adapter = adapter
+                            progressDialog!!.dismiss()
 
-                        binding.spinnerSpecialist.setSelection(sessionManager.specialist.toString().toInt()-1)
+                            binding.spinnerSpecialist.setSelection(
+                                sessionManager.specialist.toString().toInt() - 1
+                            )
 
 
-                        binding.spinnerSpecialist.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onItemSelected(
-                                    adapterView: AdapterView<*>?,
-                                    view: View,
-                                    i: Int,
-                                    l: Long
-                                ) {
-                                    val id = specilList.result!![i].id
-                                    specilistId = id.toString()
-                                    //   Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                            binding.spinnerSpecialist.onItemSelectedListener =
+                                object : AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        adapterView: AdapterView<*>?,
+                                        view: View,
+                                        i: Int,
+                                        l: Long
+                                    ) {
+                                        val id = specilList.result!![i].id
+                                        specilistId = id.toString()
+                                        //   Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                    }
+
+                                    override fun onNothingSelected(adapterView: AdapterView<*>?) {}
                                 }
 
-                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-                            }
-
+                        }
+                    } catch (e: Exception) {
+                        myToast(this@ProfileSetting, "Something went wrong")
+                        progressDialog!!.dismiss()
                     }
                 }
 
@@ -300,6 +313,7 @@ class ProfileSetting : AppCompatActivity() {
 
             })
     }
+
     private fun apiCallStateSpinner() {
         progressDialog = ProgressDialog(this@ProfileSetting)
         progressDialog!!.setMessage("Loading..")
@@ -307,7 +321,7 @@ class ProfileSetting : AppCompatActivity() {
         progressDialog!!.isIndeterminate = false
         progressDialog!!.setCancelable(true)
 
-       // progressDialog!!.show()
+        // progressDialog!!.show()
 
         ApiClient.apiService.getState()
             .enqueue(object : Callback<ModelState> {
@@ -315,42 +329,51 @@ class ProfileSetting : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<ModelState>, response: Response<ModelState>
                 ) {
+                    try {
 
-                    stateList = response.body()!!;
-                    if (specilList != null) {
+                        stateList = response.body()!!;
+                        if (specilList != null) {
 
-                        //spinner code start
-                        val items = arrayOfNulls<String>(stateList.result!!.size)
+                            //spinner code start
+                            val items = arrayOfNulls<String>(stateList.result!!.size)
 
-                        for (i in stateList.result!!.indices) {
-                            items[i] = stateList.result!![i].name
-                        }
-                        val adapter: ArrayAdapter<String?> =
-                            ArrayAdapter(this@ProfileSetting, R.layout.simple_list_item_1, items)
-                        binding.spinnerState.adapter = adapter
+                            for (i in stateList.result!!.indices) {
+                                items[i] = stateList.result!![i].name
+                            }
+                            val adapter: ArrayAdapter<String?> =
+                                ArrayAdapter(
+                                    this@ProfileSetting,
+                                    R.layout.simple_list_item_1,
+                                    items
+                                )
+                            binding.spinnerState.adapter = adapter
 
-                        binding.spinnerState.setSelection(items.indexOf(sessionManager.state.toString()));
-                        Log.e("sdsdsd",sessionManager.state.toString())
+                            binding.spinnerState.setSelection(items.indexOf(sessionManager.state.toString()));
+                            Log.e("sdsdsd", sessionManager.state.toString())
 
-                        progressDialog!!.dismiss()
+                            progressDialog!!.dismiss()
 
 
-                        binding.spinnerState.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onItemSelected(
-                                    adapterView: AdapterView<*>?,
-                                    view: View,
-                                    i: Int,
-                                    l: Long
-                                ) {
-                                    val id = stateList.result!![i].name
-                                    state = id.toString()
-                                    //   Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                            binding.spinnerState.onItemSelectedListener =
+                                object : AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        adapterView: AdapterView<*>?,
+                                        view: View,
+                                        i: Int,
+                                        l: Long
+                                    ) {
+                                        val id = stateList.result!![i].name
+                                        state = id.toString()
+                                        //   Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                    }
+
+                                    override fun onNothingSelected(adapterView: AdapterView<*>?) {}
                                 }
 
-                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-                            }
-
+                        }
+                    } catch (e: Exception) {
+                        myToast(this@ProfileSetting, "Something went wrong")
+                        progressDialog!!.dismiss()
                     }
                 }
 
@@ -362,6 +385,7 @@ class ProfileSetting : AppCompatActivity() {
 
             })
     }
+
     private fun apiCallCitySpinner() {
         progressDialog = ProgressDialog(this@ProfileSetting)
         progressDialog!!.setMessage("Loading..")
@@ -369,7 +393,7 @@ class ProfileSetting : AppCompatActivity() {
         progressDialog!!.isIndeterminate = false
         progressDialog!!.setCancelable(true)
 
-       // progressDialog!!.show()
+        // progressDialog!!.show()
 
         ApiClient.apiService.getCity()
             .enqueue(object : Callback<ModelCity> {
@@ -378,40 +402,50 @@ class ProfileSetting : AppCompatActivity() {
                     call: Call<ModelCity>, response: Response<ModelCity>
                 ) {
 
-                    cityList = response.body()!!;
-                    if (cityList != null) {
 
-                        //spinner code start
-                        val items = arrayOfNulls<String>(cityList.result!!.size)
+                    try {
+                        cityList = response.body()!!;
+                        if (cityList != null) {
 
-                        for (i in cityList.result!!.indices) {
-                            items[i] = cityList.result!![i].city
-                        }
-                        val adapter: ArrayAdapter<String?> =
-                            ArrayAdapter(this@ProfileSetting, R.layout.simple_list_item_1, items)
-                        binding.spinnerCity.adapter = adapter
-                        binding.spinnerCity.setSelection(items.indexOf(sessionManager.city.toString()));
+                            //spinner code start
+                            val items = arrayOfNulls<String>(cityList.result!!.size)
 
-                        progressDialog!!.dismiss()
+                            for (i in cityList.result!!.indices) {
+                                items[i] = cityList.result!![i].city
+                            }
+                            val adapter: ArrayAdapter<String?> =
+                                ArrayAdapter(
+                                    this@ProfileSetting,
+                                    R.layout.simple_list_item_1,
+                                    items
+                                )
+                            binding.spinnerCity.adapter = adapter
+                            binding.spinnerCity.setSelection(items.indexOf(sessionManager.city.toString()));
+
+                            progressDialog!!.dismiss()
 
 
 
-                        binding.spinnerCity.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onItemSelected(
-                                    adapterView: AdapterView<*>?,
-                                    view: View,
-                                    i: Int,
-                                    l: Long
-                                ) {
-                                    val id = cityList.result!![i].city
-                                    city = id.toString()
-                                    //   Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                            binding.spinnerCity.onItemSelectedListener =
+                                object : AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        adapterView: AdapterView<*>?,
+                                        view: View,
+                                        i: Int,
+                                        l: Long
+                                    ) {
+                                        val id = cityList.result!![i].city
+                                        city = id.toString()
+                                        //   Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                    }
+
+                                    override fun onNothingSelected(adapterView: AdapterView<*>?) {}
                                 }
 
-                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-                            }
-
+                        }
+                    }catch (e:Exception){
+                        myToast(this@ProfileSetting, "Something went wrong")
+                        progressDialog!!.dismiss()
                     }
                 }
 

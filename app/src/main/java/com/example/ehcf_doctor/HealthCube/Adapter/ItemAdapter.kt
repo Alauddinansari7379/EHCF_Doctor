@@ -59,7 +59,7 @@ class ItemAdapter(var context: Context,val testList:TestList) : RecyclerView.Ada
             testList.selctedTestList(item.text as String,)
 
             if (selected.contains(item)) {
-                selected.remove(item)
+               // selected.remove(item)
                 unhighlightView(holder)
             } else {
                 selected.add(item)
@@ -68,13 +68,13 @@ class ItemAdapter(var context: Context,val testList:TestList) : RecyclerView.Ada
             }
             receiver!!.onClickAction()
         }
-        if((selected.contains(item)) )
-        {
-              highlightView(holder)
-        }
-        else{
-            unhighlightView(holder)
-        }
+//        if((selected.contains(item)) )
+//        {
+//              highlightView(holder)
+//        }
+//        else{
+//            unhighlightView(holder)
+//        }
 
     }
     companion object{

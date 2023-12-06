@@ -1,0 +1,6230 @@
+[
+  {
+    "Test Name": "1-3-ß-D-Glucan Assay"
+  },
+  {
+    "Test Name": "17 - Alpha- Hydroxy Progesterone"
+  },
+  {
+    "Test Name": "17 - Alpha Hydroxyprogesterone (Neonatal Screening)"
+  },
+  {
+    "Test Name": "17 - hydroxycorticosteroids (17- OHCS) - 24 hr urine"
+  },
+  {
+    "Test Name": "17 - Ketogenic Steroids - 24hr urine"
+  },
+  {
+    "Test Name": "5 - Hydroxy Indole Acetic Acid (5 HIAA) - 24 hrs urine"
+  },
+  {
+    "Test Name": "5 - Hydroxy Indole Acetic Acid (5-HIAA) - Spot urine"
+  },
+  {
+    "Test Name": "A/G (Albumin/Globulin) Ratio"
+  },
+  {
+    "Test Name": "ABG (Blood Gas Analysis) - Arterial"
+  },
+  {
+    "Test Name": "ABG with Lactate"
+  },
+  {
+    "Test Name": "Absolute Eosinophil Count (AEC)"
+  },
+  {
+    "Test Name": "Absolute Lymphocyte Count (ALC)"
+  },
+  {
+    "Test Name": "Absolute Neutrophil Count (ANC)"
+  },
+  {
+    "Test Name": "Acetone, Urine"
+  },
+  {
+    "Test Name": "Acetylcholine Receptor (Achr) Binding Antibody"
+  },
+  {
+    "Test Name": "Acetylcholine Receptor Modulating antibodies"
+  },
+  {
+    "Test Name": "Achondroplasia (FGFR3 gene)"
+  },
+  {
+    "Test Name": "Acid Lipase Disorder (Wolman Disease)"
+  },
+  {
+    "Test Name": "ACTH Stimulation Test For Androsteindione - 3 samples"
+  },
+  {
+    "Test Name": "ACTH Stimulation Test For Cortisol - 2 samples"
+  },
+  {
+    "Test Name": "ACTH Stimulation Test For Cortisol - 3 samples"
+  },
+  {
+    "Test Name": "ACTH Stimulation Test For DHEAS - 2 samples"
+  },
+  {
+    "Test Name": "ACTH Stimulation TestFor 17 OH progesterone - 2 samples"
+  },
+  {
+    "Test Name": "Actitest and Fibrotest (Liver fibrosis and inflammation score)"
+  },
+  {
+    "Test Name": "Activated Partial Thromboplastin Time (aPTT)"
+  },
+  {
+    "Test Name": "Activated Partial Thromboplastin Time (aPTT) with Mixing Studies"
+  },
+  {
+    "Test Name": "Activated Protein C Resistance (APCR)"
+  },
+  {
+    "Test Name": "ACTN3 Genotyping (Sports Gene)"
+  },
+  {
+    "Test Name": "Adenosine Deaminase, ADA - Serum"
+  },
+  {
+    "Test Name": "Adenosine Deaminase, ADA- Ascitic fluid"
+  },
+  {
+    "Test Name": "Adenosine Deaminase, ADA- CSF"
+  },
+  {
+    "Test Name": "Adenosine Deaminase, ADA- Fluid"
+  },
+  {
+    "Test Name": "Adenosine Deaminase, ADA- Pericardial fluid"
+  },
+  {
+    "Test Name": "Adenosine Deaminase, ADA- Peritoneal fluid"
+  },
+  {
+    "Test Name": "Adenosine Deaminase, ADA- Pleural fluid"
+  },
+  {
+    "Test Name": "Adenovirus IgG"
+  },
+  {
+    "Test Name": "Adenovirus IgM"
+  },
+  {
+    "Test Name": "Adenovirus PCR"
+  },
+  {
+    "Test Name": "ADRB2 Genotype - For B2 Agonist Reponsiveness"
+  },
+  {
+    "Test Name": "Adrenaline (Epinephrine) - 24 hrs urine"
+  },
+  {
+    "Test Name": "Adrenaline (Epinephrine) - Plasma"
+  },
+  {
+    "Test Name": "Adreno Corticotrophic Hormone (ACTH)"
+  },
+  {
+    "Test Name": "AFB - MOTT Drug Sensitivity: MIC TEST For Rapid Growing Non-Tuberculous Mycobacteria (NTM/MOTT)"
+  },
+  {
+    "Test Name": "AFB - MOTT Drug Sensitivity: MIC TEST For Slow Growing Non-Tuberculous Mycobacteria (NTM/MOTT)"
+  },
+  {
+    "Test Name": "AFB Detection RNA PCR"
+  },
+  {
+    "Test Name": "AFB/TB - Drug sensitivity - 5 Drug Flexi Panel"
+  },
+  {
+    "Test Name": "AFB/TB - Drug sensitivity- 10 Drug Flexi Panel"
+  },
+  {
+    "Test Name": "AFB/TB - Drug sensitivity- 13 Drug Flexi Panel"
+  },
+  {
+    "Test Name": "AFB/TB - Drug sensitivity for 1st line 4 drugs [Streptomycin, INH, Rifampicin, Ethambutol (SIREP)]"
+  },
+  {
+    "Test Name": "AFB/TB - Drug sensitivity for 1st line 5 drugs [Streptomycin, INH, Rifampicin, Ethambutol and Pyrazinamide (SIREP)]"
+  },
+  {
+    "Test Name": "AFB/TB - Drug sensitivity for 2nd line 10 drugs (kanamycin, ethionamide, PAS, Ofloxacin,Mofloxacin, Amikacin, Capreomycin, Clofazimine, Levofloxacin,\nCycloserine)"
+  },
+  {
+    "Test Name": "AFB/TB - Drug sensitivity for 2nd line 4 drugs - KEPO (kanamycin, ethionamide, PAS, Ofloxacin)"
+  },
+  {
+    "Test Name": "AFB/TB - Drug sensitivity for 2nd line 4 drugs - MACC (Mofloxacin, Amikacin, Capreomycin, Clofazimine)"
+  },
+  {
+    "Test Name": "AFB/TB - MDR (Multi Drug Resistance) Detection (INH and Rif) - HAINS genotyping"
+  },
+  {
+    "Test Name": "AFB/TB - MOTT species Differentiation"
+  },
+  {
+    "Test Name": "AFB/TB - Mycobacterium Tuberculosis DNA PCR"
+  },
+  {
+    "Test Name": "AFB/TB - XDR (Extensive Drug Resistance) detection - HAINS genotyping"
+  },
+  {
+    "Test Name": "AFB/TB Culture - Fluorescent method (Rapid -MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Culture followed by MTb/MOTT identification"
+  },
+  {
+    "Test Name": "AFB/TB Detection - AFB/ZN Stain"
+  },
+  {
+    "Test Name": "AFB/TB Identification (M.tb / MOTT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Amikacin (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Capreomycin (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Clofazimine (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Ethambutol (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Ethionamide (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Isoniazid (INH)(Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Kanamycin (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Levofloxacin (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Moxifloxacin (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Ofloxacin (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : PAS (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Pyrazinamide (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Rifabutin (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Rifampicin (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility : Streptomycin(Rapid-MGIT)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility: 10 Drug Panel (Combination of 1st and 2nd line drugs)"
+  },
+  {
+    "Test Name": "AFB/TB Susceptibility: Clarithromycin (Rapid-MGIT)"
+  },
+  {
+    "Test Name": "Agglutinin - Cold - Qualitative"
+  },
+  {
+    "Test Name": "Agglutinin - Warm - Qualitative"
+  },
+  {
+    "Test Name": "Alanine aminotransferase - (ALT / SGPT)"
+  },
+  {
+    "Test Name": "Albertßs Stain (Corynebacterium diphtheria identification)"
+  },
+  {
+    "Test Name": "Albumin - 24 hrs urine"
+  },
+  {
+    "Test Name": "Albumin - Body Fluid"
+  },
+  {
+    "Test Name": "Albumin - CSF"
+  },
+  {
+    "Test Name": "Albumin - Serum"
+  },
+  {
+    "Test Name": "Albumin - Spot urine"
+  },
+  {
+    "Test Name": "Alcohol (Ethanol), Quantitative\n- Serum"
+  },
+  {
+    "Test Name": "Alcohol (Ethanol), Quantitative\n- Urine"
+  },
+  {
+    "Test Name": "Aldehyde Chopra Test"
+  },
+  {
+    "Test Name": "Aldolase"
+  },
+  {
+    "Test Name": "Aldosterone - 24 hrs urine"
+  },
+  {
+    "Test Name": "Aldosterone - Serum"
+  },
+  {
+    "Test Name": "Aldosterone / Plasma Renin Activity Ratio"
+  },
+  {
+    "Test Name": "ALK/EML4-FISH (Paraffin Block)"
+  },
+  {
+    "Test Name": "Alkaline Phosphatase - ALP"
+  },
+  {
+    "Test Name": "Alkaline Phosphatase - Bone sub-Fraction (Ostase)"
+  },
+  {
+    "Test Name": "Alkaline Phosphatase Isoenzymes"
+  },
+  {
+    "Test Name": "ALL MULTIPLEX PCR BASIC"
+  },
+  {
+    "Test Name": "Allergen, Individual - Animal Cat Dander"
+  },
+  {
+    "Test Name": "Allergen, Individual - Animal Chicken Feather"
+  },
+  {
+    "Test Name": "Allergen, Individual - Animal Cow Dander"
+  },
+  {
+    "Test Name": "Allergen, Individual - Animal Dog Dander"
+  },
+  {
+    "Test Name": "Allergen, Individual - Animal Guinea Pig Epithelium"
+  },
+  {
+    "Test Name": "Allergen, Individual - Animal Horse Dander"
+  },
+  {
+    "Test Name": "Allergen, Individual - Animal Pigeon Feather"
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Amoxicillin"
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Ampicillin"
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Cephalosporin"
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Ciprofloxacin"
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Diclofenac"
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Ibuprofen"
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Insulin Human"
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Paracetamol"
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Penicilloyl G."
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Penicilloyl V"
+  },
+  {
+    "Test Name": "Allergen, Individual - Drug Sulpha"
+  },
+  {
+    "Test Name": "Allergen, Individual - Dust Dermatophagoides Farinae"
+  },
+  {
+    "Test Name": "Allergen, Individual - Dust Dermatophagoides Pteronyssinus"
+  },
+  {
+    "Test Name": "Allergen, Individual - Dust House Dust - Hollistier"
+  },
+  {
+    "Test Name": "Allergen, Individual - Dust House Dust Greer Labs"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Almond"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Alpha - Lactalbumin - milk"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Apple"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Baingan"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Bakers Yeast"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Banana"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Basil"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Beef"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Beta\n- Lactoglobulin - Milk"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Black Pepper"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Blue Mussel"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Brazil Nut"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Cabbage"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Cardamon"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Casein( Milk Protein)"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Cashew Nut"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Celery"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Cheese Cheddar"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Chick Pea"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Chicken Meat"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Chilipepper"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Clove"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Cocoa"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Coconut"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Cod FISH"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Coffee"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Coriander"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Corn / Maize"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Cow Milk"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Crab"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Egg White"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Egg Yolk"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Garlic"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Gluten"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Green Pea"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Hazelnut"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Kiwi Fruit"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Lemon"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Lentil"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Mango"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Mushroom"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Mustard"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Mutton"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Oat"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Olive"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Onion"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Orange"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Oyster"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Papaya"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Paprica"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Parsley"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Peach"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Peanut"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Pear"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Pecan Nut"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Pineapple"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Pistachio"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Plaice"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Plum"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Poppy Seed"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Pork"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Potato"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Pumpkin"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Red Chili"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Red Kidney Bean"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Rice"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Salmon"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Shrimp / Prawns"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Soyabean"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Spinach"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Sweet Potato"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Tomato"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Tuna"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food Wheat"
+  },
+  {
+    "Test Name": "Allergen, Individual - Food White Bean"
+  },
+  {
+    "Test Name": "Allergen, Individual - Grass Pollen Bermuda Grass"
+  },
+  {
+    "Test Name": "Allergen, Individual - Grass Pollen Cultivated Ryegrass"
+  },
+  {
+    "Test Name": "Allergen, Individual - Grass Pollen Johnson Grass"
+  },
+  {
+    "Test Name": "Allergen, Individual - Grass Pollen Meadow Grass"
+  },
+  {
+    "Test Name": "Allergen, Individual - Grass Pollen Timothy Grass"
+  },
+  {
+    "Test Name": "Allergen, Individual - Grass Pollen Zea Mays Grass"
+  },
+  {
+    "Test Name": "Allergen, Individual - Insect Cockroach German"
+  },
+  {
+    "Test Name": "Allergen, Individual - Insect Honey Bee Venom"
+  },
+  {
+    "Test Name": "Allergen, Individual - Microorganism AlteRNAria Test"
+  },
+  {
+    "Test Name": "Allergen, Individual - Microorganism Alterneria Tenius"
+  },
+  {
+    "Test Name": "Allergen, Individual - Microorganism Candida Albicans"
+  },
+  {
+    "Test Name": "Allergen, Individual -\nMicroorganism Cladosporium Herbarum"
+  },
+  {
+    "Test Name": "Allergen, Individual - Microorganism Mosquito"
+  },
+  {
+    "Test Name": "Allergen, Individual - Microorganism Penicillium Notatum"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen Acasia"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen Alder"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen Birch"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen Eucalyptus"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen Hazel"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen Japanese Cedar"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen Mesquite"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen Mulberry"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen Oak"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen White Pine"
+  },
+  {
+    "Test Name": "Allergen, Individual - Tree Pollen Willow"
+  },
+  {
+    "Test Name": "Allergen, Individual - Weed Pollen Cocklebur"
+  },
+  {
+    "Test Name": "Allergen, Individual - Weed Pollen Common Pigweed"
+  },
+  {
+    "Test Name": "Allergen, Individual - Weed Pollen Common Ragweed"
+  },
+  {
+    "Test Name": "Allergen, Individual - Weed Pollen English Plantain"
+  },
+  {
+    "Test Name": "Allergen, Individual - Weed Pollen Golden Rod"
+  },
+  {
+    "Test Name": "Allergen, Individual - Weed Pollen Goose Foot"
+  },
+  {
+    "Test Name": "Allergen, Individual - Weed Pollen Mugwort"
+  },
+  {
+    "Test Name": "Allergen, Individual - Weed Pollen Nettle"
+  },
+  {
+    "Test Name": "Allergen, Individual - Weed Pollen Rape Pollen"
+  },
+  {
+    "Test Name": "Allergic Broncho-Pulmo Aspergillosis (ABPA) Panel ( Aspergillus Fumigatus- Specific IgE, Aspergillus IgG, IgE Total - Serum)"
+  },
+  {
+    "Test Name": "Allergic Broncho-Pulmo Aspergillosis Panel (ABPA- MINI) - ( Aspergillus Fumigatus- Specific IgE, Aspergillus IgG)"
+  },
+  {
+    "Test Name": "Allergic Broncho-Pulmo Aspergillosis Screen Panel (ABPA-Screen) - ( Aspergillus Fumigatus- Specific IgE, IgE\nTotal - Serum)"
+  },
+  {
+    "Test Name": "Allergy - Asthma / Rhinitis Screening Panel - Pediatric (*Cat dander *Dog dander\n*Common ragweed *Bermuda grass *Mesquite\n*Dermatophagoides farinae\n*Alternaria alternata\n*Aspergillus fumigatus\n*Cockroach)"
+  },
+  {
+    "Test Name": "Allergy - Asthma / Rhinitis Screening Panel 1 - Adult (Common ragweed, Dermatophagoides Farinae,Dermatophagoides Pteronyssinus, Alterneria tenuis, Aspergillus fumigatus, Candida albicans, Penicillium notatum, House dust, Cockroach)"
+  },
+  {
+    "Test Name": "Allergy Panel - Adult\nComprehensive (Peanut,Wheat,Soyabean,Cow Milk,Egg White,Cod Fish,Shrimp, Blue mussel, Dermatophagoides Farinae,Dermatophagoides Pteronyssinus,House Dust Greer,Cockroach, Cat Dander,Dog Dander,Alternaria Alternata,Aspergillus Fumigatus,Penicillium notatum,Candida, Cynodon or bermuda or dhoob grass, Common ragweed or congress grass, common pigweed, johnson grass,Alder, papdi\nchibil, Birch, mesquite, goose"
+  },
+  {
+    "Test Name": "Allergy Panel - Asthma"
+  },
+  {
+    "Test Name": "Allergy Panel - Child"
+  },
+  {
+    "Test Name": "Allergy Panel - Cockroach"
+  },
+  {
+    "Test Name": "Allergy Panel - Cod Fish"
+  },
+  {
+    "Test Name": "Allergy Panel - Cow Milk"
+  },
+  {
+    "Test Name": "Allergy Panel - D Farinae"
+  },
+  {
+    "Test Name": "Allergy Panel - D Pteronsysinus"
+  },
+  {
+    "Test Name": "Allergy Panel - Drugs 10 parameters (ACTH, Penicillin V, Penicillin G, Human Insulin, Diclofenac, Ibuprufen,Paracetamol, Ciprofloxacin, Sulfa, Total IgE)"
+  },
+  {
+    "Test Name": "Allergy Panel - Eczema Panel"
+  },
+  {
+    "Test Name": "Allergy Panel - Egg White"
+  },
+  {
+    "Test Name": "Allergy Panel - Environmental\n(Phadiatop, Cat dander, Dog dander,Common Ragweed (Ambrosia Elatior )Close To Parthenium / Congress Grass,House Dust (Greer Labs),D Farinae (House Dust Mite),D Pterysinuss (House Dust Mite),Cockroach German (Blatella Germanica),Papdi Chibil / Elm,Penicillium Notatum (Fungi),Cladosporium Herbarum (Fungi),Aspergillus Fumigatus (Fungi),Candida Albicans (Fungi),Alternaria (Fungi),Cynodon grass (Bermuda Grass /\nDurva),Sorghum grass (Jhonson"
+  },
+  {
+    "Test Name": "Allergy Panel - Food Fruit Panel (Mango, Kiwi, Banana, Papaya, Apple, Peach, Pear, Pineapple, Total IgE)"
+  },
+  {
+    "Test Name": "Allergy Panel - Food intolerance / GI (Egg White, Wheat, Peanut, Soyabean, Cow Milk, Cod Fish, Shrimp, Blue Mussel ,Salmon,Tuna,Almond, Coconut, Cashew Nut, Tomato,Yeast,Garlic, Onion, Celery, Pork, Egg Yolk, Chicken Meat, Banana, Pineapple, Apple, Gluten, Spinach, cabbage, Caprica, Potato, Lentil, Rice,Corn, chick pea, casien, brinjal, lemon, olive, Beef, herring , mackerel, plaice, brazil nut, hazelnut, Pear, Peach, Total IgE)"
+  },
+  {
+    "Test Name": "Allergy Panel - Food Milk and Milk Product Panel (Cow Milk ( Doodh), Casein ( Milk Protein / Dahi ), Cheese Cheddar, Alpha Lactalbumin, Beta Lactoglolin, Total IgE.)"
+  },
+  {
+    "Test Name": "Allergy Panel - Food Non - Vegetarian Panel ( Pork (Sus Spp.),Egg Yolk (Anda),Chicken Meat (Gallus Spp./ Murgi),Beef (Bos spp),Salmon (Salmo Salar\n/ Rawas),Tuna (Thunnus Albacares) ,Shrimp / Prawns,Cod Fish (Gadus Morhua / Machhli ),Blue Mussel (Mytilus Edulis) ,Egg White (Anda),Total IgE)"
+  },
+  {
+    "Test Name": "Allergy Panel - Food Nuts Panel (Almond, Brazil Nut, Hazelnut, Peanut, cashewnut, pecanut, walnut, Pistachio, Coconut,  IgE)"
+  },
+  {
+    "Test Name": "Allergy Panel - Food Spices Panel Basil ( Ocimum Basilicum\n),Black Pepper ( Piper Nigrum\n), Cardamon ( Elettaria Cardamomum ) , Chilipepper ( Capsicum Frutescens ), Cinnamon ( Cinnamomum Spp.\n), Clove ( Syzygium Aromaticum ), Coriander ( Coriandrum Sativum ), Fennel Seed ( Foeniculum Vulgare ) , Ginger ( Zingiber Officinale ), Mustard ( Brassica / Sinapis Spp. ), Total igE."
+  },
+  {
+    "Test Name": "Allergy Panel - Food Vegetable Panel - 1 (Garlic , Onion, Celery, Tomato, Yeast, Total IgE.)"
+  },
+  {
+    "Test Name": "Allergy Panel - Food  Vegetarian and Non-vegetarian"
+  },
+  {
+    "Test Name": "Allergy Panel - Food Vegetarian and Nonvegetarian Panel (Egg White, Wheat, Peanut, Soyabean, Cow Milk,Chicken Meat, Beef, Pork,Egg Yolk,Cod Fish,Shrimp,Tuna,Salmon,Blue Mussel,Pineapple, Lemon,Rice, Lentil, olive,Tomato, garlic, onion, Total IgE)"
+  },
+  {
+    "Test Name": "Allergy Panel - Food Vegetarians (Cow Milk, Lemon, Pineapple, Peanut, Potato, Wheat, Rice,Soyabean, Lentils, Tomato, Olive, Total IgE)"
+  },
+  {
+    "Test Name": "Allergy Panel - GIT Panel (Wheat, Peanut, Soyabean, Cow Milk, Almond, Coconut, Cashew Nut, Tomato,Yeast,Garlic, Onion, Celery, Banana, Pineapple, Apple, Gluten, Spinach, cabbage, Caprica, Potato, Lentil, Rice,Corn, chick pea, casien, brinjal, lemon, olive, brazil nut, hazelnut, Pear,\nPeach, Total IgE)"
+  },
+  {
+    "Test Name": "Allergy Panel - Grass (Cynodon Grass (Bermuda Grass/Durva), Sorghum Grass(Jhonson Grass/ Jowar), Timothy Grass(Phleum Pratense/Ghass), Rye Grass(Lolium Perene), Meadow Grass (Poa Pratensis), Bahia Grass (Paspalum Notatum/ Indian Rice Grass), Total IgE)"
+  },
+  {
+    "Test Name": "Allergy Panel - House Dust Greer"
+  },
+  {
+    "Test Name": "Allergy Panel - Mold - 2 (Pencillium Notatum, Cladosporium, Herbarum, Aspergillus Fumigatus, Candida Albicans, Alternaria Tenius, Tota IgE.)"
+  },
+  {
+    "Test Name": "Allergy Panel - Others Drug Panel (Maxi)"
+  },
+  {
+    "Test Name": "Allergy Panel - Peanut"
+  },
+  {
+    "Test Name": "Allergy Panel - Soyabean"
+  },
+  {
+    "Test Name": "Allergy Panel - Total IgE"
+  },
+  {
+    "Test Name": "Allergy Panel - Tree Pollen"
+  },
+  {
+    "Test Name": "Allergy Panel - Weeds Pollen (Common Ragweed,Mugwort,Plantain English,Goosefoot,Salwort, Total IgE.)"
+  },
+  {
+    "Test Name": "Allergy Panel - Wheat"
+  },
+  {
+    "Test Name": "Allergy Panel -Basic Eczema Panel"
+  },
+  {
+    "Test Name": "Allergy Screening Ige - Total Antibodies With Phadiatop"
+  },
+  {
+    "Test Name": "Allergy Screening Phadiatop - Adult"
+  },
+  {
+    "Test Name": "Allergy Screening Phadiatop - Infant"
+  },
+  {
+    "Test Name": "Alpha 1 Acid Glycoprotein"
+  },
+  {
+    "Test Name": "Alpha 2 Macroglobulin"
+  },
+  {
+    "Test Name": "Alpha Feto Protein (AFP) - Amniotic fluid"
+  },
+  {
+    "Test Name": "Alpha Feto Protein (AFP) - Ascitic fluid"
+  },
+  {
+    "Test Name": "Alpha Feto Protein (AFP) - CSF"
+  },
+  {
+    "Test Name": "Alpha Feto Protein (AFP) - Serum"
+  },
+  {
+    "Test Name": "Alpha Fucosidase"
+  },
+  {
+    "Test Name": "Alpha Galactosidase (Fabry)"
+  },
+  {
+    "Test Name": "Alpha Glucosidase (Glycogen Storage Disease II / Pompes Disease)"
+  },
+  {
+    "Test Name": "Alpha Mannosidase (Lysosomal storage disorder)"
+  },
+  {
+    "Test Name": "Alpha N Acetyl Glucosaminidase"
+  },
+  {
+    "Test Name": "Alpha N-Acetyl Galactosaminidase (Schindler\ndisease)"
+  },
+  {
+    "Test Name": "Alpha Naphthyl Acetate Esterase (ANAE)"
+  },
+  {
+    "Test Name": "Alpha Thalassemia Mutation Detection"
+  },
+  {
+    "Test Name": "Alpha-1 Antitrypsin, Genotyping (Z,X,M Mutation By PCR)"
+  },
+  {
+    "Test Name": "Alpha-1-Antitrypsin"
+  },
+  {
+    "Test Name": "ALPS (Auto immune Lymphoproliferative syndrome) Screening /Double Negative T Cell analysis"
+  },
+  {
+    "Test Name": "Aluminium - 24 Hours Urine"
+  },
+  {
+    "Test Name": "Aluminium - Dialysis Fluid"
+  },
+  {
+    "Test Name": "Aluminium - Urine Spot"
+  },
+  {
+    "Test Name": "AMH - Anti Mullerian Hormone"
+  },
+  {
+    "Test Name": "Amino Acid - Maple Syrup Disease, Plasma"
+  },
+  {
+    "Test Name": "Amino Acid - Non-Ketotic Hyperglycemia Panel CSF & Plasma"
+  },
+  {
+    "Test Name": "Amino Acid CSF - Qualitative screen"
+  },
+  {
+    "Test Name": "Amino Acid CSF - Quantitative"
+  },
+  {
+    "Test Name": "Amino Acid Plasma - Qualitative screen"
+  },
+  {
+    "Test Name": "Amino Acid Plasma - Quantitative"
+  },
+  {
+    "Test Name": "Amino Acid Urine - Quantitative"
+  },
+  {
+    "Test Name": "Amino Levulinic Acid 5 - ALA - 24 hrs urine"
+  },
+  {
+    "Test Name": "Amino Levulinic Acid 5 - ALA - Spot urine"
+  },
+  {
+    "Test Name": "AML FISH Panel: Any 10 FISH\nMarkers"
+  },
+  {
+    "Test Name": "AML MUTIPLEX PCR"
+  },
+  {
+    "Test Name": "AML Panel (Molecular): FLT3(ITD) by Fragment Analysis, FLT3-TKD, CEBPA,\nNPM1 by Sequencing"
+  },
+  {
+    "Test Name": "AML Risk Stratification Gene Panel"
+  },
+  {
+    "Test Name": "Ammonia - Plasma"
+  },
+  {
+    "Test Name": "Amniotic Fluid Karyotyping for Twins"
+  },
+  {
+    "Test Name": "AMPA-GluR1 & R2"
+  },
+  {
+    "Test Name": "AmPath Good Health-1 (FBS, BUN, Uric acid, Calcium ß Serum, CUE, , Lipid Profile, Liver Function Tests, T3\n, T4, TSH)"
+  },
+  {
+    "Test Name": "AmPath Good Health-2 (FBS, BUN, Uric acid, Calcium ß Serum, CUE, CBC with PS Review, Creatinine, ESR, HbA1c, Lipid Profile, Liver Function Tests, T3 , T4, TSH, Iron, TIBC, UIBC, HBsAg &\nElectrolytes)"
+  },
+  {
+    "Test Name": "AmPath Good Health-3 ((FBS, BUN, Uric acid, Calcium ß Serum, CUE, CBC with PS Review, Creatinine, ESR, HbA1c, Iron, TIBC, UIBC, Lipid Profile,Liver Function Tests, T3\n, T4, TSH , Vit B12, Vit D, HBsAg\n& Electrolytes)"
+  },
+  {
+    "Test Name": "Amphiphysin Antibody (for Paraneoplastic Syndrome)"
+  },
+  {
+    "Test Name": "Amylase - Ascitic fluid"
+  },
+  {
+    "Test Name": "Amylase - Body Fluid"
+  },
+  {
+    "Test Name": "Amylase - Pleural fluid"
+  },
+  {
+    "Test Name": "Amylase - Serum"
+  },
+  {
+    "Test Name": "Amylase - urine spot"
+  },
+  {
+    "Test Name": "Amyloid - A"
+  },
+  {
+    "Test Name": "ANA IFA REFLEX TO ANA PROFILE 18"
+  },
+  {
+    "Test Name": "ANA IFA REFLEX TO ANA PROFILE 25 ANTIGENS"
+  },
+  {
+    "Test Name": "ANA PROFILE (25 Antigens)"
+  },
+  {
+    "Test Name": "ANA PROFILE 18"
+  },
+  {
+    "Test Name": "ANCA (Anti Neutrophil Cytoplasmic Antibody) - IFA with reflex titers"
+  },
+  {
+    "Test Name": "ANCA (Anti Neutrophil Cytoplasmic Antibody) Screen without titer - IFA"
+  },
+  {
+    "Test Name": "Androgen Profile (Testosterone Total, Testosterone-Free, SHBG, DHT, FAI,\nAndrostenedione)"
+  },
+  {
+    "Test Name": "Androstenedione"
+  },
+  {
+    "Test Name": "Anemia - Nutritional - Suspect Iron Deficiency (Ferritin, Hemogram (CBC + Retic + PS), Iron, TIBC,Transferrin, UIBC)"
+  },
+  {
+    "Test Name": "Anemia - Nutritional - Suspect Macrocytic (Hemogram (CBC + Retic + PS); Ferritin; Folate (Folic Acid), LDH-Serum, Liver Function Tests (LFT), Vitamin B12 )"
+  },
+  {
+    "Test Name": "Anemia - Suspect Hemoglobinopathy [Ferritin, Hemoglobin Variant Analysis, Hemogram (CBC + Retic + PS), Iron, TIBC, Transferrin Saturation Index (TSI), Unsaturated Iron Binding Capacity (UIBC)]"
+  },
+  {
+    "Test Name": "Anemia - Suspect hemolytic - for screening [Coombs Test ß Direct & Indirect, G6PD Quantitative, Haptoglobin, Hemogram (CBC + Retic + PS), LDH)-Serum, Liver Function Tests (LFT), Osmotic Fragility Test, Urine - Hemosiderin]"
+  },
+  {
+    "Test Name": "Anemia Macrocytic Panel (Vitamin B12 & Folic acid)"
+  },
+  {
+    "Test Name": "Angiotensin Converting Enzyme (ACE) - Serum"
+  },
+  {
+    "Test Name": "Ante natal profile Basic - [CBC, Glucose random, Blood Grouping and Typing (ABO and Rh), CUE, HBsAg, HIV 1 and 2\nantibody, VDRL]"
+  },
+  {
+    "Test Name": "Ante natal Profile I [HCV Antibody, Blood Grouping and Typing (ABO and Rh), CUE, CBC with PS, Creatinine, Glucose ß Random, HBsAg, HIV 1 and 2 Antibody, RPR/VDRL, TSH, Urea, BUN]"
+  },
+  {
+    "Test Name": "Ante natal Profile II [ Ante natal Profile I & Hb Variant analysis]"
+  },
+  {
+    "Test Name": "Ante natal Profile IV ( Ante natal Profile II,Antibody screening, Rh & Kell typing)"
+  },
+  {
+    "Test Name": "Anti A Titre"
+  },
+  {
+    "Test Name": "Anti Adrenal Antibody Screen - IFA"
+  },
+  {
+    "Test Name": "Anti B Titre"
+  },
+  {
+    "Test Name": "Anti Cardiolipin Ab IgG"
+  },
+  {
+    "Test Name": "Anti Cardiolipin Ab IgM"
+  },
+  {
+    "Test Name": "Anti cardiolipin antibody IgA"
+  },
+  {
+    "Test Name": "Anti Cardiolipin Profile (IgA+IgG+IgM) Quant"
+  },
+  {
+    "Test Name": "Anti Centromere Antibodies"
+  },
+  {
+    "Test Name": "Anti Cyclic Citrullinated Peptide (Anti - CCP)"
+  },
+  {
+    "Test Name": "Anti Diuretic Hormone (ADH) / Vasopressin"
+  },
+  {
+    "Test Name": "Anti DNAase B"
+  },
+  {
+    "Test Name": "Anti ds-DNA - ELISA"
+  },
+  {
+    "Test Name": "Anti ds-DNA Antibody - IFA - screen without titers"
+  },
+  {
+    "Test Name": "Anti ds-DNA Antibody - IFA with reflex titers"
+  },
+  {
+    "Test Name": "Anti Endomysial Antibody IgA - IFA"
+  },
+  {
+    "Test Name": "Anti Endomysial Antibody IgA - IFA (With titer)"
+  },
+  {
+    "Test Name": "Anti Endomysial Antibody IgG - EIA"
+  },
+  {
+    "Test Name": "Anti Epidermal (Pemphigus) Antibody by IF"
+  },
+  {
+    "Test Name": "Anti Epidermal (Pemphigus) Antibody by IF - with titre"
+  },
+  {
+    "Test Name": "Anti GBM (Glomerular Basement Membrane ) Antibody"
+  },
+  {
+    "Test Name": "Anti GBM (Glomerular Basement Membrane ) IgG Antibodies - EIA"
+  },
+  {
+    "Test Name": "Anti Gliadin IgA Antibodies"
+  },
+  {
+    "Test Name": "Anti Gliadin IgG Antibodies"
+  },
+  {
+    "Test Name": "Anti Histones Antibodies"
+  },
+  {
+    "Test Name": "Anti Human Tissue\nTransglutaminase (tTG) Antibody (IgA)"
+  },
+  {
+    "Test Name": "Anti Human Tissue Transglutaminase (tTG) Antibody (IgG)"
+  },
+  {
+    "Test Name": "Anti IA2; Insulinoma Associated Antigen"
+  },
+  {
+    "Test Name": "Anti Islet Cell Antibody"
+  },
+  {
+    "Test Name": "Anti Islet Cell Antibody With titer"
+  },
+  {
+    "Test Name": "Anti LKM (Liver Kidney Microsomal) Antibodies - EIA"
+  },
+  {
+    "Test Name": "Anti LKM (Liver Kidney Microsomal) Antibodies - IFA with reflex titer"
+  },
+  {
+    "Test Name": "Anti Mitochondrial Antibody (AMA) - IFA Screen"
+  },
+  {
+    "Test Name": "Anti Mitochondrial Antibody (AMA) - IFA with reflex titers"
+  },
+  {
+    "Test Name": "Anti MuSK antibody (Myasthenia gravis)"
+  },
+  {
+    "Test Name": "Anti Neutrophil Cytoplasmic Antibody (ANCA) Positive Reflex MPO, PR3 Antibodies"
+  },
+  {
+    "Test Name": "Anti NMDA Receptor Encephalitis IgG Antibodies - CSF"
+  },
+  {
+    "Test Name": "Anti NMDA Receptor Encephalitis IgG Antibodies - Serum"
+  },
+  {
+    "Test Name": "Anti Nuclear Antibody (ANA) - IFA - Pattern identification on Hep-2 cells with reflex titers"
+  },
+  {
+    "Test Name": "Anti Nuclear Antibody (ANA) - IFA - Pattern identification on Hep-2 cells without titers"
+  },
+  {
+    "Test Name": "Anti Nuclear Antibody (ANA) - Quantitative ELISA"
+  },
+  {
+    "Test Name": "Anti Nuclear Antibody (ANA) Profile - Immuno Blot (Extractable Nuclear Antigens/ENA)"
+  },
+  {
+    "Test Name": "Anti Ovary Antibodies - IFA (with titer)"
+  },
+  {
+    "Test Name": "Anti Ovary Antibodies - IFA (without titer)"
+  },
+  {
+    "Test Name": "Anti Parietal cell Antibodies (APCA) - IFA with titer"
+  },
+  {
+    "Test Name": "Anti Parietal cell Antibodies (APCA) - IFA without titer"
+  },
+  {
+    "Test Name": "Anti Phospholipid Antibody - IgA"
+  },
+  {
+    "Test Name": "Anti Phospholipid Antibody - IgG"
+  },
+  {
+    "Test Name": "Anti Phospholipid Antibody - IgM"
+  },
+  {
+    "Test Name": "Anti Phospholipid Antibody Syndrome - APLAS-1 (Lupus Anticoagulant - dRVVT, Cardiolipin IgG & IgM Abs, beta2glycoprotein1 IgG & IgM)"
+  },
+  {
+    "Test Name": "Anti Phospholipid Antibody Syndrome - APLAS-2 (Lupus Anticoagulant - dRVVT, Cardiolipin IgG & IgM Abs, beta2glycoprotein1 IgG & IgM, Anti Phospholipid IgG & IgM)"
+  },
+  {
+    "Test Name": "Anti Saccharomyces cervisae (ASCA) IgA Antibody"
+  },
+  {
+    "Test Name": "Anti Saccharomyces cervisae (ASCA) IgG Antibody"
+  },
+  {
+    "Test Name": "Anti Skeletal (Striated) Muscle Antibody (ASKA ) - IFA with reflex titres"
+  },
+  {
+    "Test Name": "Anti Smooth Muscle Antibody (ASMA) - IFA with reflex titers"
+  },
+  {
+    "Test Name": "Anti Smooth Muscle Antibody (ASMA) Screen - IFA"
+  },
+  {
+    "Test Name": "Anti Soluble Liver Antigen (SLA)"
+  },
+  {
+    "Test Name": "Anti Sperm Antibodies"
+  },
+  {
+    "Test Name": "Anti ss-DNA"
+  },
+  {
+    "Test Name": "Anti Streptolysin O (ASO) Titers"
+  },
+  {
+    "Test Name": "Anti TG ( Anti Thyroglobulin) - CSF"
+  },
+  {
+    "Test Name": "Anti TG ( Anti Thyroglobulin) - Serum"
+  },
+  {
+    "Test Name": "Anti Thrombin (AT III) Activity - Functional"
+  },
+  {
+    "Test Name": "Anti Thrombin III Antigen"
+  },
+  {
+    "Test Name": "Anti TPO (Anti Thyroid Peroxidase)"
+  },
+  {
+    "Test Name": "Anti TPO (Anti Thyroid Peroxidase) - CSF"
+  },
+  {
+    "Test Name": "Anti-Aquaporin-4 / NMO Antibodies ( Neuromyelitis Optica Antibodies)"
+  },
+  {
+    "Test Name": "Anti-Aquaporin-4 / NMO Antibodies ( Neuromyelitis Optica Antibodies)-CSF"
+  },
+  {
+    "Test Name": "Anti-MPO Antibodies (Anti- Myleoperoxidase Antibodies) - pANCA"
+  },
+  {
+    "Test Name": "Anti-Phospholipase A2 Receptor (PLA 2R) IgG"
+  },
+  {
+    "Test Name": "Anti-PR3 Antibodies - cANCA"
+  },
+  {
+    "Test Name": "Anti-SARS COV-2 Antibody to\nSpike protein ß Quantitative"
+  },
+  {
+    "Test Name": "Anti-SARS COV-2 Antibody to\nSpike protein ß Quantitative"
+  },
+  {
+    "Test Name": "Apolipoprotein ß E"
+  },
+  {
+    "Test Name": "Apolipoprotein ß E genotyping"
+  },
+  {
+    "Test Name": "Apolipoprotein A1 (Apo-A1)"
+  },
+  {
+    "Test Name": "Apolipoprotein B (Apo-B)"
+  },
+  {
+    "Test Name": "Apolipoprotein Evaluation Panel [Apolipo A-1, Apolipo B, Lipoprotein (A) ]"
+  },
+  {
+    "Test Name": "Arsenic - Blood"
+  },
+  {
+    "Test Name": "Arsenic Urine - 24 Hours"
+  },
+  {
+    "Test Name": "Arsenic Urine - Spot"
+  },
+  {
+    "Test Name": "Arthritis Panel - I (ASO, Calcium, CBC, ESR, CRP, RF,\nUric acid)"
+  },
+  {
+    "Test Name": "Arthritis Panel - II (ANA - IFA with reflex titers, ASO, Calcium, CBC ,ESR, CRP, RF,\nUric acid)"
+  },
+  {
+    "Test Name": "Arthritis Panel - III (Includes Arthritis Panel II,Anti-CCP)"
+  },
+  {
+    "Test Name": "Aryl Sulphatase A (metachromatic leucodystrophy)"
+  },
+  {
+    "Test Name": "Aryl Sulphatase B (Mucopolysaccharidosis - VI / Maroteaux Lamy) - Quantitative blood"
+  },
+  {
+    "Test Name": "Asparagine - Quantitative - Urine"
+  },
+  {
+    "Test Name": "Aspartate Aminotransferase (AST/SGOT)"
+  },
+  {
+    "Test Name": "Aspartic Acid - Quantitative - Urine"
+  },
+  {
+    "Test Name": "Aspergillosis IgG"
+  },
+  {
+    "Test Name": "Aspergillosis IgG + IgM"
+  },
+  {
+    "Test Name": "Aspergillosis IgM"
+  },
+  {
+    "Test Name": "Aspergillus FumIgatus DNA Detector"
+  },
+  {
+    "Test Name": "ASPERGILLUS FUMIGATUS IGG"
+  },
+  {
+    "Test Name": "Aspergillus Fumigatus- Specific IgE"
+  },
+  {
+    "Test Name": "Ataxia-telangiectasia (ATM) gene analysis"
+  },
+  {
+    "Test Name": "Auramine Rhodamine Stain for screening of Tubercle bacilli"
+  },
+  {
+    "Test Name": "Auto Immune Encephalitis Panel (NMDA, AMPA-GluR1 & R2, GABA B receptor, VGKC (LGI1), CASPR2 by IFA)"
+  },
+  {
+    "Test Name": "Auto Immune Encephalitis Panel-CSF (NMDA, AMPA-\nGluR1 & R2, GABA B receptor, VGKC (LGI1), CASPR2 by IFA"
+  },
+  {
+    "Test Name": "Autoimmune Hepatitis Panel I (ANA-IFA with titers, AMA- IFA, ANCA-IFA with titers, ASMA - IFA, Anti LKM)"
+  },
+  {
+    "Test Name": "Autoimmune Hepatitis Panel II (AMA M2, M2-3E (Bpo), Sp100, PML, gp210, LKM1, LC1, SLA/LP, Ro52)"
+  },
+  {
+    "Test Name": "BACTERIA IDENTIFICATION - MALDITOF"
+  },
+  {
+    "Test Name": "Bacterial Meningitis Screen- Antigen detection"
+  },
+  {
+    "Test Name": "B-ALL: BCR-ABL1 RT-qPCR for\np210 & p190 , ABL1 kinase domain mutation (sequencing)"
+  },
+  {
+    "Test Name": "BCR ABL1 (Ph) like ALLs FISH\npanel - FISH for ABL1, ABL2, CSF1R, CRLF2 and PDGFRB\nrearrangement"
+  },
+  {
+    "Test Name": "BCR/ABL - Philadelphia Chromosome  (IS - International Scale) Quantitative"
+  },
+  {
+    "Test Name": "BCR/ABL - Philadelphia Chromosome - Qualitative (Breakpoint Analysis) - PCR"
+  },
+  {
+    "Test Name": "BCR/ABL - Philadelphia Chromosome Quantitative by Real time PCR"
+  },
+  {
+    "Test Name": "BCR/ABL 1 -Micro (p230) Quantitative PCR"
+  },
+  {
+    "Test Name": "BCR/ABL 1 -Minor (p190) Quantitative PCR"
+  },
+  {
+    "Test Name": "Beta 2 glycoprotein 1 IgA"
+  },
+  {
+    "Test Name": "Beta 2 glycoprotein 1 IgG"
+  },
+  {
+    "Test Name": "Beta 2 glycoprotein 1 IgM"
+  },
+  {
+    "Test Name": "Beta 2 Microglobulin - CSF"
+  },
+  {
+    "Test Name": "Beta 2 Microglobulin - Serum"
+  },
+  {
+    "Test Name": "Beta 2 Microglobulin - Urine spot"
+  },
+  {
+    "Test Name": "Beta 2 Transferrin- Carbohydrate Resistant"
+  },
+  {
+    "Test Name": "Beta Galactocerebrosidase (Krabbe)"
+  },
+  {
+    "Test Name": "Beta Galactosidase (GM 1 / MPS IV B)"
+  },
+  {
+    "Test Name": "Beta Glucosidase (Gaucher)"
+  },
+  {
+    "Test Name": "Beta Hexosaminidase A (GM2- 1/ taysachs)"
+  },
+  {
+    "Test Name": "Beta Hexosaminidase T (GM2- 2/ Sandhoff)"
+  },
+  {
+    "Test Name": "Beta Mannosidase"
+  },
+  {
+    "Test Name": "Beta Thalassemia - beta globin full gene sequencing (> than 50 Mutations) - PNDT"
+  },
+  {
+    "Test Name": "Beta Thalassemia - beta globin full gene sequencing (> than 50 Mutations)-Blood"
+  },
+  {
+    "Test Name": "Beta Thalassemia Beta globin\ngene sequencing - family member screening"
+  },
+  {
+    "Test Name": "Beta Thalassemia Mutation Detection - Blood ( 5 common mutations )"
+  },
+  {
+    "Test Name": "Beta-2-Crosslaps (CTx-1)"
+  },
+  {
+    "Test Name": "Beta-HCG (Quantitative) - Tumor Marker"
+  },
+  {
+    "Test Name": "Beta-HCG Quantitative - Serum (Pregnancy)"
+  },
+  {
+    "Test Name": "Bicarbonate - Body Fluid"
+  },
+  {
+    "Test Name": "Bicarbonate (Carbon Dioxide) - Serum"
+  },
+  {
+    "Test Name": "Bile Acids - Total"
+  },
+  {
+    "Test Name": "Bilirubin (Total, Direct and Indirect)"
+  },
+  {
+    "Test Name": "Bilirubin Conjugated"
+  },
+  {
+    "Test Name": "Bilirubin Total"
+  },
+  {
+    "Test Name": "Bilirubin Total - Body fluid"
+  },
+  {
+    "Test Name": "Bilirubin Unconjugated, Indirect"
+  },
+  {
+    "Test Name": "Biochemical Analysis (Glucose, Protein and Chloride) - Ascitic Fluid"
+  },
+  {
+    "Test Name": "Biochemical Analysis (Glucose, Protein and Chloride) - Body\nFluid"
+  },
+  {
+    "Test Name": "Biochemical Analysis (Glucose, Protein and Chloride) - CSF"
+  },
+  {
+    "Test Name": "Biochemical Analysis (Glucose, Protein and Chloride) - Pericardial Fluid"
+  },
+  {
+    "Test Name": "Biochemical Analysis (Glucose, Protein and Chloride) - Pleural fluid"
+  },
+  {
+    "Test Name": "Biochemical Analysis (Glucose, Protein and Chloride) - Synovial fluid"
+  },
+  {
+    "Test Name": "Biofire - Blood Culture Identification (BCID) Panel"
+  },
+  {
+    "Test Name": "Biofire - Meningitis Panel (ME)"
+  },
+  {
+    "Test Name": "Biofire - Pneumonia Plus Panel"
+  },
+  {
+    "Test Name": "Biofire - Respiratory RP2 Plus Panel"
+  },
+  {
+    "Test Name": "BioFire Gastrointestinal (GI) Panel"
+  },
+  {
+    "Test Name": "Biopsy - Bone (core biospy <2 CM)"
+  },
+  {
+    "Test Name": "Biopsy - Extra large Specimen / Complex Cancer specimen (Eg Radical Mastectomy, Extensive ileo-colectomy, etc)"
+  },
+  {
+    "Test Name": "Biopsy - Large Specimen (Hysterectomy with Salpingo- oophorectomy, Non-malignant excisions of Thyroid, Kidney, Testes, Intestines, Lymph node dissections, Hepatic resections for metastases, Breast - wide local excisions)"
+  },
+  {
+    "Test Name": "Biopsy - Limb Amputation / large bone Specimen"
+  },
+  {
+    "Test Name": "Biopsy - Lymph Node - Excision Biopsy (> 3 Nodes)"
+  },
+  {
+    "Test Name": "Biopsy - Lymph Node - Excision Biopsy (1 -3 Nodes)"
+  },
+  {
+    "Test Name": "Biopsy - Lymphoma / Lymph Node Biopsy Review (Up To 5 Blocks / Slides)"
+  },
+  {
+    "Test Name": "Biopsy - Medium Specimen (Simple hysterectomy, Placenta, Gall bladder, Breast lumpectomies and reductions, prostate and bladder chippings, skin excisions for cancer, brain tumors)"
+  },
+  {
+    "Test Name": "Biopsy - Renal / Kidney with IF studies"
+  },
+  {
+    "Test Name": "Biopsy - Skin with IF studies"
+  },
+  {
+    "Test Name": "Biopsy - Small Specimen (Endometrial and cervical biopsies, endoscopic biopsies, trucut biopsies, Appendix, Fallopian tubes, Products of conception, Small\nincision/excisions)"
+  },
+  {
+    "Test Name": "Biopsy -Lymph Node - Trucut Biopsy"
+  },
+  {
+    "Test Name": "Biopsy of skin - Final Diagnostic Panel (inclusive of special stains) without IF studies"
+  },
+  {
+    "Test Name": "Biopsy- Photomicrograph"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion- Stained Slides for review III (11\n- 15 Slides)"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion- Stained Slides for review III (16\n- 20 Slides)"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion- Stained Slides for review III (21\n- 25 Slides)"
+  },
+  {
+    "Test Name": "Biopsy-Second Opinion-Slides and Block for Review I (1 block/1 Slide)"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion-Slides and Block for Review II (upto 4 Paraffin Blocks/4 Slides)"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion-Slides and Block for Review III (11 - 15 Paraffin Blocks/Slides)"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion-Slides and Block for Review III (16 - 20 Paraffin Blocks/Slides)"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion-Slides and Block for Review III (21 - 25 Paraffin Blocks/Slides)"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion-Slides and Block for Review III (more than 4 Paraffin Blocks/Slides)"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion-Slides for review I (1 Slides)"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion-Slides for review II (up to 4 Slides)"
+  },
+  {
+    "Test Name": "Biopsy-Second opinion-Slides for review III (more than 4 Slides)"
+  },
+  {
+    "Test Name": "Biotinidase deficiency - Quantitative - Blood"
+  },
+  {
+    "Test Name": "Bismuth, Blood"
+  },
+  {
+    "Test Name": "BK Virus Qualitative Real Time PCR"
+  },
+  {
+    "Test Name": "BK Virus Quantitative Real Time PCR"
+  },
+  {
+    "Test Name": "Blood group Antibody Screening With Reflex Antibody Identification"
+  },
+  {
+    "Test Name": "Blood Grouping and Typing - Gel Card Method"
+  },
+  {
+    "Test Name": "Blood Grouping and Typing (ABO and Rh) - Tube agglutination"
+  },
+  {
+    "Test Name": "Blood Urea Nitrogen, BUN - Serum"
+  },
+  {
+    "Test Name": "BOH (Bad Obstetric History) Panel - Comprehensive [ ANA, APA-IgG/IgM, Anti Cardiolipin - IgG/IgM/IgA(screen), Lupus Anticoagulant(DRVVT), TSH, TORCH-10 (IgG & IgM)]"
+  },
+  {
+    "Test Name": "BOH (Bad Obstetric History) Panel - Comprehensive with Karyotyping [ ANA, APA- IgG/IgM, Anti Cardiolipin - IgG/IgM/IgA(screen), Lupus Anticoagulant, TSH, TORCH-10 (IgG & IgM), Karyotyping of\nCouple.]"
+  },
+  {
+    "Test Name": "BOH (Bad Obstetric History) Profile - Basic [ ANA, Anti Cardiolipin - IgG/IgM/IgA(screen), Lupus Anticoagulant(DRVVT), TSH and Torch-5 IgM ]"
+  },
+  {
+    "Test Name": "Bone Marrow Aspirate Morphological Assessment"
+  },
+  {
+    "Test Name": "BONE MARROW ASPIRATION & BIOPSY"
+  },
+  {
+    "Test Name": "Bone Marrow Biopsy"
+  },
+  {
+    "Test Name": "Bone Marrow Evaluation Procedure and Morphological\nAssessment"
+  },
+  {
+    "Test Name": "Bone marrow karyotyping"
+  },
+  {
+    "Test Name": "Bone Marrow Sample/Peripheral Blood Preservation for Cytogenetics"
+  },
+  {
+    "Test Name": "Bone Marrow Slide Review"
+  },
+  {
+    "Test Name": "Bone Screen: Calcium, Phosphorous, VIT D"
+  },
+  {
+    "Test Name": "Bone Specimen (Medium)"
+  },
+  {
+    "Test Name": "Bordetella Pertussis (IgG antibodies-Quantitative)"
+  },
+  {
+    "Test Name": "Bordetella Pertussis by PCR"
+  },
+  {
+    "Test Name": "BRAF Full Gene Mutation Analysis-Blood"
+  },
+  {
+    "Test Name": "BRAF Full Gene Mutation Analysis-Paraffin Block"
+  },
+  {
+    "Test Name": "BRAF V600E Mutation"
+  },
+  {
+    "Test Name": "BRCA 1 & 2 Full Gene Sequencing (with Sanger validation )"
+  },
+  {
+    "Test Name": "BRCA1 & BRCA2 somatic mutation testing"
+  },
+  {
+    "Test Name": "Breast and Ovarian Cancer: ATM, BRCA1, BRCA2, BRIP1, CDH1, CHEK2, NBN, PALB2, PTEN, RAD51C, RAD51D, STK11, TP53"
+  },
+  {
+    "Test Name": "Breast Cancer Monitor Panel (CA 15-3, CEA)"
+  },
+  {
+    "Test Name": "Brucella Antibodies - Agglutination"
+  },
+  {
+    "Test Name": "Brucella IgG Antibodies"
+  },
+  {
+    "Test Name": "Brucella IgM Antibodies"
+  },
+  {
+    "Test Name": "BUN/Creatinine Ratio"
+  },
+  {
+    "Test Name": "C1 Esterase Inhibitor -\nQuantification (C1 Inactivator - Quantitative)"
+  },
+  {
+    "Test Name": "C3 (Complement 3)"
+  },
+  {
+    "Test Name": "C4 (Complement 4)"
+  },
+  {
+    "Test Name": "C6 (Complement C6)"
+  },
+  {
+    "Test Name": "C7 (Complement C7)"
+  },
+  {
+    "Test Name": "C8 (Complement C8)"
+  },
+  {
+    "Test Name": "C9 (Complement C9)"
+  },
+  {
+    "Test Name": "CA 125 (Cancer Antigen 125)"
+  },
+  {
+    "Test Name": "CA 125 Body Fluids"
+  },
+  {
+    "Test Name": "CA 15.3 (Cancer Antigen 15.3)"
+  },
+  {
+    "Test Name": "CA 19.9 (Cancer Antigen 19.9)"
+  },
+  {
+    "Test Name": "CA 19.9 (Cancer Antigen 19.9)- Body Fluid"
+  },
+  {
+    "Test Name": "CA 72.4"
+  },
+  {
+    "Test Name": "Cadmium, 24 Hours Urine"
+  },
+  {
+    "Test Name": "Cadmium, Blood"
+  },
+  {
+    "Test Name": "Cadmium, Urine Spot"
+  },
+  {
+    "Test Name": "CAH Panel (Androstenedione, 17 OH Progesterone, Total Testosterone, Cortisol, Aldosterone)"
+  },
+  {
+    "Test Name": "Calcitonin"
+  },
+  {
+    "Test Name": "Calcium - 24 hours urine"
+  },
+  {
+    "Test Name": "Calcium - Corrected"
+  },
+  {
+    "Test Name": "Calcium - Serum"
+  },
+  {
+    "Test Name": "Calcium - Spot urine"
+  },
+  {
+    "Test Name": "Calcium - Spot urine (with Ca:Creatinine Ratio)"
+  },
+  {
+    "Test Name": "Calcium- Ionized"
+  },
+  {
+    "Test Name": "Calcium-Body Fluid"
+  },
+  {
+    "Test Name": "Calprotectin - Fecal"
+  },
+  {
+    "Test Name": "Calreticulin Mutation"
+  },
+  {
+    "Test Name": "Campylobacter Species Antigen Detection - Stool"
+  },
+  {
+    "Test Name": "Canavan Disease (N-Acetyl Aspartic Acid)"
+  },
+  {
+    "Test Name": "Cancer Syndromes: APC, ATM, BMPR1A, BRCA1, BRCA2, BRIP1, CHEK1, CHEK2, MEN1, MLH1, MSH2, MSH6, NBN, NF2, PALB2, PMS2, PTEN, RAD51C, RAD51D, RET, SDHB, SDHD, SMAD4, STK11, TP53, TSC1, TSC2, VHL, Wt1, RB1"
+  },
+  {
+    "Test Name": "Cancer Targeted Gene Panel : Colon/Colorectal (KRAS, BRAF, PIK3CA, PTEN)"
+  },
+  {
+    "Test Name": "Cancers of the Nervous  System: ALK, APC, CDKN2A, MLH1, NF2, PMS2, PTEN, SUFU, TP53, VHL"
+  },
+  {
+    "Test Name": "Candida Albicans Antibodies"
+  },
+  {
+    "Test Name": "Candida Albicans DNA Detector"
+  },
+  {
+    "Test Name": "Carbamazepine - Free"
+  },
+  {
+    "Test Name": "Carbamazepine (Tegretol)"
+  },
+  {
+    "Test Name": "Cardiac Enzymes (SGOT, CK MB, CK MB/CK Ratio, LDH,\nCreatinine)"
+  },
+  {
+    "Test Name": "Cardiac Risk Assessment (D- Dimer, Glucose ß Random, hs CRP, Lipid Profile, Homocysteine)"
+  },
+  {
+    "Test Name": "Carnitine"
+  },
+  {
+    "Test Name": "Catecholamines - 24 hours urine (Adrenaline and Nor- adrenaline)"
+  },
+  {
+    "Test Name": "Catecholamines - Plasma (Adrenaline and Nor- adrenaline)"
+  },
+  {
+    "Test Name": "CBC with ESR"
+  },
+  {
+    "Test Name": "CBL Mutation Detection"
+  },
+  {
+    "Test Name": "CD 34 - Stem cell enumeration"
+  },
+  {
+    "Test Name": "CD4 & CD8 lymphocyte subsetting (CD45+/CD3+/ CD4+\n/CD8+)"
+  },
+  {
+    "Test Name": "CD4 & CD8 lymphocyte subsetting (CD45+/CD3+/ CD4+\n/CD8+) - Body fluid"
+  },
+  {
+    "Test Name": "CEA (Carcino Embryonic Antigen)"
+  },
+  {
+    "Test Name": "CEA-Body Fluid"
+  },
+  {
+    "Test Name": "CEBPA Mutation Detection"
+  },
+  {
+    "Test Name": "Celiac Profile (TTG IgA ABS, Gliadin IgG and IgA ABS; Endomysial Ab)"
+  },
+  {
+    "Test Name": "Ceruloplasmin"
+  },
+  {
+    "Test Name": "CH 50 Complement Total Serum"
+  },
+  {
+    "Test Name": "Charcot Marie Tooth Disease"
+  },
+  {
+    "Test Name": "Chikungunya IgM - Rapid"
+  },
+  {
+    "Test Name": "Chikungunya Qualitative - PCR"
+  },
+  {
+    "Test Name": "Chimerism Study Post Bone Marrow Transplant"
+  },
+  {
+    "Test Name": "Chimerism Study Pre Bone Marrow Transplant- Donor & Recipient"
+  },
+  {
+    "Test Name": "Chitotriosidase (Plasma)"
+  },
+  {
+    "Test Name": "Chlamydia Pneumoniae IgG Antibodies"
+  },
+  {
+    "Test Name": "Chlamydia Pneumoniae IgM Antibodies"
+  },
+  {
+    "Test Name": "Chlamydia speciation"
+  },
+  {
+    "Test Name": "Chlamydia Trachomatis IgA Antibodies"
+  },
+  {
+    "Test Name": "Chlamydia Trachomatis IgG Antibodies"
+  },
+  {
+    "Test Name": "Chlamydia Trachomatis IgM Antibodies"
+  },
+  {
+    "Test Name": "Chlamydia Trachomatis PCR"
+  },
+  {
+    "Test Name": "Chloride - 24 hours urine"
+  },
+  {
+    "Test Name": "Chloride - CSF"
+  },
+  {
+    "Test Name": "Chloride - Dialysis fluid"
+  },
+  {
+    "Test Name": "Chloride - Fluid"
+  },
+  {
+    "Test Name": "Chloride - Serum"
+  },
+  {
+    "Test Name": "Chloride - Spot urine"
+  },
+  {
+    "Test Name": "Chlylomicron Qualitattive - Body Fluid"
+  },
+  {
+    "Test Name": "Cho/HDL Ratio"
+  },
+  {
+    "Test Name": "Cholesterol - Fluid"
+  },
+  {
+    "Test Name": "Cholesterol - HDL (Direct)"
+  },
+  {
+    "Test Name": "Cholesterol - LDL (Direct)"
+  },
+  {
+    "Test Name": "Cholesterol LDL Calculated"
+  },
+  {
+    "Test Name": "Cholesterol Total - Serum"
+  },
+  {
+    "Test Name": "Cholinesterase / Pseudocholinesterase"
+  },
+  {
+    "Test Name": "Chromium, 24 Hours Urine"
+  },
+  {
+    "Test Name": "Chromium, Blood"
+  },
+  {
+    "Test Name": "Chromium, Urine Spot"
+  },
+  {
+    "Test Name": "Chromogranin A"
+  },
+  {
+    "Test Name": "Chromosomal Array - Amniotic Fluid"
+  },
+  {
+    "Test Name": "Chromosomal Array - Peripheral blood."
+  },
+  {
+    "Test Name": "Chromosomal Array - Peripheral blood.High Density 750K"
+  },
+  {
+    "Test Name": "Chromosomal Array - Products of Conception"
+  },
+  {
+    "Test Name": "Chylomicron Qualitative - Urine"
+  },
+  {
+    "Test Name": "Citrate - 24 hrs Urine"
+  },
+  {
+    "Test Name": "CK MB"
+  },
+  {
+    "Test Name": "CK MB/CK Ratio"
+  },
+  {
+    "Test Name": "c-Kit Mutation  - Blood"
+  },
+  {
+    "Test Name": "c-Kit Mutation (GIST) - Tissue"
+  },
+  {
+    "Test Name": "Clinical Exome Sequencing"
+  },
+  {
+    "Test Name": "CLL Prognostication Gene Panel - NGS"
+  },
+  {
+    "Test Name": "Clomipramine"
+  },
+  {
+    "Test Name": "Clonazepam"
+  },
+  {
+    "Test Name": "Clorazepate"
+  },
+  {
+    "Test Name": "Clostridium Difficile PCR"
+  },
+  {
+    "Test Name": "Clostridium difficile toxin"
+  },
+  {
+    "Test Name": "Clozapine"
+  },
+  {
+    "Test Name": "CMV - PCR Qualitative, Amniotic\nFluid"
+  },
+  {
+    "Test Name": "CMV - PCR Qualitative, CSF"
+  },
+  {
+    "Test Name": "CMV - PCR Qualitative, Plasma"
+  },
+  {
+    "Test Name": "CMV - PCR Qualitative, Urine"
+  },
+  {
+    "Test Name": "CMV - PCR Quantitative"
+  },
+  {
+    "Test Name": "CMV (Cytomegalovirus) IgG Antibodies - Serum"
+  },
+  {
+    "Test Name": "CMV (Cytomegalovirus) IgG Avidity"
+  },
+  {
+    "Test Name": "CMV (Cytomegalovirus) IgM Antibodies"
+  },
+  {
+    "Test Name": "c-myc Breakapart- FISH"
+  },
+  {
+    "Test Name": "Coagulation Screen - Basic (PT, INR, aPTT)"
+  },
+  {
+    "Test Name": "Coagulation Screening - 1 (PT, aPTT, INR, Platelet Count)"
+  },
+  {
+    "Test Name": "Coagulation Screening - 2 (PT, aPTT, INR, Platelet Count, Thrombin Time)"
+  },
+  {
+    "Test Name": "Coagulation Screening - 3 (PT, aPTT, INR, Fibrinogen, Platelet Count, Thrombin Time)"
+  },
+  {
+    "Test Name": "Coagulation Screening - 4 (PT, aPTT, Urea Clot Lysis , Fibrinogen, Thrombin Time)"
+  },
+  {
+    "Test Name": "Coagulation Screening - Suspect DIC (PT, aPTT, INR, Fibrinogen, D-Dimer, FDP, Hemogram (CBC + Retic + PS)"
+  },
+  {
+    "Test Name": "Cobalt Urine, Spot Urine"
+  },
+  {
+    "Test Name": "Cobalt, 24 Hours Urine"
+  },
+  {
+    "Test Name": "Cobalt, Blood"
+  },
+  {
+    "Test Name": "Coccidioides Antibody"
+  },
+  {
+    "Test Name": "Colon Cancer Panel 1: KRAS, NRAS,  BRAF(ASO-PCR), PIK3CA\nmutation by Sanger\nSequencing,"
+  },
+  {
+    "Test Name": "Colon Cancer Panel 2: KRAS, NRAS by Sanger Sequencing, BRAF(ASO-PCR) &\nMicrosatellite Instability Index[MLH-1,MSH-2,MSH-\n6,PMS-2] by PCR"
+  },
+  {
+    "Test Name": "Complete Blood Count"
+  },
+  {
+    "Test Name": "Complete Blood Count with Peripheral Smear Review"
+  },
+  {
+    "Test Name": "Comprehensive genomic profiling (CGP) (500 Genes,TMB, MSI & HRR)"
+  },
+  {
+    "Test Name": "Comprehensive leukemia panel - 57 genes"
+  },
+  {
+    "Test Name": "Coombs Test - Direct (Gel Agglutination)"
+  },
+  {
+    "Test Name": "Coombs Test - Indirect (Gel Agglutination)"
+  },
+  {
+    "Test Name": "Copper (Cu) - 24 hours urine"
+  },
+  {
+    "Test Name": "Copper Reflex To Ceruloplasmin (Ceruloplasmin Will Be Performed If Low Value Of Copper)"
+  },
+  {
+    "Test Name": "Copper, Urine Spot"
+  },
+  {
+    "Test Name": "Copper-Serum"
+  },
+  {
+    "Test Name": "Cortisol AM (ECLIA)"
+  },
+  {
+    "Test Name": "Cortisol Free, Urine 24 hrs"
+  },
+  {
+    "Test Name": "Cortisol PM"
+  },
+  {
+    "Test Name": "Cortisol Suppression by Dexamethasone, Overnight High Dose"
+  },
+  {
+    "Test Name": "Cortisol Suppression by Dexamethasone, Overnight Low Dose"
+  },
+  {
+    "Test Name": "Covid 19 Total Antibody Test"
+  },
+  {
+    "Test Name": "COVID RTPCR WITH COLLECTION"
+  },
+  {
+    "Test Name": "Coxiella Burnetti - Q fever (IgG antibody)"
+  },
+  {
+    "Test Name": "Coxiella Burnetti - Q fever (IgM antibody)"
+  },
+  {
+    "Test Name": "Coxsackie Antibody IgG"
+  },
+  {
+    "Test Name": "Coxsackie Antibody IgM"
+  },
+  {
+    "Test Name": "C-Peptide - Fasting"
+  },
+  {
+    "Test Name": "C-Peptide (PP)"
+  },
+  {
+    "Test Name": "C-Peptide 24 Hr Urine"
+  },
+  {
+    "Test Name": "C-Peptide Stimulation by Glucagon"
+  },
+  {
+    "Test Name": "C-Reactive Protein (CRP) - quantitative"
+  },
+  {
+    "Test Name": "Creatine Kinase(CPK) - isoenzymes Electrophoresis"
+  },
+  {
+    "Test Name": "Creatine Kinase(CPK) - Serum"
+  },
+  {
+    "Test Name": "Creatinine"
+  },
+  {
+    "Test Name": "Creatinine - 24 hours Urinary"
+  },
+  {
+    "Test Name": "Creatinine - Body fluid"
+  },
+  {
+    "Test Name": "Creatinine - Spot urine"
+  },
+  {
+    "Test Name": "Creatinine Clearance Test"
+  },
+  {
+    "Test Name": "Cryoglobulin Panel (Immunofixation electrophoresis for classification of Cryoglobulins)"
+  },
+  {
+    "Test Name": "Cryoglobulin-Qualitative"
+  },
+  {
+    "Test Name": "Cryptococcus Antigen detection - CSF, BAL, Urine"
+  },
+  {
+    "Test Name": "Cryptococcus antigen detection - Serum"
+  },
+  {
+    "Test Name": "Cryptococcus Antigen Detection If Negative Reflex CSF Fungal Culture"
+  },
+  {
+    "Test Name": "Cryptosporidium Antigen Detection From Stool: Rapid Card Test"
+  },
+  {
+    "Test Name": "Cryptosporidium elements identification in Stool - Microscopy"
+  },
+  {
+    "Test Name": "CSF / Body fluids Analysis for hematologic maligancies"
+  },
+  {
+    "Test Name": "Culture - Actinomyces"
+  },
+  {
+    "Test Name": "Culture - Corybacterium Diphtheria"
+  },
+  {
+    "Test Name": "Culture - Gonococcus (Neisseria gonorrhoea)"
+  },
+  {
+    "Test Name": "Culture - Hemophilus"
+  },
+  {
+    "Test Name": "Culture - Nocardia"
+  },
+  {
+    "Test Name": "Culture - Water (with Presumptive Coliform Count)"
+  },
+  {
+    "Test Name": "Culture (Special)"
+  },
+  {
+    "Test Name": "Culture and Identification - Anaerobic - Conventional"
+  },
+  {
+    "Test Name": "Culture and Identification - Anaerobic [Blood]- Automated"
+  },
+  {
+    "Test Name": "Culture and Identification - Anaerobic [Fluids]- Automated"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [BAL]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [BLOOD]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [BODY FLUIDS]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [Bone Marrow]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [CENTRAL LINE TIP]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [CSF]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [DIALYSIS CATH TIP]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [EAR SWAB]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [ET]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [EYE SWAB]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [ICD]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [LYMPH NODE]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [NASAL SWAB]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [PERICARDIAL FLUID]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [PERITONEAL/ASCITIC FLUID]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [PLEURAL FLUID]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [PUS]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [RECTAL SWAB]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [SEMEN]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [SPUTUM]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [STOOL]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [SYNOVIAL FLUID]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [THROAT SWAB]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [TISSUE]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [TRACHEAL SECRETION]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [URETHRAL SWAB]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [URINARY CATHTIP]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [URINE] - Identification & Sensitivity on Vitek"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [VAGINAL SWAB]"
+  },
+  {
+    "Test Name": "Culture and Sensitivity - Aerobic [WOUND SWAB]"
+  },
+  {
+    "Test Name": "Culture -Bacterial - (Conventional Aerobic Culture) followed by conventional Reflex Antibacterial Sensitivity"
+  },
+  {
+    "Test Name": "Cyclosporine"
+  },
+  {
+    "Test Name": "Cyfra 21-1 (Lung Cancer Marker)"
+  },
+  {
+    "Test Name": "CYP2C19 GENOTYPING\n(Clopidogrel gene mutaion / Clopidogrel resistance)"
+  },
+  {
+    "Test Name": "CYP2C9 Genotyping Assay"
+  },
+  {
+    "Test Name": "CYP3A4*22 Genotyping"
+  },
+  {
+    "Test Name": "Cystatin C"
+  },
+  {
+    "Test Name": "Cystic fibrosis gene Mutation (F508,G551D/R553X,G542X)"
+  },
+  {
+    "Test Name": "Cystic fibrosis Neonatal screen (immunoreactive tripsinogen)"
+  },
+  {
+    "Test Name": "Cysticercosis Antibody IgG - Serum"
+  },
+  {
+    "Test Name": "Cysticercus IgG Antibodies - CSF"
+  },
+  {
+    "Test Name": "Cystine Quantitative - Serum"
+  },
+  {
+    "Test Name": "Cytochemistry stains (MPO, PAS, NSE, CAE, Perl's )"
+  },
+  {
+    "Test Name": "Cytomegalovirus Combi Test (CMV Viral Load/GCV resistance)"
+  },
+  {
+    "Test Name": "D-Dimer -Quantitative"
+  },
+  {
+    "Test Name": "Dehydroepiandrosterone (DHEA)"
+  },
+  {
+    "Test Name": "Dehydroepiandrosterone Sulphate, DHEA-S"
+  },
+  {
+    "Test Name": "Dengue Detection Panel (IgG, IgM & NS1) - Rapid Qualitative"
+  },
+  {
+    "Test Name": "Dengue IgG antibody - ELISA"
+  },
+  {
+    "Test Name": "Dengue IgM antibody - ELISA"
+  },
+  {
+    "Test Name": "Dengue NS1 Antigen - ELISA"
+  },
+  {
+    "Test Name": "Dengue NS1 Antigen - Rapid"
+  },
+  {
+    "Test Name": "Dengue Profile ELISA (Dengue IgG antibody - ELISA+ Dengue IgM antibody - ELISA + Dengue NS1 Antigen - ELISA"
+  },
+  {
+    "Test Name": "Dengue Qualitative - PCR - CSF"
+  },
+  {
+    "Test Name": "Dengue Qualitative - PCR - Plasma"
+  },
+  {
+    "Test Name": "DENGUE DUO (DENGUE & CHIKUNGUNYA VIRUSES) QUALITATIVE PCR"
+  },
+  {
+    "Test Name": "Desmoglein I Antibody"
+  },
+  {
+    "Test Name": "Desmoglein III Antibody"
+  },
+  {
+    "Test Name": "Detection of Malaria Parasites"
+  },
+  {
+    "Test Name": "Diabetes - NephroCheck (Albumin ;BUN; BUN/Creatinine Ratio; Calcium\nß Serum, CUE, Creatinine- Serum, Creatinine - Spot urine, Electrolytes (Na, K, Cl) ß Serum, GFR-e (Glomerular Filtration Rate - estimated), Glucose ß Fasting & PP, Microalbumin -Spot urine, Microalbumin/Creatinine Ratio, Uric acid , HbA1c)"
+  },
+  {
+    "Test Name": "Diabetes Check - I (Glucose - F & PP; HbA1c)"
+  },
+  {
+    "Test Name": "Diabetes Check - II (Complete Urine Examination; Glucose ß Fasting & PP, HbA1c, Lipid Profile)"
+  },
+  {
+    "Test Name": "Diabetes Check- Comprehensive (Glucose- F&PP, HbA1c, Lipid Profile, CUE, Microalbumin, Creatinine, BUN, Urea, Electrolytes)"
+  },
+  {
+    "Test Name": "Digoxin (lanoxin)"
+  },
+  {
+    "Test Name": "Dihydrotestosterone (DHT)"
+  },
+  {
+    "Test Name": "Diptheria IgG Abs,Serum"
+  },
+  {
+    "Test Name": "DMD/ BMD - (Duchenne / Becker Muscular Dystrophy ) - 18 exons"
+  },
+  {
+    "Test Name": "DMD/BMD (Duchenne / Becker Muscular Dystrophy )- 79 exons"
+  },
+  {
+    "Test Name": "DNA Extraction and Preservation"
+  },
+  {
+    "Test Name": "DNPH Test (dinitrophenylhydrazine Test)"
+  },
+  {
+    "Test Name": "Dopamine - Plasma"
+  },
+  {
+    "Test Name": "Dopamine - Urine 24 hrs"
+  },
+  {
+    "Test Name": "DPD - Deoxypyridinoline (Pyrilinks D)"
+  },
+  {
+    "Test Name": "DPD Gene Mutations (5-FU toxicity) - (Dihydropyrimidine Dehydrogenase Gene Mutation)"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine : 6 Drugs (Opiates, PCP, Cocaine, Marijuana, Amphetamine, Barbiturates)"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine: 12 Drugs (Amphetamine, Methamphetamine, Cocaine, Barbiturates, Cannabinoids, Opiates, PCP, Benzodiazepine and Morphine, TCA, MDMA (XTC)"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine: 9 Drugs (Amphetamine, Methamphetamine, Cocaine, Barbiturates, Cannabinoids, Opiates, PCP, Benzodiazepine and Methadone)"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine: Amphetamine"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine: Barbiturates"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine: Cannabinoids"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine: Cocaine"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine: Methadone"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine: Opiates"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine: Phencyclidine (PCP)"
+  },
+  {
+    "Test Name": "Drugs Of Abuse - Urine: Propoxyphene"
+  },
+  {
+    "Test Name": "Drugs Of Abuse- Urine: Benzodiazepines"
+  },
+  {
+    "Test Name": "Drugs Of Abuse- Urine: Methamphetamine"
+  },
+  {
+    "Test Name": "DUAL MARKER REFLEX TO NIPT"
+  },
+  {
+    "Test Name": "Dystrophin Gene Mutation"
+  },
+  {
+    "Test Name": "E Coli K1 / N. Meningitidis B - Antigen detection"
+  },
+  {
+    "Test Name": "E.Coli O157 Antigen Detection"
+  },
+  {
+    "Test Name": "Echinococcus Antibody IgG (Hydatid Serology & Immunology)"
+  },
+  {
+    "Test Name": "Echinococcus Detection / Hydatid cyst"
+  },
+  {
+    "Test Name": "Echovirus Antibody - IgG"
+  },
+  {
+    "Test Name": "Echovirus Antibody - IgM"
+  },
+  {
+    "Test Name": "EGFR Mutation Detection - Real time PCR ( Exon 18,19,20,21) including T790M- USFDA approved Kit"
+  },
+  {
+    "Test Name": "Electrolytes (Na, K, Cl) - Body Fluid"
+  },
+  {
+    "Test Name": "Electrolytes (Na, K, Cl) - Dialysis Fluid"
+  },
+  {
+    "Test Name": "Electrolytes (Na, K, Cl) - Serum"
+  },
+  {
+    "Test Name": "Electrolytes (Na, K, Cl) - Urine 24 hr"
+  },
+  {
+    "Test Name": "Electrolytes (Na, K, Cl) - Urine spot"
+  },
+  {
+    "Test Name": "ENA (Extractable Nuclear Antigen) Profile - Qualitative"
+  },
+  {
+    "Test Name": "ENA (Extractable Nuclear Antigen) Profile - Quantitative"
+  },
+  {
+    "Test Name": "Endocrine cancers ATM, AIP, BRCA1, BRCA2, CDC73, CDKN2A, MEN1, PALB2, PTEN, RET, SDHAF2, SDHB, SDHC, SDHD, SMAD4, STK11, TP53,\nVHL"
+  },
+  {
+    "Test Name": "Entamoeba Histolytica Antibody (IgG) - Amoebiasis"
+  },
+  {
+    "Test Name": "Enteroviruses-RNA - PCR - CSF"
+  },
+  {
+    "Test Name": "Enteroviruses-RNA - PCR - Plasma"
+  },
+  {
+    "Test Name": "Eosinophilic leukemia panel - FISH for PDGFRA, PDGFRB and FGFR1"
+  },
+  {
+    "Test Name": "Eosinophilic leukemia panel extended - Bone marrow karyotyping,FISH for PDGFRA, PDGFRB and FGFR1"
+  },
+  {
+    "Test Name": "Epstein Barr Virus Early Antigen IgG Antibodies, EBV (EA) (Infectious\nMononucleosis)"
+  },
+  {
+    "Test Name": "Epstein Barr Virus Nuclear Antigen IgM Antibodies, EBV (Na) (Infectious Mononucleosis)"
+  },
+  {
+    "Test Name": "Epstein Barr Virus Viral Capsid Antigen IgG Antibodies, EBV (VCA) (Infectious Mononucleosis)"
+  },
+  {
+    "Test Name": "Epstein Barr Virus Viral Capsid Antigen IgM Antibodies, EBV (VCA) (Infectious Mononucleosis)"
+  },
+  {
+    "Test Name": "Epstein Barr Virus Nuclear Antigen IgG Antibodies, EBV (Na) (Infectious Mononucleosis)"
+  },
+  {
+    "Test Name": "Epstein-Barr Virus (EBV) DNA PCR- Qualitative"
+  },
+  {
+    "Test Name": "Epstein-Barr Virus (EBV) DNA PCR- Quantitative"
+  },
+  {
+    "Test Name": "Epstein-Barr Virus Early RNA (EBER-ISH) In-Situ-\nHybridization"
+  },
+  {
+    "Test Name": "Erythrocyte Sedimentation Rate (ESR) -Westergren's\nMethod"
+  },
+  {
+    "Test Name": "Erythropoietin (EPO)"
+  },
+  {
+    "Test Name": "Estradiol, E2"
+  },
+  {
+    "Test Name": "Estriol - Unconjugated, uE3"
+  },
+  {
+    "Test Name": "Everolimus"
+  },
+  {
+    "Test Name": "Expert 2nd Opinion from UPMC (Telepathology)"
+  },
+  {
+    "Test Name": "Extended Breast panel (ER, PR, HER2Neu, AR, CK5/6, E-\nCadherin, KI67)"
+  },
+  {
+    "Test Name": "Extra-Large Specimen with bony tissue"
+  },
+  {
+    "Test Name": "Factor II (Prothrombin) Activity"
+  },
+  {
+    "Test Name": "Factor IX (Anti-Hemophilia B) Activity"
+  },
+  {
+    "Test Name": "Factor V ( Proaccelerin) Activity"
+  },
+  {
+    "Test Name": "Factor V Leiden -Mutation Detection - PCR"
+  },
+  {
+    "Test Name": "Factor VII (Proconvertin) Activity"
+  },
+  {
+    "Test Name": "Factor VIII (Anti-Hemophilia A) Activity"
+  },
+  {
+    "Test Name": "Factor X (Stuart Prower) Factor functional activity"
+  },
+  {
+    "Test Name": "Factor XI (Rosenthal) Functional Activity"
+  },
+  {
+    "Test Name": "Factor XII (Hageman) Activity"
+  },
+  {
+    "Test Name": "Factor XIII Activity (Qualitative)\n- Urea clot lysis test"
+  },
+  {
+    "Test Name": "FECAL ELASTASE"
+  },
+  {
+    "Test Name": "Ferric Chloride Test (For Phenylketonurea)"
+  },
+  {
+    "Test Name": "Ferritin"
+  },
+  {
+    "Test Name": "Fertility Capsule I (FSH, LH, Prolactin)"
+  },
+  {
+    "Test Name": "Fertility Capsule II (FSH, LH, Prolactin, E2 & TSH)"
+  },
+  {
+    "Test Name": "Fertility Capsule III (FSH, LH, Prolactin, E2, DHEAS, Progeterone & TSH)"
+  },
+  {
+    "Test Name": "Fertility Capsule IV (FSH, LH, Prolactin,Testosterone)"
+  },
+  {
+    "Test Name": "Fertility Capsule V (AMH, LH, FSH, Prolactin, E2, TSH)"
+  },
+  {
+    "Test Name": "Fertility Capsule VI (FSH & LH)"
+  },
+  {
+    "Test Name": "Fertility Capsule VII (FSH, LH & Testosterone-Total)"
+  },
+  {
+    "Test Name": "Fertility Capsule VIII (AMH, LH, FSH, Prolactin, E2, TSH, Testosterone Free and Total)"
+  },
+  {
+    "Test Name": "Fever Check - 1 (CBC, SGOT, SGPT, Complete Urine Examination, Erythrocyte Sedimentation Rate (ESR) , Malaria - Smear Examination, WIDAL Slide Agglutination\ntests)"
+  },
+  {
+    "Test Name": "Fever Check - 2 (CBC, Complete Urine Examination, Erythrocyte Sedimentation Rate (ESR) , Malaria - Smear Examination, WIDAL Slide Agglutination tests)"
+  },
+  {
+    "Test Name": "Fibrin Degradation Products (FDP)"
+  },
+  {
+    "Test Name": "Fibrinogen - Tissue (IF)"
+  },
+  {
+    "Test Name": "Fibrinogen (Clotting Method of Clauss)"
+  },
+  {
+    "Test Name": "Fibromax (Fibrosis, Activity, STEATO, ASH and NASH of\nLiver.)"
+  },
+  {
+    "Test Name": "Filaria Antibody,Serum"
+  },
+  {
+    "Test Name": "Filaria Antigen"
+  },
+  {
+    "Test Name": "FIP1L1-PDGFR Gene\nRearrangement"
+  },
+  {
+    "Test Name": "FISH - t(8;14) - Burkitt's Lymphoma - Tissue"
+  },
+  {
+    "Test Name": "FISH -5/del(5q), -7/del(7q),\n+8,del(20q), del(17p)"
+  },
+  {
+    "Test Name": "FISH- ALK Gene\nRearrangement (Paraffin Block)"
+  },
+  {
+    "Test Name": "FISH for  13,18,21, X&Y"
+  },
+  {
+    "Test Name": "FISH for 1 Marker"
+  },
+  {
+    "Test Name": "FISH for 13,21,18,XY-Products of conception"
+  },
+  {
+    "Test Name": "FISH for 1p/19q co deletion"
+  },
+  {
+    "Test Name": "FISH for 3q (TERC)"
+  },
+  {
+    "Test Name": "FISH for 5 Markers"
+  },
+  {
+    "Test Name": "FISH for 6 Markers"
+  },
+  {
+    "Test Name": "FISH for ABL1 gene rearrangement"
+  },
+  {
+    "Test Name": "FISH for ABL2 gene rearrangement"
+  },
+  {
+    "Test Name": "FISH for AML/ETO - t(8;21)"
+  },
+  {
+    "Test Name": "FISH for Aneuploidy - 2 Markers Chr 13, 21 (Prenatal)"
+  },
+  {
+    "Test Name": "FISH for Aneuploidy - 3 Markers Chr 13,18, 21"
+  },
+  {
+    "Test Name": "FISH for Aneuploidy - 3 Markers Chr 13,18, 21 (Prenatal)"
+  },
+  {
+    "Test Name": "FISH for Aneuploidy - 3 Markers Chr 18,X, Y (Prenatal)"
+  },
+  {
+    "Test Name": "FISH for Aneuploidy - 5 markers Chr 13, 18, 21, X, Y (Prenatal)"
+  },
+  {
+    "Test Name": "FISH for Aneuploidy - 6 markers 13/16/18/21/X/Y (Prenatal)"
+  },
+  {
+    "Test Name": "FISH for Aneuploidy - 9 markers Chr 9/13/15/16/18/21/22/X/Y (Prenatal)"
+  },
+  {
+    "Test Name": "FISH for Aneuploidy - Single Marker (Prenatal)"
+  },
+  {
+    "Test Name": "FISH for Angelman Prader Willi Syndrome (Microdeletion 15q11-13)"
+  },
+  {
+    "Test Name": "FISH for Angelman Prader Willi Syndrome (Microdeletion 15q11-13)"
+  },
+  {
+    "Test Name": "FISH for ATM deletion"
+  },
+  {
+    "Test Name": "FISH for Bcl - 2"
+  },
+  {
+    "Test Name": "FISH for Bcl - 6"
+  },
+  {
+    "Test Name": "FISH for Bcl 2 gene rearrangement"
+  },
+  {
+    "Test Name": "FISH for BCl 6 Gene rearrangement"
+  },
+  {
+    "Test Name": "FISH for BCR/ABL - t(9;22)"
+  },
+  {
+    "Test Name": "FISH for Bladder Cancer (for Chromosomes 3, 7, 17 & p16 gene on chromosome 9)"
+  },
+  {
+    "Test Name": "FISH for c MYC, Solid Tumor"
+  },
+  {
+    "Test Name": "FISH for CEP12 / Trisomy 12"
+  },
+  {
+    "Test Name": "FISH for CEP8"
+  },
+  {
+    "Test Name": "FISH for CHROMOSOME 21"
+  },
+  {
+    "Test Name": "FISH for CRLF2 gene rearrangement"
+  },
+  {
+    "Test Name": "FISH for CSF1R gene rearrangement"
+  },
+  {
+    "Test Name": "FISH for del(13q)"
+  },
+  {
+    "Test Name": "FISH for del20q"
+  },
+  {
+    "Test Name": "FISH for del5q"
+  },
+  {
+    "Test Name": "FISH for del7q"
+  },
+  {
+    "Test Name": "FISH for DiGeorge Syndrome (Microdeletion 22q) - amniotic fluid"
+  },
+  {
+    "Test Name": "FISH for DiGeorge Syndrome (Microdeletion 22q) -\nperipheral blood"
+  },
+  {
+    "Test Name": "FISH for E2A rearrangement"
+  },
+  {
+    "Test Name": "FISH for Ewing's Sarcoma (EWSR1 gene)"
+  },
+  {
+    "Test Name": "FISH for FGFR1 gene rearrangement"
+  },
+  {
+    "Test Name": "FISH for HER2/neu - Paraffin Block"
+  },
+  {
+    "Test Name": "FISH for IgH / Bcl2"
+  },
+  {
+    "Test Name": "FISH for IgH gene rearrangement"
+  },
+  {
+    "Test Name": "FISH for IgH-FGFR3 fusion / t(4;14)"
+  },
+  {
+    "Test Name": "FISH for IgH-MAF fusion / t(14:16)"
+  },
+  {
+    "Test Name": "FISH for Inv (16)"
+  },
+  {
+    "Test Name": "FISH for Lymphoma B-Cell (BMA/PB): t(11;14)(IGH/CCND1), t(14;18)(IGH/BCL2),\nt(8q24)(MYC  translocation),\nt(3q27)(BCL6  translocation)"
+  },
+  {
+    "Test Name": "FISH for MET gene Amplification"
+  },
+  {
+    "Test Name": "FISH for Miller - Dieker Syndrome (Microdeletion 17p13.3)"
+  },
+  {
+    "Test Name": "FISH for MLL"
+  },
+  {
+    "Test Name": "FISH for Monosomy 1"
+  },
+  {
+    "Test Name": "FISH for Monosomy 7"
+  },
+  {
+    "Test Name": "FISH for N-myc oncogene amplification"
+  },
+  {
+    "Test Name": "FISH for PDGFR ß A (Platelet\nDerived Growth Factor\nReceptor ß alpha)"
+  },
+  {
+    "Test Name": "FISH for PDGFR ß B (Platelet\nDerived Growth Factor\nReceptor ß beta)"
+  },
+  {
+    "Test Name": "FISH for PIK3CA"
+  },
+  {
+    "Test Name": "FISH for PML/RAR? t(15;17)"
+  },
+  {
+    "Test Name": "FISH for RARA Gene rearrangement"
+  },
+  {
+    "Test Name": "FISH for ROS -1 (Lung Cancer NSCLC)"
+  },
+  {
+    "Test Name": "FISH for Solid Tumour-1 Marker"
+  },
+  {
+    "Test Name": "FISH for SRY Deletion"
+  },
+  {
+    "Test Name": "FISH for Synovial Sarcoma"
+  },
+  {
+    "Test Name": "FISH for t (10:24) HOX11"
+  },
+  {
+    "Test Name": "FISH for t(11;14) - Mantle cell lymphoma"
+  },
+  {
+    "Test Name": "FISH for t(11;14) or CCND1/IGH"
+  },
+  {
+    "Test Name": "FISH for t(14;18) for follicular lymphoma"
+  },
+  {
+    "Test Name": "FISH for t(17;22) COL1A1/PDGFB"
+  },
+  {
+    "Test Name": "FISH for t(8;14) - Burkitt's Lymphoma"
+  },
+  {
+    "Test Name": "FISH for TEL/AML t(12;21)"
+  },
+  {
+    "Test Name": "FISH for TMPRSS2-ERG"
+  },
+  {
+    "Test Name": "FISH for TOP2A"
+  },
+  {
+    "Test Name": "FISH for TP53 deletion / del17p"
+  },
+  {
+    "Test Name": "FISH for Trisomy 13"
+  },
+  {
+    "Test Name": "FISH for Trisomy 13 & 21"
+  },
+  {
+    "Test Name": "FISH for Trisomy 16"
+  },
+  {
+    "Test Name": "FISH for Trisomy 18"
+  },
+  {
+    "Test Name": "FISH for Trisomy 18, X, Y"
+  },
+  {
+    "Test Name": "FISH for Trisomy 21"
+  },
+  {
+    "Test Name": "FISH for Williams Syndrome (Elastin Gene 17q11.23)"
+  },
+  {
+    "Test Name": "FISH for X Chromosome"
+  },
+  {
+    "Test Name": "FISH for X Y Chromosome"
+  },
+  {
+    "Test Name": "FISH for XY - Sex Mismatched Bone Marrow Transplant"
+  },
+  {
+    "Test Name": "FISH for Y Chromosome"
+  },
+  {
+    "Test Name": "FISH for t(11;18) for MALTomas; BIRC3 MALT1\nfusion"
+  },
+  {
+    "Test Name": "FISH- LYMPHOMA  PANEL -3,\nTriple Hit (BMA/PB): (t(14;18)(IGH/BCL2),\nMYC(8q24) translocation,\nt(3q27)(BCL6 t)"
+  },
+  {
+    "Test Name": "FISH- LYMPHOMA  PANEL -3,\nTriple Hit (FFPE- Block): (t(14;18)(IGH/BCL2),\nMYC(8q24) translocation,\nt(3q27)(BCL6 t)"
+  },
+  {
+    "Test Name": "FISH- LYMPHOMA  PANEL\nDouble Hit /Triple Hit (c Myc, Bcl2, Bcl6, IgH-cMyc fusion)"
+  },
+  {
+    "Test Name": "FISH- LYMPHOMA PANEL - 2,\nDual Hit (BMA/PB): (t(14;18)(IGH/BCL2),\nMYC(8q24) translocation)"
+  },
+  {
+    "Test Name": "FISH Lymphoma Panel 4 (BMA/PB): t(14;18)(IGH/BCL2),\nt(3q27)(BCL6  translocation)"
+  },
+  {
+    "Test Name": "FISH Lymphoma Panel 4 (FFPE): t(14;18)(IGH/BCL2),\nt(3q27)(BCL6  translocation)"
+  },
+  {
+    "Test Name": "FISH- LYMPHOMA  PANEL\nDouble Hit /Triple Hit (c Myc, Bcl2, Bcl6, IgH-cMyc fusion)"
+  },
+  {
+    "Test Name": "FISH on body fluids -1 marker"
+  },
+  {
+    "Test Name": "Flowcytometry - B-Cell Absolute Counts (CD19/CD20/CD45)"
+  },
+  {
+    "Test Name": "Flowcytometry - Glanzmann's thrombesthenia screening"
+  },
+  {
+    "Test Name": "Flowcytometry - LAD\n(Leukocyte Adhesion Deficiency) Screening"
+  },
+  {
+    "Test Name": "Flowcytometry - Lymphocyte NK Cell enumeration (CD3, CD19, CD56, CD45)"
+  },
+  {
+    "Test Name": "Flowcytometry - Lymphocyte subset enumeration (B/T/NK quantification) - CD3, CD4, CD8, CD19, CD56, CD45"
+  },
+  {
+    "Test Name": "Flowcytometry Panel - Acute Leukemia Comprehensive Characterization  (Case based antibodies selected from the list given below: CD45, CD34, CD38, TdT, CD19, CD20, CD22,\nCD10, CD79a, Kappa, Lambda, CD1a, CD2, CD3, CD4, CD5, CD7, CD8, CD13, CD33,CD56, CD64, CD117, CD123,\nGlycophorin A, MPO, CD11b, HLA-DR, CD14, CD15, CD16, CD41, CD61, CD71 )"
+  },
+  {
+    "Test Name": "Flowcytometry Panel - Body fluid for Hematolymphoid malignancies; (Case based antibodies selected from the list given below CD45, CD34, CD38, TdT, CD19, CD20, CD22,\nCD10, CD79a, Kappa, Lambda, CD1a, CD2, CD3, CD4, CD5, CD7, CD8, CD13, CD33,CD56, CD64, CD117, CD123, MPO)"
+  },
+  {
+    "Test Name": "Flowcytometry Panel - CSF for Hematolymphoid malignancies (Case based antibodies selected from the list given below CD45, CD34, CD38, TdT, CD19, CD20, CD22, CD10,\nCD79a, Kappa, Lambda, CD1a, CD2, CD3, CD4, CD5, CD7, CD8, CD13, CD33,CD56, CD64, CD117, CD123, MPO)"
+  },
+  {
+    "Test Name": "Flowcytometry Panel - Lymphoproliferative Disorder Characterization (Case based antibodies selected from the list given below CD45, CD34, HLA-DR, CD38, TdT, CD19, CD20, CD22, CD10, CD79a,\nkappa, lambda, CD23, CD11c, CD25, CD103, CD3, CD1a, CD2, CD4, CD5, CD8, CD7, CD16, CD56, CD57, CD123, CD200,bcl2, FMC-7, ZAP-70 )"
+  },
+  {
+    "Test Name": "Flowcytometry Panel - MDS Screening  (CD13, CD11b, CD16, CD34, CD45, CD117, CD19, CD10, CD20, CD38, HLA- DR)"
+  },
+  {
+    "Test Name": "Flowcytometry Panel - MRD - Acute Myleiod Leukemia (AML)"
+  },
+  {
+    "Test Name": "Flowcytometry Panel - MRD - T- ALL"
+  },
+  {
+    "Test Name": "Flowcytometry Panel - Multiple Myeloma  (CD45, CD38, CD19, CD56, CD138,\nCD27,kappa, lambda)"
+  },
+  {
+    "Test Name": "Flowcytometry Panel-MRD B- ALL"
+  },
+  {
+    "Test Name": "FLT3 Gene mutation (ITD, D835Y) Detection"
+  },
+  {
+    "Test Name": "FLT3 Gene mutation ITD Detection with allele burden & TKD Mutation(D835)"
+  },
+  {
+    "Test Name": "Folate (Folic Acid)"
+  },
+  {
+    "Test Name": "Follicle Stimulating Hormone, FSH"
+  },
+  {
+    "Test Name": "FOOD DETECT"
+  },
+  {
+    "Test Name": "Food Intolerance Test"
+  },
+  {
+    "Test Name": "FoundationOneCDx"
+  },
+  {
+    "Test Name": "FoundationOneHeme"
+  },
+  {
+    "Test Name": "FoundationOneLiquid"
+  },
+  {
+    "Test Name": "Fragile X (FMR1) Mutation Screen"
+  },
+  {
+    "Test Name": "Fragile X Chromosome Analysis (G Banding)"
+  },
+  {
+    "Test Name": "Free androgen Index (FAI)"
+  },
+  {
+    "Test Name": "Free Beta-hCG (free Beta- human chorionic gonadotropin)"
+  },
+  {
+    "Test Name": "Free Light Chain Assay (kappa & Lambda) - Serum (with kappa lamba ratio)"
+  },
+  {
+    "Test Name": "Free Light Chain Assay (kappa & Lambda) - Urine"
+  },
+  {
+    "Test Name": "Friedreich's Ataxia Mutation Analysis"
+  },
+  {
+    "Test Name": "Frozen Section (extra large >10 sections)"
+  },
+  {
+    "Test Name": "Frozen Section (large 5-10 sections)"
+  },
+  {
+    "Test Name": "Frozen Section(medium <5 sections)"
+  },
+  {
+    "Test Name": "Frozen Section(small 1-2 sections)"
+  },
+  {
+    "Test Name": "Fructosamine"
+  },
+  {
+    "Test Name": "Fungal Culture - Conventional"
+  },
+  {
+    "Test Name": "Fungal Elements Identification - staining"
+  },
+  {
+    "Test Name": "Fungus Culture [Ascitic/Peritoneal fluid]"
+  },
+  {
+    "Test Name": "Fungus Culture [BAL]"
+  },
+  {
+    "Test Name": "Fungus Culture [BLOOD]"
+  },
+  {
+    "Test Name": "Fungus Culture [CERVICAL SWAB]"
+  },
+  {
+    "Test Name": "Fungus Culture [CORNEAL/ CONJUNCTIVAL/ INTRA OCULAR SPECIMEN]"
+  },
+  {
+    "Test Name": "Fungus Culture [CSF]"
+  },
+  {
+    "Test Name": "Fungus Culture [DIALYSIS CATH TIP]"
+  },
+  {
+    "Test Name": "Fungus Culture [EAR/ NOSE/ SCRAPINGS]"
+  },
+  {
+    "Test Name": "Fungus Culture [ET]"
+  },
+  {
+    "Test Name": "Fungus Culture [HAIR]"
+  },
+  {
+    "Test Name": "Fungus Culture [ICD FLUID]"
+  },
+  {
+    "Test Name": "Fungus Culture [LYMPH NODE]"
+  },
+  {
+    "Test Name": "Fungus Culture [NAIL]"
+  },
+  {
+    "Test Name": "Fungus Culture [PERICARDIAL FLUID]"
+  },
+  {
+    "Test Name": "Fungus Culture [PLEURAL FLUID]"
+  },
+  {
+    "Test Name": "Fungus Culture [PUS]"
+  },
+  {
+    "Test Name": "Fungus Culture [SKIN SCRAPINGS/ SUBCUTANEOUS TISSUE]"
+  },
+  {
+    "Test Name": "Fungus Culture [SPUTUM]"
+  },
+  {
+    "Test Name": "Fungus Culture [STOOL]"
+  },
+  {
+    "Test Name": "Fungus Culture [SYNOVIAL FLUID]"
+  },
+  {
+    "Test Name": "Fungus Culture [THROAT SWAB]"
+  },
+  {
+    "Test Name": "Fungus Culture [URETHRAL SWAB]"
+  },
+  {
+    "Test Name": "Fungus Culture [URINE]"
+  },
+  {
+    "Test Name": "Fungus Culture [VAGINAL SWAB]"
+  },
+  {
+    "Test Name": "Fungus Culture [WOUND SWAB]"
+  },
+  {
+    "Test Name": "G6PD Glucose 6 Phosphate Dehydrogenase - Neonatal Screen"
+  },
+  {
+    "Test Name": "G6PD Glucose 6 Phosphate Dehydrogenase - Quantitative"
+  },
+  {
+    "Test Name": "GAD - 65 Antibody (for Paraneoplastic Syndrome)"
+  },
+  {
+    "Test Name": "Galactomannan - (BAL)"
+  },
+  {
+    "Test Name": "Galactomannan - Aspergillus Antigen"
+  },
+  {
+    "Test Name": "Galactose 6 Sulphatase"
+  },
+  {
+    "Test Name": "Galactose Classical - Transferase - Quantitative - Blood"
+  },
+  {
+    "Test Name": "Galactose, Quantitative - Plasma"
+  },
+  {
+    "Test Name": "Galactosemia - Neonatal Screen"
+  },
+  {
+    "Test Name": "Gamma Glutamyl Transferase (GGT)"
+  },
+  {
+    "Test Name": "Ganglioside - IgG antibody panel by immunoblot"
+  },
+  {
+    "Test Name": "Ganglioside - IgM antibody panel by immunoblot"
+  },
+  {
+    "Test Name": "Ganglioside GQ1B"
+  },
+  {
+    "Test Name": "Gastrin"
+  },
+  {
+    "Test Name": "Gastroenteritis Screening Panel (Stool-Routine & culture and Rotavirus Antigen Detection)"
+  },
+  {
+    "Test Name": "Gastro-Intenstinal Cancers APC, BMPR1A, CDH1, CDKN2A, CHEK2, EPCAM, KIT, MET, MLH1, MSH2, MSH6, MUTYH, PMS2, PTEN, SDHB, SDHC, SMAD4, STK11, TP53"
+  },
+  {
+    "Test Name": "Gaucher's Disease - Quantitative blood"
+  },
+  {
+    "Test Name": "GCV Resistance by Sequencing"
+  },
+  {
+    "Test Name": "Gene Expert (xPERT MTB/RIF) - Extrapulmonary"
+  },
+  {
+    "Test Name": "Gene Expert (xPERT MTB/RIF) - Pulmonary"
+  },
+  {
+    "Test Name": "Genetic Hair Loss Test for Alopecia"
+  },
+  {
+    "Test Name": "GFR-e (Glomerular Filtration Rate - estimated) with Cystatin C"
+  },
+  {
+    "Test Name": "GFR-e (Glomerular Filtration Rate - estimated) with Serum Creatinine"
+  },
+  {
+    "Test Name": "GI Cancer Gene Mutation Panel (APC, BMPR1A, CDH1, CDKN2A, CHEK2, EPCAM, KIT, MET, MLH1, MSH2, MSH6, MUTYH, PMS2, PTEN, SDHB, SDHC, SMAD4, STK11, TP53)"
+  },
+  {
+    "Test Name": "Giardia -Antigen detection"
+  },
+  {
+    "Test Name": "Gilbert's Syndrome Gene Sequencing (UGT1A1 Gene Polymorphism)"
+  },
+  {
+    "Test Name": "Globulin"
+  },
+  {
+    "Test Name": "Glucosamine N Acetyl Transferase"
+  },
+  {
+    "Test Name": "Glucose - F & PP (Fasting & Post prandial)"
+  },
+  {
+    "Test Name": "Glucose - Fasting"
+  },
+  {
+    "Test Name": "Glucose - PP (Post prandial)"
+  },
+  {
+    "Test Name": "Glucose Challenge Test - Gestational (2 step procedure)"
+  },
+  {
+    "Test Name": "Glucose Challenge Test (GCT - 1 step) - Gestational"
+  },
+  {
+    "Test Name": "Glucose Tolerance Test, GTT-3 Samples"
+  },
+  {
+    "Test Name": "Glucose-6 Phospahte Dehydrogenase (G6PD) Gene\nMutations"
+  },
+  {
+    "Test Name": "Glucose-Random"
+  },
+  {
+    "Test Name": "Glutamic Acid - Quantitative Plasma"
+  },
+  {
+    "Test Name": "Glutamic Acid Decarboxylase 65 (Gad-65) IgG Antibodies"
+  },
+  {
+    "Test Name": "Glutamine - Quantitative Plasma"
+  },
+  {
+    "Test Name": "Glycine - Quantitative CSF"
+  },
+  {
+    "Test Name": "Glycine - Quantitative Plasma"
+  },
+  {
+    "Test Name": "Glycosaminoglycan (GAG)"
+  },
+  {
+    "Test Name": "GM1 Gangliosidosis - Quantitative blood"
+  },
+  {
+    "Test Name": "GM2 Gangliosidosis - Quantitative blood (Tay Sach's & Sandhoff Disease)"
+  },
+  {
+    "Test Name": "GNRH (LHRH) Stimulation Test - For FSH and LH - 5 samples"
+  },
+  {
+    "Test Name": "Goodpasture's Syndrome Panel (Anti GBM Antibody & PR3/cANCA)"
+  },
+  {
+    "Test Name": "Gram's Stain - any sample"
+  },
+  {
+    "Test Name": "Gram's Stain - Vaginal discharge with Neugent's score"
+  },
+  {
+    "Test Name": "Gram's Stain Urethral discharge"
+  },
+  {
+    "Test Name": "Growth Disorder Panel (HGH, IGF-1, IGFBP-3)"
+  },
+  {
+    "Test Name": "Growth Hormone (GH)"
+  },
+  {
+    "Test Name": "Growth Hormone Stimulation Test"
+  },
+  {
+    "Test Name": "GTT with Growth Hormone Separation Test"
+  },
+  {
+    "Test Name": "Gynaecological Cancers BRCA1, BRCA2, CDH1, CHEK2, EPCAM, MLH1, MSH2, MSH6, PTEN, PMS2, TP53, STK11"
+  },
+  {
+    "Test Name": "H1N1 (Swine Flu) RNA PCR"
+  },
+  {
+    "Test Name": "Haemoglobin-Free in Plasma"
+  },
+  {
+    "Test Name": "Haemoglobin-Free in Urine"
+  },
+  {
+    "Test Name": "Haemophilia Profile (APTT with mixing studies, Factor VIII, Factor IX)"
+  },
+  {
+    "Test Name": "Haemophilus Influenza B (Hib)- IgG Serum"
+  },
+  {
+    "Test Name": "Haemophilus Influenza B Antigen - CSF"
+  },
+  {
+    "Test Name": "Haemophilus Influenza B Antigen - Serum"
+  },
+  {
+    "Test Name": "Haemophilus Influenza B Antigen - urine"
+  },
+  {
+    "Test Name": "Ham's Test (For PNH Screen) - Acidified Serum lysis test"
+  },
+  {
+    "Test Name": "Hanging Drop for V.cholerae"
+  },
+  {
+    "Test Name": "Haptoglobin - Genotype"
+  },
+  {
+    "Test Name": "Haptoglobin - Serum"
+  },
+  {
+    "Test Name": "HbA1c - Glycated Haemoglobin By HPLC"
+  },
+  {
+    "Test Name": "HbA1c - Glycated Hemoglobin"
+  },
+  {
+    "Test Name": "HbD Iran mutation analysis"
+  },
+  {
+    "Test Name": "HbD Punjab mutation analysis"
+  },
+  {
+    "Test Name": "HbE mutation analysis (Glu-26- lys)"
+  },
+  {
+    "Test Name": "HBSAG BY ELISA"
+  },
+  {
+    "Test Name": "HBV Drug Resistance\nGenotyping ß YMDD"
+  },
+  {
+    "Test Name": "HCG (Human Chorionic Gonadotropin) Quantitative - CSF"
+  },
+  {
+    "Test Name": "HCV Antibody Spot Test"
+  },
+  {
+    "Test Name": "HCV BY ELISA"
+  },
+  {
+    "Test Name": "HCV-IgM Antibody"
+  },
+  {
+    "Test Name": "HE4 (Human Epididymis Protein-4)"
+  },
+  {
+    "Test Name": "HE4 (Human Epididymis Protein-4) With ROMA Index (For Epithelial Ovarian Cancer)"
+  },
+  {
+    "Test Name": "Heavy Metal Profile Comprehensive"
+  },
+  {
+    "Test Name": "Heavy Metal Profile Screening"
+  },
+  {
+    "Test Name": "Helicobacter Pylori Culture"
+  },
+  {
+    "Test Name": "Helicobacter Pylori IgA Antibodies"
+  },
+  {
+    "Test Name": "Helicobacter Pylori IgG Antibodies"
+  },
+  {
+    "Test Name": "Helicobacter Pylori IgM Antibodies"
+  },
+  {
+    "Test Name": "Helicobactor Pylori Antigen Detection"
+  },
+  {
+    "Test Name": "Hematocrit / Packed cell volume / PCV"
+  },
+  {
+    "Test Name": "Hemochromatosis (HFE) Gene Mutation"
+  },
+  {
+    "Test Name": "Hemodialysis Water Culture"
+  },
+  {
+    "Test Name": "Hemoglobin"
+  },
+  {
+    "Test Name": "Hemoglobin Variant Analysis (Hb-HPLC) with RBC indices"
+  },
+  {
+    "Test Name": "Hemonc AML - COMBO FISH II (FISH for AML/ETO - t(8;21), PML/RAR? t(15;17), Inv (16),\nFLT3 Gene mutation (ITD, D835Y) Detection"
+  },
+  {
+    "Test Name": "Hemonc -AML -\nCOMBO FISH I (FISH for AML- ETO,PML-RARA, inv16, FLT3\nMutation, NPM1 Mutation detection, CEBPA mutation\ndetection"
+  },
+  {
+    "Test Name": "HemOnc Panel - ALL Cytogenetics 1 ( Karyotyping + FISH for BCR-ABL1 + TEL-AML1\n+ MLL + E2A rearrangement)"
+  },
+  {
+    "Test Name": "HemOnc Panel - ALL Cytogenetics 2 ( Karyotyping + FISH for BCR-ABL1 + TEL-AML1\n+ MLL )"
+  },
+  {
+    "Test Name": "Hemonc panel - ALL FISH (FISH for BCR-ABL1 + TEL-AML1 +\nMLL + E2A rearrangement)"
+  },
+  {
+    "Test Name": "HemOnc Panel - AML cytogenetics 1 (Karyotyping + FISH for AML-ETO + Inv(16)+ MLL + PML /RARA)"
+  },
+  {
+    "Test Name": "HemOnc Panel - AML Cytogenetics 2 (Karyotyping + FISH for AML-ETO + Inv(16)+ MLL)"
+  },
+  {
+    "Test Name": "HemOnc Panel - AML cytogenetics 3 (Karyotyping + FISH for AML-ETO + Inv(16)+ MLL + BCR/ABL)"
+  },
+  {
+    "Test Name": "Hemonc panel - AML FISH (FISH for AML-ETO + Inv(16)+ MLL + PML /RARA)"
+  },
+  {
+    "Test Name": "HemOnc Panel - CLL cytogenetics  3 (Karyotyping , FISH for del17p , del 11q (ATM deletion) , trisomy 12 &\ndel13q)"
+  },
+  {
+    "Test Name": "HemOnc Panel - CLL cytogenetics 1 (Karyotyping + FISH for del17p)"
+  },
+  {
+    "Test Name": "HemOnc Panel - CLL cytogenetics 2 (Karyotyping + FISH for del17p + del 11q (ATM deletion) + trisomy 12)"
+  },
+  {
+    "Test Name": "HemOnc Panel - CLL FISH 1 (FISH for del17p + del 11q (ATM deletion) + trisomy 12)"
+  },
+  {
+    "Test Name": "HemOnc Panel - CLL FISH 2 (FISH for del17p + del 11q (ATM deletion) + trisomy 12 + del13q)"
+  },
+  {
+    "Test Name": "HemOnc Panel - CML Screen\n(Karyotyping and BCR/ABL By FISH)"
+  },
+  {
+    "Test Name": "HemOnc Panel - FISH for 2 Markers"
+  },
+  {
+    "Test Name": "HemOnc Panel - FISH for 3 Markers"
+  },
+  {
+    "Test Name": "HemOnc Panel - FISH for 4 Markers"
+  },
+  {
+    "Test Name": "HemOnc Panel - FISH for 6 markers"
+  },
+  {
+    "Test Name": "HemOnc Panel - MDS (Karyotyping + FISH for trisomy 8 + del7q + del5q + del20q + Monosomy 7 + Monosomy 5)"
+  },
+  {
+    "Test Name": "HemOnc Panel - MDS FISH (FISH for trisomy 8 + del7q + del5q + del20q + Monosomy 7\n+ Monosomy 5)"
+  },
+  {
+    "Test Name": "HemOnc Panel - MPN (JAK2V617F+ JAK2 EXON 12+ CALR+MPL)"
+  },
+  {
+    "Test Name": "HemOnc Panel - Myeloma Cytogenetics [ Karyotyping + FISH for del17p + IGH breakapart + del13q + t(4;14) + t(14;16) ]"
+  },
+  {
+    "Test Name": "HemOnc Panel - Myeloma Cytogenetics with CD138 magnetic bead enrichment [ Karyotyping + FISH for del17p\n+ IGH breakapart + del13q +\nt(4;14) + t(14;16) ]"
+  },
+  {
+    "Test Name": "HemOnc Panel - Myeloma Cytogenetics-2 [FISH for del17p\n+ IGH breakapart + del13q +\nt(4;14) + t(14;16) ]"
+  },
+  {
+    "Test Name": "HemOnc Panel - Myeloma Cytogenetics-2 with CD138 magnetic bead enrichment [FISH for del17p + IGH breakapart + del13q + t(4;14) + t(14;16) ]"
+  },
+  {
+    "Test Name": "HemOnc Panel - Myeloma IgH Characterisation (FISH for 4;14 and 14;16)"
+  },
+  {
+    "Test Name": "HemOnc Panel - Myeloma IgH Characterisation with CD138 magnetic bead enrichment (FISH for 4;14 and 14;16)"
+  },
+  {
+    "Test Name": "HemOnc Panel - Smart Cytogenetics 1 (Karyotyping + FISH for One marker)"
+  },
+  {
+    "Test Name": "HemOnc Panel - Smart Cytogenetics 2 (Karyotyping and FISH For two Markers)"
+  },
+  {
+    "Test Name": "HemOnc Panel - Smart Cytogenetics 3 (Karyotyping and FISH For three Markers)"
+  },
+  {
+    "Test Name": "HemOnc Panel - Smart Cytogenetics 5 (Karyotyping and FISH for 5 markers)"
+  },
+  {
+    "Test Name": "HemOnc Panel - Smart Cytogenetics 6 (Karyotyping and FISH for 6 markers)"
+  },
+  {
+    "Test Name": "HemOnc Panel -AML Molecular Prognostication (FLT3+NPM1+CEBPA)"
+  },
+  {
+    "Test Name": "Hemonc Panel MDS Karyotyping + FISH -2 : 5/del(5q), -7/del(7q),\n+8,del(20q), del(17p)"
+  },
+  {
+    "Test Name": "Hemosiderin - Urine"
+  },
+  {
+    "Test Name": "Hemostasis Panel - Intrinsic - Extended 1 (APTT With Mixing Studies, Factor VIII, Factor IX, Factor XI)"
+  },
+  {
+    "Test Name": "Heparan Sulphate Sulphamidase (Sanfillipo / MPS III A)"
+  },
+  {
+    "Test Name": "Hepatitis - Steatosis (Alcoholic & Non-Alcoholic Steato Hepatitis - ASH/NASH)"
+  },
+  {
+    "Test Name": "Hepatitis A Virus (HAV) Antibody - IgG"
+  },
+  {
+    "Test Name": "Hepatitis A virus (HAV) IgM"
+  },
+  {
+    "Test Name": "Hepatitis A virus (HAV) IgM - SPOT"
+  },
+  {
+    "Test Name": "Hepatitis A Virus (HAV) Panel - HAV IgM & HAV IgG"
+  },
+  {
+    "Test Name": "Hepatitis A Virus (HAV) RNA PCR"
+  },
+  {
+    "Test Name": "Hepatitis B core Antibody IgM (Anti HBc - IgM)"
+  },
+  {
+    "Test Name": "Hepatitis B Core Antibody Total (HBcAb- Total)"
+  },
+  {
+    "Test Name": "Hepatitis B envelope Antibody (AntiHBe)"
+  },
+  {
+    "Test Name": "Hepatitis B Envelope Antigen (HBeAg)"
+  },
+  {
+    "Test Name": "Hepatitis B surface Antibody Total (Anti HBs)"
+  },
+  {
+    "Test Name": "Hepatitis B surface antigen (HBsAg) - Confirmation (Neutralisation test)"
+  },
+  {
+    "Test Name": "Hepatitis B surface antigen (HBsAg) - Quantitative"
+  },
+  {
+    "Test Name": "Hepatitis B surface antigen (HBsAg) - Screening"
+  },
+  {
+    "Test Name": "Hepatitis B Surface antigen (HBsAg) - Spot Test"
+  },
+  {
+    "Test Name": "Hepatitis B Viral load - Quantitative - PCR"
+  },
+  {
+    "Test Name": "Hepatitis B Virus (HBV) - Drug Resistance (Lamivudine, Telbivudine, Adefovir, Tenofovir and Entecavir)"
+  },
+  {
+    "Test Name": "Hepatitis B Virus (HBV) Basal Core Promoter Mutation"
+  },
+  {
+    "Test Name": "Hepatitis B Virus (HBV) Genotyping"
+  },
+  {
+    "Test Name": "Hepatitis B Virus (HBV) Genotyping & Drug Resistance"
+  },
+  {
+    "Test Name": "Hepatitis B Virus (HBV) Precore Mutation"
+  },
+  {
+    "Test Name": "Hepatitis B Virus DNA detection (Qualitative - PCR)"
+  },
+  {
+    "Test Name": "Hepatitis C Virus (HCV) Antibody"
+  },
+  {
+    "Test Name": "Hepatitis C Virus Genotyping - PCR"
+  },
+  {
+    "Test Name": "Hepatitis C Virus RNA Detection - Qualitative - PCR"
+  },
+  {
+    "Test Name": "Hepatitis C Virus RNA Quantitative (Viral load) - PCR"
+  },
+  {
+    "Test Name": "Hepatitis C Virus RNA Quantitative + Genotyping"
+  },
+  {
+    "Test Name": "Hepatitis Delta Virus - RNA PCR"
+  },
+  {
+    "Test Name": "Hepatitis Delta Virus IgM Antibodies"
+  },
+  {
+    "Test Name": "Hepatitis Delta Virus Total Antibodies"
+  },
+  {
+    "Test Name": "Hepatitis E Virus (HEV) Antibody - IgG"
+  },
+  {
+    "Test Name": "Hepatitis E Virus (HEV) Antibody - IgM"
+  },
+  {
+    "Test Name": "Hepatitis E virus (HEV) IgM - SPOT"
+  },
+  {
+    "Test Name": "Hepatitis G Vius(HGV) - RNA detection by PCR"
+  },
+  {
+    "Test Name": "Hepatitis Panel - Atypical virus evaluation (CMV IgM, HSV IgM, Varicella zoster IgM, EBV(VCA)\nIgM"
+  },
+  {
+    "Test Name": "Hepcidin"
+  },
+  {
+    "Test Name": "Hereditary Cancer Gene Panel - Focussed"
+  },
+  {
+    "Test Name": "Hereditary Pancreatitis Panel"
+  },
+  {
+    "Test Name": "Herpes Simplex Virus (HSV) Types 1+2 IgG and IgM Antibodies"
+  },
+  {
+    "Test Name": "Herpes Simplex Virus 1 IgG - Serum"
+  },
+  {
+    "Test Name": "Herpes Simplex Virus 1 IgM - Serum"
+  },
+  {
+    "Test Name": "Herpes Simplex Virus 1+2 IgG - Serum"
+  },
+  {
+    "Test Name": "Herpes Simplex Virus 1+2 IgM - Serum"
+  },
+  {
+    "Test Name": "Herpes Simplex Virus 2 IgG - Serum"
+  },
+  {
+    "Test Name": "Herpes Simplex Virus 2 IgM - Serum"
+  },
+  {
+    "Test Name": "Herpes Simplex Virus Type 1 & 2 Qualitative PCR - Fluid"
+  },
+  {
+    "Test Name": "Herpes Simplex Virus Type 1 & 2 Qualitative PCR - Serum"
+  },
+  {
+    "Test Name": "Heterophile Antibodies (HA) (Infectious Mononucleosis) - Monotest/ Paul Bunnel test"
+  },
+  {
+    "Test Name": "High Resolution Band Karotyping"
+  },
+  {
+    "Test Name": "Hirsutism Evaluation Panel II: (DHEA-S, Testosterone-Total , Testosterone-Free, LH, FSH, 17 Hydroxyprogesterone)"
+  },
+  {
+    "Test Name": "Hirsutism Evaluation Panel III (DHEA, DHEA-S, Serum\nTestosterone (Total and Free), LH, FSH, Sex Hormone Binding Globulin (SHBG), 17 Hydroxyprogesterone, Androstenedione, Free\nAndrogen Index (FAI), DHT)"
+  },
+  {
+    "Test Name": "Hirsutism Screening Panel I (DHEA-S, Testosterone - Total and Testrosterone -Free)"
+  },
+  {
+    "Test Name": "Histamine - Plasma"
+  },
+  {
+    "Test Name": "Histidine - Quantitative - Serum"
+  },
+  {
+    "Test Name": "Histoplasma Antibody - Serum"
+  },
+  {
+    "Test Name": "HIV 1 and 2 antibody"
+  },
+  {
+    "Test Name": "HIV 1 and 2 Antibody with p24 Antigen capture"
+  },
+  {
+    "Test Name": "HIV 1 Early Detection Combo for < 2yrs age (HIV 1&2 Antibody with p24 Ag capture; HIV Proviral DNA PCR )"
+  },
+  {
+    "Test Name": "HIV 1 Early Detection Combo for > 2yrs age (HIV 1&2 Antibody with p24 Ag capture; HIV 1 RNA PCR - Qualitative )"
+  },
+  {
+    "Test Name": "HIV 1 Western Blot (with HIV 2 band)"
+  },
+  {
+    "Test Name": "HIV 2 Western Blot"
+  },
+  {
+    "Test Name": "HIV By ELISA"
+  },
+  {
+    "Test Name": "HIV Spot test"
+  },
+  {
+    "Test Name": "HIV-1 DNA Detector, Qualitative (Proviral DNA)"
+  },
+  {
+    "Test Name": "HIV-1 Drug Resistance - Genotypic"
+  },
+  {
+    "Test Name": "HIV-1 RNA Qualitative - PCR"
+  },
+  {
+    "Test Name": "HIV-1 RNA Quantitative - PCR"
+  },
+  {
+    "Test Name": "HIV-2 RNA Qualitative - PCR"
+  },
+  {
+    "Test Name": "HIV-2 RNA Quantitative - PCR"
+  },
+  {
+    "Test Name": "HLA - A2 (Alzheimer's Risk factor)"
+  },
+  {
+    "Test Name": "HLA - B15"
+  },
+  {
+    "Test Name": "HLA - B22"
+  },
+  {
+    "Test Name": "HLA - B38"
+  },
+  {
+    "Test Name": "HLA - B5 (B 51/52) - Behcet's Disease"
+  },
+  {
+    "Test Name": "HLA - B7 - Seronegative Spondyloarthropathy"
+  },
+  {
+    "Test Name": "HLA - B8"
+  },
+  {
+    "Test Name": "HLA - Cw6"
+  },
+  {
+    "Test Name": "HLA B-27 - Flowcytometry"
+  },
+  {
+    "Test Name": "HLA B-27 Qualitative PCR"
+  },
+  {
+    "Test Name": "HLA Celiac Disease DR-DQb1- DQA1"
+  },
+  {
+    "Test Name": "HLAB*1502 Screening"
+  },
+  {
+    "Test Name": "HOMA Index Insulin Resistance Test"
+  },
+  {
+    "Test Name": "Homocysteine"
+  },
+  {
+    "Test Name": "Homocysteine, Urine"
+  },
+  {
+    "Test Name": "Homogentisic Acid (Alkaptonuria) - Qualitative - Urine"
+  },
+  {
+    "Test Name": "Homogentisic Acid (Alkaptonuria) - Quantitative - Urine"
+  },
+  {
+    "Test Name": "Homovanilic Acid - 24 hr Urine"
+  },
+  {
+    "Test Name": "Homovanilic Acid - random Urine"
+  },
+  {
+    "Test Name": "HPV Screening with reflex genotyping for 32 subtypes (including High risk genotypes - 16, 18, 31, 33, 35, 52, 58, and\n67, low risk genotype 6, 11, 13,\n30, 32, 34, 39, 40, 42, 43, 44,\n51, 53, 54, 55, 56, 57, 59, 61,\n62, 64, 66, 68 and 69)"
+  },
+  {
+    "Test Name": "HRAS"
+  },
+  {
+    "Test Name": "hs CRP (C-Reactive Protein high sensitive)"
+  },
+  {
+    "Test Name": "HTLV I and II Antibodies"
+  },
+  {
+    "Test Name": "Hu Antibody - (Against neuronal antigen in\nParaneoplastic syndromes)"
+  },
+  {
+    "Test Name": "Human Herpes Virus 6 by PCR"
+  },
+  {
+    "Test Name": "Human Herpes Virus 8 by PCR"
+  },
+  {
+    "Test Name": "Huntington Disease - Mutation Analysis CAG Repeats"
+  },
+  {
+    "Test Name": "Hydroxyproline - Plasma"
+  },
+  {
+    "Test Name": "Hypercalcemia Panel (Albumin, Calcium ß Corrected, Calcium ß Serum, PTH, Phosphorus ß inorganic, Vit D (25-OH))"
+  },
+  {
+    "Test Name": "Hypersensitivity Pneumonitis Panel"
+  },
+  {
+    "Test Name": "Hypertension Profile (CBC, CUE, FBS, Bun, Creatinine, Uric Acid, Electrolytes and Lipid Profile - complete )"
+  },
+  {
+    "Test Name": "IBD Screening Panel I (ASCA IgA, ASCA IgG, ANCA)"
+  },
+  {
+    "Test Name": "IBD Screening Panel II (Autoantibodies to p & c ANCA, Intestinal goblet cells, ASCA- IgG/IgA, DNA bound  Lactoferin, acnii, pancreas\nantigen)"
+  },
+  {
+    "Test Name": "IDH 1&2 Mutation Analysis"
+  },
+  {
+    "Test Name": "IG VH Gene Mutation Detection"
+  },
+  {
+    "Test Name": "IGF Binding Protein-3 (IGFBP-3)"
+  },
+  {
+    "Test Name": "IGF-1 (Insulin like Growth Factor 1 ) SOMATOMEDIN-C"
+  },
+  {
+    "Test Name": "IgG Synthesis index (CSF Index)"
+  },
+  {
+    "Test Name": "IHC - 34 Beta E12(HMWCK)"
+  },
+  {
+    "Test Name": "IHC - Actin - Smooth muscle (SMA)"
+  },
+  {
+    "Test Name": "IHC - Adrenocorticotropic Hormone (ACTH)"
+  },
+  {
+    "Test Name": "IHC - AE1/AE3"
+  },
+  {
+    "Test Name": "IHC - AFP (Alpha-Fetoprotein)"
+  },
+  {
+    "Test Name": "IHC - ALK 1(for non lung tumours)"
+  },
+  {
+    "Test Name": "IHC - ALK-D5F3 for Lung Tumors (FDA approved clone)"
+  },
+  {
+    "Test Name": "IHC - Alpha-1-Antitrypsin"
+  },
+  {
+    "Test Name": "IHC - ATRX"
+  },
+  {
+    "Test Name": "IHC - Bcl-2 Oncoprotein"
+  },
+  {
+    "Test Name": "IHC - BCL6"
+  },
+  {
+    "Test Name": "IHC - BerEP4"
+  },
+  {
+    "Test Name": "IHC - Beta catenin"
+  },
+  {
+    "Test Name": "IHC - BHCG"
+  },
+  {
+    "Test Name": "IHC - BOB1"
+  },
+  {
+    "Test Name": "IHC - Breast hormone receptor and prognostic panel (ER, PR, HER2Neu, Ki67)"
+  },
+  {
+    "Test Name": "IHC - Breast hormone receptor panel (ER, PR, HER2Neu)"
+  },
+  {
+    "Test Name": "IHC - CA125"
+  },
+  {
+    "Test Name": "IHC - CA19.9"
+  },
+  {
+    "Test Name": "IHC - Calcitonin (IHC)"
+  },
+  {
+    "Test Name": "IHC - Calretinin"
+  },
+  {
+    "Test Name": "IHC - CD 123"
+  },
+  {
+    "Test Name": "IHC - CD 25"
+  },
+  {
+    "Test Name": "IHC - CD 35"
+  },
+  {
+    "Test Name": "IHC - CD10 (CALLA)"
+  },
+  {
+    "Test Name": "IHC - CD117 (C-KIT)"
+  },
+  {
+    "Test Name": "IHC - CD138"
+  },
+  {
+    "Test Name": "IHC - CD1a"
+  },
+  {
+    "Test Name": "IHC - CD2"
+  },
+  {
+    "Test Name": "IHC - CD20"
+  },
+  {
+    "Test Name": "IHC - CD21"
+  },
+  {
+    "Test Name": "IHC - CD23"
+  },
+  {
+    "Test Name": "IHC - CD3"
+  },
+  {
+    "Test Name": "IHC - CD30"
+  },
+  {
+    "Test Name": "IHC - CD31"
+  },
+  {
+    "Test Name": "IHC - CD34"
+  },
+  {
+    "Test Name": "IHC - CD4"
+  },
+  {
+    "Test Name": "IHC - CD43"
+  },
+  {
+    "Test Name": "IHC - CD45/LCA"
+  },
+  {
+    "Test Name": "IHC - CD5"
+  },
+  {
+    "Test Name": "IHC - CD56"
+  },
+  {
+    "Test Name": "IHC - CD57"
+  },
+  {
+    "Test Name": "IHC - CD61"
+  },
+  {
+    "Test Name": "IHC - CD68"
+  },
+  {
+    "Test Name": "IHC - CD7"
+  },
+  {
+    "Test Name": "IHC - CD79a"
+  },
+  {
+    "Test Name": "IHC - CD8"
+  },
+  {
+    "Test Name": "IHC - CD99"
+  },
+  {
+    "Test Name": "IHC - CDX2"
+  },
+  {
+    "Test Name": "IHC - CEA"
+  },
+  {
+    "Test Name": "IHC - Chromogranin"
+  },
+  {
+    "Test Name": "IHC - Cyclin D1"
+  },
+  {
+    "Test Name": "IHC - Cytokeratin - Pan Keratin"
+  },
+  {
+    "Test Name": "IHC - Cytokeratin 19 (CK19)"
+  },
+  {
+    "Test Name": "IHC - Cytokeratin 20 - CK20"
+  },
+  {
+    "Test Name": "IHC - Cytokeratin 5/6 - CK5/6"
+  },
+  {
+    "Test Name": "IHC - Cytokeratin 7 - CK7"
+  },
+  {
+    "Test Name": "IHC - Desmin"
+  },
+  {
+    "Test Name": "IHC - diagnostic panel for Hodgkin's Lymphoma (To Reflexly choose among following Markers- LCA, CD30, CD15, EBV, CD20, PAX5, CD3, CD5, CD4, CD57, Oct2,\nBOB1,ALK-1)"
+  },
+  {
+    "Test Name": "IHC - diagnostic panel for Lung cancer to reflex choose from - CK7, CK20, Napsin A, TTF1, P63,\nCK 5/6, CD56, Synapto,\nChromogranin"
+  },
+  {
+    "Test Name": "IHC - diagnostic panel; Melanoma panel - S100, HMB45, MELAN A"
+  },
+  {
+    "Test Name": "IHC - diagnostic panel; sarcoma panel (To Reflexly choose among following Markers- Vimentin, SMA, Desmin, Myogenin, S100, CD34, CD31,\nCKIT, Caldesmon, NSE, CD 99, FLI1, AE1/3, CK, EMA, TLE-1)"
+  },
+  {
+    "Test Name": "IHC - DOG-1"
+  },
+  {
+    "Test Name": "IHC - E-Cadherin"
+  },
+  {
+    "Test Name": "IHC - EMA"
+  },
+  {
+    "Test Name": "IHC - EP CAM"
+  },
+  {
+    "Test Name": "IHC - Epstein Barr virus - EBV- LMP"
+  },
+  {
+    "Test Name": "IHC - ER"
+  },
+  {
+    "Test Name": "IHC - Factor XIII a"
+  },
+  {
+    "Test Name": "IHC - Final diagnosis panel with histopathology ( 6 to 8 antibodies)"
+  },
+  {
+    "Test Name": "IHC - Final diagnosis panel with histopathology (upto 5\nantibodies)"
+  },
+  {
+    "Test Name": "IHC - Final diagnostic panel; Non Hodgkin's Lymphoma (To Reflexly choose among following Markers- LCA, CD20, CD79a, PAX5, CD3, CD5, CD4, CD8, CD7,CD25,CD123, Oct2, BOB1, MUM-1, Bcl2, Bcl6, CD10, CD23, CD138, kappa, lambda, CD56, CD57, CD68, CD138, CD15, CD30, TdT, CD99,\nMPO,CD117,Granzyme B,cyclin D1, EBV,CD2,ALK-\n1,Perforin,TIA1,Langerin)"
+  },
+  {
+    "Test Name": "IHC - FLI-1"
+  },
+  {
+    "Test Name": "IHC - Follicle Stimulating Hormone (FSH)"
+  },
+  {
+    "Test Name": "IHC - GALECTIN-3"
+  },
+  {
+    "Test Name": "IHC - GATA-3"
+  },
+  {
+    "Test Name": "IHC - GCDFP15"
+  },
+  {
+    "Test Name": "IHC - Glial Fibrillary Acidic Protein - GFAP"
+  },
+  {
+    "Test Name": "IHC - GLUT-1"
+  },
+  {
+    "Test Name": "IHC - GLYCOPHORIN-A"
+  },
+  {
+    "Test Name": "IHC - GLYPICAN-3"
+  },
+  {
+    "Test Name": "IHC - GRANZYME B"
+  },
+  {
+    "Test Name": "IHC - Growth Hormone (GH)"
+  },
+  {
+    "Test Name": "IHC - H-Caldesmon"
+  },
+  {
+    "Test Name": "IHC - Hepatitis B Surface Antigen (HBsAg)"
+  },
+  {
+    "Test Name": "IHC - HepPar 1/ HS A"
+  },
+  {
+    "Test Name": "IHC - Her-2/neu c-erb"
+  },
+  {
+    "Test Name": "IHC - HMB45 Melanoma"
+  },
+  {
+    "Test Name": "IHC - IgG-4"
+  },
+  {
+    "Test Name": "IHC - Inhibin Alpha"
+  },
+  {
+    "Test Name": "IHC - KI67 (MIB-1)"
+  },
+  {
+    "Test Name": "IHC - LAMBDA"
+  },
+  {
+    "Test Name": "IHC - Langerin"
+  },
+  {
+    "Test Name": "IHC - Leu 1 - CD15"
+  },
+  {
+    "Test Name": "IHC - Lymphoma Review Diagnostic and Prognostication\n- Suspect Large Cell Lymphoma (10-12 Markers)"
+  },
+  {
+    "Test Name": "IHC - LYSOZYME"
+  },
+  {
+    "Test Name": "IHC - Mammaglobin"
+  },
+  {
+    "Test Name": "IHC - MDM2"
+  },
+  {
+    "Test Name": "IHC - Melan A"
+  },
+  {
+    "Test Name": "IHC - Microsatellite Instability Panel for Colorectal Carcinoma (MLH-1, MSH-2, MSH-6, PMS- 2)"
+  },
+  {
+    "Test Name": "IHC - Multiple Myeloma Panel from Bone Marrow / Tissue Biopsy Block"
+  },
+  {
+    "Test Name": "IHC - MUM-1"
+  },
+  {
+    "Test Name": "IHC - Myeloperoxidase/MPO"
+  },
+  {
+    "Test Name": "IHC - Myogenin"
+  },
+  {
+    "Test Name": "IHC - Napsin A"
+  },
+  {
+    "Test Name": "IHC - Neuron Specific Enolase/NSE"
+  },
+  {
+    "Test Name": "IHC - NKX2.2"
+  },
+  {
+    "Test Name": "IHC - OCT 3/4"
+  },
+  {
+    "Test Name": "IHC - Oct-2"
+  },
+  {
+    "Test Name": "IHC - P16"
+  },
+  {
+    "Test Name": "IHC - p40"
+  },
+  {
+    "Test Name": "IHC - P504S (Racemase)"
+  },
+  {
+    "Test Name": "IHC - P53 Tumor Suppressor Protein"
+  },
+  {
+    "Test Name": "IHC - P63"
+  },
+  {
+    "Test Name": "IHC - PAX 5"
+  },
+  {
+    "Test Name": "IHC - PAX 8"
+  },
+  {
+    "Test Name": "IHC - PIN 4"
+  },
+  {
+    "Test Name": "IHC - Pitutary Lesion Hormones (Prolactin, Growth Hormone, LH, FSH, ACTH,TSH)"
+  },
+  {
+    "Test Name": "IHC - PLAP (Placental Alkaline Phosphatase)"
+  },
+  {
+    "Test Name": "IHC - PR (Progesterone Receptor)"
+  },
+  {
+    "Test Name": "IHC - Prolactin"
+  },
+  {
+    "Test Name": "IHC - ps2 (Estrogen Regulated Protein)"
+  },
+  {
+    "Test Name": "IHC - PSA (Prostatic Specific Antigen)"
+  },
+  {
+    "Test Name": "IHC - S100"
+  },
+  {
+    "Test Name": "IHC - SALL4"
+  },
+  {
+    "Test Name": "IHC - SOX 2"
+  },
+  {
+    "Test Name": "IHC - Synaptophysin"
+  },
+  {
+    "Test Name": "IHC - Terminal Deoxynucleotide Transferase (TdT)"
+  },
+  {
+    "Test Name": "IHC - Thyroglobulin (IHC)"
+  },
+  {
+    "Test Name": "IHC - Thyroid-Stimulating Hormone (TSH)"
+  },
+  {
+    "Test Name": "IHC - TIA-1"
+  },
+  {
+    "Test Name": "IHC - TTF-1"
+  },
+  {
+    "Test Name": "IHC - Vimentin"
+  },
+  {
+    "Test Name": "IHC - WT-1"
+  },
+  {
+    "Test Name": "IHC (13 - 16) Antigens"
+  },
+  {
+    "Test Name": "IHC > 8 Antigens"
+  },
+  {
+    "Test Name": "IHC 1 Antigen"
+  },
+  {
+    "Test Name": "IHC 2 Antigens"
+  },
+  {
+    "Test Name": "IHC 3 Antigens"
+  },
+  {
+    "Test Name": "IHC 4 Antigens"
+  },
+  {
+    "Test Name": "IHC- ER, PR"
+  },
+  {
+    "Test Name": "IHC for SV40"
+  },
+  {
+    "Test Name": "IHC PDL-1 (SP263-FDA\napproved clone)"
+  },
+  {
+    "Test Name": "IHC-IDH 1 Antibody"
+  },
+  {
+    "Test Name": "IHC-KAPPA"
+  },
+  {
+    "Test Name": "IHC-TFE 3"
+  },
+  {
+    "Test Name": "IHC-TLE 1"
+  },
+  {
+    "Test Name": "IL28B Genotyping"
+  },
+  {
+    "Test Name": "ILD Panel - RA Factor, CRP, ANA(IFA), ANA (Immunoblot), DsDNA, pANCA, cANCA, ACE\n(Serum), Anti CCP"
+  },
+  {
+    "Test Name": "Imatinib Resistance Mutation Analysis (IRMA) or Mutation detection in the ABL kinase domain"
+  },
+  {
+    "Test Name": "Immunofixation Electrophoresis (IFE), Qualitative - 24H Urine"
+  },
+  {
+    "Test Name": "Immunofixation Electrophoresis, IFE, Qualitative-Serum"
+  },
+  {
+    "Test Name": "Immunofixation- quantitative 24H Urine (Includes Protein electrophoresis, Immunofixation, freelite chains\n- kappa & lambda)"
+  },
+  {
+    "Test Name": "Immunofixation- quantitative Serum (Includes Protein electrophoresis, Immunofixation, IgG, IgM, IgA, freelite chains - kappa & lambda, and Beta 2 microglobulin)"
+  },
+  {
+    "Test Name": "Immunoglobin Capsule I (IgG, IgA, IgM)"
+  },
+  {
+    "Test Name": "Immunoglobulin - IgD & IgE Typing Serum"
+  },
+  {
+    "Test Name": "Immunoglobulin - IgE Total - Serum"
+  },
+  {
+    "Test Name": "Immunoglobulin - IgG 4 Sub Class"
+  },
+  {
+    "Test Name": "Immunoglobulin A, IgA - Serum"
+  },
+  {
+    "Test Name": "Immunoglobulin Capsule II (IgG, IgA, IgM, Kappa & Lambda free light chains)"
+  },
+  {
+    "Test Name": "Immunoglobulin G, IgG - Serum"
+  },
+  {
+    "Test Name": "Immunoglobulin IgA - CSF"
+  },
+  {
+    "Test Name": "Immunoglobulin IgG - CSF"
+  },
+  {
+    "Test Name": "Immunoglobulin IgM - CSF"
+  },
+  {
+    "Test Name": "Immunoglobulin M, IgM - Serum"
+  },
+  {
+    "Test Name": "Impotence Profile (FSH, LH, Prolactin, Testosterone, SHBG, Free androgen Index)"
+  },
+  {
+    "Test Name": "India-Ink Preparation (Cryptococcus detection)"
+  },
+  {
+    "Test Name": "Infliximab Antibody"
+  },
+  {
+    "Test Name": "Influenza Virus A and B IgG"
+  },
+  {
+    "Test Name": "Influenza Virus A and B IgM"
+  },
+  {
+    "Test Name": "Inhibin A"
+  },
+  {
+    "Test Name": "Inhibin B"
+  },
+  {
+    "Test Name": "Insulin Antibodies"
+  },
+  {
+    "Test Name": "Insulin- Fasting"
+  },
+  {
+    "Test Name": "Insulin Random"
+  },
+  {
+    "Test Name": "Insulin-PP"
+  },
+  {
+    "Test Name": "Interleukin 6 (IL6)"
+  },
+  {
+    "Test Name": "Intrinsic Factor Antibody - IFA"
+  },
+  {
+    "Test Name": "Inv 16 (p13q22) Gene Rearrangement Qualitative PCR"
+  },
+  {
+    "Test Name": "Iron"
+  },
+  {
+    "Test Name": "Iron Binding Capacity - Total (TIBC)"
+  },
+  {
+    "Test Name": "Iron Studies Profile (Serum iron; TIBC; Transferin\nsaturation %)"
+  },
+  {
+    "Test Name": "Isospora by smear examination\n- Stool"
+  },
+  {
+    "Test Name": "JAK2 (V617F) Mutation Analysis - PCR with Allele burden"
+  },
+  {
+    "Test Name": "JAK2 exon 12-15 Mutation"
+  },
+  {
+    "Test Name": "Japanese Encephalitis Virus - RNA detection by PCR"
+  },
+  {
+    "Test Name": "Japanese Encephalitis Virus - RNA detection by PCR - CSF"
+  },
+  {
+    "Test Name": "JC / Bk Virus - DNA detection by PCR - CSF"
+  },
+  {
+    "Test Name": "JC / Bk Virus - DNA detection by PCR - Plasma"
+  },
+  {
+    "Test Name": "JC / Bk Virus - DNA detection by PCR - Urine"
+  },
+  {
+    "Test Name": "JC virus - DNA detection by PCR - CSF"
+  },
+  {
+    "Test Name": "JC virus - DNA detection by PCR - Plasma"
+  },
+  {
+    "Test Name": "JC virus - DNA detection by PCR - Urine"
+  },
+  {
+    "Test Name": "Jo-1 Antibody - Serum"
+  },
+  {
+    "Test Name": "Kappa Light Chain Free - Serum"
+  },
+  {
+    "Test Name": "Karyotype Image Second Openion"
+  },
+  {
+    "Test Name": "Karyotyping - 30 Cell"
+  },
+  {
+    "Test Name": "Karyotyping - Fetal Blood"
+  },
+  {
+    "Test Name": "Karyotyping - Peripheral Blood for Couple"
+  },
+  {
+    "Test Name": "Karyotyping - Peripheral Blood for Single Individual"
+  },
+  {
+    "Test Name": "Karyotyping (Amniotic fluid/CVS) with FISH - single probe"
+  },
+  {
+    "Test Name": "Karyotyping (CVS/Amniotic fluid)"
+  },
+  {
+    "Test Name": "Karyotyping (Products of Conception) with reflex FISH- 5 Markers"
+  },
+  {
+    "Test Name": "Karyotyping and FISH For Four Markers"
+  },
+  {
+    "Test Name": "Karyotyping-Products of Conception"
+  },
+  {
+    "Test Name": "Ketone Body ( Beta Hydroxybutyrate),Serum"
+  },
+  {
+    "Test Name": "Kidney Stone screening profile (Urinary Creatinine, Calcium, Magnesium, Uric Acid, Oxalate, Citrate, Phosphorous )"
+  },
+  {
+    "Test Name": "KRAS + NRAS + BRAF- Full Gene\nMutation Analysis"
+  },
+  {
+    "Test Name": "KRAS Gene Analysis (Codons 12,13,61,146 )"
+  },
+  {
+    "Test Name": "Lactate - CSF"
+  },
+  {
+    "Test Name": "Lactate - Plasma"
+  },
+  {
+    "Test Name": "Lambda Light Chain Free - Serum"
+  },
+  {
+    "Test Name": "Lamotrigine Level"
+  },
+  {
+    "Test Name": "LDH (Lactate Dehyderogenase)\n- Ascitic fluid"
+  },
+  {
+    "Test Name": "LDH (Lactate Dehyderogenase)\n- CSF"
+  },
+  {
+    "Test Name": "LDH (Lactate Dehyderogenase)\n- Pleural fluid"
+  },
+  {
+    "Test Name": "LDH (Lactate Dehyderogenase)\n- Serum"
+  },
+  {
+    "Test Name": "LDH (Lactate Dehyderogenase)\n-Body fluid"
+  },
+  {
+    "Test Name": "LDH (Lactate Dehyderogenase) Isoenzymes"
+  },
+  {
+    "Test Name": "Lead - Blood"
+  },
+  {
+    "Test Name": "Lead, 24 Hours Urine"
+  },
+  {
+    "Test Name": "Lead, Urine Spot"
+  },
+  {
+    "Test Name": "Legionella Antigen detection - urine"
+  },
+  {
+    "Test Name": "Legionella Pneumophila IgG"
+  },
+  {
+    "Test Name": "Legionella Pneumophila IgM"
+  },
+  {
+    "Test Name": "Legionella Spp. Culture"
+  },
+  {
+    "Test Name": "Leishmania Donovani (LD) Bodies Detection"
+  },
+  {
+    "Test Name": "Leishmania IgG Antibody (KALA AZAR)"
+  },
+  {
+    "Test Name": "Leptin (Human Leptin)"
+  },
+  {
+    "Test Name": "Leptospira Antibody IgG"
+  },
+  {
+    "Test Name": "Leptospira Antibody IgM"
+  },
+  {
+    "Test Name": "Leptospira DNA Detection - PCR Blood"
+  },
+  {
+    "Test Name": "Leptospira DNA Detection - PCR Urine"
+  },
+  {
+    "Test Name": "Leucine - Quantitative Plasma"
+  },
+  {
+    "Test Name": "Leukemia Translocation Panel (Custom 4 markers) - t(1;19), t(9;22), t(12;21), t(4;11)"
+  },
+  {
+    "Test Name": "LEUKEMIA TRANSLOCATION PANEL 1 (t(1;19) (q23;p13),\nInv(16)(p13;q22), t(9;22)\n(q34;q11), t(4;11) (q21;q23), t(12;21) (p13;q22),\nt(15;17)(q22;q22),\nt(8;21)(q22;q22))"
+  },
+  {
+    "Test Name": "LEUKEMIA TRANSLOCATION PANEL 6 t(1; 19) (q23; p13), t(9; 22) (q34; q11), t(4;11)\n(q21; q23) and t(12; 21) (p13;\nq22),"
+  },
+  {
+    "Test Name": "Leutinizing Hormone,LH"
+  },
+  {
+    "Test Name": "Levetiracetam (Antiepileptic drug assay)"
+  },
+  {
+    "Test Name": "LFT MINI(SGOT, SGPT, BILIRUBIN (D),BILIRUBIN TOTAL, INDIRECT, ALP)"
+  },
+  {
+    "Test Name": "LifeStyle Check (Vitamin D+ Vitamin B12+ TSH)"
+  },
+  {
+    "Test Name": "Lipase - Serum"
+  },
+  {
+    "Test Name": "Lipase-Fluid"
+  },
+  {
+    "Test Name": "Lipid Profile - Extended (Lipid profile + ApoA1,ApoB, ApoB/ApoA ratio, Lp-A)"
+  },
+  {
+    "Test Name": "Lipid Profile (Cholesterol Total, LDL - Direct, HDL - Direct, Cho/HDL Ratio, Triglycerides, VLDL, LDL/HDL Ratio)"
+  },
+  {
+    "Test Name": "Lipid profile mini(CHOLESTROL, TG, HDL , LDL (Calculation)\n,VLDL (Calculation)"
+  },
+  {
+    "Test Name": "Lipoprotein a (Lp-a)"
+  },
+  {
+    "Test Name": "Lipoprotein electrophoresis"
+  },
+  {
+    "Test Name": "LIQUID BIOPSY ,cfDNA -EGFR- p.E746_A750\ndeletion,p.T790M\nMutation,p.L858R mutation"
+  },
+  {
+    "Test Name": "Liquid Biopsy -56 Gene test"
+  },
+  {
+    "Test Name": "Lithium"
+  },
+  {
+    "Test Name": "Liver Cancer Marker Profile (AFP, CEA, HCG)"
+  },
+  {
+    "Test Name": "Liver cytosolic antigen type-1 (LC-1) Antibody"
+  },
+  {
+    "Test Name": "Liver Fibrosis Panel (LFT,  Serum Protein electrophoresis, Prothrombin Time"
+  },
+  {
+    "Test Name": "Liver Function Tests - Extended (LFT + HBsAg & PT)"
+  },
+  {
+    "Test Name": "Liver Function Tests - LFT [Albumin, Globulin, A/G Ratio, ALT(SGPT), AST(SGOT), Alkaline\nPhosphatase (ALP), GGT, Bilirubin Total, Bilirubin Conjugated (Direct), Protein Total]"
+  },
+  {
+    "Test Name": "Lung Cancer (NSCLC) Panel 5: Molecular : EGFR(exon(18-21) mutations, KRAS(exon2,3) mutation by sequencing."
+  },
+  {
+    "Test Name": "Lung Cancer 12 Gene Panel with PDL-1 (SP-263)"
+  },
+  {
+    "Test Name": "Lung Cancer Basic Panel (NGS)"
+  },
+  {
+    "Test Name": "Lung Cancer Mutation Panel 1 - EGFR & KRAS by Sequencing; ALK-D5F3 IHC"
+  },
+  {
+    "Test Name": "Lung Cancer Mutation Panel 3- EGFR Sequencing with ALK-1 IHC & ROS-1 by FISH"
+  },
+  {
+    "Test Name": "Lung Cancer Mutation Panel- EGFR PCR with ALK-D5F3 IHC"
+  },
+  {
+    "Test Name": "Lung Cancer Panel 2 ( FISH for ALK, ROS1, RET gene\nrearrangement and MET gene\namplification"
+  },
+  {
+    "Test Name": "Lupus Anticoagulant by DRVVT (LA-dRVVT)"
+  },
+  {
+    "Test Name": "Lupus Anticoagulant Panel (LA- dRVVT, PTT-LA & aPTT)"
+  },
+  {
+    "Test Name": "Lupus Anticoagulant Screen (PTT-LA Method)"
+  },
+  {
+    "Test Name": "Lyme disease (Borellia burgdorferi) DNA Qualitative PCR"
+  },
+  {
+    "Test Name": "Lyme Disease (Borrelia Burgdorferi IgG) - ELISA"
+  },
+  {
+    "Test Name": "Lyme Disease (Borrelia Burgdorferi IgM) - ELISA"
+  },
+  {
+    "Test Name": "Lymphocyte subset enumeration with 56/16 (B/T/NK(56/16+ )\nquantification) - CD3, CD4, CD8, CD19, CD56, CD45, CD16"
+  },
+  {
+    "Test Name": "Lysine - Quantitative Plasma"
+  },
+  {
+    "Test Name": "MAG (Myelin Associated Glycoprotein) Antibodies"
+  },
+  {
+    "Test Name": "Magnesium - 24 hours urine"
+  },
+  {
+    "Test Name": "Magnesium - Body Fluid"
+  },
+  {
+    "Test Name": "Magnesium -Serum"
+  },
+  {
+    "Test Name": "Magnesium -Spot urine"
+  },
+  {
+    "Test Name": "Malaria - Smear Examination (Screening by Microscopy- Thick & Thin Smears)"
+  },
+  {
+    "Test Name": "Malaria Screening Profile (CBC, MP-thick and Thin smear, Malarial Ag detection)"
+  },
+  {
+    "Test Name": "Malarial Antigen detection (Pl.vivax & Pl.falciparum)"
+  },
+  {
+    "Test Name": "Manganese - Blood"
+  },
+  {
+    "Test Name": "Manganese Urine - 24 Hours"
+  },
+  {
+    "Test Name": "Manganese Urine - Spot"
+  },
+  {
+    "Test Name": "Maternal Screening (First Trimester) - Dual Markers with NT risk stratification"
+  },
+  {
+    "Test Name": "Maternal Screening (Second Trimester) - Quadruple Markers"
+  },
+  {
+    "Test Name": "Maternal Screening (Second Trimester) - Triple Markers"
+  },
+  {
+    "Test Name": "MDR (Multi-drug resistant) - Culture"
+  },
+  {
+    "Test Name": "MDS prognostication and risk stratification gene panel"
+  },
+  {
+    "Test Name": "Measles (Rubeola) IgG Antibodies"
+  },
+  {
+    "Test Name": "Measles (Rubeola) IgG Antibodies - CSF"
+  },
+  {
+    "Test Name": "Measles (Rubeola) IgG Antibodies- Quantitative"
+  },
+  {
+    "Test Name": "Measles (Rubeola) IgM Antibodies"
+  },
+  {
+    "Test Name": "MELAS-Mutation Detection"
+  },
+  {
+    "Test Name": "Menopause Screen-I (Estradiol (E2), FSH, LH, Free-T4,TSH )"
+  },
+  {
+    "Test Name": "Menopause Screen-II (Estradiol\n-E2, FSH,FreeT4,\nLH,TSH,Calcium, Phosphorus, 25 OH-Vit D, Cholesterol, Triglycerides)"
+  },
+  {
+    "Test Name": "Mercury - 24 Hours Urine"
+  },
+  {
+    "Test Name": "Mercury - Blood"
+  },
+  {
+    "Test Name": "Mercury - Serum"
+  },
+  {
+    "Test Name": "Mercury - Urine Spot"
+  },
+  {
+    "Test Name": "Metabolic Disorder\nPanel - Urine (Includes 101 Different Analytes To Diagnose 22 Different Metabolic Disorders)"
+  },
+  {
+    "Test Name": "Metabolic Screen Comprehensive - Urine (Aminoacids-Qualitative, Reducing Substances, DNPH Test, FeCl3 Test, Nitrosonaphthol, Nitroprusside, Silver\nNitroprusside Tests)"
+  },
+  {
+    "Test Name": "Metanephrine-Free"
+  },
+  {
+    "Test Name": "Metanephrines - 24 hours urine"
+  },
+  {
+    "Test Name": "Methaemoglobin Estimation"
+  },
+  {
+    "Test Name": "Methionine - Quantitative Plasma"
+  },
+  {
+    "Test Name": "Methotrexate"
+  },
+  {
+    "Test Name": "Methyl Malonic Acid Qualitative - Urine Spot"
+  },
+  {
+    "Test Name": "Methyl Malonic Acid Quantitative - Spot Urine"
+  },
+  {
+    "Test Name": "Methylmalonic Acid Quantitative,Serum"
+  },
+  {
+    "Test Name": "MGMT by PCR (Temozolomide Resistance) - on Tissue"
+  },
+  {
+    "Test Name": "MICM By PCR (Maternally Inherited Cardiomyopathy) - Blood"
+  },
+  {
+    "Test Name": "Microalbumin, Quantitative - 24 hours urine with Microalbumin/Creatinine Ratio"
+  },
+  {
+    "Test Name": "Microalbumin, Quantitative - Spot urine with Microalbumin/Creatinine Ratio"
+  },
+  {
+    "Test Name": "Microfilaria - Smear Examination"
+  },
+  {
+    "Test Name": "Microsporidium Detection by smear examination - Stool"
+  },
+  {
+    "Test Name": "MLH1 Hypermethylation"
+  },
+  {
+    "Test Name": "MM-Mutation Detection Mitochondrial Myopathy"
+  },
+  {
+    "Test Name": "MOG Antibody"
+  },
+  {
+    "Test Name": "MOG Antibody-CSF"
+  },
+  {
+    "Test Name": "MOLD/ YEAST IDENTIFICATION\n-MALDITOF"
+  },
+  {
+    "Test Name": "MPL Mutation Detection (Myeloproliferative Leukemia 1)"
+  },
+  {
+    "Test Name": "MPN / MPD FISH panel- 7/del(7q), +8, del(20q), PDGFRA(4q12) rearrangement with CHIC2 deletion, PDGFRB (5q33) tarnslocation"
+  },
+  {
+    "Test Name": "MPN Extended 1: JAK2 V617F, MPL W515 mutation (ASO- PCR), CALR (exon 9)\n(sequencing)"
+  },
+  {
+    "Test Name": "MPN Molecular Reflex Panel"
+  },
+  {
+    "Test Name": "MPN Panel: BCR-ABL1 by Qualitative PCR, JAK2 (Exon- 14(V617F) & Exon -12), CALR, MPL"
+  },
+  {
+    "Test Name": "MRSA (Methicillin-Resistant Staphylococcus aureus) - PCR"
+  },
+  {
+    "Test Name": "MSI Analysis (Microsatellite stability Index)"
+  },
+  {
+    "Test Name": "MTB Plus- (AFB Smear + GeneXpert (Pulmo)+ AFB/TB Culture)"
+  },
+  {
+    "Test Name": "MTB Plus EP- (AFB Smear + GeneXpert-EP+ AFB/TB Culture)"
+  },
+  {
+    "Test Name": "MTB-XPERT XDR"
+  },
+  {
+    "Test Name": "MTHFR - Methylene tetra hydro folate Reductase (C677T, A1298C) Mutation Detection"
+  },
+  {
+    "Test Name": "Mucopolysaccharides (MPS) Screen Qualitative - Urine"
+  },
+  {
+    "Test Name": "Mucopolysaccharides (MPS)Type-VI - Blood"
+  },
+  {
+    "Test Name": "Mucopolysaccharides (MPS)Type-I/ Hurler's Disease (quantitative) Blood"
+  },
+  {
+    "Test Name": "MUCORALES REAL TIME PCR"
+  },
+  {
+    "Test Name": "Multiple Sclerosis Profile - Comprehensive (Albumin-CSF & Serum, IgG-CSF & Serum, Oligoclonal Band, CSF Index and MAG Antibody)"
+  },
+  {
+    "Test Name": "Multiple Sclerosis Profile - Screening (Albumin-CSF & Serum, IgG-CSF & Serum, Oligoclonal Band, CSF Index)"
+  },
+  {
+    "Test Name": "Mumps IgG Antibody - CSF"
+  },
+  {
+    "Test Name": "Mumps IgG Antibody - Serum"
+  },
+  {
+    "Test Name": "Mumps IgG Antibody - Serum- Quantitative"
+  },
+  {
+    "Test Name": "Mumps IgM Antibody - Serum"
+  },
+  {
+    "Test Name": "Myasthenia Gravis\nProfile (AChR, ASKA, MUSK)"
+  },
+  {
+    "Test Name": "MYCOBACTERIUM SPECIATION MALDITOF"
+  },
+  {
+    "Test Name": "Mycoplasma Pneumoniae IgG Antibodies"
+  },
+  {
+    "Test Name": "Mycoplasma Pneumoniae IgM Antibodies"
+  },
+  {
+    "Test Name": "MYD88 - ASO PCR"
+  },
+  {
+    "Test Name": "MYD88 - MUTATION ANALYSIS"
+  },
+  {
+    "Test Name": "Myeloma Panel - Biochemical (Includes Protein electrophoresis, Immunofixation, IgG, IgM, IgA, freelite chains - kappa & lambda)"
+  },
+  {
+    "Test Name": "Myoglobin Serum"
+  },
+  {
+    "Test Name": "Myoglobin Urine"
+  },
+  {
+    "Test Name": "MYOSITIS PROFILE - 16 ANTIGEN"
+  },
+  {
+    "Test Name": "Myositis Profile-2 (11 Antigens\n: Mi2, Ku, PMScl 100, PM Scl 75, Jo1, SRP, PL7, PL-12, EJ, OJ,\nRo52)"
+  },
+  {
+    "Test Name": "Myotonic Dystrophy Chomosome 19q 13.3 - PCR"
+  },
+  {
+    "Test Name": "NARP (Neurogenic Ataxia Retinitis Pigmentosa) - Blood"
+  },
+  {
+    "Test Name": "Needle Biopsy - Liver with special stains"
+  },
+  {
+    "Test Name": "Needle Biopsy - Prostate (6 core)"
+  },
+  {
+    "Test Name": "Neisseria Gonorrhoeae - PCR"
+  },
+  {
+    "Test Name": "Neonatal Screening - 11 conditions\n(Heel-prick dried blood spot: Congenital Hypothyroidism, Congenital Adrenal Hyperplasia, G6PD deficiency, Cystic Fibrosis, Phenyl Ketonuria, Galactosemia and Biotinidase, Sickle Cell Disease, Sickle Cell trait, Hb variants, B thalassemia)"
+  },
+  {
+    "Test Name": "Neonatal Screening - 111 Conditions - Urine"
+  },
+  {
+    "Test Name": "Neonatal Screening - 118 Conditions (Heel Prick - Congenital Hypothyroidism, Congenital Adrenal Hyperplasia, G6PD deficiency, Cystic Fibrosis, Phenyl Ketonuria, Galactosemia and Biotinidase + urine for 111 conditions)"
+  },
+  {
+    "Test Name": "Neonatal screening - 4 conditions (Congenital Hypothyroidism, CAH, G6PD, Galactosemia)"
+  },
+  {
+    "Test Name": "Neonatal screening - 7 conditions (Heel-prick dried blood spot:Congenital Hypothyroidism, Congenital Adrenal Hyperplasia, G6PD deficiency, Cystic Fibrosis, Phenyl Ketonuria, Galactosemia and Biotinidase)"
+  },
+  {
+    "Test Name": "Neonatal Screening (17- Alpha Hydroxyprogesterone)"
+  },
+  {
+    "Test Name": "Neonatal Screening (Biotinidase)"
+  },
+  {
+    "Test Name": "Neonatal Screening (Maple Syrup Urine Disorders)"
+  },
+  {
+    "Test Name": "Neonatal Screening (Phenylalanine)"
+  },
+  {
+    "Test Name": "Neonatal Screening (Total Galactose)"
+  },
+  {
+    "Test Name": "Neonatal Screening (TSH)"
+  },
+  {
+    "Test Name": "Neonatal Screening Panel - 52 (52 conditions by Tandem Mass Spectrometry)"
+  },
+  {
+    "Test Name": "Neonatal Screening Panel - 52+10 (47 conditions by Tandem Mass Spectrometry & Congenital Hypothyroidism, Congenital Adrenal Hyperplasia, G6PD deficiency, Cystic Fibrosis, Galactosemia and Biotinidase, Sickle Cell Disease, Sickle Cell trait, Hb variants, B thalassemia)"
+  },
+  {
+    "Test Name": "Neonatal Screening Panel - 52+6 (52 conditions by Tandem Mass Spectrometry & 6 biochemicals - Congenital Hypothyroidism, Congenital Adrenal Hyperplasia, G6PD deficiency, Cystic Fibrosis, Galactosemia, Biotinidase)"
+  },
+  {
+    "Test Name": "Nephrectomy (Non Tumorous)"
+  },
+  {
+    "Test Name": "Neuronal (Paraneoplastic) Antibody Profile [Includes Amphiphysin, PNMA2 (Ma2/Ta), Ri/ANNA-2, Yo/PCA- 1, HU/ ANNA-1, CV2]"
+  },
+  {
+    "Test Name": "Neutrophil Burst Oxidase Assay (CGD screening)"
+  },
+  {
+    "Test Name": "NGAL (NEUTROPHIL GELATINASE ASSOCIATED LIPOCALIN), URINE"
+  },
+  {
+    "Test Name": "Nickel, 24 Hours Urine"
+  },
+  {
+    "Test Name": "Nickel, Urine Spot"
+  },
+  {
+    "Test Name": "Nickel,Serum"
+  },
+  {
+    "Test Name": "Nicotine Metabolite Quantitative - Serum"
+  },
+  {
+    "Test Name": "Nicotine Metabolite Quantitative - Urine Spot"
+  },
+  {
+    "Test Name": "Niemann Pick Disease - Quantitative - Blood (Sphingomyelinase deficiency)"
+  },
+  {
+    "Test Name": "NIPT test for Fetal Trisomy13,18,21 and other chromosomal aneuploidy"
+  },
+  {
+    "Test Name": "NK Cells Index Analysis - Endometrium"
+  },
+  {
+    "Test Name": "NMO with MOG Antibody Profile"
+  },
+  {
+    "Test Name": "Nocardia-Detection by Microscopy"
+  },
+  {
+    "Test Name": "Nor-Adrenaline (Nor- Epinephrine) - 24 hrs urine"
+  },
+  {
+    "Test Name": "Nor-Adrenaline (Nor- Epinephrine) - Plasma"
+  },
+  {
+    "Test Name": "Nor-Metanephrine-Free (Plasma)"
+  },
+  {
+    "Test Name": "Nor-Metanephrines - 24 hrs urine"
+  },
+  {
+    "Test Name": "NOTCH 1 Mutation analysis"
+  },
+  {
+    "Test Name": "NOTCH 3 Gene Cadasil (Deletion - duplication test)"
+  },
+  {
+    "Test Name": "NPM1 Mutation Detection"
+  },
+  {
+    "Test Name": "NRAS Mutation Analysis"
+  },
+  {
+    "Test Name": "NSE (Neuron Specific Enolase) - CSF"
+  },
+  {
+    "Test Name": "NSE (Neuron Specific Enolase) - Serum"
+  },
+  {
+    "Test Name": "NT-ProBNP (N-Terminal Pro- Beta Natriuretic Peptide)"
+  },
+  {
+    "Test Name": "NTRK 1,2 & 3 GENE - FISH"
+  },
+  {
+    "Test Name": "Obesity Capsule I (Total Protein, Cholesterol, HDL, LDL, VLDL, Cho/HDL Ratio, Triglycerides, Calcium, Creatinine, Uric acid , Electrolytes (Na, K, Cl), Glucose\nß Fasting, Phosphorous\nInorganic, T3, T4, TSH, CBC with PS, CUE)"
+  },
+  {
+    "Test Name": "Obesity Capsule II (Obesity Capsule I + Leptin + Cortisol)"
+  },
+  {
+    "Test Name": "Omicron SARS-CoV-2-RT PCR"
+  },
+  {
+    "Test Name": "Omicron SARS-CoV-2-RT PCR -\nWith Collection"
+  },
+  {
+    "Test Name": "Oncotype DX"
+  },
+  {
+    "Test Name": "Organic Acid Screen - Quantitative - Urine"
+  },
+  {
+    "Test Name": "Orotic Acid"
+  },
+  {
+    "Test Name": "Osmolality - 24 hours urine"
+  },
+  {
+    "Test Name": "Osmolality - Serum"
+  },
+  {
+    "Test Name": "Osmolality - Spot urine"
+  },
+  {
+    "Test Name": "Osteocalcin (BGP-Bone Gla Protein)"
+  },
+  {
+    "Test Name": "Osteomon Profile (Beta 2 Crosslaps and P1Np)"
+  },
+  {
+    "Test Name": "Osteoporosis Profile (Ca, P, Alkaline Phosphatase-Total & Bone Fraction, DPD, Osteocalcin, 25 OH Vitamin D3, PTH, E2)"
+  },
+  {
+    "Test Name": "Osteoscreen Panel (Calcium, Phosphorous, Vitamin D (25 Hydroxy), PTH Intact, Alakaline Phosphatase)"
+  },
+  {
+    "Test Name": "OT Surveillance Settle Plate for Culture - Aerobic"
+  },
+  {
+    "Test Name": "OT Surveillance Swabs for Culture - Aerobic"
+  },
+  {
+    "Test Name": "Ova and Parasite - Stool : Comprehensive Examination With Coccidia Evaluation"
+  },
+  {
+    "Test Name": "Ovarian Marker Profile : (CA125, CEA, CA72.4, HE4,\nROMA Index)"
+  },
+  {
+    "Test Name": "Ovarian Reserve Profile - Basic (FSH, E2, AMH)"
+  },
+  {
+    "Test Name": "Ovarian Reserve Profile - Comprehensive (FSH, LH, E2, Inhibin B and AMH)"
+  },
+  {
+    "Test Name": "Ovarian Reserve Profile (AMH+ Inhibin B+ Prolactin + T3, T4, TSH)"
+  },
+  {
+    "Test Name": "Oxalate - 24 hours urine"
+  },
+  {
+    "Test Name": "Oxalate - Spot Urine"
+  },
+  {
+    "Test Name": "Oxcarbazepine (Metabolite of oxcarbamazepine)"
+  },
+  {
+    "Test Name": "P1NP (Intact N-Terminal Propeptide Of Type I Procollagen ) - Serum"
+  },
+  {
+    "Test Name": "Palmitoyl Protein Thioesterase - Leucocytes, (Lipofuscinosis) - Blood"
+  },
+  {
+    "Test Name": "Pan Neurotropic Virus Panel"
+  },
+  {
+    "Test Name": "Pancreatic Marker\nProfile (CEA, CA19.9, Gastrin, Insulin)"
+  },
+  {
+    "Test Name": "Pancreatitis Panel (LFT, Amylase, Lipase)"
+  },
+  {
+    "Test Name": "Panfungal DNA Detection & Identification Panel"
+  },
+  {
+    "Test Name": "Panfungal DNA Detector"
+  },
+  {
+    "Test Name": "Pan-Onco Liquid Biopsy 73 gene panel with MSI"
+  },
+  {
+    "Test Name": "PAP - Liquid based Cytology (LBC) - SurePath & HPV - DNA Detection with genotyping"
+  },
+  {
+    "Test Name": "PAP - Liquid based Cytology (LBC) - SurePath (for cervix and vaginal vault)"
+  },
+  {
+    "Test Name": "Pap Smear - Conventional (Cervico Vaginal Vault smear)"
+  },
+  {
+    "Test Name": "PAPP-A (Pregnancy Associated Plasma Protein)"
+  },
+  {
+    "Test Name": "Paracetamol - Acetaminophen - Serum"
+  },
+  {
+    "Test Name": "Parainfluenza 1,2 & 3 - IgG antibody - Serum"
+  },
+  {
+    "Test Name": "Parainfluenza 1,2 & 3 - IgM antibody - Serum"
+  },
+  {
+    "Test Name": "Parathyroid Panel (PTH, Total Protein, Magnesium, Alkaline Phosphatase, Creatinine, Calcium-Total & Ionised, 24 Hrs Urine Calcium)"
+  },
+  {
+    "Test Name": "Parvovirus B19 DNA PCR - Amniotic fluid"
+  },
+  {
+    "Test Name": "Parvovirus B19 DNA PCR - Blood"
+  },
+  {
+    "Test Name": "Parvovirus B19 DNA PCR - CSF"
+  },
+  {
+    "Test Name": "Parvovirus B19 IgG"
+  },
+  {
+    "Test Name": "Parvovirus B19 IgM"
+  },
+  {
+    "Test Name": "PCOD (Polycystic Ovarian Disease) Profile [DHEA-S, FSH, LH, Prolactin, Testosterone - Free & Total, Insulin - Fasting, HbA1c]"
+  },
+  {
+    "Test Name": "PDGFR - A (Platelet Derived Growth Factor Receptor - alpha) - Gene Rearrangement (FIP1L1-PDGFR-A) - PCR"
+  },
+  {
+    "Test Name": "PDGFR ß B (Platelet Derived Growth Factor Receptor ß beta) - Gene Rearrangement - PDGFRB-ETV6 t(5;12) - PCR"
+  },
+  {
+    "Test Name": "PDGFRA Mutation Analysis- Solid Tumors (including GIST)"
+  },
+  {
+    "Test Name": "Ph for Ascitic Fluid - Automated"
+  },
+  {
+    "Test Name": "Ph for Body Fluid - Automated"
+  },
+  {
+    "Test Name": "Ph for Pericardial Fluid - Automated"
+  },
+  {
+    "Test Name": "Ph for Pleural Fluid - Automated"
+  },
+  {
+    "Test Name": "Phenobarbitone (Phenobarbital)"
+  },
+  {
+    "Test Name": "Phenylalanine - Quantitative Plasma"
+  },
+  {
+    "Test Name": "Phenytoin (Eptoin)"
+  },
+  {
+    "Test Name": "Phosphorous Inorganic"
+  },
+  {
+    "Test Name": "Phosphorous Inorganic - 24 hours urine"
+  },
+  {
+    "Test Name": "Phosphorous Inorganic - Spot urine"
+  },
+  {
+    "Test Name": "Phosphotidyl serine IgG antibody - Serum"
+  },
+  {
+    "Test Name": "Phosphotidyl serine IgM antibody - Serum"
+  },
+  {
+    "Test Name": "PIK3CA Gene\nMutations - Solid Tumors"
+  },
+  {
+    "Test Name": "Pituitary Marker Profile (HGH, ACTH, FSH, LH, Prolactin, TSH)"
+  },
+  {
+    "Test Name": "PLA2 receptor antibody (Primary membranous Glomerulopathy) - Serum"
+  },
+  {
+    "Test Name": "PLAC - Lipoprotein-Associated Phospholipase A2 Activity (Lp- PLA2) - Cardiac Risk Marker"
+  },
+  {
+    "Test Name": "PLACENTAL GROWTH FACTOR (PLGF)"
+  },
+  {
+    "Test Name": "Plasminogen Activator Inhibitor-1 (PAI-1) / SERPINE-1, 4G/5G Genotyping"
+  },
+  {
+    "Test Name": "Platelet Antibodies by\nIF - Qualitative test - Serum"
+  },
+  {
+    "Test Name": "Platelet Count"
+  },
+  {
+    "Test Name": "PML/RARA t(15:17) Gene\nrearrangement Quantitative - PCR"
+  },
+  {
+    "Test Name": "PML/RARA t(15:17) Qualitative\n- PCR"
+  },
+  {
+    "Test Name": "Pneumocystis Jerovecii (P.carinii) Detection by IFA"
+  },
+  {
+    "Test Name": "Pneumocystis Jerovecii (P.carinii) Screening by microscopy"
+  },
+  {
+    "Test Name": "Pneumonia Panel, bacterial (M Pneumoniae, S.Pneumoniae, Chlamydia Pneumoniae) - PCR"
+  },
+  {
+    "Test Name": "Pneumonia Panel, Viral-I (Influenza-A-RNA, Influenza-B- RNA, RSV- RNA, Eneterovirus- RNA) - PCR"
+  },
+  {
+    "Test Name": "Pneumonia Panel, Viral-II (CMV-DNA, HSV1/2-DNA,\nAdenovirus-DNA) PCR"
+  },
+  {
+    "Test Name": "PNH (Paroxysmal Nocturnal Hemoglobinuria) Flowcytometry - FLAER (CD14, CD15, CD33, CD45, CD24, FLAER)"
+  },
+  {
+    "Test Name": "Porphobilinogen Qualitative - Urine Random"
+  },
+  {
+    "Test Name": "Porphobilinogen Quantitative - Urine 24 Hours"
+  },
+  {
+    "Test Name": "Porphyria Profile (5 ALA and Porphobilinogen) - 24 hours Urine"
+  },
+  {
+    "Test Name": "Porphyria Profile (5 ALA and Porphobilinogen) - spot Urine"
+  },
+  {
+    "Test Name": "Porphyrin Speciation - 24 hr Urine"
+  },
+  {
+    "Test Name": "Porphyrins Total Qualitative - Random Urine - for Porphyria Screening"
+  },
+  {
+    "Test Name": "Potassium - 24 hours urine"
+  },
+  {
+    "Test Name": "Potassium - Serum"
+  },
+  {
+    "Test Name": "Potassium - Spot urine"
+  },
+  {
+    "Test Name": "Potassium-Body Fluid"
+  },
+  {
+    "Test Name": "Prader-Willi /Angelman Syndrome - PCR"
+  },
+  {
+    "Test Name": "Pre Operative Profile  (PT,aPTT, INR, CBC with ESR, Blood Grouping and Typing, Urea, Creatinine, Blood Glucose (Random), HIV 1&2 HBsAg, Anti-HCV,CUE,VDRL)"
+  },
+  {
+    "Test Name": "Pre Operative Profile - [CBC, Glucose random, Blood Grouping and Typing (ABO and Rh), CUE, HBsAg, HIV 1 and 2\nantibody, VDRL, BUN, Urea,\nCreatinine]"
+  },
+  {
+    "Test Name": "Prealbumin"
+  },
+  {
+    "Test Name": "Pregnancy test (Qualitative)"
+  },
+  {
+    "Test Name": "Primary Immunodeficiency Work-Up-1 (Lymphocyte Subsetting - B/T/NK Cells and IgG, IgA , IgM and IgE)"
+  },
+  {
+    "Test Name": "Primary Immunodeficiency Work-Up-2 [Lymphocyte Subsetting - B/T/NK Cells and IgG, IgA , IgM and IgE,Neutrophil Burst Oxidase Assay (CGD screening) ]"
+  },
+  {
+    "Test Name": "Primary Immunodeficiency Work-Up-3 [Lymphocyte Subsetting - B/T/NK Cells and IgG, IgA , IgM,Neutrophil Burst Oxidase Assay (CGD screening), ADA ]"
+  },
+  {
+    "Test Name": "Primary Immunodeficiency Work-Up-4 [Lymphocyte Subsetting - B/T/NK Cells and IgG, IgA , IgM and IgE, LAD Screening]"
+  },
+  {
+    "Test Name": "Primary Immunodeficiency Work-Up-5 [Lymphocyte Subsetting - B/T/NK Cells and IgG, IgA , IgM and IgE, LAD Screening, Neutrophil Burst Oxidase Assay (CGD screening)\n]"
+  },
+  {
+    "Test Name": "Primary Immunodeficiency Work-Up-6 [Lymphocyte Subsetting - B/T/NK Cells and IgG, IgA , IgM and IgE, LAD Screening, Neutrophil Burst Oxidase Assay (CGD screening),\nADA ]"
+  },
+  {
+    "Test Name": "Primary Immunodeficiency Work-Up-Basic [Lymphocyte Subsetting - B/T/NK Cells and IgG, IgA , IgM]"
+  },
+  {
+    "Test Name": "Pro GRP (Pro Gastrin Releasing Peptide) - Serum"
+  },
+  {
+    "Test Name": "Procalcitonin, PCT"
+  },
+  {
+    "Test Name": "Progesterone"
+  },
+  {
+    "Test Name": "Prolactin"
+  },
+  {
+    "Test Name": "Prolactin - active Monomeric prolactin - Serum"
+  },
+  {
+    "Test Name": "Protein - Total with Albumin and Globulin"
+  },
+  {
+    "Test Name": "Protein C Antigen"
+  },
+  {
+    "Test Name": "Protein C Functional Activity"
+  },
+  {
+    "Test Name": "Protein Electrophoresis - Urine 24 hrs"
+  },
+  {
+    "Test Name": "Protein Electrophoresis -CSF (Oligoclonal bands)"
+  },
+  {
+    "Test Name": "Protein Electrophoresis -Serum"
+  },
+  {
+    "Test Name": "Protein S Antigen - Free"
+  },
+  {
+    "Test Name": "Protein Total - Ascitic fluid"
+  },
+  {
+    "Test Name": "Protein Total - CSF"
+  },
+  {
+    "Test Name": "Protein Total - Dialysis Fluid"
+  },
+  {
+    "Test Name": "Protein Total - Pericardial Fluid"
+  },
+  {
+    "Test Name": "Protein Total - Peritoneal fluid"
+  },
+  {
+    "Test Name": "Protein Total - Pleural Fluid"
+  },
+  {
+    "Test Name": "Protein Total, 24 hours urine"
+  },
+  {
+    "Test Name": "Protein Total, Quantitative - Spot urine"
+  },
+  {
+    "Test Name": "Protein Total, Serum"
+  },
+  {
+    "Test Name": "Protein Total, Synovial Fluid"
+  },
+  {
+    "Test Name": "Protein/Creatinine Ratio - Urine Spot"
+  },
+  {
+    "Test Name": "Prothrombin (Factor II) Gene Mutation - G20210A"
+  },
+  {
+    "Test Name": "Prothrombin Time (PT) and INR"
+  },
+  {
+    "Test Name": "PSA - free, (fPSA)"
+  },
+  {
+    "Test Name": "PSA (total) with free-PSA and ratio (free:Total)"
+  },
+  {
+    "Test Name": "PSA Total (Prostatic Specific Antigen, Total)"
+  },
+  {
+    "Test Name": "PT with Mixing Studies"
+  },
+  {
+    "Test Name": "PTH (Parathyroid Hormone)"
+  },
+  {
+    "Test Name": "PTPN11"
+  },
+  {
+    "Test Name": "PUO - Pyrexia of Unknown origin Profile (Aerobic & Anaerobic Blood Culture, IgM Antibodies To Dengue, Leptospira, Brucella, EBV)"
+  },
+  {
+    "Test Name": "Pyruvate (Pyruvic acid) - Blood"
+  },
+  {
+    "Test Name": "Qualitative PCR-AML- ETO/t(8;21)"
+  },
+  {
+    "Test Name": "RBC Folate (includes serum folate)"
+  },
+  {
+    "Test Name": "Real Time PCR for Herpes Simplex Virus (HSV) Type 2 - qualitative"
+  },
+  {
+    "Test Name": "Real Time PCR for Herpes Sipmlex Virus (HSV) Type 1 - qualitative"
+  },
+  {
+    "Test Name": "Real Time PCR for Human Immunodeficiency Virus 1&2 (HIV 1&2)"
+  },
+  {
+    "Test Name": "Real Time PCR for Japanese Encephalitis Virus (viral load)"
+  },
+  {
+    "Test Name": "Real Time PCR for Mycobacterium Leprae"
+  },
+  {
+    "Test Name": "Real Time PCR for Zika Virus"
+  },
+  {
+    "Test Name": "Reducing Substances - Stool"
+  },
+  {
+    "Test Name": "Reducing Substances-Urine"
+  },
+  {
+    "Test Name": "Reflex - FISH for Myeloma on CD 138 enriched cells. (7\nmarkers, 4 with reflex 3)"
+  },
+  {
+    "Test Name": "Renal Function Test (RFT) - Basic [CUE, Serum - Protein Total, Creatinine , Electrolytes (Na, K, Cl), BUN, Uric acid]"
+  },
+  {
+    "Test Name": "Renal Function Test (RFT) - Comprehensive [CUE, Serum Total Protein, Albumin, BUN, Calcium, Cholesterol, Creatinine, Electrolytes (Na, K, Cl), Phosphorous Inorganic,\nUric acid, Alkaline phosphatase, Glucose ß Fasting, CBC with PS]"
+  },
+  {
+    "Test Name": "Renin Activity, Plasma"
+  },
+  {
+    "Test Name": "RESPIRATORY PANEL 1\n(Influenza A & B *Rhino Virus)"
+  },
+  {
+    "Test Name": "RESPIRATORY\nPANEL 2(Parainfluenza viruses 2, 3 & 4)"
+  },
+  {
+    "Test Name": "RESPIRATORY PANEL 3\n(Coronaviruses NL63,  229E, OC43 &  HKU1)"
+  },
+  {
+    "Test Name": "RESPIRATORY\nPANEL 4(Parainfluenza Virus 1 *Human Metapneumovirus\nA/B *Bocavirus, *Mycoplasma pneumoniae)"
+  },
+  {
+    "Test Name": "RESPIRATORY\nPANEL 5(Respiratory syncytial virus A/B\n*Cytomegalovirus\n*Enterovirus / Parechovirus\n*Adenovirus)"
+  },
+  {
+    "Test Name": "RESPIRATORY\nPANEL 6(Staphylococcus aureus *Streptococcus pneumoniae *Chlamydia pneumoniae *Haemophilus influenzae Type B)"
+  },
+  {
+    "Test Name": "RESPIRATORY\nPANEL 7(Klebsiella pneumoniae*Legio nella\n*Pneumocystis jiroveci\n*Salmonella species)"
+  },
+  {
+    "Test Name": "RESPIRATORY\nPANEL 8(Moraxella catarrhalis\n*Bordetella pertussis\n*Influenza  C *Haemophilus influenzae)"
+  },
+  {
+    "Test Name": "Respiratory Tract Infection profile - IgM (Mycoplasma pneumoniae, Coxiella burnetti, Chlamydia pneumonia, RSV, Legionella pneumophila, Influenza virus, Adenovirus, Parainfluenza virus)"
+  },
+  {
+    "Test Name": "Respiratory Tract Infection Profile-IgG (IgG Antibodies To Legionella\nPneumophilia, Mycoplasma Pneumonia, Coxiella Brunetii, Chlamydia Pneumoniae, Adenovirus, Rsv, Influenza A/B and Parainfluenza\n1,2,3 )"
+  },
+  {
+    "Test Name": "Respiratory Viral Panel (Flu)"
+  },
+  {
+    "Test Name": "RET Gene  -Medullary Thyroid Carinoma Mutation Detection Sequencing method-6 Exons"
+  },
+  {
+    "Test Name": "Reticulin IgA Antibody"
+  },
+  {
+    "Test Name": "Reticulocyte Count (% & absolute)"
+  },
+  {
+    "Test Name": "Rett Syndrome MECP2 Deletion/ Duplication - Blood"
+  },
+  {
+    "Test Name": "Rett Syndrome MECP2 Sequencing - Blood"
+  },
+  {
+    "Test Name": "Rett Syndrome(MECP2 gene) mutation and deletion duplication testing"
+  },
+  {
+    "Test Name": "Return of Block"
+  },
+  {
+    "Test Name": "Return of Block & Original Slide for opinion"
+  },
+  {
+    "Test Name": "Return of Extra slide and block - One (Stained slide)"
+  },
+  {
+    "Test Name": "Return of Extra slides (Up to 10 stained slides)"
+  },
+  {
+    "Test Name": "Return of Extra slides (Up to 15 stained slides)"
+  },
+  {
+    "Test Name": "Return of Extra Slides (Up to 5 Stained slides)"
+  },
+  {
+    "Test Name": "RFT MINI(UREA, CREATININE, NA+, K+, CL+)"
+  },
+  {
+    "Test Name": "Rh Antibody Titre (Anti D/Coomb's titre-Automated)"
+  },
+  {
+    "Test Name": "Rheumatic Fever Panel (CBC, ESR, ASO, CRP, Throat Swab Culture and Sensitivity.)"
+  },
+  {
+    "Test Name": "Rheumatoid Factor (RA) - Quantitative - Serum"
+  },
+  {
+    "Test Name": "Rheumatoid Factor (RF) -IgA"
+  },
+  {
+    "Test Name": "Rheumatoid Factor (RF) -IgM"
+  },
+  {
+    "Test Name": "Ri Antibody (Neuronal antigen for Paraneoplastic syndromes)"
+  },
+  {
+    "Test Name": "Rickettsia Antibody Panel"
+  },
+  {
+    "Test Name": "RNA Extraction and Preservation"
+  },
+  {
+    "Test Name": "Rocky Mountain Spotted Fever Antibodies"
+  },
+  {
+    "Test Name": "Rota virus Antigen detection"
+  },
+  {
+    "Test Name": "Routine examination with cytology - Ascitic fluid"
+  },
+  {
+    "Test Name": "Routine examination with cytology - Body fluid"
+  },
+  {
+    "Test Name": "Routine examination with cytology - CSF"
+  },
+  {
+    "Test Name": "Routine examination with cytology - Pericardial Fluid"
+  },
+  {
+    "Test Name": "Routine examination with cytology - Peritoneal Fluid"
+  },
+  {
+    "Test Name": "Routine examination with cytology - Pleural Fluid"
+  },
+  {
+    "Test Name": "Routine examination with cytology - Synovial Fluid"
+  },
+  {
+    "Test Name": "RSV-Respiratory Syncytial Virus IgG antibody"
+  },
+  {
+    "Test Name": "RSV-Respiratory Syncytial Virus IgM antibody"
+  },
+  {
+    "Test Name": "RT-PCR for AML/ETO\nQuantitative"
+  },
+  {
+    "Test Name": "RT-PCR for Inv (16) Quantitative"
+  },
+  {
+    "Test Name": "Rubella (German measles) virus RNA detection by PCR - Amniotic Fluid"
+  },
+  {
+    "Test Name": "Rubella (German measles) virus RNA detection by PCR - Blood/Plasma"
+  },
+  {
+    "Test Name": "Rubella (German measles) virus RNA detection by PCR - CSF"
+  },
+  {
+    "Test Name": "Rubella (German measles) virus RNA detection by PCR - CVS"
+  },
+  {
+    "Test Name": "Rubella (German measles) virus RNA detection by PCR - Urine"
+  },
+  {
+    "Test Name": "Rubella (German measles) virusRNA detection by PCR - Cord Blood"
+  },
+  {
+    "Test Name": "Rubella IgG Avidity"
+  },
+  {
+    "Test Name": "Rubella virus IgG Antibody"
+  },
+  {
+    "Test Name": "Rubella virus IgG Antibody- Quantitative"
+  },
+  {
+    "Test Name": "Rubella virus IgM Antibody"
+  },
+  {
+    "Test Name": "SARS-COV-2 (COVID-19) IgG"
+  },
+  {
+    "Test Name": "SARS-COV-2 (COVID-19) IgG"
+  },
+  {
+    "Test Name": "SARS-COV-2 (COVID-19) IgG"
+  },
+  {
+    "Test Name": "SARS-CoV-2(COVID 19)\nQualitative Real Time PCR"
+  },
+  {
+    "Test Name": "SCA 1 (Spinal Cerebral Ataxia Type -1)"
+  },
+  {
+    "Test Name": "SCA 12 (Spinal Cerebral Ataxia Type -12)"
+  },
+  {
+    "Test Name": "SCA 2 (Spinal Cerebral Ataxia Type -2)"
+  },
+  {
+    "Test Name": "SCA 3 (Spinal Cerebral Ataxia Type-3)"
+  },
+  {
+    "Test Name": "SCA 6 (Spinal Cerebral Ataxia Type-6)"
+  },
+  {
+    "Test Name": "SCA 7 (Spinal Cerebral Ataxia Type-7)"
+  },
+  {
+    "Test Name": "SCA1, 2, 3, 6, 7, 12 and 17"
+  },
+  {
+    "Test Name": "SCA10 (Spinal Cerebral Ataxia Type-10)"
+  },
+  {
+    "Test Name": "SCA17 (Spinal Cerebral Ataxia Type-17)"
+  },
+  {
+    "Test Name": "Scl-70 IgG Antibodies"
+  },
+  {
+    "Test Name": "Screening for Microdelection syndromes"
+  },
+  {
+    "Test Name": "Scrub Typhus IgM"
+  },
+  {
+    "Test Name": "SCRUB TYPHUS IgM - RAPID"
+  },
+  {
+    "Test Name": "Second Opinion - FISH Hematological Malignancies"
+  },
+  {
+    "Test Name": "Second Opinion - FISH Solid Tumor"
+  },
+  {
+    "Test Name": "Selenium, 24 Hours Urine"
+  },
+  {
+    "Test Name": "Selenium, Serum"
+  },
+  {
+    "Test Name": "Selenium, Urine Spot"
+  },
+  {
+    "Test Name": "Semen Analysis"
+  },
+  {
+    "Test Name": "Semen Fructose, Qualitative"
+  },
+  {
+    "Test Name": "Serine Quantitative - Plasma"
+  },
+  {
+    "Test Name": "Serotonin (5-Hydroxy Tryptamine) - Serum"
+  },
+  {
+    "Test Name": "Serotonin (5-Hydroxy Tryptamine) - Urine"
+  },
+  {
+    "Test Name": "Serum Ascitic Albumin Gradient (SAAG)"
+  },
+  {
+    "Test Name": "Sex Hormone Binding Globulin (SHBG)"
+  },
+  {
+    "Test Name": "Sickle Cell DNA PCR"
+  },
+  {
+    "Test Name": "Sickle cell DNA PCR PNDT"
+  },
+  {
+    "Test Name": "Sickling test"
+  },
+  {
+    "Test Name": "Silver - Blood"
+  },
+  {
+    "Test Name": "Sirolimus"
+  },
+  {
+    "Test Name": "Sjogrens Syndrome Antibodies [SS-A (Ro) and SS-B (La) IgG]"
+  },
+  {
+    "Test Name": "SMA (Spinal Muscular Atrophy)\ngene ß SMN microdeletion"
+  },
+  {
+    "Test Name": "Smith (Sm) IgG Antibodies"
+  },
+  {
+    "Test Name": "Sodium - 24 hours urine"
+  },
+  {
+    "Test Name": "Sodium - Body fluid"
+  },
+  {
+    "Test Name": "Sodium - Dialysis fluid"
+  },
+  {
+    "Test Name": "Sodium - Spot urine"
+  },
+  {
+    "Test Name": "Sodium- CSF"
+  },
+  {
+    "Test Name": "Sodium- Serum"
+  },
+  {
+    "Test Name": "Soluble Transferrin Receptor (sTFR)"
+  },
+  {
+    "Test Name": "Somatic Gene Mutation Panel - 270 Genes"
+  },
+  {
+    "Test Name": "Special stain - 1 to 2 stains"
+  },
+  {
+    "Test Name": "Special stain - 2 to 5 stains PAS/MUCICARMINE/CONGORE D/RETICULIN/AFB/GMS/PRUSS IAN BLUE / MASSON / LUXOL FAST BLUE/ FITE FARRACO/ELASTIC STAIN /\nGIEMSA / ALCIAN BLUE"
+  },
+  {
+    "Test Name": "Sperm DNA Fragmentation Assay"
+  },
+  {
+    "Test Name": "Sphingolipidosis Panel 1 (Metachromatic Leucodystrophy, GM1 Gangliosidosis, GM2 Gangliosidosis, Gauchers Disease, Niemann Pick disease)"
+  },
+  {
+    "Test Name": "Sphingolipidosis Panel 2 (Gauchers Disease, Niemann\nPick disease)"
+  },
+  {
+    "Test Name": "Sphingolipidosis Panel 3 (GM1 Gangliosidosis, Gauchers Disease, Niemann Pick disease)"
+  },
+  {
+    "Test Name": "Sphingomyelinase (Niemann Pick Disease)"
+  },
+  {
+    "Test Name": "SPINAL MUSCULAR ATROPHY- SMN 1"
+  },
+  {
+    "Test Name": "SS-A (Ro) IgG Antibodies"
+  },
+  {
+    "Test Name": "SS-B (La) IgG Antibodies"
+  },
+  {
+    "Test Name": "STD Diagnostic Panel (C Trachomatis DNA Detector, HPV DNA Detector, HSV DNA\nDetector )"
+  },
+  {
+    "Test Name": "STD PANEL - Comprehensive PCR"
+  },
+  {
+    "Test Name": "Stomach Cancer Profile (CEA, CA19.9, CA72.4)"
+  },
+  {
+    "Test Name": "Stone Analysis - Gall Bladder"
+  },
+  {
+    "Test Name": "Stone Analysis - Kidney (By FTIR)"
+  },
+  {
+    "Test Name": "Stool - Occult Blood (Fecal Occult blood test - FOBT)"
+  },
+  {
+    "Test Name": "Stool - Routine"
+  },
+  {
+    "Test Name": "Stool Opportunistic parasites - Microscopy"
+  },
+  {
+    "Test Name": "Streptococcus Group B Antigen\n- Serum"
+  },
+  {
+    "Test Name": "Streptococcus Group B Antigen, CSF"
+  },
+  {
+    "Test Name": "Streptococcus Pneumoniae Antigen"
+  },
+  {
+    "Test Name": "Streptococcus Pneumoniae Antigen, CSF"
+  },
+  {
+    "Test Name": "Stress Cytogenetics for Chromosomal Breakage Syndromes with karyotyping"
+  },
+  {
+    "Test Name": "Stress Cytogenetics for Chromosomal Breakage Syndromes without karyotyping"
+  },
+  {
+    "Test Name": "Syphilis/ Treponemal Antibody"
+  },
+  {
+    "Test Name": "T3 - Free (Tri-iodothyronine- Free)"
+  },
+  {
+    "Test Name": "T3 - Total (Tri Iodothyronine)"
+  },
+  {
+    "Test Name": "T3 Antibody"
+  },
+  {
+    "Test Name": "T4 - Free (Thyroxine - Free)"
+  },
+  {
+    "Test Name": "T4 - Total (Thyroxine - Total)"
+  },
+  {
+    "Test Name": "T4 Antibody"
+  },
+  {
+    "Test Name": "Tacrolimus"
+  },
+  {
+    "Test Name": "TB Culture - Conventional LJ"
+  },
+  {
+    "Test Name": "TB Gamma Interferon - Quantiferon"
+  },
+  {
+    "Test Name": "T-Cell Gene Rearrangement"
+  },
+  {
+    "Test Name": "TEL/AML -Qualitative   PCR"
+  },
+  {
+    "Test Name": "Testicular Marker Profile (HCG Beta, AFP)"
+  },
+  {
+    "Test Name": "Testosterone - Free"
+  },
+  {
+    "Test Name": "Testosterone - Total"
+  },
+  {
+    "Test Name": "Testosterone Total and Free"
+  },
+  {
+    "Test Name": "Tetanus Toxoid Antibodies (IgG)"
+  },
+  {
+    "Test Name": "Thalassemia Studies (CBC, Iron Studies and Haemoglobin variant analysis)"
+  },
+  {
+    "Test Name": "Thallium - Blood"
+  },
+  {
+    "Test Name": "Thallium - Urine 24 hours"
+  },
+  {
+    "Test Name": "Thallium - Urine Spot"
+  },
+  {
+    "Test Name": "Theophylline"
+  },
+  {
+    "Test Name": "Threonine Quantitative - plasma"
+  },
+  {
+    "Test Name": "Thrombin Time"
+  },
+  {
+    "Test Name": "Thyroglobulin - Serum"
+  },
+  {
+    "Test Name": "Thyroglobulin-Fluid"
+  },
+  {
+    "Test Name": "Thyroid Antibodies Panel (Anti- TG & Anti TPO)"
+  },
+  {
+    "Test Name": "Thyroid Profile - I (T3, T4 & TSH)"
+  },
+  {
+    "Test Name": "Thyroid Profile - II (FT3, FT4 & TSH)"
+  },
+  {
+    "Test Name": "Thyroid Profile - III (Anti-TG, Anti-TPO,T3, T4 & TSH)"
+  },
+  {
+    "Test Name": "Thyroid Profile - IV (Anti-TG, Anti-TPO, FT3, FT4, T3, T4 & TSH)"
+  },
+  {
+    "Test Name": "Thyroid Profile - V (T3, T4, FT3, FT4 & TSH)"
+  },
+  {
+    "Test Name": "Thyroid Profile - VI (FT4 & TSH)"
+  },
+  {
+    "Test Name": "Thyroid Profile VII - FT3 & TSH"
+  },
+  {
+    "Test Name": "Thyroxine Binding Globulin, TBG"
+  },
+  {
+    "Test Name": "TNF Alpha (Tumour Necrosis Factor) Serum"
+  },
+  {
+    "Test Name": "Tobramycin - Serum"
+  },
+  {
+    "Test Name": "TORCH by PCR (Toxoplasma, CMV, Rubella and Herpes by PCR) - Blood"
+  },
+  {
+    "Test Name": "TORCH by PCR (Toxoplasma, CMV, Rubella and Herpes by PCR) - other samples"
+  },
+  {
+    "Test Name": "Torch IgG and IgM - 10 Parameter [IgG/IgM Antibodies To Toxoplasma, CMV, Rubella, HSV-1 and HSV- 2]"
+  },
+  {
+    "Test Name": "ToRCH IgG and IgM - 8 Parameter  [IgG/IgM Antibodies To ToxoPlasma, CMV, Rubella, HSV-1&2 Combi]"
+  },
+  {
+    "Test Name": "Torch IgG Panel (5 parameters) [IgG Antibodies To  ToxoPlasma, CMV, Rubella, HSV-1 and HSV-2]"
+  },
+  {
+    "Test Name": "Torch IgM Panel (4 parameters)\n[IgM Antibodies To ToxoPlasma, CMV, Rubella,\nHSV-1/2 Combo]"
+  },
+  {
+    "Test Name": "Total Leukocyte Count (TLC)"
+  },
+  {
+    "Test Name": "Total Leukocyte Count and Differential Counts"
+  },
+  {
+    "Test Name": "Toxoplasma DNA detection by PCR - other samples"
+  },
+  {
+    "Test Name": "Toxoplasma DNA detection by PCR - Peripheral Blood / Cord blood"
+  },
+  {
+    "Test Name": "Toxoplasma gondii Avidity IgG"
+  },
+  {
+    "Test Name": "Toxoplasma gondii IgG Antibody"
+  },
+  {
+    "Test Name": "Toxoplasma gondii IgG Antibody-CSF"
+  },
+  {
+    "Test Name": "Toxoplasma gondii IgM Antibody"
+  },
+  {
+    "Test Name": "TPMT Enzyme Activity (Thiopurine Methyl Transferase) Plasma"
+  },
+  {
+    "Test Name": "TPMT Genotyping for Thyopurine drugs - Blood"
+  },
+  {
+    "Test Name": "Transferrin"
+  },
+  {
+    "Test Name": "Transferrin Saturation Index (TSI)"
+  },
+  {
+    "Test Name": "Treponema Pallidum Haemagglutination Assay (TPHA)"
+  },
+  {
+    "Test Name": "TRH stimulation test (For TSH)"
+  },
+  {
+    "Test Name": "Triglycerides"
+  },
+  {
+    "Test Name": "Triglycerides-Body Fluid"
+  },
+  {
+    "Test Name": "Tripeptidyl Peptidase1"
+  },
+  {
+    "Test Name": "Troponin-I Quantitative"
+  },
+  {
+    "Test Name": "Troponin-T Quantitative"
+  },
+  {
+    "Test Name": "Trypanosoma Cruzi IgG"
+  },
+  {
+    "Test Name": "TSH Receptor Antibodies"
+  },
+  {
+    "Test Name": "TSH, Thyroid Stimulating Hormone"
+  },
+  {
+    "Test Name": "Tumour Mutation Burden NGS"
+  },
+  {
+    "Test Name": "TYPHI DOT (Salmonella typhi IgG)"
+  },
+  {
+    "Test Name": "TYPHI DOT (Salmonella typhi IgM )"
+  },
+  {
+    "Test Name": "Typhoid DNA (By Real time PCR) - Blood"
+  },
+  {
+    "Test Name": "Typhoid DNA (By Real time PCR) - CSF"
+  },
+  {
+    "Test Name": "Tyrosine Quantitative Blood plasma"
+  },
+  {
+    "Test Name": "U1 snRNP Antibodies"
+  },
+  {
+    "Test Name": "Unsaturated Iron Binding Capacity (UIBC)"
+  },
+  {
+    "Test Name": "Urea"
+  },
+  {
+    "Test Name": "Urea - 24 hours urine"
+  },
+  {
+    "Test Name": "Urea - Body Fluid"
+  },
+  {
+    "Test Name": "Urea - Spot urine"
+  },
+  {
+    "Test Name": "Uric acid"
+  },
+  {
+    "Test Name": "Uric acid - 24 hours urine"
+  },
+  {
+    "Test Name": "Uric acid -Spot urine"
+  },
+  {
+    "Test Name": "Urine - Bile pigments"
+  },
+  {
+    "Test Name": "Urine - Bile salts"
+  },
+  {
+    "Test Name": "Urine - Fat Globules"
+  },
+  {
+    "Test Name": "Urine - Hemoglobin"
+  },
+  {
+    "Test Name": "Urine - Ketone bodies"
+  },
+  {
+    "Test Name": "Urine - Nitrites"
+  },
+  {
+    "Test Name": "Urine - Proteins"
+  },
+  {
+    "Test Name": "Urine - Sugar/ Reducing Substances"
+  },
+  {
+    "Test Name": "Urine Examination - Routine & Microscopy (CUE)"
+  },
+  {
+    "Test Name": "Urobilinogen - Urine"
+  },
+  {
+    "Test Name": "Valproic acid (Valproate)"
+  },
+  {
+    "Test Name": "Vancomycin"
+  },
+  {
+    "Test Name": "Varicella Zoster Virus IgG (Chicken Pox; Herpes zo"
+  },
+  {
+    "Test Name": "Varicella Zoster Virus IgG (Chicken Pox; Herpes zoster; Shingles) - Serum"
+  },
+  {
+    "Test Name": "Varicella Zoster Virus IgM (Chicken Pox; Herpes zoster; Shingles) - Serum"
+  },
+  {
+    "Test Name": "VDRL / Rapid Plasma Reagin (RPR) Test - Serum"
+  },
+  {
+    "Test Name": "VDRL Test - CSF"
+  },
+  {
+    "Test Name": "Venous Thrombosis Screen - PCR (Factor V Leiden mutation, Prothrombin gene mutation, MTHFR gene mutation)"
+  },
+  {
+    "Test Name": "VGCC - Voltage gated Calcium channel Antibody - Serum"
+  },
+  {
+    "Test Name": "VGKC - Voltage gated Potassium channel (LG1 and CASPR2) Antibody Autoimmune encephalitis - CSF"
+  },
+  {
+    "Test Name": "VGKC - Voltage gated Potassium channel (LG1 and CASPR2) Antibody Autoimmune encephalitis - Serum"
+  },
+  {
+    "Test Name": "VIRAL PNEUMONIA PANEL I\n(Influenza A RNA, Influenza B RNA, Para Influenza, RSV, Enterovirus RNA)"
+  },
+  {
+    "Test Name": "VIRAL PNEUMONIA PANEL II\n(Adenovirus DNA, Cytomegalovirus DNA, HSV 1 & 2)"
+  },
+  {
+    "Test Name": "Vitamin A"
+  },
+  {
+    "Test Name": "Vitamin B1"
+  },
+  {
+    "Test Name": "Vitamin B12"
+  },
+  {
+    "Test Name": "Vitamin B12, active (Holo Transcobalamin)"
+  },
+  {
+    "Test Name": "Vitamin B2"
+  },
+  {
+    "Test Name": "Vitamin B6 (Pyridoxal phosphate)"
+  },
+  {
+    "Test Name": "Vitamin C"
+  },
+  {
+    "Test Name": "Vitamin D, 25-Hydroxy"
+  },
+  {
+    "Test Name": "Vitamin D, 25-Hydroxy - by LC- MS/MS"
+  },
+  {
+    "Test Name": "Vitamin D3 (1,25 Dihydroxy )"
+  },
+  {
+    "Test Name": "Vitamin E (Tocopherol)"
+  },
+  {
+    "Test Name": "Vitamin K"
+  },
+  {
+    "Test Name": "Vitamin Special Profile"
+  },
+  {
+    "Test Name": "VLDL (Very Low Density Lipoprotein)"
+  },
+  {
+    "Test Name": "VMA (Vanillyl Mandelic Acid) - 24hr urine"
+  },
+  {
+    "Test Name": "VMA (Vanillyl Mandelic Acid) - Spot urine"
+  },
+  {
+    "Test Name": "Von Willebrand Factor (vWF) Antigen"
+  },
+  {
+    "Test Name": "Voriconazole"
+  },
+  {
+    "Test Name": "VWD Screening Profile"
+  },
+  {
+    "Test Name": "VZV-Varicella Zoster Virus (Chicken pox) - PCR"
+  },
+  {
+    "Test Name": "VZV-Varicella Zoster\nVirus (Chicken pox) - PCR on Blood"
+  },
+  {
+    "Test Name": "Warfarin Sensitivity (CYP2C9*2,CYP2C9*3\n&VKORC1 Mutation)"
+  },
+  {
+    "Test Name": "Water for chemical analysis"
+  },
+  {
+    "Test Name": "Weil Felix (Rickettsial Antigens - OX2, OXK & OX-19)"
+  },
+  {
+    "Test Name": "West nile virus IgG"
+  },
+  {
+    "Test Name": "West nile virus IgM"
+  },
+  {
+    "Test Name": "Whole Exome Sequencing"
+  },
+  {
+    "Test Name": "WIDAL Slide Agglutination tests"
+  },
+  {
+    "Test Name": "WIDAL tube Agglutination test"
+  },
+  {
+    "Test Name": "Wilson Disease (ATP7 B Gene Mutation) full gene sequencing"
+  },
+  {
+    "Test Name": "Wilson's Disease Panel (CBC, Ceruloplasmin, Serum and Urine Copper, Serum total protein, SGOT, SGPT, Bilirubin, RBS)"
+  },
+  {
+    "Test Name": "WT-1 Mutation Detection - PCR"
+  },
+  {
+    "Test Name": "Y Chromosome Microdeletion"
+  },
+  {
+    "Test Name": "Yersinia Enterocolitica - Culture only"
+  },
+  {
+    "Test Name": "Yersinia Enterocolitica - IgG antibody"
+  },
+  {
+    "Test Name": "Yersinia Enterocolitica - IgM antibody"
+  },
+  {
+    "Test Name": "Yo Antibody Neuronal antibody for Paraneoplastic syndromes"
+  },
+  {
+    "Test Name": "Zinc - 24 hour urine"
+  },
+  {
+    "Test Name": "Zinc - Random Urine"
+  },
+  {
+    "Test Name": "Zinc - Serum/Plasma"
+  }
+]

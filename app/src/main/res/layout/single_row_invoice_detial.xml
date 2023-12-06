@@ -93,16 +93,31 @@
 
                     </androidx.appcompat.widget.AppCompatTextView>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tvDoctorNameInvD"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="10dp"
-                        android:text="Ratul Das"
-                        android:textStyle="bold">
+                        android:gravity="end"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                             android:text="Dr. "
+                            android:textStyle="bold">
 
-                    </androidx.appcompat.widget.AppCompatTextView>
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDoctorNameInvD"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp"
+                            android:text="Ratul Das"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                    </LinearLayout>
+
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvPatientNameInvD"

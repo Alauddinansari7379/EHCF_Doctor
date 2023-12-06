@@ -11,6 +11,7 @@ data class ResultXX(
     val name: String,
     val height: Any,
     val id: String,
+    val externalPatientId: String,
     val lbm: Any,
     val metabolism: Any,
     val musclemass: Any,
@@ -21,6 +22,7 @@ data class ResultXX(
     val systolic: String,
     val temperature: String,
     val test_name: String,
+    val date: String,
     val updated_at: String,
     val visceralfat: Any,
     val weight: Any

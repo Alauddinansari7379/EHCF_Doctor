@@ -48,6 +48,8 @@ class SessionManager(context: Context?) {
         private const val HOSPITAL_ADDRESS = "hos_address"
         private const val REGISTRATION = "registration"
          private const val SPECIALIST = "specialist"
+         private const val YEAROFCOMPLETION = "yearOfCompletion"
+         private const val REGISTRATIONYEAR = "registrationYear"
         private const val CLINIC_ADDRESS_ONE = "clinic_address_one"
         private const val CLINIC_ADDRESS_TWO = "clinic_address_two"
         private const val CITY = "city"
@@ -83,6 +85,18 @@ class SessionManager(context: Context?) {
         get() = prefs.getString(SPECIALIST, "")
         set(specialist) {
             prefs.edit().putString(SPECIALIST, specialist).apply()
+        }
+
+    var yearOfCompletion: String?
+        get() = prefs.getString(YEAROFCOMPLETION, "")
+        set(yearOfCompletion) {
+            prefs.edit().putString(YEAROFCOMPLETION, yearOfCompletion).apply()
+        }
+
+    var registrationYear: String?
+        get() = prefs.getString(REGISTRATIONYEAR, "")
+        set(registrationYear) {
+            prefs.edit().putString(REGISTRATIONYEAR, registrationYear).apply()
         }
     var city: String?
         get() = prefs.getString(CITY, "")

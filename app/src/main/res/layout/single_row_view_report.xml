@@ -83,14 +83,28 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 android:gravity="end"
+                android:layout_marginRight="10dp"
+
                 android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvReportNotUploaded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Red"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Report Not Uploded">
+
+                </androidx.appcompat.widget.AppCompatTextView>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnViewReportViewAll"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
+                    android:drawablePadding="10dp"
                     android:layout_gravity="end"
-                    android:layout_marginRight="10dp"
                     android:background="@drawable/corner"
                     android:backgroundTint="@color/main_color"
                     android:drawableLeft="@drawable/ic_baseline_remove_red_eye_24"

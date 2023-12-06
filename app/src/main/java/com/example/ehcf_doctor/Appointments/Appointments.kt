@@ -2,7 +2,6 @@ package com.example.ehcf_doctor.Appointments
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -10,8 +9,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager.widget.ViewPager
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -26,14 +23,12 @@ import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.databinding.ActivityApointmentsBinding
 import com.example.myrecyview.apiclient.ApiClient
-import com.giphy.sdk.analytics.GiphyPingbacks.context
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
-import xyz.teamgravity.checkinternet.CheckInternet
 
 
 class Appointments : AppCompatActivity() {

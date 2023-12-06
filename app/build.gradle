@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.ehcf_doctor"
-        minSdk 23
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -67,7 +67,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     // (Jitsi dependencies)
-    implementation('org.jitsi.react:jitsi-meet-sdk:7.0.1') { transitive = true }
+    implementation ('org.jitsi.react:jitsi-meet-sdk:8.5.0') { transitive = true }
     // (Razorpay dependencies)
     implementation 'com.razorpay:checkout:1.6.26'
 
@@ -173,6 +173,11 @@ dependencies {
 
     //For screen
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+   // Image Picker From Camera
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+
 
 
 //    //AudioRecorder

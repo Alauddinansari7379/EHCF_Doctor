@@ -16,15 +16,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ehcf.Helper.changeDateFormatNew
 import com.example.ehcf.Helper.convertTo12Hour
 import com.example.ehcf_doctor.Appointments.Upcoming.activity.AppointmentDetalis
-import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
-import com.example.ehcf_doctor.R
 import com.squareup.picasso.Picasso
-import java.text.SimpleDateFormat
+import com.example.ehcf_doctor.Booking.model.ResultUpcoming
+import com.example.ehcf_doctor.R
+ import java.text.SimpleDateFormat
 import java.util.*
 
 
 class AdapterUpComing(
-    val context: Context, private val list: ModelGetConsultation, val confirmSlot: ConfirmSlot
+    val context: Context, private val list: ArrayList<ResultUpcoming> , val confirmSlot: ConfirmSlot
 ) :
     RecyclerView.Adapter<AdapterUpComing.MyViewHolder>() {
 
@@ -41,9 +41,8 @@ class AdapterUpComing(
     @SuppressLint("LogNotTimber")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         try {
-            if (list.result[position].profile_picture!!.isNotEmpty()) {
-                Picasso.get()
-                    .load("https://ehcf.thedemostore.in/uploads/${list.result[position].profile_picture}")
+            if (list[position].profile_picture!!.isNotEmpty()) {
+                Picasso.get().load("https://ehcf.thedemostore.in/uploads/${list[position].profile_picture}")
                     .placeholder(R.drawable.profile).error(R.drawable.profile).into(holder.imgProfile);
 
 
@@ -51,43 +50,43 @@ class AdapterUpComing(
             // holder.SrNo.text= "${position+1}"
 //        Log.e("currentDate","$currentDate")
 //        Log.e("startTime","${list.result[position].date.toString()}")
-            holder.date.text = list.result[position].date.toString()
-            if (list.result[position].member_name != null) {
-                holder.coustmerName.text = list.result[position].member_name
+            holder.date.text = list[position].date.toString()
+            if (list[position].member_name != null) {
+                holder.coustmerName.text = list[position].member_name
 
             } else {
-                holder.coustmerName.text = list.result[position].customer_name.toString()
+                holder.coustmerName.text = list[position].customer_name.toString()
             }
             // holder.bookingId.text = list.result[position].id.toString()
             // holder.title.text = list.result[position].title.toString()
-            if (list.result[position].start_time.toString() != "null") {
-                holder.startTime.text = convertTo12Hour(list.result[position].start_time.toString())
-                holder.endTime.text = convertTo12Hour(list.result[position].end_time.toString())
+            if (list[position].start_time.toString() != "null") {
+                holder.startTime.text = convertTo12Hour(list[position].start_time.toString())
+                holder.endTime.text = convertTo12Hour(list[position].end_time.toString())
             }
 
-            holder.status.text = list.result[position].status_for_doctor.toString()
+            holder.status.text = list[position].status_name.toString()
 
             holder.btnConfirm.setOnClickListener {
                 val slug = "accepted"
-                confirmSlot.alretDilogConfirm(list.result[position].id.toString(), slug)
+                confirmSlot.alretDilogConfirm(list[position].id.toString(), slug)
             }
             holder.btnReject.setOnClickListener {
                 // val slug="booking_rejected"
                 val slug = "rejected"
-                confirmSlot.alretDilogReject(list.result[position].id.toString(), slug)
+                confirmSlot.alretDilogReject(list[position].id.toString(), slug)
             }
             holder.btnCheck.setOnClickListener {
-                confirmSlot.popupRemainingTime(list.result[position].date?.let { it1 ->
+                confirmSlot.popupRemainingTime(list[position].date?.let { it1 ->
                     changeDateFormatNew(
                         it1
                     )
-                } + " " + list.result[position].start_time)
+                } + " " + list[position].start_time)
             }
 
             holder.btnCompleted.setOnClickListener {
-                confirmSlot.alretDilogCompleted(list.result[position].id.toString())
+                confirmSlot.alretDilogCompleted(list[position].id.toString())
             }
-            when (list.result[position].consultation_type) {
+            when (list[position].consultation_type) {
                 "1" -> {
                     holder.consaltationType.text = "Tele-Consultation"
                 }
@@ -99,7 +98,7 @@ class AdapterUpComing(
                 }
             }
 //        Picasso.get().load(list.result[position].category_image).into(holder.image)
-            when (list.result[position].slug) {
+            when (list[position].slug) {
 //            "booking_confirmed" -> {
 //                holder.btnCheck.visibility = View.VISIBLE
 //                holder.btnConfirm.visibility = View.GONE
@@ -134,17 +133,17 @@ class AdapterUpComing(
 
 
             Log.e("currentDate", currentDate)
-            Log.e("startTime", list.result[position].date + " " + list.result[position].time)
+            Log.e("startTime", list[position].date + " " + list[position].time)
 
-            if (list.result[position].date + " " + list.result[position].start_time <= currentDate && list.result[position].slug == "accepted") {
+            if (list[position].date + " " + list[position].start_time <= currentDate && list[position].slug == "accepted") {
                 holder.btnStartMeeting.visibility = View.VISIBLE
                 holder.btnCompleted.visibility = View.GONE
                 holder.btnCheck.visibility = View.GONE
                 holder.btnConfirm.visibility = View.GONE
                 holder.btnReject.visibility = View.GONE
             }
-            if (list.result[position].date + " " + list.result[position].start_time <= currentDate && list.result[position].slug == "accepted"
-                && list.result[position].consultation_type == "2"
+            if (list[position].date + " " + list[position].start_time <= currentDate && list[position].slug == "accepted"
+                && list[position].consultation_type == "2"
             ) {
                 holder.btnStartMeeting.visibility = View.GONE
                 holder.btnCompleted.visibility = View.VISIBLE
@@ -152,8 +151,8 @@ class AdapterUpComing(
                 holder.btnConfirm.visibility = View.GONE
                 holder.btnReject.visibility = View.GONE
             }
-            if (list.result[position].date + " " + list.result[position].start_time <= currentDate && list.result[position].slug == "accepted"
-                && list.result[position].consultation_type == "3"
+            if (list[position].date + " " + list[position].start_time <= currentDate && list[position].slug == "accepted"
+                && list[position].consultation_type == "3"
             ) {
                 holder.btnStartMeeting.visibility = View.GONE
                 holder.btnCompleted.visibility = View.VISIBLE
@@ -162,15 +161,12 @@ class AdapterUpComing(
                 holder.btnReject.visibility = View.GONE
             }
             holder.btnStartMeeting.setOnClickListener {
-                CompanionCoustmorName = list.result[position].customer_name.toString()
-                confirmSlot.videoCall(
-                    list.result[position].date + " " + list.result[position].start_time,
-                    list.result[position].id
-                )
+                CompanionCoustmorName = list[position].customer_name.toString()
+                confirmSlot.videoCall(list[position].date + "EHCF" + list[position].start_time, list[position].id)
             }
             holder.btnView.setOnClickListener {
                 val intent = Intent(context as Activity, AppointmentDetalis::class.java)
-                    .putExtra("bookingId", list.result[position].id.toString())
+                    .putExtra("bookingId", list[position].id.toString())
                 context.startActivity(intent)
             }
             // Glide.with(hol der.image).load(list[position].url).into(holder.image)
@@ -182,7 +178,7 @@ class AdapterUpComing(
 
 
     override fun getItemCount(): Int {
-        return list.result.size
+        return list.size
 
     }
 

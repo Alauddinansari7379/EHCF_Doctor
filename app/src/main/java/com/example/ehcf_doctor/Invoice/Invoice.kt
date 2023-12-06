@@ -119,33 +119,34 @@ class Invoice : AppCompatActivity() {
                     call: Call<ModelInvoice>,
                     response: Response<ModelInvoice>
                 ) {
-                    if (response.code() == 500) {
-                        myToast(this@Invoice, "Server Error")
-                        binding.shimmerInvoice.visibility = View.GONE
-                    } else if (response.body()!!.status == 0) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmerInvoice.visibility = View.GONE
-                        myToast(this@Invoice, "${response.body()!!.message}")
-                        progressDialog!!.dismiss()
+                    try {
+                        if (response.code() == 500) {
+                            myToast(this@Invoice, "Server Error")
+                            binding.shimmerInvoice.visibility = View.GONE
+                        } else if (response.body()!!.status == 0) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmerInvoice.visibility = View.GONE
+                            myToast(this@Invoice, "${response.body()!!.message}")
+                            progressDialog!!.dismiss()
 
-                    } else if (response.body()!!.result.isEmpty()) {
-                        binding.rvManageSlot.adapter =
-                            AdapterInvoice(this@Invoice, response.body()!!)
-                        binding.rvManageSlot.adapter!!.notifyDataSetChanged()
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmerInvoice.visibility = View.GONE
-                        myToast(this@Invoice, "No Invoice Found")
-                        progressDialog!!.dismiss()
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.rvManageSlot.adapter =
+                                AdapterInvoice(this@Invoice, response.body()!!)
+                            binding.rvManageSlot.adapter!!.notifyDataSetChanged()
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmerInvoice.visibility = View.GONE
+                            myToast(this@Invoice, "No Invoice Found")
+                            progressDialog!!.dismiss()
 
-                    } else {
-                        binding.rvManageSlot.adapter =
-                            AdapterInvoice(this@Invoice, response.body()!!)
-                        binding.rvManageSlot.adapter!!.notifyDataSetChanged()
-                        binding.tvNoDataFound.visibility = View.GONE
-                        shimmerFrameLayout?.startShimmer()
-                        binding.rvManageSlot.visibility = View.VISIBLE
-                        binding.shimmerInvoice.visibility = View.GONE
-                        progressDialog!!.dismiss()
+                        } else {
+                            binding.rvManageSlot.adapter =
+                                AdapterInvoice(this@Invoice, response.body()!!)
+                            binding.rvManageSlot.adapter!!.notifyDataSetChanged()
+                            binding.tvNoDataFound.visibility = View.GONE
+                            shimmerFrameLayout?.startShimmer()
+                            binding.rvManageSlot.visibility = View.VISIBLE
+                            binding.shimmerInvoice.visibility = View.GONE
+                            progressDialog!!.dismiss()
 //                        binding.rvManageSlot.apply {
 //                            binding.tvNoDataFound.visibility = View.GONE
 //                            shimmerFrameLayout?.startShimmer()
@@ -156,6 +157,12 @@ class Invoice : AppCompatActivity() {
 //                            progressDialog!!.dismiss()
 //
 //                        }
+                        }
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        myToast(this@Invoice, "Something went wrong")
+                        binding.shimmerInvoice.visibility = View.GONE
+                        progressDialog!!.dismiss()
                     }
                 }
 
@@ -185,36 +192,37 @@ class Invoice : AppCompatActivity() {
                     call: Call<ModelInvoice>,
                     response: Response<ModelInvoice>
                 ) {
-                    if (response.code() == 500) {
-                        myToast(this@Invoice, "Server Error")
-                        binding.shimmerInvoice.visibility = View.GONE
-                    } else if (response.body()!!.status == 0) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmerInvoice.visibility = View.GONE
-                        binding.edtSearch.text.clear()
-                        myToast(this@Invoice, "${response.body()!!.message}")
-                        progressDialog!!.dismiss()
+                    try {
+                        if (response.code() == 500) {
+                            myToast(this@Invoice, "Server Error")
+                            binding.shimmerInvoice.visibility = View.GONE
+                        } else if (response.body()!!.status == 0) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmerInvoice.visibility = View.GONE
+                            binding.edtSearch.text.clear()
+                            myToast(this@Invoice, "${response.body()!!.message}")
+                            progressDialog!!.dismiss()
 
-                    } else if (response.body()!!.result.isEmpty()) {
-                        binding.rvManageSlot.adapter =
-                            AdapterInvoice(this@Invoice, response.body()!!)
-                        binding.rvManageSlot.adapter!!.notifyDataSetChanged()
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmerInvoice.visibility = View.GONE
-                        binding.edtSearch.text.clear()
-                        myToast(this@Invoice, "No Invoice Found")
-                        progressDialog!!.dismiss()
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.rvManageSlot.adapter =
+                                AdapterInvoice(this@Invoice, response.body()!!)
+                            binding.rvManageSlot.adapter!!.notifyDataSetChanged()
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmerInvoice.visibility = View.GONE
+                            binding.edtSearch.text.clear()
+                            myToast(this@Invoice, "No Invoice Found")
+                            progressDialog!!.dismiss()
 
-                    } else {
-                        binding.rvManageSlot.adapter =
-                            AdapterInvoice(this@Invoice, response.body()!!)
-                        binding.rvManageSlot.adapter!!.notifyDataSetChanged()
-                        binding.tvNoDataFound.visibility = View.GONE
-                        shimmerFrameLayout?.startShimmer()
-                        binding.rvManageSlot.visibility = View.VISIBLE
-                        binding.shimmerInvoice.visibility = View.GONE
-                        binding.edtSearch.text.clear()
-                        progressDialog!!.dismiss()
+                        } else {
+                            binding.rvManageSlot.adapter =
+                                AdapterInvoice(this@Invoice, response.body()!!)
+                            binding.rvManageSlot.adapter!!.notifyDataSetChanged()
+                            binding.tvNoDataFound.visibility = View.GONE
+                            shimmerFrameLayout?.startShimmer()
+                            binding.rvManageSlot.visibility = View.VISIBLE
+                            binding.shimmerInvoice.visibility = View.GONE
+                            binding.edtSearch.text.clear()
+                            progressDialog!!.dismiss()
 //                        binding.rvManageSlot.apply {
 //                            binding.tvNoDataFound.visibility = View.GONE
 //                            shimmerFrameLayout?.startShimmer()
@@ -225,6 +233,11 @@ class Invoice : AppCompatActivity() {
 //                            progressDialog!!.dismiss()
 //
 //                        }
+                        }
+                    }catch (e:Exception){
+                        myToast(this@Invoice, "Something went wrong")
+                        binding.shimmerInvoice.visibility = View.GONE
+                        progressDialog!!.dismiss()
                     }
                 }
 

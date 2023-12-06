@@ -39,13 +39,15 @@ class AdapterTestHistory(
             // holder.SrNo.text= "${position+1}"
             holder.name.text = list.result[position].name
             holder.testName.text = list.result[position].test_name
+            holder.tvTestDateHistory.text = list.result[position].date
              //  holder.doctorName.text = list.result[position].n.toString()
 
 
             holder.viewReport.setOnClickListener {
                 PatientList.TestHistory ="1"
                 val intent = Intent(context as Activity, AddPatient::class.java)
-                    .putExtra("id", list.result[position].id)
+                    .putExtra("id", list.result[position].externalPatientId)
+                    .putExtra("date", list.result[position].date)
                     .putExtra("customer_name", list.result[position].name)
 
                 context.startActivity(intent)
@@ -65,6 +67,7 @@ class AdapterTestHistory(
         val name: TextView = itemView.findViewById(R.id.tvNameMyPatientHistory)
           val testName: TextView = itemView.findViewById(R.id.tvTestNameHistory)
           val viewReport: Button = itemView.findViewById(R.id.btnViewReportHistory)
+          val tvTestDateHistory: TextView = itemView.findViewById(R.id.tvTestDateHistory)
 
     }
     interface CommentList {

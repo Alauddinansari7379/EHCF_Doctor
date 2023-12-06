@@ -1,6 +1,6 @@
 package com.example.ehcf_doctor.MyPatient.model
 
-data class Result(
+data class ResultMyPatient(
     val blood_group: String,
     val created_at: String,
     val customer_name: String,

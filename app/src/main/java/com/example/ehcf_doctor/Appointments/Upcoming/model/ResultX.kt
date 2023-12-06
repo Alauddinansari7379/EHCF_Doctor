@@ -18,6 +18,7 @@ data class ResultX(
     val phone_with_code: String,
     val profile_picture: String,
     val rating: String,
+    val profile_image: String,
     val slug: String,
     val status: String,
     val status_for_doctor: String,

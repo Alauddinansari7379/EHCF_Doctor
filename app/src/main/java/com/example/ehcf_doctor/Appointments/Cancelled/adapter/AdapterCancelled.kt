@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ehcf.Helper.convertTo12Hour
 import com.example.ehcf_doctor.Appointments.Upcoming.activity.AppointmentDetalis
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
+import com.example.ehcf_doctor.Booking.model.ResultUpcoming
 import com.example.ehcf_doctor.R
 import com.squareup.picasso.Picasso
 
 
 class AdapterCancelled(
-    val context: Context, private val list: ModelGetConsultation
+    val context: Context, private val list: ArrayList<ResultUpcoming>
 ) :
     RecyclerView.Adapter<AdapterCancelled.MyViewHolder>() {
 
@@ -32,30 +33,30 @@ class AdapterCancelled(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // holder.SrNo.text= "${position+1}"
         try {
-            if (list.result[position].profile_picture!!.isNotEmpty()) {
+            if (list[position].profile_picture!!.isNotEmpty()) {
                 Picasso.get()
-                    .load("https://ehcf.thedemostore.in/uploads/${list.result[position].profile_picture}")
+                    .load("https://ehcf.thedemostore.in/uploads/${list[position].profile_picture}")
                     .placeholder(R.drawable.profile).error(R.drawable.profile).into(holder.profile);
 
 
             }
 
-            holder.appointmentDate.text = list.result[position].date
-            holder.totalAmount.text = list.result[position].total.toString()
-            holder.tvStatus.text = list.result[position].status_for_doctor
-            if (list.result[position].start_time != null) {
-                holder.startTime.text = convertTo12Hour(list.result[position].start_time.toString())
-                holder.endTime.text = convertTo12Hour(list.result[position].end_time.toString())
+            holder.appointmentDate.text = list[position].date
+            holder.totalAmount.text = list[position].total.toString()
+            holder.tvStatus.text = list[position].status_for_doctor
+            if (list[position].start_time != null) {
+                holder.startTime.text = convertTo12Hour(list[position].start_time.toString())
+                holder.endTime.text = convertTo12Hour(list[position].end_time.toString())
             }
 
             // holder.description.text = list.result[position].description.toString()
-            if (list.result[position].member_name != null) {
-                holder.coustmorName.text = list.result[position].member_name
+            if (list[position].member_name != null) {
+                holder.coustmorName.text = list[position].member_name
 
             } else {
-                holder.coustmorName.text = list.result[position].customer_name.toString()
+                holder.coustmorName.text = list[position].customer_name.toString()
             }
-            when (list.result[position].consultation_type) {
+            when (list[position].consultation_type) {
                 "1" -> {
                     holder.tvConsultationTypeCan.text = "Tele-Consultation"
                 }
@@ -80,7 +81,7 @@ class AdapterCancelled(
 
             holder.cardView.setOnClickListener {
                 val intent = Intent(context as Activity, AppointmentDetalis::class.java)
-                    .putExtra("bookingId", list.result[position].id.toString())
+                    .putExtra("bookingId", list[position].id.toString())
                 context.startActivity(intent)
             }
 
@@ -92,7 +93,7 @@ class AdapterCancelled(
 
     }
     override fun getItemCount(): Int {
-        return list.result.size
+        return list.size
 
     }
 

@@ -72,7 +72,7 @@ class ProfileFragment : Fragment(), UploadRequestBody.UploadCallback {
 
 
 
-        doctorname = sessionManager.doctorName.toString()
+        doctorname = "Dr "+sessionManager.doctorName.toString()
         email = sessionManager.email.toString()
         wallet = sessionManager.wallet.toString()
 
@@ -119,20 +119,25 @@ class ProfileFragment : Fragment(), UploadRequestBody.UploadCallback {
                     call: Call<ResetPassResponse>,
                     response: Response<ResetPassResponse>
                 ) {
-                    if (response.body()!!.status == 1) {
-                        progressDialog!!.dismiss()
-                        alretDilogChanged()
-                        //myToast(requireActivity(), response.body()!!.message)
-                    } else {
-                        myToast(requireActivity(), response.body()!!.message)
-                        progressDialog!!.dismiss()
+                    try {
+                        if (response.body()!!.status == 1) {
+                            progressDialog!!.dismiss()
+                            alretDilogChanged()
+                            //myToast(requireActivity(), response.body()!!.message)
+                        } else {
+                            myToast(requireActivity(), response.body()!!.message)
+                            progressDialog!!.dismiss()
 
+                        }
+                    }catch (e:Exception){
+                        activity?.let { myToast(it, "Something went wrong") }
+                        progressDialog!!.dismiss()
                     }
                 }
 
                 override fun onFailure(call: Call<ResetPassResponse>, t: Throwable) {
                     progressDialog!!.dismiss()
-                    myToast(requireActivity(), "Something went wrong")
+                    activity?.let { myToast(it, "Something went wrong") }
 
                 }
 
@@ -209,12 +214,13 @@ class ProfileFragment : Fragment(), UploadRequestBody.UploadCallback {
                             //  binding.progressBar.progress = 100
                             progressDialog!!.dismiss()
                         } else {
-                            myToast(activity!!, "Something went wrong")
+                            activity?.let { myToast(it, "Something went wrong") }
                         }
 
                     }catch (e:Exception){
-                        myToast(activity!!, "Something went wrong")
+                        activity?.let { myToast(it, "Something went wrong") }
                         e.printStackTrace()
+                        progressDialog!!.dismiss()
                     }
                 }
             }
@@ -222,7 +228,7 @@ class ProfileFragment : Fragment(), UploadRequestBody.UploadCallback {
             override fun onFailure(call: Call<ModelProfilePic>, t: Throwable) {
                // binding.layoutRoot.snackbar(t.message!!)
                 // binding.progressBar.progress = 0
-                myToast(activity!!,"Something went wrong")
+                activity?.let { myToast(it, "Something went wrong") }
 
                 progressDialog!!.dismiss()
 
@@ -308,33 +314,40 @@ class ProfileFragment : Fragment(), UploadRequestBody.UploadCallback {
                     call: Call<ModelUpdateNameEmail>,
                     response: Response<ModelUpdateNameEmail>
                 ) {
-                    if (response.code() == 500) {
-                        myToast(requireActivity(), "Server Error")
+
+                    try {
+                        if (response.code() == 500) {
+                            myToast(requireActivity(), "Server Error")
+                            progressDialog!!.dismiss()
+
+                        } else if (response.code() == 200) {
+                            progressDialog!!.dismiss()
+                            alertDialogUpdated()
+                            sessionManager.doctorName = response.body()!!.result.doctor_name
+                            sessionManager.email = response.body()!!.result.email
+
+                            doctorname = "Dr " + sessionManager.doctorName.toString()
+                            this@ProfileFragment.email = sessionManager.email.toString()
+
+                            binding.tvFirstName.text = doctorname
+                            binding.tvLastName.text = doctorname
+                            binding.tvEmail.text = this@ProfileFragment.email
+
+                        } else {
+                            activity?.let { myToast(it, "Something went wrong") }
+                            progressDialog!!.dismiss()
+
+                        }
+                    }catch (e:Exception){
                         progressDialog!!.dismiss()
-
-                    } else if (response.code() == 200) {
-                        progressDialog!!.dismiss()
-                        alertDialogUpdated()
-                        sessionManager.doctorName = response.body()!!.result.doctor_name
-                        sessionManager.email = response.body()!!.result.email
-
-                        doctorname = sessionManager.doctorName.toString()
-                        this@ProfileFragment.email = sessionManager.email.toString()
-
-                        binding.tvFirstName.text = doctorname
-                        binding.tvLastName.text = doctorname
-                        binding.tvEmail.text = this@ProfileFragment.email
-
-                    } else {
-                        myToast(requireActivity(), "Something went wrong")
-                        progressDialog!!.dismiss()
-
+                        e.printStackTrace()
+                        activity?.let { myToast(it, "Something went wrong") }
                     }
                 }
 
                 override fun onFailure(call: Call<ModelUpdateNameEmail>, t: Throwable) {
                     progressDialog!!.dismiss()
-                    myToast(requireActivity(), "Something went wrong")
+                    activity?.let { myToast(it, "Something went wrong") }
 
                 }
 

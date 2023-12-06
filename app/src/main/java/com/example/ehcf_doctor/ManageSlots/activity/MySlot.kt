@@ -2,10 +2,10 @@ package com.example.ehcf_doctor.ManageSlots.activity
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
-import android.content.ContentValues
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.postDelayed
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -25,6 +26,7 @@ import com.example.ehcf_doctor.ManageSlots.model.*
 import com.example.ehcf_doctor.databinding.ActivityManageSlotsSeassionBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
+import okhttp3.internal.toImmutableList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,19 +34,21 @@ import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
 import xyz.teamgravity.checkinternet.CheckInternet
 
 
-class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchButton.ActiveInactiveSlot {
+class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
+    AdapterSwitchButton.ActiveInactiveSlot {
     private val context: Context = this@MySlot
     var progressDialog: ProgressDialog? = null
     var relationList = ArrayList<String>()
     private lateinit var sessionManager: SessionManager
     var dayList = ArrayList<ModelDay>()
-    var dayId = ""
     var con = true
     var shimmerFrameLayout: ShimmerFrameLayout? = null
     // var Allocationlist = java.util.ArrayList<>()
 
 
     private lateinit var binding: ActivityManageSlotsSeassionBinding
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityManageSlotsSeassionBinding.inflate(layoutInflater)
@@ -57,11 +61,11 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
             onBackPressed()
         }
         Handler(Looper.getMainLooper()).postDelayed(300) {
-            apiCall(dayId)
             apiCallSwitchButton()
 
         }
 
+        // apiCall(dayId)
 
 
 //        binding.mondaySwitch.setOnClickListener {
@@ -81,6 +85,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
         dayList.add(ModelDay("Friday", "5"))
         dayList.add(ModelDay("Saturday", "6"))
         dayList.add(ModelDay("Sunday", "7"))
+        dayList.add(ModelDay("Sunday", "8"))
 
         binding.cardActiveInactive.setOnClickListener {
 //            binding.layoutActiveInactive.visibility =View.VISIBLE
@@ -100,20 +105,44 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
 
         }
 
-        binding.spinnerDay.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                if (dayList.size > 0) {
-                    dayId = dayList[i].id
-                    apiCall(dayId)
-                    Log.e(ContentValues.TAG, "gender: $dayId")
+
+        binding.spinnerDay.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapterView: AdapterView<*>?,
+                    view: View?,
+                    i: Int,
+                    l: Long
+                ) {
+                    if (dayList.size > 0) {
+                        dayId = dayList[i].id
+                        day = dayList[i].day
+                        index = i
+
+
+                        Log.e("Dayid", dayId)
+                        apiCall(dayId)
+                    }
+                }
+
+                override fun onNothingSelected(adapterView: AdapterView<*>?) {
+
                 }
             }
-
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-        }
         binding.spinnerDay.adapter =
             ArrayAdapter<ModelDay>(context, android.R.layout.simple_list_item_1, dayList)
+        // binding.spinnerDay.setSelection(dayList.indexOf(sessionManager.registrationYear.toString())
+        Log.e("DayidspinnerDay", dayId)
 
+        //  binding.spinnerDay.setSelection(dayList.indexOf(ModelDay(day, dayId)))
+
+//        val cls: ModelDay = dayList[dayId.toInt()]
+//        binding.spinnerDay.setSelection(dayList.indexOf(cls), true)
+
+        binding.spinnerDay.setSelection(index)
+
+
+        //  val selectionPosition: Int = adapter.getPosition("YOUR_VALUE")
 
         val refreshListener = SwipeRefreshLayout.OnRefreshListener {
             overridePendingTransition(0, 0)
@@ -125,40 +154,14 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
 
     }
 
-
-//    private fun filter(text: String) {
-//        // creating a new array list to filter our data.
-//        val filteredlist = java.util.ArrayList<ModelSlotList>()
-//        filteredlist.clear()
-//
-//        // running a for loop to compare elements.
-//        for (item in ) {
-//            // checking if the entered string matched with any item of our recycler view.
-//            if (item.sl.contains(text)) {
-//                Log.e(ContentValues.TAG, "filter:>>>>>>>>>>>>>>>>>> ${item.orderno}/$text")
-//                // if the item is matched we are
-//                // adding it to our filtered list.
-//                filteredlist.add(item)
-//                Log.e(ContentValues.TAG, "filterSize:>>>>>>>>>>>>>>>>>> ${filteredlist.size}")
-//
-//                binding.rvManageSlot.adapter = AdapterSlotsList(this, filteredlist, this)
-//                binding.tvCountpro.text = filteredlist.size.toString()
-//            }
-//        }
-////        if (filteredlist.isEmpty()) {
-////            // if no item is added in filtered list we are
-////            // displaying a toast message as no data found.
-////            myToast(this,"No Data Found")
-////        } else {
-////            // at last we are passing that filtered
-////            // list to our adapter class.
-//////            AdapterOrderAllocation.filterList(filteredlist)
-////        }
-//    }
+    companion object {
+        var day = ""
+        var dayId = "0"
+        var index = 0
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun apiCall(dayId: String) {
-        Log.e("consaltaion type,", dayId)
         progressDialog = ProgressDialog(this@MySlot)
         progressDialog!!.setMessage("Loading..")
         progressDialog!!.setTitle("Please Wait")
@@ -173,33 +176,34 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
                     call: Call<ModelSlotList>,
                     response: Response<ModelSlotList>
                 ) {
-                    if (response.code() == 500) {
-                        myToast(this@MySlot, "Server Error")
-                        binding.shimmerMySlot.visibility = View.GONE
-                    } else if (response.body()!!.status == 0) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmerMySlot.visibility = View.GONE
-                        myToast(this@MySlot, "${response.body()!!.message}")
-                        progressDialog!!.dismiss()
+                    try {
+                        if (response.code() == 500) {
+                            myToast(this@MySlot, "Server Error")
+                            binding.shimmerMySlot.visibility = View.GONE
+                        } else if (response.body()!!.status == 0) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmerMySlot.visibility = View.GONE
+                            myToast(this@MySlot, "${response.body()!!.message}")
+                            progressDialog!!.dismiss()
 
-                    } else if (response.body()!!.result.isEmpty()) {
-                        binding.rvManageSlot.adapter =
-                            AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
-                        binding.rvManageSlot.adapter!!.notifyDataSetChanged()
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmerMySlot.visibility = View.GONE
-                        myToast(this@MySlot, "No Slot Found")
-                        progressDialog!!.dismiss()
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.rvManageSlot.adapter =
+                                AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
+                            binding.rvManageSlot.adapter!!.notifyDataSetChanged()
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmerMySlot.visibility = View.GONE
+                            myToast(this@MySlot, "No Slot Found")
+                            progressDialog!!.dismiss()
 
-                    } else {
-                        binding.rvManageSlot.adapter =
-                            AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
-                        binding.rvManageSlot.adapter!!.notifyDataSetChanged()
-                        binding.tvNoDataFound.visibility = View.GONE
-                        shimmerFrameLayout?.startShimmer()
-                        binding.rvManageSlot.visibility = View.VISIBLE
-                        binding.shimmerMySlot.visibility = View.GONE
-                        progressDialog!!.dismiss()
+                        } else {
+                            binding.rvManageSlot.adapter =
+                                AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
+                            binding.rvManageSlot.adapter!!.notifyDataSetChanged()
+                            binding.tvNoDataFound.visibility = View.GONE
+                            shimmerFrameLayout?.startShimmer()
+                            binding.rvManageSlot.visibility = View.VISIBLE
+                            binding.shimmerMySlot.visibility = View.GONE
+                            progressDialog!!.dismiss()
 //                        binding.rvManageSlot.apply {
 //                            binding.tvNoDataFound.visibility = View.GONE
 //                            shimmerFrameLayout?.startShimmer()
@@ -210,6 +214,12 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
 //                            progressDialog!!.dismiss()
 //
 //                        }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        myToast(this@MySlot, "Something went wrong")
+                        progressDialog!!.dismiss()
+
                     }
                 }
 
@@ -224,16 +234,14 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
             })
     }
 
-    private fun apiCallActiveSlot(dayCode: String) {
 
-    }
     private fun apiCallSwitchButton() {
         progressDialog = ProgressDialog(this@MySlot)
         progressDialog!!.setMessage("Loading..")
         progressDialog!!.setTitle("Please Wait")
         progressDialog!!.isIndeterminate = false
         progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        //  progressDialog!!.show()
 
         ApiClient.apiService.switchButton(sessionManager.id.toString())
             .enqueue(object : Callback<ModelSwitechButton> {
@@ -251,16 +259,17 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
 
                     } else if (response.body()!!.result.isEmpty()) {
                         binding.rvSwitchButton.adapter =
-                            AdapterSwitchButton(this@MySlot, response.body()!!,this@MySlot)
+                            AdapterSwitchButton(this@MySlot, response.body()!!, this@MySlot)
                         progressDialog!!.dismiss()
 
                     } else {
                         binding.rvSwitchButton.adapter =
-                            AdapterSwitchButton(this@MySlot, response.body()!!,this@MySlot)
+                            AdapterSwitchButton(this@MySlot, response.body()!!, this@MySlot)
                         progressDialog!!.dismiss()
                     }
 
                 }
+
                 override fun onFailure(call: Call<ModelSwitechButton>, t: Throwable) {
                     myToast(this@MySlot, "Something went wrong")
 
@@ -269,9 +278,6 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
 
             })
 
-
-    }
-    private fun apiCallInActiveSlot(dayCode: String) {
 
     }
 
@@ -290,31 +296,34 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
                 call: Call<ModelDeleteSlot>,
                 response: Response<ModelDeleteSlot>
             ) {
-                if (response.body()!!.status == 1) {
-                    myToast(this@MySlot, response.body()!!.message)
-                    overridePendingTransition(0, 0)
-                    finish()
-                    startActivity(intent)
-                    overridePendingTransition(0, 0)
-                    //   binding.rvManageSlot.adapter!!.notifyDataSetChanged()
-                    // myToast(requireActivity(),"No Data Found")
-                    progressDialog!!.dismiss()
+                try {
+                    if (response.body()!!.status == 1) {
+                        myToast(this@MySlot, response.body()!!.message)
+                        overridePendingTransition(0, 0)
+                        finish()
+                        startActivity(intent)
+                        overridePendingTransition(0, 0)
+                        //   binding.rvManageSlot.adapter!!.notifyDataSetChanged()
+                        // myToast(requireActivity(),"No Data Found")
+                        progressDialog!!.dismiss()
 
-                } else {
-                    myToast(this@MySlot, response.body()!!.message)
+                    } else {
+                        myToast(this@MySlot, response.body()!!.message)
+                    }
+                }catch (e:Exception){
+                    e.printStackTrace()
+                    progressDialog!!.dismiss()
+                    myToast(this@MySlot, "Something went wrong")
+
                 }
             }
 
 
             override fun onFailure(call: Call<ModelDeleteSlot>, t: Throwable) {
                 myToast(this@MySlot, "Something went wrong")
-
+                progressDialog!!.dismiss()
             }
-
-
         })
-
-
     }
 
     override fun deleteSlotApi(slotId: String) {
@@ -351,19 +360,26 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
                 call: Call<ModelDeleteSlot>,
                 response: Response<ModelDeleteSlot>
             ) {
-                if (response.body()!!.status == 1) {
-                    myToast(this@MySlot, response.body()!!.message)
-                    // myToast(requireActivity(),"No Data Found")
+                try {
+                    if (response.body()!!.status == 1) {
+                        myToast(this@MySlot, response.body()!!.message)
+                        // myToast(requireActivity(),"No Data Found")
+                        progressDialog!!.dismiss()
+                        apiCall(dayId)
+                    } else {
+                        myToast(this@MySlot, response.body()!!.message)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    myToast(this@MySlot, "Something went wrong")
                     progressDialog!!.dismiss()
-                    apiCall(dayId)
-                } else {
-                    myToast(this@MySlot, response.body()!!.message)
                 }
-            }
 
+            }
 
             override fun onFailure(call: Call<ModelDeleteSlot>, t: Throwable) {
                 myToast(this@MySlot, "Something went wrong")
+                progressDialog!!.dismiss()
 
             }
 
@@ -377,32 +393,40 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
         progressDialog!!.setTitle("Please Wait")
         progressDialog!!.isIndeterminate = false
         progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        //  progressDialog!!.show()
 
 
-        ApiClient.apiService.activeASlot(dayCode,active).enqueue(object : Callback<ModelActive> {
+        ApiClient.apiService.activeASlot(dayCode, active).enqueue(object : Callback<ModelActive> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
                 call: Call<ModelActive>,
                 response: Response<ModelActive>
             ) {
-                if (response.body()!!.status == 1) {
-                    myToast(this@MySlot, response.body()!!.message)
-                    // myToast(requireActivity(),"No Data Found")
+                try {
+                    if (response.body()!!.status == 1) {
+                        myToast(this@MySlot, response.body()!!.message)
+                        // myToast(requireActivity(),"No Data Found")
+                        progressDialog!!.dismiss()
+                    } else {
+                        myToast(this@MySlot, response.body()!!.message)
+                    }
+                } catch (e: Exception) {
+                    myToast(this@MySlot, "Something went wrong")
                     progressDialog!!.dismiss()
-                } else {
-                    myToast(this@MySlot, response.body()!!.message)
+                    e.printStackTrace()
                 }
             }
 
 
             override fun onFailure(call: Call<ModelActive>, t: Throwable) {
                 myToast(this@MySlot, "Something went wrong")
+                progressDialog!!.dismiss()
 
             }
 
 
-        })    }
+        })
+    }
 
     override fun onStart() {
         super.onStart()
@@ -418,7 +442,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
         }
     }
 
-    override fun activeSlot(dayCode:String) {
+    override fun activeSlot(dayCode: String) {
         progressDialog = ProgressDialog(this@MySlot)
         progressDialog!!.setMessage("Loading..")
         progressDialog!!.setTitle("Please Wait")
@@ -433,9 +457,10 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
                     call: Call<ModelActive>,
                     response: Response<ModelActive>
                 ) {
-                    if (response.body()!!.status == 1) {
-                        myToast(this@MySlot, response.body()!!.message)
-                        refresh()
+                    try {
+                        if (response.body()!!.status == 1) {
+                            myToast(this@MySlot, response.body()!!.message)
+                            refresh()
 
 //                    overridePendingTransition(0, 0)
 //                    finish()
@@ -443,16 +468,23 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
 //                    overridePendingTransition(0, 0)
 //                    //   binding.rvManageSlot.adapter!!.notifyDataSetChanged()
 //                    // myToast(requireActivity(),"No Data Found")
+                            progressDialog!!.dismiss()
+
+                        } else {
+                            myToast(this@MySlot, response.body()!!.message)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        myToast(this@MySlot, "Something went wrong")
                         progressDialog!!.dismiss()
 
-                    } else {
-                        myToast(this@MySlot, response.body()!!.message)
                     }
                 }
 
 
                 override fun onFailure(call: Call<ModelActive>, t: Throwable) {
                     myToast(this@MySlot, "Something went wrong")
+                    progressDialog!!.dismiss()
 
                 }
 
@@ -478,25 +510,34 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
                     call: Call<ModelActive>,
                     response: Response<ModelActive>
                 ) {
-                    if (response.body()!!.status == 1) {
-                        myToast(this@MySlot, response.body()!!.message)
-                        refresh()
+                    try {
+                        if (response.body()!!.status == 1) {
+                            myToast(this@MySlot, response.body()!!.message)
+                            refresh()
 //                    overridePendingTransition(0, 0)
 //                    finish()
 //                    startActivity(intent)
 //                    overridePendingTransition(0, 0)
 //                    //   binding.rvManageSlot.adapter!!.notifyDataSetChanged()
 //                    // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
+                            progressDialog!!.dismiss()
 
-                    } else {
-                        myToast(this@MySlot, response.body()!!.message)
+                        } else {
+                            myToast(this@MySlot, response.body()!!.message)
+                            progressDialog!!.dismiss()
+
+                        }
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        myToast(this@MySlot, "Something went wrong")
+                        progressDialog!!.dismiss()
                     }
                 }
 
 
                 override fun onFailure(call: Call<ModelActive>, t: Throwable) {
                     myToast(this@MySlot, "Something went wrong")
+                    progressDialog!!.dismiss()
 
                 }
 
@@ -504,6 +545,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,AdapterSwitchBut
             })
 
     }
+
     fun refresh() {
         overridePendingTransition(0, 0)
         finish()

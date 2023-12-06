@@ -47,7 +47,7 @@ class PatientHistory : AppCompatActivity() {
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
 
-        ApiClient.apiService.patientHistory(sessionManager.id.toString())
+        ApiClient.apiService.patientHistory(id)
             .enqueue(object : Callback<ModelPatientHistoryX> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(

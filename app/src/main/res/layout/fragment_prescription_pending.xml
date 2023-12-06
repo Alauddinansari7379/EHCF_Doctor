@@ -30,6 +30,7 @@
 
 
         </EditText>
+<!--
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgSearch"
             android:layout_width="35dp"
@@ -42,6 +43,7 @@
             android:src="@drawable/baseline_search_24">
 
         </androidx.appcompat.widget.AppCompatImageView>
+-->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgRefresh"
             android:layout_width="35dp"
@@ -109,25 +111,25 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
     </androidx.recyclerview.widget.RecyclerView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvNoDataFound"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No Appointment Found"
-            android:visibility="gone"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNoDataFound"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="No Pending Prescription Found."
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    android:textColor="@color/main_color"
+                    android:textSize="18dp"
+                    >
 
-        </androidx.appcompat.widget.AppCompatTextView>
-    </LinearLayout>
+                </androidx.appcompat.widget.AppCompatTextView>
+
+            </LinearLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="150dp"

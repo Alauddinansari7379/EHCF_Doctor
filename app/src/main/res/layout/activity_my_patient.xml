@@ -97,6 +97,7 @@
 
 
             </EditText>
+<!--
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgSearch"
                 android:layout_width="35dp"
@@ -109,6 +110,7 @@
                 android:src="@drawable/baseline_search_24">
 
             </androidx.appcompat.widget.AppCompatImageView>
+-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgRefresh"
                 android:layout_width="35dp"

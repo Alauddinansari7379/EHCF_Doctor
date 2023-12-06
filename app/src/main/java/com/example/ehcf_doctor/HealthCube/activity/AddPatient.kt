@@ -5,7 +5,6 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -17,24 +16,30 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.HealthCube.Adapter.AdapterTestList
 import com.example.ehcf_doctor.HealthCube.Adapter.ItemAdapter
 import com.example.ehcf_doctor.HealthCube.Adapter.ItemAdapter.Companion.selectedTestList
 import com.example.ehcf_doctor.HealthCube.Model.*
-import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityAddPatientBinding
 import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.HealthCube.RetrofitHealthCube.ApiClientHealthCube
+import com.example.ehcf_doctor.HealthCube.RetrofitHealthCube.ApiInterfaceHealthCube
+import com.example.ehcf_doctor.Login.activity.SignIn
 import com.rajat.pdfviewer.PdfViewerActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,14 +48,17 @@ import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 
-class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.TestList {
+class AddPatient : AppCompatActivity() {
     private val context: Context = this@AddPatient
     private lateinit var sessionManager: SessionManager
     var progressDialog: ProgressDialog? = null
     var gender = ""
     var dateOfBirth = ""
+    var dateOfBirthNew = ""
+    var dateOfBirthHealth = ""
     var patient_id = ""
     var helthCubePatientId = ""
+    var externalPatientId = ""
     var reportList = ArrayList<String>()
     var mydilaog: Dialog? = null
     private var countryName = ""
@@ -60,8 +68,11 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
     var hightlightTests = ""
     private var countryCode = ""
     var sampleUserId: String? = "+919392595905"
-    var secretKey: String? = "a1fc979a-03d6-4ca6-9196-d7192873d4a8"
-    var client_id: String? = "b96214a0-2d05-4e65-be92-b83852227733"
+//    var secretKey: String? = "a1fc979a-03d6-4ca6-9196-d7192873d4a8"
+//    var client_id: String? = "b96214a0-2d05-4e65-be92-b83852227733"
+
+    var secretKey: String? = "bce6f92b-c106-404e-b255-ffad5dc0e434"
+    var client_id: String? = "a73a6a93-4fdb-4239-a8c7-e2eed5ae6853"
     var name = ""
     var city = ""
     var state = ""
@@ -74,23 +85,42 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
     var temperature = ""
     var testName = ""
     var systolic = ""
-    var imageString =
-        "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"
+    var spO2 = ""
+    var bloodGlucose = ""
+    var hemoglobin = ""
+    var uricAcid = ""
+    var malaria = ""
+    var typhoid = ""
+    var pulseRate = ""
+    var imageString = ""
     var diastolic = ""
     var reportId = ""
     private val diagnosticTestList: MutableList<String> = ArrayList()
     val testList = kotlin.collections.ArrayList<String>()
-
-
-    private var accessToken =
-        "eyJhbGciOiJSUzI1NiIsImtpZCI6ImYwNmNhYjZhLTBmZGItNGVmMi1iMDMwLTZlZDY1Njg2ODVkZCJ9.eyJ1YV9oYXNoIjoiYWRlNTBhZmE2YTNjY2M3OWVmYWZjMjllNzYwN2FiZGMiLCJzaWQiOiIxZDU5NjM5Ni00ZjNhLTQyYTItYWZhYy1hYzllZDc0YWUzNDEiLCJzdWIiOiJBTk9OWU1PVVMiLCJhdWQiOiJiOTYyMTRhMC0yZDA1LTRlNjUtYmU5Mi1iODM4NTIyMjc3MzMiLCJpYXQiOjE2OTAyNjg2NjksImF1dGhfdGltZSI6MTY5MDI2ODY2OSwiaXNzIjoiaHR0cHM6Ly9kZW1vLWV6ZHgtZnJlZS5jaWRhYXMuZGUiLCJqdGkiOiI0ZTQ1MWZmNy03YjVjLTQ0OTktYmRlMi05YmE3NjM3NDk5YzciLCJzY29wZXMiOlsiY2lkYWFzOmZkc19zZXR0aW5nc193cml0ZSIsImNpZGFhczpmZHNfc2V0dGluZ3NfcmVhZCIsImNpZGFhczpzdHJpcGVfYWNjb3VudF9jcmVhdGUiLCJjaWRhYXM6Y2hlY2tvdXRfd3JpdGUiLCJjaWRhYXM6dHJhbnNhY3Rpb25fbG9nX3dyaXRlIiwiY2lkYWFzOnRyYW5zYWN0aW9uX2xvZ19yZWFkIiwiY2lkYWFzOmZpZWxkX3NldHVwX3JlYWQiLCJjaWRhYXM6cGF5bWVudGNvbmZpZ19yZWFkIiwiY2lkYWFzOnBheW1lbnRjb25maWdfZGVsZXRlIiwiY2lkYWFzOnBheW1lbnRjb25maWdfd3JpdGUiLCJjaWRhYXM6bmV3c2xldHRlcl9kZWxldGUiLCJjaWRhYXM6bmV3c2xldHRlcl93cml0ZSIsImNpZGFhczp1c2VyY3JlYXRlIiwiY2lkYWFzOndlYmhvb2siLCJjaWRhYXM6bG9naW4iLCJjaWRhYXM6cmVtb3ZlX3Nlc3Npb24iLCJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiLCJhZGRyZXNzIiwicGhvbmUiLCJncm91cHMiLCJyb2xlcyIsIm9mZmxpbmVfYWNjZXNzIiwiY2lkYWFzOnJlZ2lzdGVyIiwiaWRlbnRpdGllcyIsImNpZGFhczppbnZpdGUiLCJjaWRhYXM6YWRtaW5fcmVhZCIsImNpZGFhczphcHBzX3JlYWQiLCJjaWRhYXM6YWRtaW5fZGVsZXRlIiwiY2lkYWFzOmFkbWluX3dyaXRlIiwiY2lkYWFzOnNjb3Blc19kZWxldGUiLCJjaWRhYXM6c2NvcGVzX3dyaXRlIiwiY2lkYWFzOnNjb3Blc19yZWFkIiwiY2lkYWFzOmFwcHNfZGVsZXRlIiwiY2lkYWFzOmFwcHNfd3JpdGUiLCJjaWRhYXM6dXNlcnNfd3JpdGUiLCJjaWRhYXM6dXNlcnNfcmVhZCIsImNpZGFhczpzZWN1cml0eV9rZXlfZGVsZXRlIiwiY2lkYWFzOnNlY3VyaXR5X2tleV93cml0ZSIsImNpZGFhczpzZWN1cml0eV9rZXlfcmVhZCIsImNpZGFhczpwYXNzd29yZF9yZWFkIiwiY2lkYWFzOmNvbnNlbnRfd3JpdGUiLCJjaWRhYXM6Y29uc2VudF9yZWFkIiwiY2lkYWFzOnB1YmxpY19wcm9maWxlIiwicGFzc2VzIiwiY2lkYWFzOnBhc3NfZGVsZXRlIiwiY2lkYWFzOmlkdmFsX3NldHRpbmdzX2RlbGV0ZSIsImNpZGFhczppZHZhbF9wZXJmb3JtIiwiY2lkYWFzOnBhc3NfcmVhZCIsImNpZGFhczpwYXNzX3dyaXRlIiwiY2lkYWFzOmlkdmFsX3NldHRpbmdzX3JlYWQiLCJjaWRhYXM6aWR2YWxfc2V0dGluZ3Nfd3JpdGUiLCJjaWRhYXM6aWR2YWxfY2FzZV9yZWFkIiwiY2lkYWFzOmlkdmFsX3VzZXJfY3R4X2NsZWFudXAiLCJjaWRhYXM6aWR2YWxfY2FzZV93cml0ZSIsImNpZGFhczppZHZhbF9tZWRpYV9yZWFkIiwiY2lkYWFzOmlkdmFsX2luaXQiLCJjaWRhYXM6c2Vzc2lvbl93cml0ZSIsImNpZGFhczp0b2tlbl9jcmVhdGUiLCJjaWRhYXM6c2Vzc2lvbl9kZWxldGUiLCJjaWRhYXM6Y29tbXVuaWNhdGlvbl9zZW5kIiwiY2lkYWFzOml2cl9zZW5kIiwiY2lkYWFzOnNtc19zZW5kIiwiY2lkYWFzOmVtYWlsX3NlbmQiLCJjaWRhYXM6cGFzc3dvcmRsZXNzX2NyZWF0ZSIsImNpZGFhczpzZXNzaW9uX3JlYWQiLCJjaWRhYXM6dXNlcmluZm8iLCJjaWRhYXM6aWRwcyIsImNpZGFhczpzaW5nbGVfZmFjdG9yX2F1dGhfZmFjZSIsImNpZGFhczp0ZW5hbnRfZG9jc19yZWFkIiwiY2lkYWFzOnRlbmFudF9kb2NzX2RlbGV0ZSIsImNpZGFhczp1c2VydXBkYXRlIiwiY2lkYWFzOmRlbGV0ZXVzZXIiLCJjaWRhYXM6dGVuYW50X2RvY3Nfd3JpdGUiLCJjaWRhYXM6ZGVsZXRlIiwiY2lkYWFzOmFwcF9kZXZlbG9wZXJzIiwiY2lkYWFzOmN1c3RvbV9zZWN1cml0eV9rZXlfcmVhZCIsImNpZGFhczpjdXN0b21fc2VjdXJpdHlfa2V5X2RlbGV0ZSIsImNpZGFhczpjdXN0b21fc2VjdXJpdHlfa2V5X3dyaXRlIiwiY2lkYWFzOmRldmljZXNfd3JpdGUiLCJjaWRhYXM6ZGV2aWNlc19yZWFkIiwiY2lkYWFzOndyaXRlIiwiY2lkYWFzOnJlYWQiLCJjaWRhYXM6cHVyZ2V1c2VyIiwiY2lkYWFzOnRlbmFudF9jb25zZW50X2RlbGV0ZSIsImNpZGFhczp2ZXJpZmljYXRpb25fZGVsZXRlIiwiY2lkYWFzOnJlcG9ydHNfd3JpdGUiLCJjaWRhYXM6cmVwb3J0c19yZWFkIiwiY2lkYWFzOnJlcG9ydHNfZGVsZXRlIiwiY2lkYWFzOnRlbmFudF9jb25zZW50X3dyaXRlIiwiY2lkYWFzOnRlbmFudF9jb25zZW50X3JlYWQiLCJjaWRhYXM6dmVyaWZpY2F0aW9uX3dyaXRlIiwiY2lkYWFzOnZlcmlmaWNhdGlvbl9yZWFkIiwiY2lkYWFzOmhvc3RlZF9wYWdlc19kZWxldGUiLCJjaWRhYXM6aG9zdGVkX3BhZ2VzX3dyaXRlIiwiY2lkYWFzOmdyb3Vwc191c2VyX21hcF9kZWxldGUiLCJjaWRhYXM6aG9zdGVkX3BhZ2VzX3JlYWQiLCJjaWRhYXM6Z3JvdXBzX3VzZXJfbWFwX3JlYWQiLCJjaWRhYXM6Z3JvdXBzX3VzZXJfbWFwX3dyaXRlIiwiY2lkYWFzOmdyb3Vwc19kZWxldGUiLCJjaWRhYXM6Z3JvdXBzX3JlYWQiLCJjaWRhYXM6Z3JvdXBzX3dyaXRlIiwiY2lkYWFzOmdyb3VwX3R5cGVfZGVsZXRlIiwiY2lkYWFzOmdyb3VwX3R5cGVfd3JpdGUiLCJjaWRhYXM6Z3JvdXBfdHlwZV9yZWFkIiwiY2lkYWFzOm9wdGluX2RlbGV0ZSIsImNpZGFhczpvcHRpbl93cml0ZSIsImNpZGFhczpvcHRpbl9yZWFkIiwiY2lkYWFzOmNhcHRjaGFfZGVsZXRlIiwiY2lkYWFzOmNhcHRjaGFfd3JpdGUiLCJjaWRhYXM6Y2FwdGNoYV9yZWFkIiwiY2lkYWFzOndlYmhvb2tfZGVsZXRlIiwiY2lkYWFzOndlYmhvb2tfd3JpdGUiLCJjaWRhYXM6d2ViaG9va19yZWFkIiwiY2lkYWFzOnBhc3N3b3JkX3BvbGljeV9kZWxldGUiLCJjaWRhYXM6cGFzc3dvcmRfcG9saWN5X3dyaXRlIiwiY2lkYWFzOnBhc3N3b3JkX3BvbGljeV9yZWFkIiwiY2lkYWFzOnRlbXBsYXRlc19kZWxldGUiLCJjaWRhYXM6dGVtcGxhdGVzX3dyaXRlIiwiY2lkYWFzOnRlbXBsYXRlc19yZWFkIiwiY2lkYWFzOnJlZ2lzdHJhdGlvbl9zZXR1cF9kZWxldGUiLCJjaWRhYXM6cmVnaXN0cmF0aW9uX3NldHVwX3dyaXRlIiwiY2lkYWFzOnJlZ2lzdHJhdGlvbl9zZXR1cF9yZWFkIiwiY2lkYWFzOnByb3ZpZGVyc19kZWxldGUiLCJjaWRhYXM6cHJvdmlkZXJzX3dyaXRlIiwiY2lkYWFzOnByb3ZpZGVyc19yZWFkIiwiY2lkYWFzOnJvbGVzX2RlbGV0ZSIsImNpZGFhczpyb2xlc193cml0ZSIsImNpZGFhczpyb2xlc19yZWFkIiwiY2lkYWFzOnVzZXJzX3NlYXJjaCIsImNpZGFhczp1c2Vyc19pbnZpdGUiLCJjaWRhYXM6dXNlcnNfZGVsZXRlIiwiY2lkYWFzOnVybF93cml0ZSJdLCJleHAiOjE2OTAzNTUwNjl9.YhL50IVuaZTxS2wV-R-TR5-vXiZjcDJ_SXFKMnPKtvwXh48q6SkehL1ygpCixvENicpkXRPmQ759Yev-JhxayTfytDE4EdyuJg5wNcwVb7x1lEbNsiWLP7RcthiUSTz5xPZtqJcxyw7KT46Aj0ByAYeSYFvoCnyCMa-Nx_to0OA"
-    private var con = true
+    private var accessToken =""
+     private var con = true
     private lateinit var binding: ActivityAddPatientBinding
     var activity: Activity = this@AddPatient
     var rv: RecyclerView? = null
     var adapter: ItemAdapter? = null
     var actionMode: ActionMode? = null
-
+    var textView: TextView? = null
+    lateinit var selectedLanguage: BooleanArray
+    var langList: ArrayList<Int> = ArrayList()
+    var langArray = arrayOf(
+        "TEMPERATURE",
+        "BLOOD_PRESSURE",
+        "WEIGHT",
+        "ECG",
+        "PULSE_OXIMETER",
+        "BLOOD_GLUCOSE",
+        "HEMOGLOBIN",
+        "URIC_ACID",
+        "CHOLESTEROL",
+        "MALARIA",
+        "TYPHOID"
+    )
+    var testListNew1 = ArrayList<String>()
 
     private val actionModeCallback: ActionMode.Callback = object : ActionMode.Callback {
 
@@ -119,6 +149,7 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddPatientBinding.inflate(layoutInflater)
@@ -126,20 +157,96 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
 
         sessionManager = SessionManager(this@AddPatient)
 
-        val lm = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        adapter = ItemAdapter(this, this)
-        rv = findViewById(R.id.recyclerViewTest)
-        rv!!.adapter = adapter
-        rv!!.setHasFixedSize(true)
-        rv!!.layoutManager = lm
-        val dividerItemDecoration = DividerItemDecoration(rv!!.context, lm.orientation)
-        rv!!.addItemDecoration(dividerItemDecoration)
-        val items: MutableList<ClipData.Item> = ArrayList()
+        selectedLanguage = BooleanArray(langArray.size)
 
-        items.add(ClipData.Item("TEMPERATURE"))
-        items.add(ClipData.Item("BLOOD_PRESSURE"))
-        items.add(ClipData.Item("WEIGHT"))
-        items.add(ClipData.Item("ECG"))
+
+
+
+        binding.layTest!!.setOnClickListener(View.OnClickListener { // Initialize alert dialog
+            val builder = AlertDialog.Builder(this@AddPatient)
+            // set title
+            builder.setTitle("Select Language")
+
+            // set dialog non cancelable
+            builder.setCancelable(false)
+            builder.setMultiChoiceItems(
+                langArray, selectedLanguage
+            ) { dialogInterface, i, b ->
+                // check condition
+                if (b) {
+                    // when checkbox selected
+                    // Add position in lang list
+                    langList.add(i)
+                    Log.e("selectedLanguage", selectedLanguage.toString())
+                    // Sort array list
+                    langList.sort()
+                } else {
+                    // when checkbox unselected
+                    // Remove position from langList
+                    langList.remove(Integer.valueOf(i))
+                }
+            }
+            builder.setPositiveButton(
+                "OK"
+            ) { _, i -> // Initialize string builder
+                val stringBuilder = StringBuilder()
+                // use for loop
+                for (j in langList.indices) {
+                    // concat array value
+                    stringBuilder.append(langArray[langList[j]])
+                    // check condition
+                    if (j != langList.size - 1) {
+                        // When j value not equal
+                        // to lang list size - 1
+                        // add comma
+                        stringBuilder.append(", ")
+                    }
+                }
+                // set text on textView
+                binding.tvTestName.text = stringBuilder.toString()
+                Log.e("TestList", stringBuilder.toString())
+                testListNew1.add(stringBuilder.toString())
+                Log.e("TestList", testListNew1.toString())
+
+
+            }
+            builder.setNegativeButton(
+                "Cancel"
+            ) { dialogInterface, i -> // dismiss dialog
+                dialogInterface.dismiss()
+            }
+            builder.setNeutralButton(
+                "Clear All"
+            ) { _, i ->
+                // use for loop
+                for (j in selectedLanguage.indices) {
+                    // remove all selection
+                    selectedLanguage[j] = false
+                    // clear language list
+                    langList.clear()
+                    // clear text view value
+                    binding.tvTestName!!.text = ""
+
+                }
+            }
+            // show dialog
+            builder.show()
+        })
+
+//        val lm = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//        adapter = ItemAdapter(this, this)
+//        rv = findViewById(R.id.recyclerViewTest)
+//        rv!!.adapter = adapter
+//        rv!!.setHasFixedSize(true)
+//        rv!!.layoutManager = lm
+//        val dividerItemDecoration = DividerItemDecoration(rv!!.context, lm.orientation)
+//        rv!!.addItemDecoration(dividerItemDecoration)
+//        val items: MutableList<ClipData.Item> = ArrayList()
+
+//        items.add(ClipData.Item("TEMPERATURE"))
+//        items.add(ClipData.Item("BLOOD_PRESSURE"))
+//        items.add(ClipData.Item("WEIGHT"))
+//        items.add(ClipData.Item("ECG"))
         //        items.add(ClipData.Item("ECG"))
 //        items.add(ClipData.Item("PULSE_OXIMETER"))
 //        items.add(ClipData.Item("BLOOD_GLUCOSE"))
@@ -153,17 +260,46 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
 //        items.add(ClipData.Item("MALARIA"))
 //        items.add(ClipData.Item("PREGNANCY"))
 
-        adapter!!.addAll(items)
-        adapter!!.setActionModeReceiver(activity as ItemAdapter.OnClickAction)
+//        adapter!!.addAll(items)
+//        adapter!!.setActionModeReceiver(activity as ItemAdapter.OnClickAction)
+//        binding.recyclerViewTest.layoutManager = GridLayoutManager(context, 2)
+
+
+        // ArrayList of class ItemsViewModel
+        val data = ArrayList<ItemsViewModel>()
+
+        // This loop will create 20 Views containing
+        // the image with the count of view
+
+        data.add(ItemsViewModel("TEMPERATURE"))
+        data.add(ItemsViewModel("BLOOD_PRESSURE"))
+        data.add(ItemsViewModel("WEIGHT"))
+        data.add(ItemsViewModel("ECG"))
+        data.add(ItemsViewModel("PULSE_OXIMETER"))
+        data.add(ItemsViewModel("BLOOD_GLUCOSE"))
+        data.add(ItemsViewModel("HEMOGLOBIN"))
+        data.add(ItemsViewModel("URIC_ACID"))
+        data.add(ItemsViewModel("CHOLESTEROL"))
+        data.add(ItemsViewModel("MALARIA"))
+        data.add(ItemsViewModel("TYPHOID"))
+
+
+        // This will pass the ArrayList to our Adapter
+        val adapter = AdapterTestList(data)
         binding.recyclerViewTest.layoutManager = GridLayoutManager(context, 2)
 
+
+        // Setting the Adapter with the recyclerview
+        binding.recyclerViewTest.adapter = adapter
+
         binding.imgBack.setOnClickListener {
-            // convertStringToBitmap(imageString
+            // convertStringToBitmap(imageString)
             onBackPressed()
+
         }
         if (PatientList.TestHistory == "1") {
-
             val id = intent.getStringExtra("id")
+            val date = intent.getStringExtra("date")
             Log.e("iddd", id.toString())
             name = intent.getStringExtra("customer_name").toString()
             PatientList.TestHistory = ""
@@ -171,10 +307,10 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
                 // Use 'launchPdfFromPath' if you want to use assets file (enable "fromAssets" flag) / internal directory
                 PdfViewerActivity.launchPdfFromUrl(
                     context,
-                    "https://ehcf.thedemostore.in/report/$id",                                // PDF URL in String format
-                    name + "_HealthCubeReport",                        // PDF Name/Title in String format
-                    "pdf directory to save",                  // If nothing specific, Put "" it will save to Downloads
-                    enableDownload = true                    // This param is true by defualt.
+                    "https://ehcf.thedemostore.in/report/$id/$date",
+                    name + "_HealthCubeReport",
+                    "pdf directory to save",
+                    enableDownload = true
                 )
             )
         }
@@ -220,12 +356,12 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
 //                                Log.e("system", system!!)
 //                                 Log.e("use", use!!)
 //                                Log.e("value", value!!)
-//
+// ruk yeh  shi hai ok ek yaha par waise kaam kiya tha dekho isko ye kaam kar raha tha
 //                             //   println("Resource Type: $resourceType")
 //                                println("Identifier System: $system")
 //                                println("Identifier Use: $use")
 //                                println("Identifier Value: $value")
-//                            }
+//                            }r
 //
 ////                            val codeObject = resourceObject.getJSONObject("code")
 ////                            val codingArray = codeObject.getJSONArray("coding")
@@ -302,9 +438,10 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
 
         if (PatientList.Exsting == "1") {
             binding.layoutRegister.visibility = View.GONE
-            PatientList.Exsting = ""
+
             binding.btnMoveEzdx.visibility = View.VISIBLE
             binding.btnSave.visibility = View.GONE
+            patient_id = intent.getStringExtra("patient_id").toString()
             name = intent.getStringExtra("customer_name").toString()
             phoneNumber = intent.getStringExtra("phone_number").toString()
             email = intent.getStringExtra("email").toString()
@@ -323,7 +460,7 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
                     "other"
                 }
             }
-            apiCallRegisterPatientExisting()
+            apiCallRegisterPatient()
         }
 
         if (PatientList.Diagnostic == "1") {
@@ -361,15 +498,37 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         }
         binding.spinnerCountryCode.setOnCountryChangeListener {
             countryName = binding.spinnerCountryCode.selectedCountryName
-            // countryName = countryCode.substring(1)
+            // countryName = countryCode.substring(1)n
             Log.e("countryName,", "$countryName")
         }
 
         binding.btnMoveEzdx.setOnClickListener {
-            if (selectedTestList.isEmpty()) {
-                myToast(this@AddPatient, "Select Diagnostics Test")
-            } else {
-                selectedTestList.distinct()
+            try {
+                var launcherIntent = packageManager.getLaunchIntentForPackage(ezdxPackageName)
+                if (launcherIntent != null) {
+                    launcherIntent.setPackage(packageName)
+                    launcherIntent.action = AddPatient::class.java.canonicalName
+                    startActivity(launcherIntent)
+                } else {
+                    // this will launch playstore if app is not installed
+                    launcherIntent = Intent(Intent.ACTION_VIEW)
+                    launcherIntent.data = Uri.parse("market://details?id=${ezdxPackageName}")
+                    startActivity(launcherIntent)
+
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this@AddPatient, "Error launching ezdx $e", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+        }
+
+/*
+        binding.btnMoveEzdx.setOnClickListener {
+//            if (AdapterTestList.TestName.isEmpty()) {
+//                myToast(this@AddPatient, "Select Diagnostics Test")
+//            } else {
+                // selectedTestList.distinct()
 
                 Log.e("dob", dateOfBirth)
                 Log.e("gender", gender)
@@ -383,6 +542,9 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
 //                        ":[{\"given\":[\"Alauddin Ansari\"]}],\"resourceType\":\"Patient\",\"telecom\":[{\"rank\":\"1\"," +
 //                        "\"system\":\"phone\",\"use\":\"mobile\",\"value\":\"7379452259\"}]}"
 
+                val maleriya="{\"entry\":[{\"resource\":{\"identifier\":[{\"system\":\"Ezdx\",\"use\":\"usual\",\"value\":\"6bd9055c-9c96-44d0-a957-9dab4e2fbf20\"}],\"resourceType\":\"Observation\",\"code\":{\"coding\":[{\"code\":\"76772-3\",\"display\":\"MALARIA\",\"system\":\"http://loinc.org\"}]},\"subject\":{\"identifier\":[{\"system\":\"Partner\",\"use\":\"usual\",\"value\":\"27912812780122\"}]},\"valueString\":\"Negative\"}}],\"resourceType\":\"Bundle\",\"type\":\"collection\"}"
+
+                val typhoid="{\"entry\":[{\"resource\":{\"identifier\":[{\"system\":\"Ezdx\",\"use\":\"usual\",\"value\":\"9528d07c-df25-46a0-81c5-0782a39d0c1a\"}],\"resourceType\":\"Observation\",\"code\":{\"coding\":[{\"code\":\"XTYPHOIDX\",\"display\":\"Typhoid\",\"system\":\"http://loinc.org\"}]},\"subject\":{\"identifier\":[{\"system\":\"Partner\",\"use\":\"usual\",\"value\":\"27912812780122\"}]},\"valueString\":\"Negative\"}}],\"resourceType\":\"Bundle\",\"type\":\"collection\"}"
                 var patientDataInHl7String: String? =
                     "{\"address\":[{\"country\":\"india\",\"type\":\"physical\",\"use\":\"home\"}]," +
                             "\"birthDate\":\"$dateOfBirth\",\"gender\":\"$gender\",\"identifier\":" +
@@ -396,7 +558,7 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
                     val test3 = ItemAdapter.Companion.selectedTestList.find { it == "WEIGHT" }
                     // val test4 = ItemAdapter.Companion.selectedTestList.find { it == "ECG" }
 
-                    hightlightTests = "[\"$test1\",\"$test2\",\"$test3\"]"
+                    hightlightTests = "[\"${AdapterTestList.TestName}\"]"
                     // hightlightTests = "[\"${selectedTestList[0]}\",\"${selectedTestList[1]}\",\"${selectedTestList[2]}\",\"${selectedTestList[3]}\",\"${selectedTestList[4]}\"]"
 
                     Log.e("test1", test1.toString())
@@ -449,8 +611,8 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
                 }
 
             }
-        }
-
+*/
+        // }
 
 
         binding.btnSave.setOnClickListener {
@@ -472,8 +634,8 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
                 myToast(this@AddPatient, "Select Gender")
                 return@setOnClickListener
             }
+
             apiCallRegisterPatient()
-            // apiCallRegisterHealthCube()
         }
 
         mydilaog?.setCanceledOnTouchOutside(false)
@@ -487,8 +649,10 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
                 DateFormat.getDateInstance().format(newDate.time)
                 val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(newDate.time)
                 binding.tvDOB.text = date
-                dateOfBirth =
-                    SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(newDate.time)
+                dateOfBirth = SimpleDateFormat("ddMMyyyy", Locale.getDefault()).format(newDate.time)
+                dateOfBirthHealth =
+                    SimpleDateFormat("ddMMyyyy", Locale.getDefault()).format(newDate.time)
+                dateOfBirthNew = date
 
                 Log.e("selectedDate", selectedDate)
             },
@@ -512,20 +676,20 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         }
 
         binding.layMen.setOnClickListener {
-            gender = "male"
+            gender = "MALE"
             binding.tvMale.setTextColor(Color.parseColor("#9F367A"))
             binding.tvFemale.setTextColor(Color.parseColor("#A19398"))
             binding.tvOther.setTextColor(Color.parseColor("#A19398"))
         }
 
         binding.layWomen.setOnClickListener {
-            gender = "female"
+            gender = "FEMALE"
             binding.tvFemale.setTextColor(Color.parseColor("#9F367A"))
             binding.tvOther.setTextColor(Color.parseColor("#A19398"))
             binding.tvMale.setTextColor(Color.parseColor("#A19398"))
         }
         binding.layOther.setOnClickListener {
-            gender = "other"
+            gender = "OTHER"
             binding.tvOther.setTextColor(Color.parseColor("#9F367A"))
             binding.tvFemale.setTextColor(Color.parseColor("#A19398"))
             binding.tvMale.setTextColor(Color.parseColor("#A19398"))
@@ -544,6 +708,21 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
                 )
             )
         }
+        binding.btnGenerate.setOnClickListener {
+            SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you sure want to Generate New Token?")
+                .setCancelText("No")
+                .setConfirmText("Yes")
+                .showCancelButton(true)
+                .setConfirmClickListener { sDialog ->
+                    sDialog.cancel()
+                    apiCallGenerateNewToken()
+                }
+                .setCancelClickListener { sDialog ->
+                    sDialog.cancel()
+                }
+                .show()
+        }
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -552,21 +731,48 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
 
         val result = intent.getStringExtra(ezdxPackageName + "RESULT").toString()
 
+        binding.recyclerViewTest.visibility = View.GONE
+
         Log.e("Result", intent.getStringExtra(ezdxPackageName + "RESULT").toString())
 
         Log.e("sds", selectedTestList.contains("TEMPERATURE").toString())
 
+//
+//        if (selectedTestList.contains("TEMPERATURE")) {
+//            temperatureResponse(result)
+//            selectedTestList.clear()
+//        } else if (selectedTestList.contains("BLOOD_PRESSURE")) {
+//            bPResponse(result)
+//            selectedTestList.clear()
+//        } else if (selectedTestList.contains("WEIGHT")) {
+//            weightResponse(result)
+//            selectedTestList.clear()
+//
+//        }
 
-        if (selectedTestList.contains("TEMPERATURE")) {
+        if (AdapterTestList.TestName.contains("TEMPERATURE")) {
             temperatureResponse(result)
-            selectedTestList.clear()
-        } else if (selectedTestList.contains("BLOOD_PRESSURE")) {
+        } else if (AdapterTestList.TestName.contains("BLOOD_PRESSURE")) {
             bPResponse(result)
-            selectedTestList.clear()
-        } else if (selectedTestList.contains("WEIGHT")) {
-            weightResponse(result)
-            selectedTestList.clear()
+        } else if (AdapterTestList.TestName.contains("WEIGHT")) {
+            //  weightResponse(result)
+            myToast(this@AddPatient, "Result not Found")
 
+        } else if (AdapterTestList.TestName.contains("ECG")) {
+            myToast(this@AddPatient, "Result not Found")
+
+        } else if (AdapterTestList.TestName.contains("PULSE_OXIMETER")) {
+            oximetryResponse(result)
+        } else if (AdapterTestList.TestName.contains("BLOOD_GLUCOSE")) {
+            glucoseResponse(result)
+        } else if (AdapterTestList.TestName.contains("HEMOGLOBIN")) {
+            hemoglobinResponse(result)
+        } else if (AdapterTestList.TestName.contains("URIC_ACID")) {
+            uricAcidResponse(result)
+        } else if (AdapterTestList.TestName.contains("MALARIA")) {
+            malariyaResponse(result)
+        } else if (AdapterTestList.TestName.contains("TYPHOID")) {
+            typhoidResponse(result)
         }
 
 //        if (selectedTestList.containsAll(listOf("TEMPERATURE","BLOOD_PRESSURE"))){
@@ -607,19 +813,19 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         }
     }
 
-    override fun onClickAction() {
-        val selected = adapter!!.selected.size
-        if (actionMode == null) {
-            //  actionMode = startActionMode(actionModeCallback)
-            //  actionMode!!.title = "Selected: $selected"
-        } else {
-            if (selected == 0) {
-                actionMode!!.finish()
-            } else {
-                //  actionMode!!.title = "Selected: $selected"
-            }
-        }
-    }
+//    override fun onClickAction() {
+//        val selected = adapter!!.selected.size
+//        if (actionMode == null) {
+//            //  actionMode = startActionMode(actionModeCallback)
+//            //  actionMode!!.title = "Selected: $selected"
+//        } else {
+//            if (selected == 0) {
+//                actionMode!!.finish()
+//            } else {
+//                //  actionMode!!.title = "Selected: $selected"
+//            }
+//        }
+//    }
 
     fun convertStringToBitmap(string: String?): Bitmap? {
         val byteArray1: ByteArray = Base64.decode(string, Base64.DEFAULT)
@@ -725,6 +931,229 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         }
     }
 
+    private fun oximetryResponse(oximetryResponse: String) {
+        try {
+//            val oximetryResponse =
+//                "{\"entry\":[{\"resource\":{\"identifier\":[{\"system\":\"Ezdx\",\"use\":\"usual\",\"value\":" +
+//                        "\"2b18ad96-e2c5-44d6-bc14-69c59c362b45\"}],\"resourceType\":\"Observation\",\"code\":{\"coding\":[{\"code\":" +
+//                        "\"59408-5\",\"display\":\"Oxygen saturation in Arterial blood by Pulse oximetry\",\"system\":\"http://loinc.org\"}]}," +
+//                        "\"subject\":{\"identifier\":[{\"system\":\"Partner\",\"use\":\"usual\",\"value\":\"27912812780122\"}]},\"valueQuantity\"" +
+//                        ":{\"code\":\"%\",\"system\":\"http://unitsofmeasure.org\",\"unit\":\"%\",\"value\":97.0}}},{\"resource\":{\"identifier" +
+//                        "\":[{\"system\":\"Ezdx\",\"use\":\"usual\",\"value\":\"2b18ad96-e2c5-44d6-bc14-69c59c362b45\"}],\"resourceType\":" +
+//                        "\"Observation\",\"code\":{\"coding\":[{\"code\":\"8867-4\",\"display\":\"Heart rate\",\"system\":\"http://loinc.org\"}]}," +
+//                        "\"subject\":{\"identifier\":[{\"system\":\"Partner\",\"use\":\"usual\",\"value\":\"27912812780122\"}]},\"valueQuantity\"" +
+//                        ":{\"code\":\"bpm\",\"system\":\"http://unitsofmeasure.org\",\"unit\":\"bpm\",\"value\":74.0}}}],\"resourceType\":\"Bundle\"," +
+//                        "\"type\":\"collection\"}"
+
+
+            val glicose =
+                "{\"entry\":[{\"resource\":{\"identifier\":[{\"system\":\"Ezdx\",\"use\":\"usual\",\"value\":\"f784d695-ed4b-408f-a937-5316370f2ede\"}],\"resourceType\":\"Observation\",\"code\":{\"coding\":[{\"code\":\"2339-0\",\"display\":\"Glucose [Mass/\u200Bvolume] in Blood\",\"system\":\"http://loinc.org\"}]},\"subject\":{\"identifier\":[{\"system\":\"Partner\",\"use\":\"usual\",\"value\":\"27912812780122\"}]},\"valueQuantity\":{\"code\":\"mg/dL\",\"system\":\"http://unitsofmeasure.org\",\"unit\":\"mg/dL\",\"value\":92.0}}}],\"resourceType\":\"Bundle\",\"type\":\"collection\"}"
+
+            if (oximetryResponse.isNotEmpty()) {
+                val reportData = ArrayList<String>()
+                reportData.add(oximetryResponse)
+
+                val test2 = oximetryResponse.substringAfterLast("unit\":\"%\",\"value")
+
+                spO2 = test2.substring(2, 6)
+                pulseRate = test2.substring(410, 414)
+                binding.cardOximeter.visibility = View.VISIBLE
+                binding.tvSpO2.text = spO2
+                binding.tvPulseRate.text = pulseRate
+                testName = "PULSE OXIMETRY"
+                apiCallSaveReportData()
+
+
+                Log.e("spO2", spO2!!.toString())
+                Log.e("pulseRate", pulseRate!!.toString())
+                Log.e("test2", test2!!.toString())
+            } else {
+                myToast(this@AddPatient, "No Test Found")
+            }
+
+        } catch (e: Exception) {
+            myToast(this, "Something went wrong")
+            e.printStackTrace()
+        }
+    }
+
+    private fun glucoseResponse(glucoseResponse: String) {
+        try {
+
+//            val glucoseResponse =
+//                "{\"entry\":[{\"resource\":{\"identifier\":[{\"system\":\"Ezdx\",\"use\":\"usual\",\"value\":" +
+//                        "\"f784d695-ed4b-408f-a937-5316370f2ede\"}],\"resourceType\":\"Observation\",\"code\":{\"coding\":[{\"code\":" +
+//                        "\"2339-0\",\"display\":\"Glucose [Mass/\u200Bvolume] in Blood\",\"system\":\"http://loinc.org\"}]},\"subject\"" +
+//                        ":{\"identifier\":[{\"system\":\"Partner\",\"use\":\"usual\",\"value\":\"27912812780122\"}]},\"valueQuantity\":{" +
+//                        "\"code\":\"mg/dL\",\"system\":\"http://unitsofmeasure.org\",\"unit\":\"mg/dL\",\"value\":92.0}}}],\"resourceType\":" +
+//                        "\"Bundle\",\"type\":\"collection\"}"
+
+            if (glucoseResponse.isNotEmpty()) {
+                val reportData = ArrayList<String>()
+                reportData.add(glucoseResponse)
+
+                val test2 = glucoseResponse.substringAfterLast("mg/dL")
+
+                bloodGlucose = test2.substring(10, 14)
+
+                binding.cardGlucose.visibility = View.VISIBLE
+                binding.tvGlucose.text = bloodGlucose
+                testName = "Blood Glucose"
+                apiCallSaveReportData()
+
+
+                Log.e("bloodGlucose", bloodGlucose!!.toString())
+                Log.e("test2", test2!!.toString())
+            } else {
+                myToast(this@AddPatient, "No Test Found")
+            }
+
+        } catch (e: Exception) {
+            myToast(this, "Something went wrong")
+            e.printStackTrace()
+        }
+    }
+
+    private fun hemoglobinResponse(glucoseResponse: String) {
+        try {
+
+//            val glucoseResponse =
+//            " {\"entry\":[{\"resource\":{\"identifier\":[{\"system\":\"Ezdx\",\"use\":\"usual\",\"value\":" +
+//                    "\"92f0deb1-07dd-4280-b309-f633ec4cf2a0\"}],\"resourceType\":\"Observation\",\"code\":{\"coding\":[{\"code\":" +
+//                    "\"XHEMOGLX\",\"display\":\"Hemoglobin [Mass/volume] in Blood\",\"system\":\"http://loinc.org\"}]},\"subject\"" +
+//                    ":{\"identifier\":[{\"system\":\"Partner\",\"use\":\"usual\",\"value\":\"27912812780122\"}]},\"valueQuantity\"" +
+//                    ":{\"code\":\"g/dL\",\"system\":\"http://unitsofmeasure.org\",\"unit\":\"g/dL\",\"value\":17.9}}}],\"resourceType\"" +
+//                    ":\"Bundle\",\"type\":\"collection\"}"
+
+
+            if (glucoseResponse.isNotEmpty()) {
+                val reportData = ArrayList<String>()
+                reportData.add(glucoseResponse)
+
+                val test2 = glucoseResponse.substringAfterLast("unit\":\"g/dL")
+
+                hemoglobin = test2.substring(10, 14).replace("}", "")
+
+                binding.cardHemoglobin.visibility = View.VISIBLE
+                binding.tvHemoglobin.text = hemoglobin
+                testName = "Hemoglobin"
+                apiCallSaveReportData()
+
+
+                Log.e("hemoglobin", hemoglobin!!.toString())
+                Log.e("test2", test2!!.toString())
+            } else {
+                myToast(this@AddPatient, "No Test Found")
+            }
+
+        } catch (e: Exception) {
+            myToast(this, "Something went wrong")
+            e.printStackTrace()
+        }
+    }
+
+    private fun uricAcidResponse(uricAcidResponse: String) {
+        try {
+            val uricAcidResponse =
+//                "{\"entry\":[{\"resource\":{\"identifier\":[{\"system\":\"Ezdx\",\"use\":\"usual\",\"value\":" +
+//                        "\"dd0c5d90-bfcc-48b2-84f6-377fbcde5267\"}],\"resourceType\":\"Observation\",\"code\":{" +
+//                        "\"coding\":[{\"code\":\"XURICACX\",\"display\":\"Uric Acid\",\"system\":\"http://loinc.org\"}]}," +
+//                        "\"subject\":{\"identifier\":[{\"system\":\"Partner\",\"use\":\"usual\",\"value\":\"27912812780122\"}]}," +
+//                        "\"valueQuantity\":{\"code\":\"mg/dL\",\"system\":\"http://unitsofmeasure.org\",\"unit\":\"mg/dL\",\"value\":0.2}}}],\"resourceType\":\"Bundle\",\"type\":\"collection\"}"
+                if (uricAcidResponse.isNotEmpty()) {
+                    val reportData = ArrayList<String>()
+                    reportData.add(uricAcidResponse)
+
+                    val test2 = uricAcidResponse.substringAfterLast("unit\":\"mg/dL")
+
+                    uricAcid = test2.substring(10, 13)
+
+                    binding.cardUricAcid.visibility = View.VISIBLE
+                    binding.tvUricAcid.text = uricAcid
+                    testName = "Uric Acid"
+                    apiCallSaveReportData()
+
+
+                    Log.e("uricAcid", uricAcid!!.toString())
+                    Log.e("test2", test2!!.toString())
+                } else {
+                    myToast(this@AddPatient, "No Test Found")
+                }
+
+        } catch (e: Exception) {
+            myToast(this, "Something went wrong")
+            e.printStackTrace()
+        }
+    }
+
+    private fun malariyaResponse(malariyaResponse: String) {
+        try {
+//            val malariyaResponse = "{\"entry\":[{\"resource\":{\"identifier\":[{\"system\":\"Ezdx\",\"use\":\"usual\"," +
+//                    "\"value\":\"6bd9055c-9c96-44d0-a957-9dab4e2fbf20\"}],\"resourceType\":\"Observation\",\"code\":{" +
+//                    "\"coding\":[{\"code\":\"76772-3\",\"display\":\"MALARIA\",\"system\":\"http://loinc.org\"}]},\"subject\":{" +
+//                    "\"identifier\":[{\"system\":\"Partner\",\"use\":\"usual\",\"value\":\"27912812780122\"}]},\"valueString\":" +
+//                    "\"Negative\"}}],\"resourceType\":\"Bundle\",\"type\":\"collection\"}"
+            if (malariyaResponse.isNotEmpty()) {
+                val reportData = ArrayList<String>()
+                reportData.add(malariyaResponse)
+
+                val test2 = malariyaResponse.substringAfterLast("valueString")
+
+                malaria = test2.substring(3, 17).replace("}", "").replace("]", "")
+                    .replace(",", "").replace('"', ' ')
+
+                binding.cardMalaria.visibility = View.VISIBLE
+                binding.tvMalaria.text = malaria
+                testName = "Malaria"
+                apiCallSaveReportData()
+
+
+                Log.e("malaria", malaria!!.toString())
+                Log.e("test2", test2!!.toString())
+            } else {
+                myToast(this@AddPatient, "No Test Found")
+            }
+
+        } catch (e: Exception) {
+            myToast(this, "Something went wrong")
+            e.printStackTrace()
+        }
+    }
+
+    private fun typhoidResponse(typhoidResponse: String) {
+        try {
+//            val typhoidResponse = "{\"entry\":[{\"resource\":{\"identifier\":[{\"system\":\"Ezdx\",\"use\":\"usual\"," +
+//                    "\"value\":\"6bd9055c-9c96-44d0-a957-9dab4e2fbf20\"}],\"resourceType\":\"Observation\",\"code\":{" +
+//                    "\"coding\":[{\"code\":\"76772-3\",\"display\":\"MALARIA\",\"system\":\"http://loinc.org\"}]},\"subject\":{" +
+//                    "\"identifier\":[{\"system\":\"Partner\",\"use\":\"usual\",\"value\":\"27912812780122\"}]},\"valueString\":" +
+//                    "\"Negative\"}}],\"resourceType\":\"Bundle\",\"type\":\"collection\"}"
+            if (typhoidResponse.isNotEmpty()) {
+                val reportData = ArrayList<String>()
+                reportData.add(typhoidResponse)
+
+                val test2 = typhoidResponse.substringAfterLast("valueString")
+
+                typhoid = test2.substring(3, 17).replace("}", "").replace("]", "")
+                    .replace(",", "").replace('"', ' ')
+
+                binding.cardTyphoid.visibility = View.VISIBLE
+                binding.tvTyphoid.text = typhoid
+                testName = "Typhoid"
+                apiCallSaveReportData()
+
+
+                Log.e("typhoid", typhoid!!.toString())
+                Log.e("test2", test2!!.toString())
+            } else {
+                myToast(this@AddPatient, "No Test Found")
+            }
+
+        } catch (e: Exception) {
+            myToast(this, "Something went wrong")
+            e.printStackTrace()
+        }
+    }
+
     companion object {
         const val ezdxPackageName =
             "com.healthcubed.ezdx.ezdx.demo" // pointing to demo environment, For your testing
@@ -755,21 +1184,27 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
 
-        name = binding.edtName.text.toString()
-        city = binding.edtCity.text.toString()
-        state = binding.edtState.text.toString()
-        postelCode = binding.edtPostelCode.text.toString()
-        email = binding.edtEmail.text.toString()
-        phoneNumber = binding.edtMobile.text.toString()
-        val code = "+91 "
-        phoneNumberNew = code + phoneNumber
+        if (PatientList.Exsting == "1") {
+            PatientList.Exsting = ""
+
+        } else {
+            name = binding.edtName.text.toString()
+            city = binding.edtCity.text.toString()
+            state = binding.edtState.text.toString()
+            postelCode = binding.edtPostelCode.text.toString()
+            email = binding.edtEmail.text.toString()
+            phoneNumber = binding.edtMobile.text.toString()
+            val code = "+91 "
+            phoneNumberNew = code + phoneNumber
+        }
+
 
         ApiClient.apiService.patientHealthcubeReg(
             name,
             gender,
             city,
             state,
-            dateOfBirth,
+            dateOfBirthNew,
             countryName,
             phoneNumberNew,
             "+91 9392595905",
@@ -793,18 +1228,23 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
                             binding.btnMoveEzdx.visibility = View.VISIBLE
                             binding.btnSave.visibility = View.GONE
                             binding.layoutRegister.visibility = View.GONE
+                            binding.btnGenerate.visibility = View.GONE
 
-                            NewRegisteredpatientId = response.body()!!.result.id.toString()
-
-                            //myToast(requireActivity(), response.body()!!.message)
+                            helthCubePatientId = response.body()!!.result.id.toString()
+                            externalPatientId =
+                                response.body()!!.result.externalPatientId.toString()
+                            // myToast(this@AddPatient, response.body()!!.message)
+                            apiCallRegisterHealthCube(externalPatientId)
                         } else {
                             myToast(this@AddPatient, response.body()!!.message)
                             progressDialog!!.dismiss()
 
                         }
-                    }catch (e:Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                         myToast(this@AddPatient, "Something went wrong")
+                        progressDialog!!.dismiss()
+
                     }
                 }
 
@@ -828,9 +1268,10 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         progressDialog!!.show()
 
         ApiClient.apiService.healthcubeReportInsert(
-            NewRegisteredpatientId, testName,sessionManager.id.toString(), temperature,
+            helthCubePatientId, testName, sessionManager.id.toString(), temperature,
             "", "", "", "", "", "", "", "",
-            "", "", "", "", "", diastolic, systolic
+            "", "", "", "", "", diastolic, systolic, spO2, pulseRate, bloodGlucose, uricAcid,
+            hemoglobin, malaria, typhoid
         )
             .enqueue(object :
                 Callback<ModelHealthCubeReg> {
@@ -915,27 +1356,72 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
                 }
 
             })
-
-
     }
 
 
-/*
-    private fun apiCallMedicine() {
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            //.baseUrl("https://jsonplaceholder.typicode.com/")
-            .baseUrl("https://demo-ezdx.healthcubed.com/ezdx-partner-srv/")
-            .build()
-            .create(ApiInterfaceHelthCube::class.java)
+    /*
+        private fun apiCallMedicine() {
+            val retrofitBuilder = Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                //.baseUrl("https://jsonplaceholder.typicode.com/")
+                .baseUrl("https://demo-ezdx.healthcubed.com/ezdx-partner-srv/")
+                .build()
+                .create(ApiInterfaceHelthCube::class.java)
 
-        val name = binding.edtName.text.toString()
-        val city = binding.edtCity.text.toString()
-        val state = binding.edtState.text.toString()
-        val postelCode = binding.edtPostelCode.text.toString()
-        val email = binding.edtEmail.text.toString()
-        val phoneNumber = binding.edtMobile.text.toString()
-        val phoneNumberNew = "+91$phoneNumber"
+            val name = binding.edtName.text.toString()
+            val city = binding.edtCity.text.toString()
+            val state = binding.edtState.text.toString()
+            val postelCode = binding.edtPostelCode.text.toString()
+            val email = binding.edtEmail.text.toString()
+            val phoneNumber = binding.edtMobile.text.toString()
+            val phoneNumberNew = "+91$phoneNumber"
+            progressDialog = ProgressDialog(this@AddPatient)
+            progressDialog!!.setMessage("Loading..")
+            progressDialog!!.setTitle("Please Wait")
+            progressDialog!!.isIndeterminate = false
+            progressDialog!!.setCancelable(true)
+            progressDialog!!.show()
+
+            val retrofitData = retrofitBuilder.registrationHealthCube(
+                accessToken,
+                name,
+                selectedDate,
+                gender,
+                email,
+                city,
+                state,
+                postelCode,
+                countryName,
+                phoneNumberNew,
+                "+91 9392595905",
+                sessionManager.id.toString(), reportList
+            )
+            retrofitData.enqueue(object : Callback<ModelRegister> {
+                override fun onResponse(
+                    call: Call<ModelRegister>,
+                    response: Response<ModelRegister>
+                ) {
+                    if (response.code() == 500) {
+                        myToast(this@AddPatient, response.body()!!.message)
+                        progressDialog!!.dismiss()
+                    } else if (response.code() == 200) {
+                        myToast(this@AddPatient, response.body()!!.message)
+                        progressDialog!!.dismiss()
+                    } else {
+                        myToast(this@AddPatient, response.body()!!.message)
+                        progressDialog!!.dismiss()
+
+                    }
+                }
+
+                override fun onFailure(call: Call<ModelRegister>, t: Throwable) {
+                    t.message?.let { myToast(this@AddPatient, it) }
+                }
+            })
+        }
+    */
+    private fun apiCallGenerateNewToken() {
+
         progressDialog = ProgressDialog(this@AddPatient)
         progressDialog!!.setMessage("Loading..")
         progressDialog!!.setTitle("Please Wait")
@@ -943,48 +1429,72 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
 
-        val retrofitData = retrofitBuilder.registrationHealthCube(
-            accessToken,
-            name,
-            selectedDate,
-            gender,
-            email,
-            city,
-            state,
-            postelCode,
-            countryName,
-            phoneNumberNew,
-            "+91 9392595905",
-            sessionManager.id.toString(), reportList
+        val retrofitBuilder = Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create())
+            //.baseUrl("https://jsonplaceholder.typicode.com/")
+            .baseUrl("https://kc-ezdx.healthcubed.com/auth/realms/partner/protocol/openid-connect/")
+            .build()
+            .create(ApiInterfaceHealthCube::class.java)
+
+        val retrofitData = retrofitBuilder.createTokenNew(
+                 "client_credentials",
+                "a73a6a93-4fdb-4239-a8c7-e2eed5ae6853",
+                "bce6f92b-c106-404e-b255-ffad5dc0e434",
         )
-        retrofitData.enqueue(object : Callback<ModelRegister> {
-            override fun onResponse(
-                call: Call<ModelRegister>,
-                response: Response<ModelRegister>
-            ) {
-                if (response.code() == 500) {
-                    myToast(this@AddPatient, response.body()!!.message)
-                    progressDialog!!.dismiss()
-                } else if (response.code() == 200) {
-                    myToast(this@AddPatient, response.body()!!.message)
-                    progressDialog!!.dismiss()
-                } else {
-                    myToast(this@AddPatient, response.body()!!.message)
-                    progressDialog!!.dismiss()
 
+
+//        ApiClientHealthCube.apiService.createTokenNew(
+//                "client_credentials",
+//                "a73a6a93-4fdb-4239-a8c7-e2eed5ae6853",
+//                "bce6f92b-c106-404e-b255-ffad5dc0e434",
+//            )
+
+        retrofitData.enqueue(object : Callback<ModelToken> {
+                override fun onResponse(
+                    call: Call<ModelToken>,
+                    response: Response<ModelToken>
+                ) {
+                    try {
+                        if (response.code() == 500) {
+                            myToast(this@AddPatient, "Server Error")
+                            progressDialog!!.dismiss()
+                        } else if (response.code() == 404) {
+                            myToast(this@AddPatient, response.body()!!.error_description)
+                            progressDialog!!.dismiss()
+                        }else if (response.code() == 400) {
+                            myToast(this@AddPatient, response.body()!!.error)
+                            progressDialog!!.dismiss()
+                        } else if (response.code() == 200) {
+                            myToast(this@AddPatient, "New Token Generated")
+                            Log.e("response.body()!!", response.body()!!.toString())
+                            accessToken="Bearer "+response.body()!!.access_token
+                            //   refresh()
+                            progressDialog!!.dismiss()
+                        } else {
+                            // myToast(this@AddPatient, response.body()!!.error)
+                            Log.e("response.body()!!", response.body()!!.toString())
+                            Log.e("response.code()!!", response.code()!!.toString())
+                            progressDialog!!.dismiss()
+                        }
+                    } catch (re: Exception) {
+                        re.printStackTrace()
+                        progressDialog!!.dismiss()
+                        myToast(this@AddPatient, "Something went wrong")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<ModelRegister>, t: Throwable) {
-                t.message?.let { myToast(this@AddPatient, it) }
-            }
-        })
+                override fun onFailure(call: Call<ModelToken>, t: Throwable) {
+                    t.message?.let {
+                        myToast(this@AddPatient, it)
+                        progressDialog!!.dismiss()
+
+                    }
+                }
+            })
     }
-*/
 
 
-/*
-    private fun apiCallRegisterHealthCube() {
+    private fun apiCallRegisterHealthCube(externalPatientId: String) {
 
         progressDialog = ProgressDialog(this@AddPatient)
         progressDialog!!.setMessage("Loading..")
@@ -1002,7 +1512,7 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         val phoneNumberNew = code + phoneNumber
 
         Log.e("NAme", name)
-        Log.e("selectedDate", selectedDate)
+        Log.e("dateOfBirthNew", dateOfBirthNew)
         Log.e("gender", gender)
         Log.e("email", email)
         Log.e("city", city)
@@ -1010,16 +1520,21 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         Log.e("postelCode", postelCode)
         Log.e("countryName", countryName)
         Log.e("phoneNumberNew", phoneNumberNew)
-        Log.e("id", "24643-9246-${sessionManager.id}")
-        ApiClientHelthCube.apiService.registrationHealthCube(
+        Log.e("externalPatientId", externalPatientId)
+        Log.e("testListNew1", testListNew1.toString())
+        Log.e("dateOfBirthHealth", dateOfBirthHealth.toString())
+
+
+        ApiClientHealthCube.apiService.postData(
             accessToken, DataModal(
-                "$name", "$selectedDate", "$gender",
-                "$email", "$city", "$state", "$postelCode", "$countryName",
-                "$phoneNumberNew", "+91 9392595905", "24643-9246-${sessionManager.id}"
+                "$name", "$dateOfBirthHealth", "$gender",
+                "",
+                "+91 9392595905", "$externalPatientId",
+                testListNew1,
             )
         )
-            .enqueue(object :
-                Callback<ModelRegister> {
+
+            .enqueue(object : Callback<ModelRegister> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
                     call: Call<ModelRegister>,
@@ -1030,19 +1545,15 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
                             myToast(this@AddPatient, "Server Error")
                             progressDialog!!.dismiss()
                         } else if (response.code() == 401) {
-                            myToast(this@AddPatient, "Unauthorized")
+                            myToast(this@AddPatient, "Token Expired")
+                            // myToast(this@AddPatient, "Unauthorized")
                             progressDialog!!.dismiss()
                         } else if (response.code() == 200) {
                             myToast(this@AddPatient, response.body()!!.message)
-                            refresh()
+                            //   refresh()
                             progressDialog!!.dismiss()
                         } else {
-                            Toast.makeText(
-                                this@AddPatient,
-                                "${response.body()!!.message}",
-                                Toast.LENGTH_SHORT
-                            ).show()
-
+                            myToast(this@AddPatient, response.body()!!.message)
                             // myToast(this@AddPatient, response.body()!!.message)
                             progressDialog!!.dismiss()
                         }
@@ -1065,7 +1576,7 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
             })
 
     }
-*/
+
 
     fun refresh() {
         overridePendingTransition(0, 0)
@@ -1074,15 +1585,28 @@ class AddPatient : AppCompatActivity(), ItemAdapter.OnClickAction, ItemAdapter.T
         overridePendingTransition(0, 0)
     }
 
-    @SuppressLint("SuspiciousIndentation")
-
-    override fun selctedTestList(item: String) {
-        selectedTestList.add(item)
-        selectedTestList.distinct()
-        Log.e("Item", item)
-        Log.e("selectedTestList", selectedTestList.toString())
+    override fun onResume() {
+        super.onResume()
+        AdapterTestList.TestName = ""
 
     }
+
+//    override fun onBackPressed() {
+//        super.onBackPressed()
+//
+//
+//    }
+
+
+    //  @SuppressLint("SuspiciousIndentation")
+
+//    override fun selctedTestList(item: String) {
+//        selectedTestList.add(item)
+//        selectedTestList.distinct()
+//        Log.e("Item", item)
+//        Log.e("selectedTestList", selectedTestList.toString())
+//
+//    }
 }
 
 // hightlightTests = "[\"PULSE_OXIMETER\",\"WEIGHT\",\"BLOOD_PRESSURE\",\"ECG\",\"TEMPERATURE\"]"

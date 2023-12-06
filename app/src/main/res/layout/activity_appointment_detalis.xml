@@ -139,8 +139,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/profile"
-                        app:civ_border_width="2dp"
-                        app:civ_border_color="#FF000000"/>
+                         app:civ_border_color="#FF000000"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -258,29 +257,6 @@
                                 </LinearLayout>
 
 
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_weight="1"
-                                android:layout_marginTop="2dp"
-                                android:layout_height="wrap_content">
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Phone Number-"
-                                    android:textColor="@color/black"
-                                    android:textStyle="bold">
-
-                                </androidx.appcompat.widget.AppCompatTextView>
-                                <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/tvPhoneNumber"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:textColor="#686868"
-                                    android:textStyle="bold">
-
-                                </androidx.appcompat.widget.AppCompatTextView>
                             </LinearLayout>
 
                             <LinearLayout

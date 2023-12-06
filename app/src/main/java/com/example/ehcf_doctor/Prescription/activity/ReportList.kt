@@ -17,14 +17,14 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ReportList : AppCompatActivity() {
-    private lateinit var binding:ActivityReportListBinding
+    private lateinit var binding: ActivityReportListBinding
     var progressDialog: ProgressDialog? = null
-    var id=""
+    var id = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityReportListBinding.inflate(layoutInflater)
-        setContentView(binding.root )
+        binding = ActivityReportListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         id = intent.getStringExtra("id").toString()
         binding.imgBack.setOnClickListener {
@@ -33,8 +33,6 @@ class ReportList : AppCompatActivity() {
 
         apiCallGetTest()
     }
-
-
 
 
     private fun apiCallGetTest() {
@@ -51,20 +49,27 @@ class ReportList : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<ModelGetTest>, response: Response<ModelGetTest>
                 ) {
-                    if (response.body()!!.result.isEmpty()) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
+                    try {
+                        if (response.body()!!.result.isEmpty()) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            // myToast(requireActivity(),"No Data Found")
+                            progressDialog!!.dismiss()
 
-                    } else {
-                        binding.recyclerView.apply {
-                            binding.tvNoDataFound.visibility = View.GONE
-                            adapter = AdapterViewReportTest( this@ReportList,response.body()!!)
+                        } else {
+                            binding.recyclerView.apply {
+                                binding.tvNoDataFound.visibility = View.GONE
+                                adapter = AdapterViewReportTest(this@ReportList, response.body()!!)
                             }
                             progressDialog!!.dismiss()
 
                         }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        myToast(this@ReportList, "Something went wrong")
+                        progressDialog!!.dismiss()
+
                     }
+                }
 
 
                 override fun onFailure(call: Call<ModelGetTest>, t: Throwable) {

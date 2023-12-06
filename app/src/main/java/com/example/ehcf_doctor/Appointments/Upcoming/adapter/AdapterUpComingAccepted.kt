@@ -43,7 +43,7 @@ class AdapterUpComingAccepted(
        // holder.bookingId.text = list.result[position].id.toString()
        // holder.title.text = list.result[position].title.toString()
         holder.startTime.text = list.result[position].time.toString()
-        holder.status.text = list.result[position].status_for_doctor.toString()
+        holder.status.text = list.result[position].status_name.toString()
         holder.consultationType.text = list.result[position].consultation_type.toString()
 
         when (list.result[position].consultation_type) {

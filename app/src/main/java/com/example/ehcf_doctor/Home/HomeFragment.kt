@@ -146,20 +146,29 @@ class HomeFragment : Fragment() {
                 override fun onResponse(
                     call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
                 ) {
-                    if (response.code() == 500) {
+                    try {
+                        if (response.code() == 500) {
 
-                    } else if (response.body()!!.result.isEmpty()) {
-                        response.body()!!.result.size.toString()
-                        Log.e("Size", response.body()!!.result.size.toString())
-                        binding.tvRejectedBooking.text = response.body()!!.result.size.toString()
+                        } else if (response.body()!!.result.isEmpty()) {
+                            response.body()!!.result.size.toString()
+                            Log.e("Size", response.body()!!.result.size.toString())
+                            binding.tvRejectedBooking.text =
+                                response.body()!!.result.size.toString()
 
-                    } else {
-                        response.body()!!.result.size.toString()
-                        Log.e("Size", response.body()!!.result.size.toString())
-                        binding.tvRejectedBooking.text = response.body()!!.result.size.toString()
+                        } else {
+                            response.body()!!.result.size.toString()
+                            Log.e("Size", response.body()!!.result.size.toString())
+                            binding.tvRejectedBooking.text =
+                                response.body()!!.result.size.toString()
+                        }
+
+
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        myToast(requireActivity(), "Something went wrong")
+                        binding.shimmer.visibility = View.GONE
+                        progressDialog!!.dismiss()
                     }
-
-
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
@@ -188,22 +197,30 @@ class HomeFragment : Fragment() {
                 override fun onResponse(
                     call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
                 ) {
-                    if (response.code() == 500) {
+                    try {
+                        if (response.code() == 500) {
 
-                    } else if (response.body()!!.result.isEmpty()) {
-                        binding.shimmer.visibility = View.GONE
-                        response.body()!!.result.size.toString()
-                        Log.e("Size", response.body()!!.result.size.toString())
-                        binding.tvCompletedBooking.text = response.body()!!.result.size.toString()
-                        // myToast(requireActivity(),"No Data Found")
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.shimmer.visibility = View.GONE
+                            response.body()!!.result.size.toString()
+                            Log.e("Size", response.body()!!.result.size.toString())
+                            binding.tvCompletedBooking.text =
+                                response.body()!!.result.size.toString()
+                            // myToast(requireActivity(),"No Data Found")
 
-                    } else {
-                        response.body()!!.result.size.toString()
-                        Log.e("Size", response.body()!!.result.size.toString())
-                        binding.tvCompletedBooking.text = response.body()!!.result.size.toString()
+                        } else {
+                            response.body()!!.result.size.toString()
+                            Log.e("Size", response.body()!!.result.size.toString())
+                            binding.tvCompletedBooking.text =
+                                response.body()!!.result.size.toString()
+                        }
+
+
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        progressDialog!!.dismiss()
+
                     }
-
-
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
@@ -245,7 +262,8 @@ class HomeFragment : Fragment() {
 
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        e.localizedMessage?.let { Log.e("CatchError", it) }
+                        progressDialog!!.dismiss()
+
                     }
 
 
@@ -296,6 +314,8 @@ class HomeFragment : Fragment() {
                     } catch (e: Exception) {
                         e.printStackTrace()
                         e.localizedMessage?.let { Log.e("CatchError", it) }
+                        progressDialog!!.dismiss()
+
                     }
 
 

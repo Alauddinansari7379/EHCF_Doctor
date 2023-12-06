@@ -11,6 +11,7 @@ import com.example.ehcf_doctor.Dashboard.model.ModelDashboard
 import com.example.ehcf_doctor.ForgotPassword.modelReponse.ModelForgotPass
 import com.example.ehcf_doctor.HealthCube.Model.ModelHealthCubeReg
 import com.example.ehcf_doctor.HealthCube.Model.ModelTestHistory
+import com.example.ehcf_doctor.HealthCube.Model.ModelTotalCount
 import com.example.ehcf_doctor.Invoice.model.ModelInvoice
 import com.example.ehcf_doctor.Invoice.model.ModelInvoiceDetial
 import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
@@ -162,6 +163,14 @@ interface ApiInterface {
     fun specialistCategoryTest(
     ): Call<ModelSpecilList>
 
+    @GET("get_test_name")
+    fun testName(
+    ): Call<ModelTestList>
+
+    @GET("get_medicine_name")
+    fun medicineName(
+    ): Call<ModelTestList>
+
     @GET("get_degree")
     fun getDegree(
     ): Call<ModelDegreeJava>
@@ -304,8 +313,7 @@ interface ApiInterface {
     @POST("get_healthcube_report")
     fun healthCubeReportHistory(
         @Query("id") id: String?,
-        @Query("doctor_id") doctor_id: String?,
-    ): Call<ModelTestHistory>
+     ): Call<ModelTestHistory>
 
     @POST("healthcube_exsisting_patient")
     fun healthcubeExsistingpatient(
@@ -438,6 +446,11 @@ interface ApiInterface {
         @Query("comments") comments: String?,
     ): Call<ModelRating>
 
+    @POST("get_healthcube_report_count")
+    fun healthcubeReportCount(
+        @Query("doctor_id") id: String?,
+     ): Call<ModelTotalCount>
+
     @POST("patient_healthcube")
     fun patientHealthcubeReg(
         @Query("name") name: String?,
@@ -477,6 +490,13 @@ interface ApiInterface {
         @Query("height") height: String?,
         @Query("diastolic") diastolic: String?,
         @Query("systolic") systolic: String?,
+        @Query("spotwo") spotwo: String?,
+        @Query("pulse_rate") pulse_rate: String?,
+        @Query("blood_glucose") blood_glucose: String?,
+        @Query("uric_acid") uric_acid: String?,
+        @Query("hemoglobin") hemoglobin: String?,
+        @Query("malaria") malaria: String?,
+        @Query("typhoid") typhoid: String?,
     ): Call<ModelHealthCubeReg>
 
 

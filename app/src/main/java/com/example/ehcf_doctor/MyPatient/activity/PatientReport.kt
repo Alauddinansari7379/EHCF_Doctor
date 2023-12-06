@@ -54,20 +54,26 @@ class PatientReport : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<ModelGetAllReport>, response: Response<ModelGetAllReport>
                 ) {
-                    if (response.body()!!.result.isEmpty()) {
-                        // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
+                    try {
+                        if (response.body()!!.result.isEmpty()) {
+                             myToast(this@PatientReport,"No Report Found")
+                            progressDialog!!.dismiss()
 
-                    } else {
-                        binding.recyclerView.apply {
-                            binding.tvNoDataFound.visibility = View.GONE
-                            adapter = AdapterViewReport(response.body()!!, this@PatientReport)
+                        } else {
+                            binding.recyclerView.apply {
+                                binding.tvNoDataFound.visibility = View.GONE
+                                adapter = AdapterViewReport(response.body()!!, this@PatientReport)
+                            }
+                            progressDialog!!.dismiss()
+
                         }
+
+
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        myToast(this@PatientReport, "Something went wrong")
                         progressDialog!!.dismiss()
-
                     }
-
-
                 }
 
                 override fun onFailure(call: Call<ModelGetAllReport>, t: Throwable) {

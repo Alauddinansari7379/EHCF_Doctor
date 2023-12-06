@@ -17,6 +17,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -29,6 +30,7 @@ import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing.Com
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComingAccepted
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
+import com.example.ehcf_doctor.Booking.model.ResultUpcoming
 import com.example.ehcf_doctor.Prescription.activity.AddPrescription
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentUpComingBinding
@@ -38,6 +40,7 @@ import com.hbisoft.hbrecorder.HBRecorder
 import com.hbisoft.hbrecorder.HBRecorderListener
 import org.jitsi.meet.sdk.JitsiMeetActivity
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
+import org.jitsi.meet.sdk.JitsiMeetUserInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -94,9 +97,8 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
 
     // var mergeAdapter =RecyclerViewMergeAdapter()
     var refreshValue = false
-
-
     private var tvTimeCounter: TextView? = null
+    private var  mainData = ArrayList<ResultUpcoming>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -116,7 +118,7 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
         sessionManager = SessionManager(requireContext())
         shimmerFrameLayout = view.findViewById(R.id.shimmer)
         shimmerFrameLayout!!.startShimmer();
-
+        mainData = ArrayList<ResultUpcoming>()
         hbRecorder = HBRecorder(requireContext(), this)
 
 
@@ -126,8 +128,13 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
         binding.imgRefresh.setOnClickListener {
             apiCallGetConsultationAccepted()
         }
+        binding.edtSearch.addTextChangedListener { str ->
+            setRecyclerViewAdapter(mainData.filter {
+                it.customer_name!!.contains(str.toString(), ignoreCase = true)
+            } as ArrayList<ResultUpcoming>)
+        }
 
-        binding.imgSearch.setOnClickListener {
+       /* binding.imgSearch.setOnClickListener {
             if (binding.edtSearch.text.toString().isEmpty()) {
                 binding.edtSearch.error = "Enter Patient Name"
                 binding.edtSearch.requestFocus()
@@ -135,7 +142,7 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
                val search = binding.edtSearch.text.toString()
                 apiCallSearchAppointments(search)
             }
-        }
+        }*/
     }
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
@@ -305,17 +312,29 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
 
     private fun videoCallFun(startTime: String, bookingId: String) {
         this.bookingId = bookingId
+
+        val jitsiMeetUserInfo = JitsiMeetUserInfo()
+        jitsiMeetUserInfo.displayName = sessionManager.doctorName
+        jitsiMeetUserInfo.email = sessionManager.email
         try {
-            val options: JitsiMeetConferenceOptions = JitsiMeetConferenceOptions.Builder()
-                .setServerURL(URL("https://meet.jit.si"))
+            val defaultOptions: JitsiMeetConferenceOptions = JitsiMeetConferenceOptions.Builder()
+                .setServerURL(URL("https://jvc.ethicalhealthcare.in/"))
                 .setRoom(startTime)
                 .setAudioMuted(false)
-                .setVideoMuted(false)
+                .setVideoMuted(true)
+                .setAudioOnly(false)
+                .setUserInfo(jitsiMeetUserInfo)
+                .setConfigOverride("enableInsecureRoomNameWarning", false)
+                .setFeatureFlag("readOnlyName", true)
+                .setFeatureFlag("prejoinpage.enabled", false)
+               // .setFeatureFlag("lobby-mode.enabled", false)
+               // .setFeatureFlag("lobby-mode", false) // Disable lobby mode
+                //.setFeatureFlag("chat.enabled",false)
+                .setConfigOverride("requireDisplayName", true)
                 .build()
-            ratingPage = true
-            JitsiMeetActivity.launch(requireContext(), options)
+            JitsiMeetActivity.launch(requireContext(), defaultOptions)
             // refreshValue=true
-          //  ratingPage = true
+            ratingPage = true
         } catch (e: MalformedURLException) {
             e.printStackTrace();
         }
@@ -336,25 +355,32 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
                 override fun onResponse(
                     call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
                 ) {
-                    if (response.body()!!.result.isEmpty()) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmer.visibility = View.GONE
-                        // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
-                    } else {
-                        binding.rvUpcoming.apply {
-                            shimmerFrameLayout?.startShimmer()
-                            binding.rvUpcoming.visibility = View.VISIBLE
-                            binding.shimmer.visibility = View.GONE
-                            binding.tvNoDataFound.visibility = View.GONE
-                            adapter = AdapterUpComing(
-                                requireContext(),
-                                response.body()!!,
-                                this@UpComingFragment
-                            )
-                            progressDialog!!.dismiss()
+                    try {
+                        if (response.code() == 200) {
+                            mainData = response.body()!!.result!!
 
                         }
+                        if (response.code() == 500) {
+                            myToast(requireActivity(), "Server error")
+                            progressDialog!!.dismiss()
+
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmer.visibility = View.GONE
+                            // myToast(requireActivity(),"No Data Found")
+                            progressDialog!!.dismiss()
+                        } else {
+                            binding.rvUpcoming.apply {
+                                setRecyclerViewAdapter(mainData)
+                                progressDialog!!.dismiss()
+
+                            }
+                        }
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        activity?.let { myToast(it, "Something went wrong") }
+                        binding.shimmer.visibility = View.GONE
+                        progressDialog!!.dismiss()
                     }
 
                 }
@@ -368,8 +394,21 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
 
             })
     }
+    private fun setRecyclerViewAdapter(data: ArrayList<ResultUpcoming>) {
+        binding.rvUpcoming.apply {
+            shimmerFrameLayout?.startShimmer()
+            binding.rvUpcoming.visibility = View.VISIBLE
+            binding.shimmer.visibility = View.GONE
+            binding.tvNoDataFound.visibility = View.GONE
+
+            adapter = AdapterUpComing(requireContext(), data,this@UpComingFragment)
+            progressDialog!!.dismiss()
+
+        }
+    }
 
 
+/*
     private fun apiCallSearchAppointments(patientName: String) {
         progressDialog = ProgressDialog(requireContext())
         progressDialog!!.setMessage("Loading..")
@@ -437,6 +476,7 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
 
             })
     }
+*/
 
     private fun apiCallGetConsultationAccepted1() {
 
@@ -446,24 +486,35 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
                 override fun onResponse(
                     call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
                 ) {
-                    if (response.body()!!.result.isEmpty()) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmer.visibility = View.GONE
-                        val intent = Intent(context as Activity, Appointments::class.java)
-                        (context as Activity).startActivity(intent)
-                    // myToast(requireActivity(),"No Data Found")
-                    } else {
-                        binding.rvUpcoming.apply {
-                            shimmerFrameLayout?.startShimmer()
-                            binding.rvUpcoming.visibility = View.VISIBLE
+                    try {
+                        if (response.code() == 200) {
+                            mainData = response.body()!!.result!!
+
+                        }
+                        if (response.code() == 500) {
+                            myToast(requireActivity(), "Server error")
+                            progressDialog!!.dismiss()
+
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmer.visibility = View.GONE
-                            binding.tvNoDataFound.visibility = View.GONE
-                            adapter = activity?.let { AdapterUpComing(it, response.body()!!, this@UpComingFragment) }
                             val intent = Intent(context as Activity, Appointments::class.java)
                             (context as Activity).startActivity(intent)
+                            // myToast(requireActivity(),"No Data Found")
+                        } else {
+                            binding.rvUpcoming.apply {
+                                setRecyclerViewAdapter(mainData)
+                                progressDialog!!.dismiss()
+                                val intent = Intent(context as Activity, Appointments::class.java)
+                                (context as Activity).startActivity(intent)
+                            }
                         }
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        activity?.let { myToast(it, "Something went wrong") }
+                        binding.shimmer.visibility = View.GONE
+                        progressDialog!!.dismiss()
                     }
-
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
@@ -672,20 +723,26 @@ private fun recordMeeting(startTime: String, bookingId: String)
                     call: Call<ModelConfirmSlotRes>,
                     response: Response<ModelConfirmSlotRes>
                 ) {
-                    if (response.code() == 200) {
-                        myToast(requireActivity(), response.body()!!.message)
-                        progressDialog!!.dismiss()
-                      //  apiCallGetConsultationAccepted1()
-                        (activity as Appointments).refresh()
-                        //  startActivity(Intent(requireContext(),UpComingFragment::class.java))
+                    try {
+                        if (response.code() == 200) {
+                            myToast(requireActivity(), response.body()!!.message)
+                            progressDialog!!.dismiss()
+                            //  apiCallGetConsultationAccepted1()
+                            (activity as Appointments).refresh()
+                            //  startActivity(Intent(requireContext(),UpComingFragment::class.java))
 
-                        //    apiCall()
-                    } else if (response.code() == 500) {
-                        activity?.let { myToast(it, "Server Error") }
-                        progressDialog!!.dismiss()
+                            //    apiCall()
+                        } else if (response.code() == 500) {
+                            activity?.let { myToast(it, "Server Error") }
+                            progressDialog!!.dismiss()
 
-                    } else {
+                        } else {
+                            activity?.let { myToast(it, "Something went wrong") }
+                            progressDialog!!.dismiss()
+                        }
+                    }catch (e:Exception){
                         activity?.let { myToast(it, "Something went wrong") }
+                        binding.shimmer.visibility = View.GONE
                         progressDialog!!.dismiss()
                     }
                 }
@@ -714,21 +771,27 @@ private fun recordMeeting(startTime: String, bookingId: String)
                     call: Call<ModelConfirmSlotRes>,
                     response: Response<ModelConfirmSlotRes>
                 ) {
-                    if (response.code() == 200) {
-                        activity?.let { myToast(it, response.body()!!.message) }
-                        progressDialog!!.dismiss()
-                        apiCallGetConsultationAccepted1()
-                        (activity as Appointments).refresh()
+                    try {
+                        if (response.code() == 200) {
+                            activity?.let { myToast(it, response.body()!!.message) }
+                            progressDialog!!.dismiss()
+                            apiCallGetConsultationAccepted1()
+                            (activity as Appointments).refresh()
 
-                        //  startActivity(Intent(requireContext(),UpComingFragment::class.java))
-                        //  apiCall()
-                        progressDialog!!.dismiss()
-                    } else if (response.code() == 500) {
-                        activity?.let { myToast(it, "Server Error") }
-                        progressDialog!!.dismiss()
+                            //  startActivity(Intent(requireContext(),UpComingFragment::class.java))
+                            //  apiCall()
+                            progressDialog!!.dismiss()
+                        } else if (response.code() == 500) {
+                            activity?.let { myToast(it, "Server Error") }
+                            progressDialog!!.dismiss()
 
-                    } else {
-                        activity?.let { myToast(it, response.body()!!.message) }
+                        } else {
+                            activity?.let { myToast(it, response.body()!!.message) }
+                            progressDialog!!.dismiss()
+                        }
+                    }catch (e:java.lang.Exception){
+                        activity?.let { myToast(it, "Something went wrong") }
+                        binding.shimmer.visibility = View.GONE
                         progressDialog!!.dismiss()
                     }
                 }
@@ -757,25 +820,30 @@ private fun recordMeeting(startTime: String, bookingId: String)
                     call: Call<ModelConfirmSlotRes>,
                     response: Response<ModelConfirmSlotRes>
                 ) {
-                    if (response.code() == 500) {
-                        activity?.let { myToast(it, "Server Error") }
-                        progressDialog!!.dismiss()
+                    try {
+                        if (response.code() == 500) {
+                            activity?.let { myToast(it, "Server Error") }
+                            progressDialog!!.dismiss()
 
-                    } else if (response.body()!!.status == 1) {
-                       // apiCallGetConsultationAccepted1()
-                      // (activity as Appointments).refresh()
-                        (activity as Appointments).refresh()
-                        val intent = Intent(context as Activity, AddPrescription::class.java)
-                            .putExtra("bookingId", bookingId)
-                        (context as Activity).startActivity(intent)
-                        ratingPage = false
-                          myToast(requireActivity(),response.body()!!.message)
-                        progressDialog!!.dismiss()
-                        //  apiCall()
+                        } else if (response.body()!!.status == 1) {
+                            // apiCallGetConsultationAccepted1()
+                            // (activity as Appointments).refresh()
+                            (activity as Appointments).refresh()
+                            val intent = Intent(context as Activity, AddPrescription::class.java)
+                                .putExtra("bookingId", bookingId)
+                            (context as Activity).startActivity(intent)
+                            ratingPage = false
+                            myToast(requireActivity(), response.body()!!.message)
+                            progressDialog!!.dismiss()
+                            //  apiCall()
 
-                    } else {
-                        activity?.let { myToast(it, response.body()!!.message) }
-                        progressDialog!!.dismiss()
+                        } else {
+                            activity?.let { myToast(it, response.body()!!.message) }
+                            progressDialog!!.dismiss()
+                        }
+                    }catch (e:Exception){
+                        activity?.let { myToast(it, "Something went wrong") }
+                         progressDialog!!.dismiss()
                     }
                 }
 

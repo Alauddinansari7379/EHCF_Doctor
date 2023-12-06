@@ -51,7 +51,7 @@ class HealthCubeTestHistory : AppCompatActivity() {
         progressDialog!!.setCancelable(true)
         // progressDialog!!.show()
 
-        ApiClient.apiService.healthCubeReportHistory(id,sessionManager.id.toString())
+        ApiClient.apiService.healthCubeReportHistory(id)
             .enqueue(object : Callback<ModelTestHistory> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
@@ -75,8 +75,7 @@ class HealthCubeTestHistory : AppCompatActivity() {
                                 binding.recyclerView.visibility = View.VISIBLE
                                 binding.shimmerMyPatient.visibility = View.GONE
                                 binding.tvNoDataFound.visibility = View.GONE
-                                adapter =
-                                    AdapterTestHistory(this@HealthCubeTestHistory, response.body()!!)
+                                adapter = AdapterTestHistory(this@HealthCubeTestHistory, response.body()!!)
                                 progressDialog!!.dismiss()
 
                             }

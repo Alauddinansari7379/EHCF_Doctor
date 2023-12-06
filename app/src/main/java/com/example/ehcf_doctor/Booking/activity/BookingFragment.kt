@@ -9,21 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
-import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing
-import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
 import com.example.ehcf_doctor.Booking.adapter.AdapterBooking
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
-import com.example.ehcf_doctor.Prescription.adapter.AdapterPrescription
-import com.example.ehcf_doctor.Prescription.model.ModelPendingPre
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.Registration.modelResponse.ModelSpecilList
-import com.example.ehcf_doctor.Retrofit.ApiInterface
 import com.example.ehcf_doctor.databinding.FragmentBookingBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -33,11 +25,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
-import xyz.teamgravity.checkinternet.CheckInternet
-import java.util.ArrayList
 
 class BookingFragment : Fragment() {
     private lateinit var binding: FragmentBookingBinding
@@ -104,36 +92,37 @@ class BookingFragment : Fragment() {
                 override fun onResponse(
                     call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
                 ) {
-                    if (response.code() == 500) {
-                        myToast(requireActivity(), "Server Error")
-                        binding.shimmer.visibility = View.GONE
-                    } else if (response.body()!!.status == 0) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmer.visibility = View.GONE
-                        binding.edtSearch.text.clear()
-                        myToast(requireActivity(), "${response.body()!!.message}")
-                        progressDialog!!.dismiss()
+                    try {
+                        if (response.code() == 500) {
+                            myToast(requireActivity(), "Server Error")
+                            binding.shimmer.visibility = View.GONE
+                        } else if (response.body()!!.status == 0) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmer.visibility = View.GONE
+                            binding.edtSearch.text.clear()
+                            myToast(requireActivity(), "${response.body()!!.message}")
+                            progressDialog!!.dismiss()
 
-                    } else if (response.body()!!.result.isEmpty()) {
-                        binding.recyclerView.adapter =
-                            activity?.let { AdapterBooking(it, response.body()!!) }
-                        binding.recyclerView.adapter!!.notifyDataSetChanged()
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmer.visibility = View.GONE
-                        binding.edtSearch.text.clear()
-                        myToast(requireActivity(), "No Appointment Found")
-                        progressDialog!!.dismiss()
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.recyclerView.adapter =
+                                activity?.let { AdapterBooking(it, response.body()!!) }
+                            binding.recyclerView.adapter!!.notifyDataSetChanged()
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmer.visibility = View.GONE
+                            binding.edtSearch.text.clear()
+                            myToast(requireActivity(), "No Appointment Found")
+                            progressDialog!!.dismiss()
 
-                    } else {
-                        binding.recyclerView.adapter =
-                            activity?.let { AdapterBooking(it, response.body()!!) }
-                        binding.recyclerView.adapter!!.notifyDataSetChanged()
-                        binding.tvNoDataFound.visibility = View.GONE
-                        shimmerFrameLayout?.startShimmer()
-                        binding.recyclerView.visibility = View.VISIBLE
-                        binding.shimmer.visibility = View.GONE
-                        binding.edtSearch.text.clear()
-                        progressDialog!!.dismiss()
+                        } else {
+                            binding.recyclerView.adapter =
+                                activity?.let { AdapterBooking(it, response.body()!!) }
+                            binding.recyclerView.adapter!!.notifyDataSetChanged()
+                            binding.tvNoDataFound.visibility = View.GONE
+                            shimmerFrameLayout?.startShimmer()
+                            binding.recyclerView.visibility = View.VISIBLE
+                            binding.shimmer.visibility = View.GONE
+                            binding.edtSearch.text.clear()
+                            progressDialog!!.dismiss()
 //                        binding.rvManageSlot.apply {
 //                            binding.tvNoDataFound.visibility = View.GONE
 //                            shimmerFrameLayout?.startShimmer()
@@ -144,6 +133,12 @@ class BookingFragment : Fragment() {
 //                            progressDialog!!.dismiss()
 //
 //                        }
+                        }
+                    }catch (e:Exception){
+                       e.printStackTrace()
+                        myToast(requireActivity(), "Something went wrong")
+                        binding.shimmer.visibility = View.GONE
+                        progressDialog!!.dismiss()
                     }
                 }
 
@@ -172,28 +167,34 @@ class BookingFragment : Fragment() {
                 override fun onResponse(
                     call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
                 ) {
+                    try {
 
-                    response.body()!!.result.size
-                    Log.e("Size", response.body()!!.result.size.toString())
+                        response.body()!!.result.size
+                        Log.e("Size", response.body()!!.result.size.toString())
 
-                    if (response.body()!!.result.isEmpty()) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmer.visibility = View.GONE
-                        // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
-
-                    } else {
-                        binding.recyclerView.apply {
-                            shimmerFrameLayout?.startShimmer()
-                            binding.recyclerView.visibility = View.VISIBLE
+                        if (response.body()!!.result.isEmpty()) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmer.visibility = View.GONE
-                            binding.tvNoDataFound.visibility = View.GONE
-                            adapter = activity?.let { AdapterBooking(it, response.body()!!) }
+                            // myToast(requireActivity(),"No Data Found")
                             progressDialog!!.dismiss()
 
+                        } else {
+                            binding.recyclerView.apply {
+                                shimmerFrameLayout?.startShimmer()
+                                binding.recyclerView.visibility = View.VISIBLE
+                                binding.shimmer.visibility = View.GONE
+                                binding.tvNoDataFound.visibility = View.GONE
+                                adapter = activity?.let { AdapterBooking(it, response.body()!!) }
+                                progressDialog!!.dismiss()
 
 
+                            }
                         }
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        myToast(requireActivity(), "Something went wrong")
+                        binding.shimmer.visibility = View.GONE
+                        progressDialog!!.dismiss()
                     }
 
                 }
@@ -222,32 +223,37 @@ class BookingFragment : Fragment() {
                 override fun onResponse(
                     call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
                 ) {
+                    try {
 
-                    response.body()!!.result.size
-                    Log.e("Size", response.body()!!.result.size.toString())
+                        response.body()!!.result.size
+                        Log.e("Size", response.body()!!.result.size.toString())
 
-                    if (response.body()!!.result.isEmpty()) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmer.visibility = View.GONE
-                        // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
-
-                    } else {
-                        binding.recyclerView.apply {
-                            shimmerFrameLayout?.startShimmer()
-                            binding.recyclerView.visibility = View.VISIBLE
+                        if (response.body()!!.result.isEmpty()) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmer.visibility = View.GONE
-                            binding.tvNoDataFound.visibility = View.GONE
-                            adapter = activity?.let { AdapterBooking(it, response.body()!!) }
+                            // myToast(requireActivity(),"No Data Found")
                             progressDialog!!.dismiss()
 
+                        } else {
+                            binding.recyclerView.apply {
+                                shimmerFrameLayout?.startShimmer()
+                                binding.recyclerView.visibility = View.VISIBLE
+                                binding.shimmer.visibility = View.GONE
+                                binding.tvNoDataFound.visibility = View.GONE
+                                adapter = activity?.let { AdapterBooking(it, response.body()!!) }
+                                progressDialog!!.dismiss()
 
 
+                            }
                         }
+
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        myToast(requireActivity(), "Something went wrong")
+                        binding.shimmer.visibility = View.GONE
+                        progressDialog!!.dismiss()
                     }
-
                 }
-
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
                     myToast(requireActivity(), "Something went wrong")
                     binding.shimmer.visibility = View.GONE

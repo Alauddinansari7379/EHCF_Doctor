@@ -130,6 +130,18 @@ class ExistingPatientList : AppCompatActivity() {
                             binding.shimmerMyPatient.visibility = View.GONE
                             // myToast(requireActivity(),"No Data Found")
                             progressDialog!!.dismiss()
+                            binding.recyclerView.apply {
+                                shimmerFrameLayout?.startShimmer()
+                                binding.recyclerView.visibility = View.VISIBLE
+                                binding.shimmerMyPatient.visibility = View.GONE
+                                 adapter =
+                                    AdapterExixtingPatientList(
+                                        this@ExistingPatientList,
+                                        response.body()!!
+                                    )
+                                progressDialog!!.dismiss()
+
+                            }
 
                         } else {
                             binding.recyclerView.apply {

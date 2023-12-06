@@ -57,7 +57,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                 android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -81,45 +81,76 @@
 <!--                    android:layout_height="match_parent"-->
 <!--                    app:hintText="Select Serial Order" />-->
 <!--            </LinearLayout>-->
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="First Name">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:text="First Name">
+                    </androidx.appcompat.widget.AppCompatTextView>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
 
-                </TextView>
+                        android:layout_gravity="center"
+                        android:textColor="#E91E63"
+                        android:text="*">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="*"
-                    android:textColor="#E91E63">
+                    </androidx.appcompat.widget.AppCompatTextView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"                    android:layout_weight="1"
+                    android:weightSum="1"
+                    android:layout_marginStart="5dp"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Middel Name">
 
-                </TextView>
+                    </androidx.appcompat.widget.AppCompatTextView>
+                 </LinearLayout>
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp">
+                 android:layout_marginRight="10dp">
 
                 <EditText
                     android:id="@+id/edtFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
                     android:background="@drawable/corner"
                     android:hint="First Name"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textSize="15dp">
+
+                </EditText>
+                <EditText
+                    android:id="@+id/edtMiddelName"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/corner"
+                    android:hint="Middel Name"
                     android:inputType="text"
                     android:padding="10dp"
                     android:textSize="15dp">
@@ -132,7 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -158,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp">
+                 android:layout_marginRight="10dp">
 
                 <EditText
                     android:id="@+id/edtLastName"
@@ -179,7 +210,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -206,7 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                 android:layout_marginTop="10dp"
                 android:background="@drawable/corner"
                 android:layout_marginRight="10dp">
 
@@ -317,7 +348,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -341,7 +372,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp">
 
                 <EditText
@@ -360,7 +391,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -384,7 +415,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp">
 
                 <EditText
@@ -404,7 +435,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -430,7 +461,7 @@
                 android:layout_height="wrap_content"
                 app:smsp_floatingLabelColor="#FF5252"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
+                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_gravity="start"
                 android:background="@drawable/corner"
@@ -449,7 +480,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:orientation="horizontal">
+                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -765,10 +796,18 @@
                     android:id="@+id/layoutchoise"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:visibility="gone"
                     android:layout_gravity="center"
+                    android:orientation="vertical"
                     android:background="@drawable/doted_corner">
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image_view"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:visibility="gone"
+                         />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageViewPDF"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:visibility="gone"
@@ -776,6 +815,105 @@
                         />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="2dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:id="@+id/layoutCamera"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                         android:layout_weight="1"
+
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/circle"
+                            android:backgroundTint="@color/main_color"
+                            android:gravity="center">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/camera"
+                                android:backgroundTint="@color/white" />
+
+                        </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Camera">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutGallery"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/circle"
+                            android:backgroundTint="@color/main_color"
+                            android:gravity="center">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/ic_menu_gallery"
+                                android:backgroundTint="@color/white" />
+
+                        </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gallery">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/layoutPDF"
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        android:layout_weight="1"
+
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/circle"
+                            android:backgroundTint="@color/main_color"
+                            android:gravity="center">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/pdf"
+                                android:backgroundTint="@color/white" />
+
+                        </LinearLayout>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PDF">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                    </LinearLayout>
+
+
+                 </LinearLayout>
+
 
 
 
@@ -856,26 +994,25 @@
                 </TextView>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp">
 
-                <EditText
-                    android:id="@+id/edtPassword"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:background="@drawable/corner"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:padding="10dp"
-                    android:textSize="15dp">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:passwordToggleEnabled="true">
 
-                </EditText>
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/corner"
+                         android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:textSize="15dp" />
 
-            </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -892,14 +1029,14 @@
 
                 </TextView>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="*"
                     android:textColor="#E91E63">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -907,7 +1044,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginBottom="10dp"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="false">
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edtConfirmPassword"

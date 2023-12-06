@@ -56,8 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:visibility="gone"
-            android:orientation="horizontal"
+             android:orientation="horizontal"
             android:layout_marginTop="8dp"
             android:layout_marginRight="10dp">
 
@@ -75,6 +74,7 @@
 
 
             </EditText>
+<!--
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgSearch"
                 android:layout_width="35dp"
@@ -87,6 +87,7 @@
                 android:src="@drawable/baseline_search_24">
 
             </androidx.appcompat.widget.AppCompatImageView>
+-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgRefresh"
                 android:layout_width="35dp"

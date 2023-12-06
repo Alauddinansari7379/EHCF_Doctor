@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
@@ -20,6 +21,9 @@ import com.example.ehcf_doctor.MyPatient.adapter.AdapterCommentList
 import com.example.ehcf_doctor.MyPatient.adapter.AdapterMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ModelCommentList
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
+import com.example.ehcf_doctor.MyPatient.model.ResultMyPatient
+import com.example.ehcf_doctor.Prescription.adapter.AdapterPrescribed
+import com.example.ehcf_doctor.Prescription.model.ResultPrePrescribed
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityMyPatientBinding
 import com.example.myrecyview.apiclient.ApiClient
@@ -38,6 +42,8 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
     private lateinit var sessionManager: SessionManager
     private lateinit var binding: ActivityMyPatientBinding
     var shimmerFrameLayout: ShimmerFrameLayout? = null
+    private lateinit var mainData: ArrayList<ResultMyPatient>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyPatientBinding.inflate(layoutInflater)
@@ -45,6 +51,7 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
         sessionManager = SessionManager(this)
         shimmerFrameLayout = findViewById(R.id.shimmer_myPatient)
         shimmerFrameLayout!!.startShimmer();
+        mainData=ArrayList<ResultMyPatient>()
 
         binding.imgBack.setOnClickListener {
             onBackPressed()
@@ -52,7 +59,11 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
 
         callPermission()
 
-
+        binding.edtSearch.addTextChangedListener { str ->
+            setRecyclerViewAdapter(mainData.filter {
+                it.customer_name!!.contains(str.toString(), ignoreCase = true)
+            } as ArrayList<ResultMyPatient>)
+        }
 
         binding.imgRefresh.setOnClickListener {
             overridePendingTransition(0, 0)
@@ -60,52 +71,29 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
-        binding.imgSearch.setOnClickListener {
-            if (binding.edtSearch.text.isEmpty()) {
-                binding.edtSearch.error = "Enter Patient Name"
-                binding.edtSearch.requestFocus()
-            } else {
-                apiCallSearchMyPatient()
+        /*     binding.imgSearch.setOnClickListener {
+                 if (binding.edtSearch.text.isEmpty()) {
+                     binding.edtSearch.error = "Enter Patient Name"
+                     binding.edtSearch.requestFocus()
+                 } else {
+                     apiCallSearchMyPatient()
 
-            }
-        }
+                 }
+             }*/
 
         apiCallMyPatient()
     }
 
-    private fun callPermission(){
-        if (ContextCompat.checkSelfPermission(this@MyPatient, CALL_PHONE) === PackageManager.PERMISSION_GRANTED) {
-          //  startActivity(callIntent)
-          //  myToast(this,"Call Permission Granted")
+    private fun callPermission() {
+        if (ContextCompat.checkSelfPermission(this@MyPatient, CALL_PHONE) === PackageManager.PERMISSION_GRANTED
+        ) {
+            //  startActivity(callIntent)
+            //  myToast(this,"Call Permission Granted")
         } else {
             requestPermissions(arrayOf(CALL_PHONE), 1)
         }
     }
-//    fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<String?>?, grantResults: IntArray
-//    ) {
-//        if (permissions != null) {
-//            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        }
-//        when (requestCode) {
-//            MY_PERMISSIONS_REQUEST_CALL_PHONE -> {
-//
-//                // If request is cancelled, the result arrays are empty.
-//                if (grantResults.size > 0
-//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-//                ) {
-//
-//                    // permission was granted, yay! Do the phone call
-//                } else {
-//
-//                    // permission denied, boo! Disable the
-//                    // functionality that depends on this permission.
-//                }
-//                return
-//            }
-//        }
-//    }
+
     private fun apiCallMyPatient() {
         progressDialog = ProgressDialog(this@MyPatient)
         progressDialog!!.setMessage("Loading...")
@@ -119,35 +107,34 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
                     call: Call<ModelMyPatient>, response: Response<ModelMyPatient>
-                ) {   try {
-                    if (response.code() == 500) {
-                        myToast(this@MyPatient, "Server Error")
-                        binding.shimmerMyPatient.visibility = View.GONE
-                        progressDialog!!.dismiss()
-
-                    } else if (response.body()!!.result.isEmpty()) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmerMyPatient.visibility = View.GONE
-                        // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
-
-                    } else {
-                        binding.recyclerView.apply {
-                            shimmerFrameLayout?.startShimmer()
-                            binding.recyclerView.visibility = View.VISIBLE
+                ) {
+                    try {
+                        if (response.code() == 200) {
+                            mainData = response.body()!!.result
+                        }
+                        if (response.code() == 500) {
+                            myToast(this@MyPatient, "Server Error")
                             binding.shimmerMyPatient.visibility = View.GONE
-                            binding.tvNoDataFound.visibility = View.GONE
-                            adapter =
-                                AdapterMyPatient(this@MyPatient, response.body()!!, this@MyPatient)
+                            progressDialog!!.dismiss()
+
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmerMyPatient.visibility = View.GONE
+                            // myToast(requireActivity(),"No Data Found")
+                            progressDialog!!.dismiss()
+
+                        } else {
+                            setRecyclerViewAdapter(mainData)
                             progressDialog!!.dismiss()
 
                         }
-                    }
-                }catch (e:Exception){
-                    myToast(this@MyPatient, "Something went wrong")
+                    } catch (e: Exception)
+                    {
+                        myToast(this@MyPatient, "Something went wrong")
+                        progressDialog!!.dismiss()
 
-                    e.printStackTrace()
-                }
+                        e.printStackTrace()
+                    }
                 }
 
                 override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
@@ -160,6 +147,20 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
             })
     }
 
+    private fun setRecyclerViewAdapter(data: ArrayList<ResultMyPatient>) {
+        binding.recyclerView.apply {
+            shimmerFrameLayout?.startShimmer()
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.shimmerMyPatient.visibility = View.GONE
+            binding.tvNoDataFound.visibility = View.GONE
+            adapter = AdapterMyPatient(this@MyPatient, data,this@MyPatient)
+            progressDialog!!.dismiss()
+
+        }
+    }
+
+
+/*
     private fun apiCallSearchMyPatient() {
         progressDialog = ProgressDialog(this@MyPatient)
         progressDialog!!.setMessage("Loading...")
@@ -231,6 +232,7 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
 
             })
     }
+*/
 
     override fun commentList(id: String) {
         progressDialog = ProgressDialog(this@MyPatient)
@@ -248,8 +250,6 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
         dialog = Dialog(this)
 
 
-
-
         ApiClient.apiService.customerAllComments(id)
             .enqueue(object :
                 Callback<ModelCommentList> {
@@ -258,25 +258,28 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
                     call: Call<ModelCommentList>,
                     response: Response<ModelCommentList>
                 ) {
-                    try{
-                    if (response.body()!!.result.isEmpty()) {
-                        myToast(this@MyPatient, "No Review Found")
-                        progressDialog!!.dismiss()
-                    } else {
-                        recyclerViewCommentList.apply {
-                            shimmerFrameLayout?.startShimmer()
-                            adapter = AdapterCommentList(
-                                this@MyPatient,
-                                response.body()!!,
-                            )
+                    try {
+                        if (response.body()!!.result.isEmpty()) {
+                            myToast(this@MyPatient, "No Review Found")
                             progressDialog!!.dismiss()
+                        } else {
+                            recyclerViewCommentList.apply {
+                                shimmerFrameLayout?.startShimmer()
+                                adapter = AdapterCommentList(
+                                    this@MyPatient,
+                                    response.body()!!,
+                                )
+                                progressDialog!!.dismiss()
+                            }
+
                         }
+                    } catch (e: Exception) {
+                        myToast(this@MyPatient, "Something went wrong")
+                        e.printStackTrace()
+                        progressDialog!!.dismiss()
+
 
                     }
-                }catch (e:Exception){
-                        myToast(this@MyPatient, "Something went wrong")
-
-                }
                 }
 
                 override fun onFailure(call: Call<ModelCommentList>, t: Throwable) {

@@ -47,7 +47,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvNameMyPatientHistory"
+                                android:id="@+id/tvTestNameHistory"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
@@ -66,11 +66,23 @@
                             android:orientation="horizontal">
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tvTestNameHistory"
+                                android:id="@+id/tvNameMyPatientHistory"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="blood test"
+                                android:textColor="#686868"
+                                android:textStyle="bold">
+
+                            </androidx.appcompat.widget.AppCompatTextView>
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvTestDateHistory"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="blood test"
+                                android:layout_marginStart="20dp"
+                                android:gravity="end"
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 

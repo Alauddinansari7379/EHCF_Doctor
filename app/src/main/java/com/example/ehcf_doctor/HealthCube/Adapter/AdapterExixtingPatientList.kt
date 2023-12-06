@@ -50,6 +50,7 @@ class AdapterExixtingPatientList(
             holder.viewReport.setOnClickListener {
                 PatientList.Exsting ="1"
                 val intent = Intent(context as Activity, AddPatient::class.java)
+                    .putExtra("patient_id", list.result[position].patient_id)
                     .putExtra("customer_name", list.result[position].name)
                     .putExtra("phone_number", list.result[position].phone)
                     .putExtra("email", list.result[position].email)

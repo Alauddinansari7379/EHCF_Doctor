@@ -8,8 +8,6 @@ import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -17,39 +15,50 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ehcf.Helper.changeDateFormat4
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.AutoComplete.AutoSuggestAdapter
+import com.example.ehcf_doctor.AutoComplete.AutoSuggestMedicineAdapter
 import com.example.ehcf_doctor.Helper.DatePickerDialogWithMaxMinRange
 import com.example.ehcf_doctor.Helper.Util
 import com.example.ehcf_doctor.Prescription.adapter.AdapterDigonisis
 import com.example.ehcf_doctor.Prescription.adapter.AdapterLabTest
 import com.example.ehcf_doctor.Prescription.adapter.AdapterOrderDetails
 import com.example.ehcf_doctor.Prescription.model.*
+import com.example.ehcf_doctor.Profile.modelResponse.ModelCityList
+import com.example.ehcf_doctor.Profile.modelResponse.ModelStateList
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Rating.Rating
 import com.example.ehcf_doctor.Registration.modelResponse.ModelGender
+import com.example.ehcf_doctor.Registration.modelResponse.ModelSpecilList
 import com.example.ehcf_doctor.databinding.ActivityAddPrescriptionBinding
 import com.example.myrecyview.apiclient.ApiClient
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
-import java.text.DateFormat
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
 class AddPrescription : AppCompatActivity() {
     private lateinit var binding: ActivityAddPrescriptionBinding
     var bookingId = ""
-    var doctor_notes = ""
+    private var doctor_notes = ""
     var mydilaog: Dialog? = null
-    var subjective_information = ""
-    var objective_information = ""
+    private var subjective_information = ""
+    private var objective_information = ""
     private var calendar: Calendar? = null
+    private var specilList = ModelSpecilList();
+    private var testListNew = ModelTestList();
+    private var medicineListNew = ModelTestList();
 
     var assessment = ""
     var plan = ""
@@ -57,6 +66,7 @@ class AddPrescription : AppCompatActivity() {
     var intake = ""
     var fraquency = ""
     var duration = ""
+    var testName = ""
     var followUpDate = ""
     var registration = ""
     var currentDate = ""
@@ -64,10 +74,14 @@ class AddPrescription : AppCompatActivity() {
     var intakeList = ArrayList<ModelGender>()
     var fraquencyList = ArrayList<ModelGender>()
     var DurationList = ArrayList<ModelGender>()
+    var testList = ArrayList<ModelGender>()
     private val context: Context = this@AddPrescription
     private lateinit var sessionManager: SessionManager
     var progressDialog: ProgressDialog? = null
     var isTest = "0"
+     private var listOfText= ArrayList<String>()
+
+
     private var maxDate: String? = null
     private var minDate: String? = null
     private val medicineList = ArrayList<ModelOrderDetails>()
@@ -86,13 +100,34 @@ class AddPrescription : AppCompatActivity() {
         for (date in dateList) {
             Log.e("sd", date.toString())
         }
-        maxDate = changeDateFormat4(dateList[9].toString())
+        maxDate = changeDateFormat4(dateList[5].toString())
 
-        Log.e("NewFor", changeDateFormat4(dateList[9].toString()))
+        Log.e("NewFor", changeDateFormat4(dateList[5].toString()))
 
         currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
         binding.tvFollowUPdate.text = currentDate
         minDate = currentDate
+
+
+        CoroutineScope(IO).launch {
+            apiCallTestName()
+            apiCallMedicineName()
+        }
+
+
+
+//        runBlocking {
+//            launch {
+//                delay(10000)
+//                apiCallSpecialistSpinner()
+//
+//                println("Hello from the launched coroutine. My thread is "
+//                        + Thread.currentThread().name)
+//            }
+//            println("Hello from the top-level coroutine. My thread is "
+//                    + Thread.currentThread().name)
+//        }
+
 
 
         bookingId = intent.getStringExtra("bookingId").toString()
@@ -176,7 +211,6 @@ class AddPrescription : AppCompatActivity() {
             intakeList.add(ModelGender("After Food", 7))
             intakeList.add(ModelGender("Before Food", 8))
 
-
             binding.edtIntake.adapter =
                 ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, intakeList)
 
@@ -236,6 +270,80 @@ class AddPrescription : AppCompatActivity() {
                 override fun onNothingSelected(adapterView: AdapterView<*>?) {}
             }
 
+
+        testList.add(ModelGender("TEMPERATURE", 7))
+        testList.add(ModelGender("BLOOD_PRESSURE", 8))
+        testList.add(ModelGender("WEIGHT", 8))
+        testList.add(ModelGender("HEIGHT", 8))
+        testList.add(ModelGender("BMI", 8))
+        testList.add(ModelGender("ECG", 8))
+        testList.add(ModelGender("PULSE_OXIMETER", 8))
+        testList.add(ModelGender("BLOOD_GLUCOSE", 8))
+        testList.add(ModelGender("CHOLESTEROL", 8))
+        testList.add(ModelGender("HEMOGLOBIN", 8))
+        testList.add(ModelGender("URIC_ACID", 8))
+        testList.add(ModelGender("CHIKUNGUNYA", 8))
+        testList.add(ModelGender("DENGUE", 8))
+        testList.add(ModelGender("HEP_C", 8))
+        testList.add(ModelGender("HEP_B", 8))
+        testList.add(ModelGender("HIV", 8))
+        testList.add(ModelGender("MALARIA", 8))
+        testList.add(ModelGender("SYPHILIS", 8))
+        testList.add(ModelGender("TROPONIN_1", 8))
+        testList.add(ModelGender("PREGNANCY", 8))
+        testList.add(ModelGender("URINE", 8))
+
+
+//            binding.edtTestName.adapter =
+//                ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, testList)
+
+        listOfText.add("TEMPERATURE")
+        listOfText.add("BLOOD_PRESSURE")
+        listOfText.add("WEIGHT")
+        listOfText.add("HEIGHT")
+        listOfText.add("BMI")
+        listOfText.add("ECG")
+        listOfText.add("PULSE_OXIMETER")
+        listOfText.add("BLOOD_GLUCOSE")
+        listOfText.add("CHOLESTEROL")
+        listOfText.add("HEMOGLOBIN")
+        listOfText.add("URIC_ACID")
+        listOfText.add("CHIKUNGUNYA")
+        listOfText.add("DENGUE")
+        listOfText.add("HEP_C")
+        listOfText.add("HEP_B")
+        listOfText.add("HIV")
+        listOfText.add("MALARIA")
+        listOfText.add("SYPHILIS")
+        listOfText.add("TROPONIN_1")
+        listOfText.add("PREGNANCY")
+        listOfText.add("URINE")
+
+//        val autoSuggestAdapter = AutoSuggestAdapter(this,
+//            android.R.layout.simple_list_item_1, listOfText)
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+//            readCityNameJSON(this@AddPrescription)
+//        }
+       // readSateNameJSON(this@AddPrescription)
+
+        // val autotext = findViewById<AutoCompleteTextView>(R.id.edtAutoSuggest)
+//        binding.edtTestName.setAdapter(autoSuggestAdapter)
+//        binding.edtTestName.threshold = 1 //comparesion start from first character
+
+//            binding.edtTestName.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//                override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+//                    if (testList.size > 0) {
+//                        testName = testList[i].name.toString()
+//
+//                        Log.e(ContentValues.TAG, "duration: $duration")
+//                    }
+//                }
+//
+//                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+//            }
+
 //            if (binding.edtSubjectiveInformation.text.isEmpty()) {
 //                binding.edtSubjectiveInformation.error = "Enter SubjectiveInformation"
 //                binding.edtSubjectiveInformation.requestFocus()
@@ -259,16 +367,14 @@ class AddPrescription : AppCompatActivity() {
 
 
 
-        binding.tvTitle.setOnClickListener {
-            //apiCallDiagnosis()
-        }
         binding.btnAddMedicine.setOnClickListener {
             setRecyclerDataMedicine(
                 binding.edtMedicineName.text.toString(),
                 timing,
                 intake,
                 fraquency,
-                duration,)
+                duration,
+            )
             binding.llayout3.visibility = View.VISIBLE
             binding.edtMedicineName.text.clear()
              binding.edtMedicineName.requestFocus()
@@ -291,9 +397,9 @@ class AddPrescription : AppCompatActivity() {
                 binding.edtAfter.text.toString(),
             )
             binding.edtTestName.requestFocus()
-            binding.edtTestName.text.clear()
-            binding.edtAfter.text.clear()
+             binding.edtAfter.text.clear()
             binding.edtInstructions.text.clear()
+            binding.edtTestName.text.clear()
         }
 
 
@@ -324,6 +430,169 @@ class AddPrescription : AppCompatActivity() {
         }
 
     }
+    private fun readSateNameJSON(context: Context): java.util.ArrayList<ModelStateList> {
+
+        lateinit var jsonString: String
+        try {
+            jsonString = context.assets.open("state_name.json")
+                .bufferedReader()
+                .use {
+                    it.readText()
+                }
+        } catch (ioException: IOException) {
+        }
+
+        val listCountryType = object : TypeToken<java.util.ArrayList<ModelStateList>>() {}.type
+
+        return Gson().fromJson(jsonString, listCountryType)
+
+    }
+    private fun apiCallTestName() {
+//        progressDialog = ProgressDialog(this@AddPrescription)
+//        progressDialog!!.setMessage("Loading..")
+//        progressDialog!!.setTitle("Please Wait")
+//        progressDialog!!.isIndeterminate = false
+//        progressDialog!!.setCancelable(true)
+//
+//        progressDialog!!.show()
+
+        ApiClient.apiService.testName()
+            .enqueue(object : Callback<ModelTestList> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelTestList>, response: Response<ModelTestList>
+                ) {
+                    try {
+
+                        testListNew = response.body()!!;
+                        if (testListNew != null) {
+
+                            //spinner code start
+                            val items = arrayOfNulls<String>(testListNew.result!!.size)
+
+                            for (i in testListNew.result!!.indices) {
+                                items[i] = testListNew.result!![i].Test_Name
+                            }
+//                        val adapter: ArrayAdapter<String?> =
+//                            ArrayAdapter(this@ProfileSetting, android.R.layout.simple_list_item_1, items)
+//                        binding.spinnerSpecialist.adapter = adapter
+//                        progressDialog!!.dismiss()
+
+
+                            val autoSuggestAdapter = AutoSuggestAdapter(
+                                this@AddPrescription,
+                                android.R.layout.simple_list_item_1, items.toMutableList()
+                            )
+
+                            binding.edtTestName.setAdapter(autoSuggestAdapter)
+                            binding.edtTestName.threshold = 1
+
+
+                        }
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        myToast(this@AddPrescription, "Something went wrong")
+                        progressDialog!!.dismiss()
+                    }
+                }
+
+                override fun onFailure(call: Call<ModelTestList>, t: Throwable) {
+                    myToast(this@AddPrescription, "Something went wrong")
+                    progressDialog!!.dismiss()
+
+                }
+
+            })
+    }
+    private fun apiCallMedicineName() {
+//        progressDialog = ProgressDialog(this@AddPrescription)
+//        progressDialog!!.setMessage("Loading..")
+//        progressDialog!!.setTitle("Please Wait")
+//        progressDialog!!.isIndeterminate = false
+//        progressDialog!!.setCancelable(true)
+//
+//        progressDialog!!.show()
+
+        ApiClient.apiService.medicineName()
+            .enqueue(object : Callback<ModelTestList> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelTestList>, response: Response<ModelTestList>
+                ) {
+                    try {
+                        medicineListNew = response.body()!!;
+                        if (medicineListNew != null) {
+
+                            //spinner code start
+                            val items = arrayOfNulls<String>(medicineListNew.result!!.size)
+
+                            for (i in medicineListNew.result!!.indices) {
+                                items[i] = medicineListNew.result!![i].medicine
+                            }
+//                        val adapter: ArrayAdapter<String?> =
+//                            ArrayAdapter(this@ProfileSetting, android.R.layout.simple_list_item_1, items)
+//                        binding.spinnerSpecialist.adapter = adapter
+//                        progressDialog!!.dismiss()
+
+
+                            val autoSuggestAdapter = AutoSuggestMedicineAdapter(
+                                this@AddPrescription,
+                                android.R.layout.simple_list_item_1, items.toMutableList()
+                            )
+
+                            binding.edtMedicineName.setAdapter(autoSuggestAdapter)
+                            binding.edtMedicineName.threshold = 1
+
+
+                        }
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        myToast(this@AddPrescription, "Something went wrong")
+                        progressDialog!!.dismiss()
+
+                    }
+                }
+
+                override fun onFailure(call: Call<ModelTestList>, t: Throwable) {
+                    myToast(this@AddPrescription, "Something went wrong")
+                    progressDialog!!.dismiss()
+
+                }
+
+            })
+    }
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    private fun readCityNameJSON(context: Context):ArrayList<ModelCityList> {
+
+        lateinit var jsonString: String
+        try {
+            jsonString = context.assets.open("city_name.json")
+                .bufferedReader()
+                .use {
+                    it.readText()
+                }.toString()
+        } catch (ioException: IOException) {
+        }
+
+        var listCountryType = object : TypeToken<ArrayList<ModelCityList>>() {}.type
+
+//        val autoSuggestAdapter = AutoSuggestAdapter(this,
+//            android.R.layout.simple_list_item_1, listOfText)
+//
+//        binding.edtTestName.setAdapter(autoSuggestAdapter)
+//        binding.edtTestName.threshold = 1
+
+//        var listOfText= ArrayList<String>()
+//        listOfText.add(it.toString())
+//        Log.e("testName", it.toString())
+        Log.e("testName", listCountryType.toString())
+
+        return Gson().fromJson(jsonString, listCountryType)
+
+
+        Log.e("listCountryType", listCountryType.toString())
+    }
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun getCurrentDateAndNextTenDays(): List<Date> {
@@ -333,7 +602,7 @@ class AddPrescription : AppCompatActivity() {
 
         val dates = mutableListOf<Date>()
 
-        for (i in 1..10) {
+        for (i in 1..6) {
             calendar.add(Calendar.DATE, 1)
             val nextDate = calendar.time
 
@@ -513,7 +782,7 @@ class AddPrescription : AppCompatActivity() {
             "null",
             doctorNotes,
             isTest,
-            binding.edtTestName.text.toString(),
+            binding.edtTestName.toString(),
             binding.edtInstructions.text.toString(),
             "5",
             currentDate,
@@ -544,6 +813,7 @@ class AddPrescription : AppCompatActivity() {
                     } catch (e: Exception) {
                         myToast(this@AddPrescription, "Something went wrong")
                         e.printStackTrace()
+                         progressDialog!!.dismiss()
                     }
                 }
 
@@ -583,23 +853,29 @@ class AddPrescription : AppCompatActivity() {
                         call: Call<ModeMedicine>,
                         response: Response<ModeMedicine>
                     ) {
+                        try {
 
-                        if (response.code() == 500) {
-                            myToast(this@AddPrescription, "Server Error")
-                            // progressDialog!!.dismiss()
-                        } else if (response.code() == 200) {
-                            val intent = Intent(context as Activity, Rating::class.java)
-                                .putExtra("meetingId", bookingId)
-                            (context as Activity).startActivity(intent)
-                            //  myToast(this@AddPrescription, response.body()!!.result)
-                            //  progressDialog!!.dismiss()
+                            if (response.code() == 500) {
+                                myToast(this@AddPrescription, "Server Error")
+                                // progressDialog!!.dismiss()
+                            } else if (response.code() == 200) {
+                                val intent = Intent(context as Activity, Rating::class.java)
+                                    .putExtra("meetingId", bookingId)
+                                (context as Activity).startActivity(intent)
+                                //  myToast(this@AddPrescription, response.body()!!.result)
+                                //  progressDialog!!.dismiss()
 
-                        } else {
-                            myToast(this@AddPrescription, "${response.body()!!.message}")
+                            } else {
+                                myToast(this@AddPrescription, "${response.body()!!.message}")
+                                progressDialog!!.dismiss()
+
+                            }
+
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                            myToast(this@AddPrescription, "Something went wrong")
                             progressDialog!!.dismiss()
-
                         }
-
                     }
 
                     override fun onFailure(call: Call<ModeMedicine>, t: Throwable) {
@@ -634,21 +910,26 @@ class AddPrescription : AppCompatActivity() {
                         call: Call<ModeMedicine>,
                         response: Response<ModeMedicine>
                     ) {
+                        try {
 
-                        if (response.code() == 500) {
-                            myToast(this@AddPrescription, "Server Error")
-                            // progressDialog!!.dismiss()
-                        } else if (response.code() == 200) {
-                            myToast(this@AddPrescription, response.body()!!.message)
-                            onBackPressed()
-                            //  progressDialog!!.dismiss()
+                            if (response.code() == 500) {
+                                myToast(this@AddPrescription, "Server Error")
+                                // progressDialog!!.dismiss()
+                            } else if (response.code() == 200) {
+                                myToast(this@AddPrescription, response.body()!!.message)
+                                onBackPressed()
+                                //  progressDialog!!.dismiss()
 
-                        } else {
-                            myToast(this@AddPrescription, "${response.body()!!.message}")
+                            } else {
+                                myToast(this@AddPrescription, "${response.body()!!.message}")
+                                progressDialog!!.dismiss()
+
+                            }
+                        }catch (e:Exception){
+                            e.printStackTrace()
+                            myToast(this@AddPrescription, "Something went wrong")
                             progressDialog!!.dismiss()
-
                         }
-
                     }
 
                     override fun onFailure(call: Call<ModeMedicine>, t: Throwable) {
@@ -683,22 +964,28 @@ class AddPrescription : AppCompatActivity() {
                         response: Response<ModeMedicine>
                     ) {
 
-                        if (response.code() == 500) {
-                            myToast(this@AddPrescription, "Server Error")
-                            // progressDialog!!.dismiss()
-                        } else if (response.code() == 200) {
-                            myToast(this@AddPrescription, response.body()!!.message)
-                            val intent = Intent(context as Activity, Rating::class.java)
-                                .putExtra("meetingId", bookingId)
-                            (context as Activity).startActivity(intent)
-                            //  progressDialog!!.dismiss()
+                        try {
+                            if (response.code() == 500) {
+                                myToast(this@AddPrescription, "Server Error")
+                                // progressDialog!!.dismiss()
+                            } else if (response.code() == 200) {
+                                myToast(this@AddPrescription, response.body()!!.message)
+                                val intent = Intent(context as Activity, Rating::class.java)
+                                    .putExtra("meetingId", bookingId)
+                                (context as Activity).startActivity(intent)
+                                //  progressDialog!!.dismiss()
 
-                        } else {
-                            myToast(this@AddPrescription, "${response.body()!!.message}")
+                            } else {
+                                myToast(this@AddPrescription, "${response.body()!!.message}")
+                                progressDialog!!.dismiss()
+
+                            }
+
+                        }catch (e:java.lang.Exception){
+                            e.printStackTrace()
+                            myToast(this@AddPrescription, "Something went wrong")
                             progressDialog!!.dismiss()
-
                         }
-
                     }
 
                     override fun onFailure(call: Call<ModeMedicine>, t: Throwable) {
@@ -742,21 +1029,27 @@ class AddPrescription : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<ModelModify>, response: Response<ModelModify>
                 ) {
+                    try {
 
-                    if (response.code() == 500) {
-                        myToast(this@AddPrescription, "Server Error")
-                        progressDialog!!.dismiss()
-                    } else if (response.code() == 200) {
-                        myToast(this@AddPrescription, response.body()!!.result)
-                        progressDialog!!.dismiss()
-                        onBackPressed()
+                        if (response.code() == 500) {
+                            myToast(this@AddPrescription, "Server Error")
+                            progressDialog!!.dismiss()
+                        } else if (response.code() == 200) {
+                            myToast(this@AddPrescription, response.body()!!.result)
+                            progressDialog!!.dismiss()
+                            onBackPressed()
 
-                    } else {
-                        myToast(this@AddPrescription, "${response.body()!!.result}")
-                        progressDialog!!.dismiss()
+                        } else {
+                            myToast(this@AddPrescription, "${response.body()!!.result}")
+                            progressDialog!!.dismiss()
 
+                        }
+
+                    }catch (e:java.lang.Exception){
+                        e.printStackTrace()
+                        myToast(this@AddPrescription, "Something went wrong")
+                        progressDialog!!.dismiss()
                     }
-
                 }
 
                 override fun onFailure(call: Call<ModelModify>, t: Throwable) {

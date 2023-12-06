@@ -1,6 +1,6 @@
 package com.example.ehcf_doctor.Booking.model
 
-data class Result(
+data class ResultUpcoming(
     val comments:String?=null,
     var consultation_type: String,
     val created_at: String,

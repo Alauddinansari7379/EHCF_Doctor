@@ -8,31 +8,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Cancelled.adapter.AdapterCancelled
-import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterUpComing
-import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelUpComingResponse
+import com.example.ehcf_doctor.Appointments.Consulted.adapter.AdapterConsulted
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
+import com.example.ehcf_doctor.Booking.model.ResultUpcoming
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.Retrofit.ApiInterface
 import com.example.ehcf_doctor.databinding.FragmentCancelledBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
-import xyz.teamgravity.checkinternet.CheckInternet
+import java.util.ArrayList
 
 class CancelledFragment : Fragment() {
     private lateinit var binding:FragmentCancelledBinding
     private lateinit var sessionManager: SessionManager
     var progressDialog : ProgressDialog?=null
     var shimmerFrameLayout: ShimmerFrameLayout? = null
+    private var mainData = ArrayList<ResultUpcoming>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,18 +43,24 @@ class CancelledFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCancelledBinding.bind(view)
+
         sessionManager = SessionManager(requireContext())
         Log.e("Id","${sessionManager.id}")
         shimmerFrameLayout = view.findViewById(R.id.shimmer)
         shimmerFrameLayout!!.startShimmer();
-
+        mainData = ArrayList<ResultUpcoming>()
         //apiCall()
         apiCallGetConsultation()
         binding.imgRefresh.setOnClickListener {
            // apiCall()
             apiCallGetConsultation()
         }
-        binding.imgSearch.setOnClickListener {
+        binding.edtSearch.addTextChangedListener { str ->
+            setRecyclerViewAdapter(mainData.filter {
+                it.customer_name!!.contains(str.toString(), ignoreCase = true)
+            } as ArrayList<ResultUpcoming>)
+        }
+    /*    binding.imgSearch.setOnClickListener {
             if (binding.edtSearch.text.toString().isEmpty()) {
                 binding.edtSearch.error = "Enter Patient Name"
                 binding.edtSearch.requestFocus()
@@ -62,8 +68,9 @@ class CancelledFragment : Fragment() {
                 val search = binding.edtSearch.text.toString()
                 apiCallSearchAppointments(search)
             }
-        }
+        }*/
     }
+/*
     private fun apiCallSearchAppointments(patientName: String) {
         progressDialog = ProgressDialog(requireContext())
         progressDialog!!.setMessage("Loading..")
@@ -131,6 +138,7 @@ class CancelledFragment : Fragment() {
 
             })
     }
+*/
 
     private fun apiCallGetConsultation() {
         progressDialog = ProgressDialog(requireContext())
@@ -147,22 +155,33 @@ class CancelledFragment : Fragment() {
                 override fun onResponse(
                     call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
                 ) {
-                    if (response.body()!!.result.isEmpty()) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmer.visibility = View.GONE
-                        // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
-
-                    } else {
-                        binding.rvCancled.apply {
-                            shimmerFrameLayout?.startShimmer()
-                            binding.rvCancled.visibility = View.VISIBLE
-                            binding.shimmer.visibility = View.GONE
-                            binding.tvNoDataFound.visibility = View.GONE
-                            adapter = AdapterCancelled(requireContext(), response.body()!!)
-                            progressDialog!!.dismiss()
+                    try {
+                        if (response.code() == 200) {
+                            mainData = response.body()!!.result!!
 
                         }
+                        if (response.code() == 500) {
+                            myToast(requireActivity(), "Server error")
+                            progressDialog!!.dismiss()
+
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmer.visibility = View.GONE
+                            // myToast(requireActivity(),"No Data Found")
+                            progressDialog!!.dismiss()
+
+                        } else {
+                            binding.rvCancled.apply {
+                                setRecyclerViewAdapter(mainData)
+                                progressDialog!!.dismiss()
+
+                            }
+                        }
+                    }catch (e:Exception) {
+                        e.printStackTrace()
+                        myToast(requireActivity(), "Something went wrong")
+                        binding.shimmer.visibility = View.GONE
+                        progressDialog!!.dismiss()
                     }
 
                 }
@@ -177,6 +196,18 @@ class CancelledFragment : Fragment() {
             })
 
     }
+    private fun setRecyclerViewAdapter(data: ArrayList<ResultUpcoming>) {
+        binding.rvCancled.apply {
+            shimmerFrameLayout?.startShimmer()
+            binding.rvCancled.visibility = View.VISIBLE
+            binding.shimmer.visibility = View.GONE
+            binding.tvNoDataFound.visibility = View.GONE
+            adapter = AdapterCancelled(requireContext(), data)
+            progressDialog!!.dismiss()
+
+        }
+    }
+
     override fun onStart() {
         super.onStart()
         if (isOnline(requireContext())){

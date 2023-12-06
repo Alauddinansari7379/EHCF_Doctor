@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -108,7 +109,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal">
-
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -293,7 +293,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp">
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/edtMedicineName"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -303,7 +303,7 @@
                         android:padding="10dp"
                         android:textSize="15dp">
 
-                    </EditText>
+                    </AutoCompleteTextView>
 
                 </LinearLayout>
 
@@ -548,8 +548,7 @@
     android:id="@+id/llayout3"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:visibility="gone"
-    android:layout_height="wrap_content">
+     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -842,14 +841,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp">
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/edtTestName"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/corner"
             android:hint="Test Name"
             android:layout_weight="1"
@@ -857,14 +856,14 @@
             android:padding="10dp"
             android:textSize="15dp">
 
-        </EditText>
+        </AutoCompleteTextView>
         <EditText
             android:id="@+id/edtAfter"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/corner"
+             android:background="@drawable/corner"
             android:hint="After"
             android:inputType="text"
             android:padding="10dp"

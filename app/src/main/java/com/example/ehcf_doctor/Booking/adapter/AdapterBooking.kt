@@ -33,10 +33,18 @@ class AdapterBooking(
         Log.e("currentDate","$currentDate")
         Log.e("startTime","${list.result[position].time.toString()}")
 
-        holder.time.text = convertTo12Hour(list.result[position].start_time.toString())
+        if (list.result[position].start_time!=null){
+            holder.time.text = convertTo12Hour(list.result[position].start_time.toString())
+
+        }
         holder.bookingDate.text = list.result[position].date
-        holder.customerName.text = list.result[position].customer_name.toString()
-        holder.paymentMode.text = list.result[position].payment_name
+        if (list.result[position].member_name != null) {
+            holder.customerName.text = list.result[position].member_name
+
+        } else {
+            holder.customerName.text = list.result[position].customer_name.toString()
+        }
+         holder.paymentMode.text = list.result[position].payment_name
         holder.totalAmount.text = list.result[position].total
         holder.email.text = list.result[position].email
         holder.phoneNumber.text = list.result[position].phone_number.toString()

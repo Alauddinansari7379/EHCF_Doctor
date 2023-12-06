@@ -108,7 +108,7 @@
                             android:id="@+id/edtPhone"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
-                            android:hint="Phone with Code"
+                            android:hint="Phone Number"
                             android:textSize="15dp"
                             android:padding="10dp"
                             android:maxLength="12"

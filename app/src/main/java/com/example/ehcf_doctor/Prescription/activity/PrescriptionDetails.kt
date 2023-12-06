@@ -54,12 +54,12 @@ class PrescriptionDetails : AppCompatActivity() {
         }
         id = intent.getStringExtra("Id").toString()
         customerName = intent.getStringExtra("customerName").toString()
-         Log.e("predetialid", id)
+        Log.e("predetialid", id)
 
         Log.e("NewDate", resultDate)
 
         apiCallPreDet()
-             binding.tvCoustmorNamePreDet.text = customerName
+        binding.tvCoustmorNamePreDet.text = customerName
 
         binding.tvDoctorNamePreDetial.text = sessionManager.doctorName
         binding.UHID.text = id
@@ -70,37 +70,23 @@ class PrescriptionDetails : AppCompatActivity() {
             overridePendingTransition(0, 0)
         }
         binding.btnDownloadPrescription.setOnClickListener {
-            SweetAlertDialog(this@PrescriptionDetails, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("Are you sure want to Download?")
-                .setCancelText("No")
-                .setConfirmText("Yes")
-                .showCancelButton(true)
-                .setConfirmClickListener { sDialog ->
-                    sDialog.cancel()
-
-                    startActivity(
-                        // Use 'launchPdfFromPath' if you want to use assets file (enable "fromAssets" flag) / internal directory
-                        PdfViewerActivity.launchPdfFromUrl(           //PdfViewerActivity.Companion.launchPdfFromUrl(..   :: incase of JAVA
-                            context,
-                            "https://ehcf.thedemostore.in/print/$id",                                // PDF URL in String format
-                            "Prescription",                        // PDF Name/Title in String format
-                            "Prescription Save to directory",                  // If nothing specific, Put "" it will save to Downloads
-                            enableDownload = true                    // This param is true by defualt.
-                        )
-                    )
-                    // completeSlot(bookingId)
+            startActivity(
+                // Use 'launchPdfFromPath' if you want to use assets file (enable "fromAssets" flag) / internal directory
+                PdfViewerActivity.launchPdfFromUrl(           //PdfViewerActivity.Companion.launchPdfFromUrl(..   :: incase of JAVA
+                    context,
+                    "https://ehcf.thedemostore.in/print/$id",                                // PDF URL in String format
+                    "Prescription",                        // PDF Name/Title in String format
+                    "Prescription Save to directory",                  // If nothing specific, Put "" it will save to Downloads
+                    enableDownload = true                    // This param is true by defualt.
+                )
+            )
+            // completeSlot(bookingId)
 //                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://ehcf.thedemostore.in/print/$id"))
 //                    startActivity(browserIntent)
-                }
-                .setCancelClickListener { sDialog ->
-                    sDialog.cancel()
-                }
-                .show()
 
 
             //  startActivity(Intent(this@PrescriptionDetails,DownloadPrescription::class.java))
         }
-
 
 
 //        binding.btnModifyPrescptionDet.setOnClickListener {
@@ -142,50 +128,51 @@ class PrescriptionDetails : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<ModelPreDetJava>, response: Response<ModelPreDetJava>
                 ) {
+                    try {
 
-                    if (response.code() == 500) {
-                        myToast(this@PrescriptionDetails, "Server Error")
-                        progressDialog!!.dismiss()
-
-                    } else {
-                        binding.recyclerView.apply {
-                            adapter = AdapterPrescriptionDetial(
-                                this@PrescriptionDetails,
-                                response.body()!!
-                            )
-
-                            for (i in response.body()!!.doctorNotes) {
-                                doctorNote = i.doctorNotes
-                                date = i.date
-                                assesment = i.assessment
-                                subjectiv = i.subjectiveInformation
-                                objective = i.objectiveInformation
-                                plan = i.plan
-                                if (i.end_follow_up_date!=null){
-                                    followUp = i.end_follow_up_date
-                                 }
-
-                            }
-                            changeDateFormatFromAnother(date)
-                            binding.tvDatePreDetialPreDetial.text = resultDate
-                            binding.tvPublicNote.text = doctorNote
-                            binding.tvSubjective.text = subjectiv
-                            binding.tvObjective.text = objective
-                            binding.Plan.text = plan
-                            binding.Assessment.text = assesment
-                            binding.followUpdate.text = followUp
-
-
-                        }
-                        binding.recyclerViewDiagonosis.apply {
-                            adapter = AdapterPrescriptionDetialDiagonsis(
-                                this@PrescriptionDetails,
-                                response.body()!!
-                            )
-
+                        if (response.code() == 500) {
+                            myToast(this@PrescriptionDetails, "Server Error")
                             progressDialog!!.dismiss()
 
-                        }
+                        } else {
+                            binding.recyclerView.apply {
+                                adapter = AdapterPrescriptionDetial(
+                                    this@PrescriptionDetails,
+                                    response.body()!!
+                                )
+
+                                for (i in response.body()!!.doctorNotes) {
+                                    doctorNote = i.doctorNotes
+                                    date = i.date
+                                    assesment = i.assessment
+                                    subjectiv = i.subjectiveInformation
+                                    objective = i.objectiveInformation
+                                    plan = i.plan
+                                    if (i.end_follow_up_date != null) {
+                                        followUp = i.end_follow_up_date
+                                    }
+
+                                }
+                                changeDateFormatFromAnother(date)
+                                binding.tvDatePreDetialPreDetial.text = resultDate
+                                binding.tvPublicNote.text = doctorNote
+                                binding.tvSubjective.text = subjectiv
+                                binding.tvObjective.text = objective
+                                binding.Plan.text = plan
+                                binding.Assessment.text = assesment
+                                binding.followUpdate.text = followUp
+
+
+                            }
+                            binding.recyclerViewDiagonosis.apply {
+                                adapter = AdapterPrescriptionDetialDiagonsis(
+                                    this@PrescriptionDetails,
+                                    response.body()!!
+                                )
+
+                                progressDialog!!.dismiss()
+
+                            }
 //                        binding.recyclerViewNote.apply {
 //                            adapter = AdapterPrescriptionDetialDoctorNote(
 //                                this@PrescriptionDetails,
@@ -194,23 +181,28 @@ class PrescriptionDetails : AppCompatActivity() {
 //
 //                            progressDialog!!.dismiss()
 
-                        //          }
+                            //          }
 
-                        binding.recyclerViewLabTest.apply {
-                            adapter = AdapterPrescriptionDetialLabTest(
-                                this@PrescriptionDetails,
-                                response.body()!!
-                            )
+                            binding.recyclerViewLabTest.apply {
+                                adapter = AdapterPrescriptionDetialLabTest(
+                                    this@PrescriptionDetails,
+                                    response.body()!!
+                                )
 
-                            progressDialog!!.dismiss()
+                                progressDialog!!.dismiss()
 
-                        }
+                            }
 
 //
 //                        Log.e("noteeeeee",response.body()!!.doctorNotes.doctorNotes)
 //                        Log.e("Tag", response.body()!!.Result().doctorNotes.toString())
 //                        binding.Note.text= response.body()!!.Result().doctorNotes.toString()
 //                        progressDialog!!.dismiss()
+
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        progressDialog!!.dismiss()
 
                     }
 

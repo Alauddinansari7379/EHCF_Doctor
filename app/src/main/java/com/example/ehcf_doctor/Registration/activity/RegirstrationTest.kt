@@ -10,10 +10,8 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
-import android.os.Bundle
-import android.os.CountDownTimer
-import android.os.Handler
-import android.os.Looper
+import android.os.*
+import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.text.Editable
 import android.text.TextWatcher
@@ -33,6 +31,7 @@ import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Registration.modelResponse.*
 import com.example.ehcf_doctor.databinding.ActivityRegirstrationTestBinding
 import com.example.myrecyview.apiclient.ApiClient
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
@@ -68,6 +67,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     var followUpList = ArrayList<ModelGender>()
     var countryCodeNew = "91"
     var firstName = ""
+    var milddleName = ""
     var lastName = ""
     private var countryCode = ""
     var doctorName = ""
@@ -98,7 +98,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     var langauges2 = ""
     var langauges3 = ""
     var langauges4 = ""
-    var langauges5 = ""
+    var selectValue = ""
     var degreeList = ModelDegreeJava()
     private var specilList = ModelSpecilList();
     private var languageList = ModelLanguage();
@@ -309,9 +309,27 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 //        langaugeList.add(ModelLanguages("Italian", 10))
 
 
-        binding.layoutchoise.setOnClickListener {
-            opeinImageChooser()
+        binding.layoutCamera.setOnClickListener {
+       //     myToast(this,"Work on Progress")
+
+            selectValue = "1"
+            ImagePicker.with(this).cameraOnly()
+//                                            .createIntent { intent ->
+//                                startForProfileImageResult.launch(intent)
+//                            }
+                .start(REQUEST_CODE_IMAGE)
         }
+        binding.layoutGallery.setOnClickListener {
+            selectValue="2"
+            opeinImageChooserNew()
+         }
+
+        binding.layoutPDF.setOnClickListener {
+            selectValue="3"
+            opeinImagePDF()
+         }
+
+
 
         binding.spinnerOpen.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
@@ -477,13 +495,13 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             password = binding.edtPassword.text.toString()
             confirmPassword = binding.edtConfirmPassword.text.toString()
 
-            if (binding.edtPassword.text.isEmpty()) {
+            if (binding.edtPassword.text!!.isEmpty()) {
                 binding.edtPassword.error = "Password Required"
                 binding.edtPassword.requestFocus()
                 return@setOnClickListener
             }
 
-            if ((binding.edtPassword.text.isEmpty())) {
+            if ((binding.edtPassword.text!!.isEmpty())) {
                 validatePassword()
                 binding.edtPassword.requestFocus()
                 return@setOnClickListener
@@ -499,8 +517,9 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
             } else {
                 firstName = binding.edtFirstName.text.toString().trim()
+                milddleName = binding.edtMiddelName.text.toString().trim()
                 lastName = binding.edtLastName.text.toString().trim()
-                doctorName = "$firstName $lastName"
+                doctorName = "$firstName $milddleName $lastName"
                 phoneNumberWithCode = binding.edtPhoneNumberWithCode.text.toString().trim()
                 email = binding.edtEmail.text.toString().trim()
                 additionalQualification = binding.edtAdditionalQualification.text.toString().trim()
@@ -522,11 +541,50 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 Log.e("Ala", "confirmPassword-$confirmPassword")
                 Log.e("Ala", "email-$email")
 
-                apiCallRegister()
+                if(selectValue=="1"){
+                    apiCallRegisterCamera()
+
+                }
+                 else{
+                     apiCallRegister()
+
+                 }
+
             }
         }
     }
 
+    private fun opeinImagePDF() {
+//        Intent(Intent.ACTION_PICK).also {
+//            it.type = "image/*"
+//            (MediaStore.ACTION_IMAGE_CAPTURE)
+//            val mimeTypes = arrayOf("image/jpeg", "image/png")
+//            it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+//            startActivityForResult(it, REQUEST_CODE_IMAGE)
+
+        val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
+        pdfIntent.type = "application/pdf"
+        pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
+        startActivityForResult(pdfIntent, REQUEST_CODE_IMAGE)
+
+        //   }
+    }
+
+    private fun opeinImageChooserNew() {
+        Intent(Intent.ACTION_PICK).also {
+            it.type = "image/*"
+            (MediaStore.ACTION_IMAGE_CAPTURE)
+            val mimeTypes = arrayOf("image/jpeg", "image/png")
+            it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+            startActivityForResult(it, REQUEST_CODE_IMAGE)
+
+//            val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
+//            pdfIntent.type = "application/pdf"
+//            pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
+//            startActivityForResult(pdfIntent, REQUEST_CODE_IMAGE)
+
+        }
+    }
 
     @SuppressLint("StringFormatInvalid")
     private fun getToken() {
@@ -709,24 +767,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
         }.start()
     }
 
-    private fun opeinImageChooser() {
-        val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
-        pdfIntent.type = "application/pdf"
-        pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
-        startActivityForResult(pdfIntent, REQUEST_CODE_IMAGE)
-//
-//        Intent(Intent.ACTION_GET_CONTENT).also {
-//            it.type = "application/pdf"
-//            //(MediaStore.ACTION_IMAGE_CAPTURE)
-//            pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
-//
-//            val mimeTypes = arrayOf("image/jpeg", "image/png","pdf/pdf")
-//            it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-//            startActivityForResult(it, REQUEST_CODE_IMAGE)
-//
-//
-//        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -734,9 +774,23 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             when (requestCode) {
                 REQUEST_CODE_IMAGE -> {
                     selectedImageUri = data?.data
-                    // binding.imageView.setImageURI(selectedImageUri)
-                    binding.imageView.visibility = View.VISIBLE
-                }
+                    when(selectValue){
+                        "1"->{
+                            binding.imageView.visibility = View.VISIBLE
+                            binding.layoutchoise.visibility = View.VISIBLE
+                            binding.imageView.setImageURI(selectedImageUri)
+                        }
+                        "2"->{
+                            binding.layoutchoise.visibility = View.VISIBLE
+                            binding.imageView.visibility = View.VISIBLE
+                            binding.imageView.setImageURI(selectedImageUri)
+                        }
+                        "3"->{
+                            binding.layoutchoise.visibility = View.VISIBLE
+                            binding.imageViewPDF.visibility = View.VISIBLE
+                        }
+                    }
+                 }
             }
         }
     }
@@ -818,6 +872,93 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             description,
             regstrationNumber,
             MultipartBody.Part.createFormData("reg_cer", file.name, body),
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"), followUpDay
+        )
+            .enqueue(object : Callback<ModelRegistrationNew> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelRegistrationNew>, response: Response<ModelRegistrationNew>
+                ) {
+                    if (response.code() == 500) {
+                        myToast(this@RegirstrationTest, "Server Error")
+                    } else if (response.body()!!.status == 1) {
+                        myToast(this@RegirstrationTest, response.body()!!.message)
+                        subscribed()
+                        progressDialog!!.dismiss()
+                        val intent = Intent(applicationContext, SignIn::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        finish()
+                        startActivity(intent)
+                    } else {
+                        myToast(this@RegirstrationTest, "${response.body()!!.message}")
+                        progressDialog!!.dismiss()
+
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ModelRegistrationNew>, t: Throwable) {
+                    myToast(this@RegirstrationTest, "Something went wrong")
+                    progressDialog!!.dismiss()
+
+                }
+
+            })
+    }
+    private fun apiCallRegisterCamera() {
+        progressDialog = ProgressDialog(this@RegirstrationTest)
+        progressDialog!!.setMessage("Loading..")
+        progressDialog!!.setTitle("Please Wait")
+        progressDialog!!.isIndeterminate = false
+        progressDialog!!.setCancelable(true)
+        progressDialog!!.show()
+
+        val file: File = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                .absolutePath + "/myAppImages/")
+        if (!file.exists()) {
+            file.mkdirs()
+        }
+        val file1: File = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).absolutePath + "/myAppImages/" + selectedImageUri!!.lastPathSegment
+        )
+
+        // val fos = FileOutputStream(file1)
+
+        val parcelFileDescriptor = contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
+
+        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+        // val file = File(cacheDir, contentResolver.getFileName(selectedImageUri!!))
+        val outputStream = FileOutputStream(file1)
+        inputStream.copyTo(outputStream)
+
+
+        //  binding.progressBar.progress = 0
+        val body = UploadRequestBody(file1, "image", this)
+        val langauges = "$langauge1,$langauges2,$langauges3"
+        Log.e("log,", langauges)
+        ApiClient.apiService.register(
+            doctorName,
+            degree,
+            additionalQualification,
+            binding.edtPhoneNumberWithCode.text.toString(),
+            phoneNumberWithCodeNew,
+            fcmToken,
+            confirmPassword,
+            email,
+            openTime,
+            closeTime,
+            lattitude,
+            longitude,
+            slotInterval,
+            specilistId,
+            exprince,
+            genderId,
+            langauges,
+            description,
+            regstrationNumber,
+            MultipartBody.Part.createFormData("reg_cer", file1.name, body),
             RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"), followUpDay
         )
             .enqueue(object : Callback<ModelRegistrationNew> {

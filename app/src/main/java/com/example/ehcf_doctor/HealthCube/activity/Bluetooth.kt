@@ -27,6 +27,7 @@ import com.example.ehcf.Helper.currentDate
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.HealthCube.Adapter.AdapterPatientList
+import com.example.ehcf_doctor.HealthCube.Model.ModelTotalCount
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityMainBluethootBinding
@@ -98,6 +99,7 @@ class Bluetooth : AppCompatActivity() {
 //            Log.e("List",b.toString())
 //        }
         apiCallMyPatient()
+        apiCallTestCount()
         binding.cardRegister.setOnClickListener {
             startActivity(Intent(this@Bluetooth, AddPatient::class.java))
         }
@@ -256,6 +258,46 @@ class Bluetooth : AppCompatActivity() {
 
 
                 override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
+                    progressDialog!!.dismiss()
+
+                }
+
+            })
+    }
+    private fun apiCallTestCount() {
+        progressDialog = ProgressDialog(this@Bluetooth)
+        progressDialog!!.setMessage("Loading...")
+        progressDialog!!.setTitle("Please Wait")
+        progressDialog!!.isIndeterminate = false
+        progressDialog!!.setCancelable(true)
+        // progressDialog!!.show()
+
+        ApiClient.apiService.healthcubeReportCount(sessionManager.id.toString())
+            .enqueue(object : Callback<ModelTotalCount> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelTotalCount>, response: Response<ModelTotalCount>
+                ) {
+                    try {
+                        if (response.code() == 500) {
+                            progressDialog!!.dismiss()
+
+                        } else if (response.code() == 200) {
+                            binding.tvTotelTest.text= response.body()!!.result.toString()
+                             // myToast(requireActivity(),"No Data Found")
+                            progressDialog!!.dismiss()
+
+                        } else {
+                            binding.tvTotelTest.text= response.body()!!.result.toString()
+                            Log.e("Size",response.body()!!.result.toString())
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
+
+
+                override fun onFailure(call: Call<ModelTotalCount>, t: Throwable) {
                     progressDialog!!.dismiss()
 
                 }

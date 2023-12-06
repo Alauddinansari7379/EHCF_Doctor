@@ -1,6 +1,6 @@
 package com.example.ehcf_doctor.HealthCube.activity
 
- import android.annotation.SuppressLint
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
@@ -9,10 +9,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.HealthCube.Adapter.AdapterPatientList
+import com.example.ehcf_doctor.MyPatient.adapter.AdapterMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
+import com.example.ehcf_doctor.MyPatient.model.ResultMyPatient
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityPatientListBinding
 import com.example.myrecyview.apiclient.ApiClient
@@ -20,6 +23,7 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.ArrayList
 
 
 class PatientList : AppCompatActivity() {
@@ -30,6 +34,8 @@ class PatientList : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
     private lateinit var binding: ActivityPatientListBinding
     var shimmerFrameLayout: ShimmerFrameLayout? = null
+    private lateinit var mainData: ArrayList<ResultMyPatient>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPatientListBinding.inflate(layoutInflater)
@@ -42,6 +48,11 @@ class PatientList : AppCompatActivity() {
             onBackPressed()
         }
 
+        binding.edtSearch.addTextChangedListener { str ->
+            setRecyclerViewAdapter(mainData.filter {
+                it.name!!.contains(str.toString(), ignoreCase = true)
+            } as ArrayList<ResultMyPatient>)
+        }
 //        binding.btnRegisterNewP.setOnClickListener {
 //            startActivity(Intent(this@PatientList, AddPatient::class.java))
 //        }
@@ -51,49 +62,26 @@ class PatientList : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
-        binding.imgSearch.setOnClickListener {
-            if (binding.edtSearch.text.isEmpty()) {
-                binding.edtSearch.error = "Enter Patient Name"
-                binding.edtSearch.requestFocus()
-            } else {
-                apiCallSearchMyPatient()
+        /*  binding.imgSearch.setOnClickListener {
+              if (binding.edtSearch.text.isEmpty()) {
+                  binding.edtSearch.error = "Enter Patient Name"
+                  binding.edtSearch.requestFocus()
+              } else {
+                  apiCallSearchMyPatient()
 
-            }
-        }
+              }
+          }*/
 
         apiCallMyPatient()
     }
-companion object{
-    var Diagnostic=""
-    var Exsting=""
-    var TestHistory=""
-}
 
-    //    fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<String?>?, grantResults: IntArray
-//    ) {
-//        if (permissions != null) {
-//            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        }
-//        when (requestCode) {
-//            MY_PERMISSIONS_REQUEST_CALL_PHONE -> {
-//
-//                // If request is cancelled, the result arrays are empty.
-//                if (grantResults.size > 0
-//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-//                ) {
-//
-//                    // permission was granted, yay! Do the phone call
-//                } else {
-//
-//                    // permission denied, boo! Disable the
-//                    // functionality that depends on this permission.
-//                }
-//                return
-//            }
-//        }
-//    }
+    companion object {
+        var Diagnostic = ""
+        var Exsting = ""
+        var TestHistory = ""
+    }
+
+
     private fun apiCallMyPatient() {
         progressDialog = ProgressDialog(this@PatientList)
         progressDialog!!.setMessage("Loading...")
@@ -108,34 +96,31 @@ companion object{
                 override fun onResponse(
                     call: Call<ModelMyPatient>, response: Response<ModelMyPatient>
                 ) {
-                    try{
-                    if (response.code() == 500) {
-                        myToast(this@PatientList, "Server Error")
-                        binding.shimmerMyPatient.visibility = View.GONE
-                        progressDialog!!.dismiss()
-
-                    } else if (response.body()!!.result.isEmpty()) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        binding.shimmerMyPatient.visibility = View.GONE
-                        // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
-
-                    } else {
-                        binding.recyclerView.apply {
-                            shimmerFrameLayout?.startShimmer()
-                            binding.recyclerView.visibility = View.VISIBLE
+                    try {
+                        if (response.code() == 200) {
+                            mainData = response.body()!!.result
+                        }
+                        if (response.code() == 500) {
+                            myToast(this@PatientList, "Server Error")
                             binding.shimmerMyPatient.visibility = View.GONE
-                            binding.tvNoDataFound.visibility = View.GONE
-                            adapter =
-                                AdapterPatientList(this@PatientList, response.body()!!)
                             progressDialog!!.dismiss()
 
+                        } else if (response.body()!!.result.isEmpty()) {
+                            binding.tvNoDataFound.visibility = View.VISIBLE
+                            binding.shimmerMyPatient.visibility = View.GONE
+                            // myToast(requireActivity(),"No Data Found")
+                            progressDialog!!.dismiss()
+
+                        } else {
+                            setRecyclerViewAdapter(mainData)
+                                 progressDialog!!.dismiss()
+
+
                         }
-                    }
-                }catch (e:Exception){
+                    } catch (e: Exception) {
                         myToast(this@PatientList, "Something went wrong")
                         e.printStackTrace()
-                }
+                    }
                 }
 
 
@@ -148,6 +133,19 @@ companion object{
 
             })
     }
+    private fun setRecyclerViewAdapter(data: ArrayList<ResultMyPatient>) {
+        binding.recyclerView.apply {
+            shimmerFrameLayout?.startShimmer()
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.shimmerMyPatient.visibility = View.GONE
+            binding.tvNoDataFound.visibility = View.GONE
+            adapter = AdapterPatientList(this@PatientList, data)
+            progressDialog!!.dismiss()
+
+        }
+    }
+
+/*
      private fun apiCallSearchMyPatient() {
         progressDialog = ProgressDialog(this@PatientList)
         progressDialog!!.setMessage("Loading...")
@@ -219,6 +217,7 @@ companion object{
 
             })
     }
+*/
 
 
 }

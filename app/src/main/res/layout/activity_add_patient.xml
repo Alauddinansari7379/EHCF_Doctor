@@ -285,8 +285,9 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvDOB"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
                          android:drawablePadding="10dp"
+                        android:gravity="center"
                          android:drawableRight="@drawable/ic_baseline_calendar_month_24"
                         android:drawableTint="@color/main_color"
                         android:hint="Date Of Birth*"
@@ -300,6 +301,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:visibility="gone"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
@@ -323,7 +325,7 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
+                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
@@ -340,12 +342,50 @@
 
                 </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layTest"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/corner"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTestName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:text="Select List of Diagnostic Tests">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="end"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@drawable/ic_arrow_drop_down_black_24dp"
+                        android:backgroundTint="@color/main_color"
+                        android:gravity="end"
+                        android:text="Men">
+
+                    </androidx.appcompat.widget.AppCompatImageView>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewTest"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
             </androidx.recyclerview.widget.RecyclerView>
@@ -440,7 +480,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                            android:text="Result">
 
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.viewpager.widget.ViewPager
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/black">
+
+                        </androidx.viewpager.widget.ViewPager>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Blood Pressure"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -479,7 +564,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="5dp"
+                        android:layout_marginBottom="15dp"
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -509,6 +594,134 @@
 
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardOximeter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/_5sdp"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                            android:text="Result">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.viewpager.widget.ViewPager
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/black">
+
+                        </androidx.viewpager.widget.ViewPager>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pulse Oximetry"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="% SpO2"
+                            android:layout_weight="1"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSpO2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                             android:text="00.00"
+                            android:layout_weight="1"
+                             android:textColor="#006064"
+                            android:textSize="18sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Pulse Rate (in bpm)"
+                            android:textColor="@color/black"
+                            android:layout_weight="1"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvPulseRate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                             android:text="00.00"
+                            android:layout_weight="1"
+                            android:textColor="#006064"
+                            android:textSize="18sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 android:id="@+id/cardTemperature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -521,6 +734,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                            android:text="Result">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.viewpager.widget.ViewPager
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/black">
+
+                        </androidx.viewpager.widget.ViewPager>
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -578,6 +815,454 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardGlucose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/_5sdp"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                            android:text="Result">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.viewpager.widget.ViewPager
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/black">
+
+                        </androidx.viewpager.widget.ViewPager>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="Total Blood Glucose is"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.appcompat.widget.AppCompatTextView
+                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="(in mg/dL)"
+                            android:textColor="#006064"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvGlucose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="000.00"
+                            android:textColor="#006064"
+                            android:textSize="18sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardHemoglobin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/_5sdp"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                             android:text="Result">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.viewpager.widget.ViewPager
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/black">
+
+                        </androidx.viewpager.widget.ViewPager>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="Total Hemoglobin is"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.appcompat.widget.AppCompatTextView
+                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="(in g/dL)"
+                            android:textColor="#006064"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvHemoglobin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="00.00"
+                            android:textColor="#006064"
+                            android:textSize="18sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardUricAcid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/_5sdp"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                             android:text="Result">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.viewpager.widget.ViewPager
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/black">
+
+                        </androidx.viewpager.widget.ViewPager>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="Total Uric Acid is"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.appcompat.widget.AppCompatTextView
+                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="(in mg/dL)"
+                            android:textColor="#006064"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvUricAcid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="00.00"
+                            android:textColor="#006064"
+                            android:textSize="18sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardMalaria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/_5sdp"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                             android:text="Result">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.viewpager.widget.ViewPager
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/black">
+
+                        </androidx.viewpager.widget.ViewPager>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="Hub's result"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvMalaria"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="NA"
+                            android:textColor="#006064"
+                            android:textSize="18sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardTyphoid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="@dimen/_5sdp"
+                android:visibility="gone"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="wrap_content">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginStart="10dp"
+                             android:text="Result">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                        <androidx.viewpager.widget.ViewPager
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@color/black">
+
+                        </androidx.viewpager.widget.ViewPager>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="Hub's result"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvTyphoid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                             android:text="NA"
+                            android:textColor="#006064"
+                            android:textSize="18sp"
+                            android:textStyle="bold">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSave"
@@ -585,6 +1270,16 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Save"
+                android:textAllCaps="false">
+
+            </com.google.android.material.button.MaterialButton>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGenerate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                 android:layout_gravity="end"
+                android:text="Generate New Token"
                 android:textAllCaps="false">
 
             </com.google.android.material.button.MaterialButton>

@@ -16,14 +16,16 @@ import com.example.ehcf.Helper.convertTo12Hour
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.Prescription.activity.AddPrescription
 import com.example.ehcf_doctor.Prescription.model.ModelPendingPre
+import com.example.ehcf_doctor.Prescription.model.ResultPrePending
 import com.example.ehcf_doctor.R
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class AdapterPrescription(
-    val context: Context, private val list: ModelPendingPre
+    val context: Context, private val list: ArrayList<ResultPrePending>
 ) :
     RecyclerView.Adapter<AdapterPrescription.MyViewHolder>() {
 
@@ -38,9 +40,9 @@ class AdapterPrescription(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         try {
-            if (list.result[position].profile_image!!.isNotEmpty()) {
+            if (list[position].profile_picture!!.isNotEmpty()) {
                 Picasso.get()
-                    .load("https://ehcf.thedemostore.in/uploads/${list.result[position].profile_image}")
+                    .load("https://ehcf.thedemostore.in/uploads/${list[position].profile_picture}")
                     .placeholder(R.drawable.profile).error(R.drawable.profile)
                     .into(holder.imgProfile);
 
@@ -48,20 +50,20 @@ class AdapterPrescription(
             }
             // holder.SrNo.text= "${position+1}"
             Log.e("currentDate", "$currentDate")
-            Log.e("startTime", "${list.result[position].time.toString()}")
-            if (list.result[position].start_time != null) {
-                holder.startTime.text = convertTo12Hour(list.result[position].start_time)
-                holder.endTime.text = convertTo12Hour(list.result[position].end_time)
+            Log.e("startTime", "${list[position].time.toString()}")
+            if (list[position].start_time != null) {
+                holder.startTime.text = convertTo12Hour(list[position].start_time)
+                holder.endTime.text = convertTo12Hour(list[position].end_time)
             }
             // holder.endTime.text = list.result[position].e
-            holder.bookingDate.text = list.result[position].date
-            if (list.result[position].member_name != null) {
-                holder.customerName.text = list.result[position].member_name
+            holder.bookingDate.text = list[position].date
+            if (list[position].member_name != null) {
+                holder.customerName.text = list[position].member_name
 
             } else {
-                holder.customerName.text = list.result[position].customer_name.toString()
+                holder.customerName.text = list[position].customer_name.toString()
             }
-            holder.specialitiesName.text = list.result[position].category_name.toString()
+            holder.specialitiesName.text = list[position].category_name.toString()
 
 //        when (list.result[position].slug) {
 //            "completed" -> {
@@ -77,7 +79,7 @@ class AdapterPrescription(
             //     }
             holder.btnAddPrescription.setOnClickListener {
                 val intent = Intent(context as Activity, AddPrescription::class.java)
-                    .putExtra("bookingId", list.result[position].id.toString())
+                    .putExtra("bookingId", list[position].id.toString())
                 context.startActivity(intent)
             }
 
@@ -87,7 +89,7 @@ class AdapterPrescription(
     }
 
     override fun getItemCount(): Int {
-        return list.result.size
+        return list.size
 
     }
 

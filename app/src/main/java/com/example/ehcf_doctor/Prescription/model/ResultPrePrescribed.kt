@@ -1,6 +1,6 @@
 package com.example.ehcf_doctor.Prescription.model
 
-data class Result(
+data class ResultPrePrescribed(
     val assessment: String,
     val booking_id: String,
     val created_at: String,
@@ -15,6 +15,7 @@ data class Result(
     val category_name: String,
     val customer_name: String,
     val profile_image: String,
+    val profile_picture: String,
     val member_name: String,
     val doctor_name: String,
     val start_time: String,
