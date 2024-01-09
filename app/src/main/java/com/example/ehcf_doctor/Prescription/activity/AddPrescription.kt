@@ -1069,6 +1069,7 @@ class AddPrescription : AppCompatActivity() {
         } else {
             val changeReceiver = NetworkChangeReceiver(context)
             changeReceiver.build()
+
             //  myToast(requireActivity(), "Not C")
 
         }
