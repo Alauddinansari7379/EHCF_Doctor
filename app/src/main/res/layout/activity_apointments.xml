@@ -75,6 +75,7 @@
         android:layout_margin="10dp"
         android:backgroundTint="#E7EDF5"
         app:tabIndicatorHeight="40dp"
+        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         app:tabIndicator="@drawable/tabcorner"
         app:tabSelectedTextColor="@color/white"
         android:layout_height="40dp"
