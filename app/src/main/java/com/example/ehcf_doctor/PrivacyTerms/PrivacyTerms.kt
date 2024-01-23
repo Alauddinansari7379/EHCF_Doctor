@@ -37,10 +37,10 @@ class PrivacyTerms : AppCompatActivity() {
 //        binding.webView.webViewClient = WebViewClient()
 //
 //        // this will load the url of the website
-//        binding.webView.loadUrl("https://www.geeksforgeeks.org/")
-//
-//        // this will enable the javascript settings, it can also allow xss vulnerabilities
-//        binding.webView.settings.javaScriptEnabled = true
+        binding.webView.loadUrl("https://ehcf.thedemostore.in/privacy_policy")
+
+        // this will enable the javascript settings, it can also allow xss vulnerabilities
+        binding.webView.settings.javaScriptEnabled = true
 //
 //        // if you want to enable zoom feature
 //        binding.webView.settings.setSupportZoom(true)

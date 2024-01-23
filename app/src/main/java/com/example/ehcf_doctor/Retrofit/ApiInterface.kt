@@ -405,7 +405,7 @@ interface ApiInterface {
     @POST("active_deactive_slot")
     fun activeASlot(
         @Query("id") invoice_id: String?,
-        @Query("IsActive") day: String?,
+        @Query("IsActive") IsActive: String?,
     ): Call<ModelActive>
 
     @POST("get_all_sll")

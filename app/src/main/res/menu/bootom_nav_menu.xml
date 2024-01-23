@@ -9,14 +9,14 @@
 
     <item
         android:id="@+id/fragment_prescription"
-        android:icon="@drawable/prescription"
+        android:icon="@drawable/invoice"
         android:title="Prescription"/>
     <item
         android:id="@+id/fragment_booking"
-        android:icon="@drawable/calendar"
+        android:icon="@drawable/appointments"
         android:title="Booking"/>
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/profilenew"
+        android:icon="@drawable/profilesetting"
         android:title="Profile"/>
 </menu>

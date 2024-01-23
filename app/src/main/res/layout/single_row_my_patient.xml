@@ -59,7 +59,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Name"
-                                android:textSize="18sp"
+                                android:textSize="14sp"
                                 android:textColor="@color/black"
                                 android:textStyle="bold">
 
@@ -78,6 +78,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="1234567890"
+                                android:textSize="12sp"
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 
@@ -89,7 +90,7 @@
                                 android:layout_height="25dp"
                                 android:padding="5dp"
                                 android:layout_marginStart="10dp"
-                                android:background="@drawable/phone"
+                                android:background="@drawable/video_call"
                                 android:textStyle="bold">
 
                             </androidx.appcompat.widget.AppCompatImageView>
@@ -107,6 +108,7 @@
                                 android:layout_marginTop="5dp"
                                 android:text="alauddinansasdd@gmail.com"
                                 android:textColor="#2E7798"
+                                android:textSize="12sp"
                                 android:textStyle="bold">
 
                             </androidx.appcompat.widget.AppCompatTextView>
@@ -143,7 +145,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="5dp"
                                     android:text="0"
-                                    android:layout_marginTop="-1dp"
+                                     android:layout_marginTop="-1dp"
                                     android:textSize="12sp"
                                     android:textColor="#676565"
                                     android:textStyle="bold">
@@ -199,6 +201,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginEnd="10dp"
+                                android:textSize="14sp"
                                 android:text="View Rating &amp; Reviews"
                                 android:background="?actionBarItemBackground"
                                 android:textColor="@color/main_color"
@@ -210,7 +213,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="50dp"
+                            android:layout_marginTop="10dp"
                             android:gravity="end"
                             android:orientation="horizontal">
 
@@ -225,6 +228,7 @@
                                 android:drawableTint="@color/white"
                                 android:drawablePadding="@dimen/_3sdp"
                                 android:padding="5dp"
+                                android:textSize="12sp"
                                 android:text="History"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white">
@@ -240,7 +244,8 @@
                                 android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
                                 android:drawableTint="@color/white"
                                 android:padding="5dp"
-                                android:drawablePadding="@dimen/_3sdp"
+                                android:textSize="12sp"
+                                android:drawablePadding="3dp"
                                 android:text="View Reports"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white">

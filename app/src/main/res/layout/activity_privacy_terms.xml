@@ -147,19 +147,20 @@
         android:id="@+id/rvUpcoming"
         android:layout_width="match_parent"
         android:layout_margin="5dp"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
     </androidx.recyclerview.widget.RecyclerView>
 
 
-    <!--    <WebView-->
-<!--        android:id="@+id/webView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@id/toolbar2"-->
-<!--        tools:layout_editor_absoluteX="-16dp" />-->
+        <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+         tools:layout_editor_absoluteX="-16dp"
+            tools:ignore="WebViewLayout" />
 
 
 </LinearLayout>

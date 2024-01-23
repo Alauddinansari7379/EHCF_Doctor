@@ -68,16 +68,18 @@ class AdapterMyPatient(
                 comment.commentList(list[position].id)
             }
             holder.imgPhone.setOnClickListener {
+
+                comment.videoCall(list[position].doctor_id.toString()+"EHCFHIS"+list[position].patient_id)
 //             val phone_intent = Intent(Intent.ACTION_CALL)
 //            phone_intent.data = Uri.parse("tel:${list.result[position].phone_number}")
 //            context.startActivity(phone_intent)
 
 
-                val intent = Intent(
-                    Intent.ACTION_CALL,
-                    Uri.parse("tel:${list[position].phone_number}")
-                )
-                context.startActivity(intent)
+//                val intent = Intent(
+//                    Intent.ACTION_CALL,
+//                    Uri.parse("tel:${list[position].phone_number}")
+//                )
+//                context.startActivity(intent)
             }
             holder.viewReport.setOnClickListener {
                 val intent = Intent(context as Activity, PatientReport::class.java)
@@ -112,5 +114,6 @@ class AdapterMyPatient(
     }
     interface CommentList {
         fun commentList(id: String)
+        fun videoCall(id: String)
     }
 }

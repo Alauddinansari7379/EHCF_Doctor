@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.MyPatient.adapter.AdapterCommentList
@@ -28,9 +29,14 @@ import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityMyPatientBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
+import org.jitsi.meet.sdk.JitsiMeetActivity
+import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
+import org.jitsi.meet.sdk.JitsiMeetUserInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.net.MalformedURLException
+import java.net.URL
 import java.util.*
 
 
@@ -71,15 +77,7 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
-        /*     binding.imgSearch.setOnClickListener {
-                 if (binding.edtSearch.text.isEmpty()) {
-                     binding.edtSearch.error = "Enter Patient Name"
-                     binding.edtSearch.requestFocus()
-                 } else {
-                     apiCallSearchMyPatient()
 
-                 }
-             }*/
 
         apiCallMyPatient()
     }
@@ -160,79 +158,6 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
     }
 
 
-/*
-    private fun apiCallSearchMyPatient() {
-        progressDialog = ProgressDialog(this@MyPatient)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
-        val patientName = binding.edtSearch.text.toString()
-        ApiClient.apiService.searchPatient(sessionManager.id.toString(), patientName)
-            .enqueue(object : Callback<ModelMyPatient> {
-                @SuppressLint("LogNotTimber")
-                override fun onResponse(
-                    call: Call<ModelMyPatient>, response: Response<ModelMyPatient>
-                ) {
-                    try {
-                        if (response.code() == 500) {
-                            myToast(this@MyPatient, "Server Error")
-                            binding.shimmerMyPatient.visibility = View.GONE
-                            progressDialog!!.dismiss()
-
-                        } else if (response.body()!!.status == 0) {
-                            binding.tvNoDataFound.visibility = View.VISIBLE
-                            binding.shimmerMyPatient.visibility = View.GONE
-                            myToast(this@MyPatient, "${response.body()!!.message}")
-                            progressDialog!!.dismiss()
-
-                        } else if (response.body()!!.result.isEmpty()) {
-                            binding.recyclerView.adapter =
-                                AdapterMyPatient(this@MyPatient, response.body()!!, this@MyPatient)
-                            binding.recyclerView.adapter!!.notifyDataSetChanged()
-                            binding.tvNoDataFound.visibility = View.VISIBLE
-                            binding.shimmerMyPatient.visibility = View.GONE
-                            myToast(this@MyPatient, "No Patient Found")
-                            progressDialog!!.dismiss()
-
-                        } else {
-                            binding.recyclerView.adapter =
-                                AdapterMyPatient(this@MyPatient, response.body()!!, this@MyPatient)
-                            binding.recyclerView.adapter!!.notifyDataSetChanged()
-                            binding.tvNoDataFound.visibility = View.GONE
-                            shimmerFrameLayout?.startShimmer()
-                            binding.recyclerView.visibility = View.VISIBLE
-                            binding.shimmerMyPatient.visibility = View.GONE
-                            progressDialog!!.dismiss()
-//                        binding.rvManageSlot.apply {
-//                            binding.tvNoDataFound.visibility = View.GONE
-//                            shimmerFrameLayout?.startShimmer()
-//                            binding.rvManageSlot.visibility = View.VISIBLE
-//                            binding.shimmerMySlot.visibility = View.GONE
-//                            // myToast(this@ShuduleTiming, response.body()!!.message)
-//                            adapter = AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
-//                            progressDialog!!.dismiss()
-//
-//                        }
-                        }
-                    }catch (e:Exception){
-                        e.printStackTrace()
-                        myToast(this@MyPatient, "Something went wrong")
-
-                    }
-                }
-
-                override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
-                    myToast(this@MyPatient, "Something went wrong")
-                    binding.shimmerMyPatient.visibility = View.GONE
-                    progressDialog!!.dismiss()
-
-                }
-
-            })
-    }
-*/
 
     override fun commentList(id: String) {
         progressDialog = ProgressDialog(this@MyPatient)
@@ -308,6 +233,56 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
             dialog?.dismiss()
         }
 
+    }
+
+    override fun videoCall(id: String) {
+        SweetAlertDialog(this@MyPatient, SweetAlertDialog.WARNING_TYPE)
+            .setTitleText("Are you sure want to Call?")
+            .setCancelText("No")
+            .setConfirmText("Yes")
+            .showCancelButton(true)
+            .setConfirmClickListener { sDialog ->
+                sDialog.cancel()
+//                val intent = Intent(applicationContext, SignIn::class.java)
+//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+//                finish()
+//                startActivity(intent)
+
+                videoCallFun( id)
+            }
+            .setCancelClickListener { sDialog ->
+                sDialog.cancel()
+            }
+            .show()
+    }
+
+    private fun videoCallFun(id: String) {
+        val jitsiMeetUserInfo = JitsiMeetUserInfo()
+        jitsiMeetUserInfo.displayName = sessionManager.doctorName
+        jitsiMeetUserInfo.email = sessionManager.email
+        try {
+            val defaultOptions: JitsiMeetConferenceOptions = JitsiMeetConferenceOptions.Builder()
+                .setServerURL(URL("https://jvc.ethicalhealthcare.in/"))
+                .setRoom(id)
+                .setAudioMuted(false)
+                .setVideoMuted(true)
+                .setAudioOnly(false)
+                .setUserInfo(jitsiMeetUserInfo)
+                .setConfigOverride("enableInsecureRoomNameWarning", false)
+                .setFeatureFlag("readOnlyName", true)
+                .setFeatureFlag("prejoinpage.enabled", false)
+                //  .setFeatureFlag("lobby-mode.enabled", false)
+                // .setToken("123") // Set the meeting password
+                //.setFeatureFlag("autoKnockLobby", false) // Disable lobby mode
+                //.setFeatureFlag("disableModeratorIndicator", false)
+                //.setFeatureFlag("chat.enabled",false)
+                .setConfigOverride("requireDisplayName", true)
+                .build()
+            JitsiMeetActivity.launch(this@MyPatient, defaultOptions)
+            //  startActivity(Intent(requireContext(),Rating::class.java))
+        } catch (e: MalformedURLException) {
+            e.printStackTrace();
+        }
     }
 
 

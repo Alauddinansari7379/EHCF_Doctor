@@ -12,6 +12,7 @@ data class ResultMyPatient(
     val dob: String,
     val patient_id: String,
     val id: String,
+    val doctor_id: Int,
     val last_active_address: String,
     val no_of_ratings: String,
     val overall_ratings: String,

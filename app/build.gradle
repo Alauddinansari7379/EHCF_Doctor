@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.ehcf_doctor"
+        applicationId "com.Amtech.ehcfdoctor"
         minSdk 24
         targetSdk 33
         versionCode 1

@@ -1,335 +1,350 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawelTest"
-    android:background="@color/white"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:layout_height="match_parent">
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <!--    <ScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content">-->
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:orientation="vertical"-->
+    <!--            android:layout_height="wrap_content">-->
+
+    <!--        </LinearLayout>-->
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="230dp"
+        android:layout_height="180dp"
+        android:background="@drawable/logonew">
+
+    </androidx.appcompat.widget.AppCompatImageView>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-
-            <!--    <ScrollView-->
-            <!--        android:layout_width="match_parent"-->
-            <!--        android:layout_height="wrap_content">-->
-            <!--        <LinearLayout-->
-            <!--            android:layout_width="match_parent"-->
-            <!--            android:orientation="vertical"-->
-            <!--            android:layout_height="wrap_content">-->
-
-            <!--        </LinearLayout>-->
-
-            <ImageView
-                android:layout_width="250dp"
-                android:layout_height="150dp"
-                android:background="@drawable/logo">
-
-            </ImageView>
             <LinearLayout
                 android:id="@+id/tvDashboard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    android:padding="5dp"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textStyle="bold"
+                    android:drawableLeft="@drawable/dashboard"
+                    android:padding="5dp"
                     android:text="Dashboard"
-                    android:drawableLeft="@drawable/dashboard">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvMySlots"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    android:padding="5dp"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textStyle="bold"
+                    android:drawableLeft="@drawable/appointments"
+                    android:padding="5dp"
                     android:text="My Slots"
-                    android:drawableLeft="@drawable/appointments">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvManageSlots"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    android:padding="5dp"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textStyle="bold"
+                    android:drawableLeft="@drawable/appointments"
+                    android:padding="5dp"
                     android:text="Manage Slots"
-                    android:drawableLeft="@drawable/appointments">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvAppointments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/mydoctor"
                     android:padding="5dp"
-                    android:textStyle="bold"
                     android:text="Appointments"
-                    android:drawableLeft="@drawable/mydoctor">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvPrescripition"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/invoice"
                     android:padding="5dp"
-                    android:textStyle="bold"
-                    android:text="Prescripition"
-                    android:drawableLeft="@drawable/myreport">
+                    android:text="Prescription"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvMyPatients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/invoice"
                     android:padding="5dp"
-                    android:textStyle="bold"
                     android:text="My Patients"
-                    android:drawableLeft="@drawable/invoice">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvInvoice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/invoice"
                     android:padding="5dp"
-                    android:textStyle="bold"
                     android:text="Invoices"
-                    android:drawableLeft="@drawable/invoice">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvProfileSetting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/profilesetting"
                     android:padding="5dp"
-                    android:textStyle="bold"
                     android:text="Profile Settings"
-                    android:drawableLeft="@drawable/profilesetting">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvAyuSynk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/profilesetting"
                     android:padding="5dp"
-                    android:textStyle="bold"
                     android:text="AyuSynk"
-                    android:drawableLeft="@drawable/profilesetting">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvHealthCube"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/profilesetting"
                     android:padding="5dp"
-                    android:textStyle="bold"
                     android:text="HealthCube"
-                    android:drawableLeft="@drawable/profilesetting">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvRecordList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/invoice"
                     android:padding="5dp"
-                    android:textStyle="bold"
                     android:text="Audio List"
-                    android:drawableLeft="@drawable/invoice">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvPasswordChange"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="8dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/passwordchange"
                     android:padding="5dp"
-                    android:textStyle="bold"
                     android:text="Password Change"
-                    android:drawableLeft="@drawable/passwordchange">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvPrivacyTerms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
+                    android:drawableLeft="@drawable/privacyterms"
                     android:padding="5dp"
-                    android:textStyle="bold"
                     android:text="Privacy &amp; Terms"
-                    android:drawableLeft="@drawable/privacyterms">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
                 <!--</LinearLayout>-->
                 <!--    </ScrollView>-->
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvLogOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="10dp"
-                >
-                <TextView
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?android:attr/selectableItemBackground"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    android:padding="5dp"
-                    android:textStyle="bold"
+                    android:drawableLeft="@drawable/ic_baseline_logout_24"
                     android:drawableTint="@color/main_color"
+                    android:padding="5dp"
                     android:text="Logout"
-                    android:drawableLeft="@drawable/ic_baseline_logout_24">
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold">
 
-                </TextView>
+                </androidx.appcompat.widget.AppCompatTextView>
             </LinearLayout>
 
         </LinearLayout>
