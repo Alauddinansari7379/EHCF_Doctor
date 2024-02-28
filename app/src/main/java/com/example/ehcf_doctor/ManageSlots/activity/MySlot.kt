@@ -85,7 +85,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
         dayList.add(ModelDay("Friday", "5"))
         dayList.add(ModelDay("Saturday", "6"))
         dayList.add(ModelDay("Sunday", "7"))
-        dayList.add(ModelDay("Sunday", "8"))
+       // dayList.add(ModelDay("Sunday", "8"))
 
         binding.cardActiveInactive.setOnClickListener {
 //            binding.layoutActiveInactive.visibility =View.VISIBLE

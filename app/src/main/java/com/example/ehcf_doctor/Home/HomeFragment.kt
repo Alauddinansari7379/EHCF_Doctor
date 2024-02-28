@@ -4,20 +4,31 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.bluetooth.BluetoothDevice
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import com.example.easywaylocation.Listener
+
  import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.easywaylocation.EasyWayLocation
+import com.example.easywaylocation.GetLocationDetail
+import com.example.easywaylocation.LocationData
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
@@ -29,15 +40,20 @@ import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentHomeBinding
 import com.example.myrecyview.apiclient.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
- import kotlinx.coroutines.launch
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
+import java.io.IOException
 import java.util.*
 
 
-class HomeFragment : Fragment() {
+ class HomeFragment : Fragment(), Listener, LocationData.AddressCallBack {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var sessionManager: SessionManager
     var doctorname = ""
@@ -45,6 +61,14 @@ class HomeFragment : Fragment() {
     var progressDialog: ProgressDialog? = null
     var shimmerFrameLayout: ShimmerFrameLayout? = null
     private val senderID = "YOUR_SENDER_ID"
+    private var fusedLocationProviderClient: FusedLocationProviderClient? = null
+    private lateinit var easyWayLocation: EasyWayLocation
+    private lateinit var getLocationDetail: GetLocationDetail
+    lateinit var lm: LocationManager
+    private val REQUEST_CODE = 100
+    private var currentAddress = ""
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,6 +119,17 @@ class HomeFragment : Fragment() {
         // audioRecorder.resumeRecording()
 
 
+        getLocationDetail = GetLocationDetail(this, requireContext())
+        easyWayLocation = EasyWayLocation(requireContext(), false, false, this)
+
+
+        lm =requireContext().getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
+
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
+        getLastLocation()
+
+
         doctorname = sessionManager.doctorName.toString()
         //  id = sessionManager.id.toString()
         binding.tvDoctorName.text = doctorname
@@ -124,7 +159,137 @@ class HomeFragment : Fragment() {
 //        }
     }
 
+    @SuppressLint("SetTextI18n", "LogNotTimber")
+    private fun getLastLocation() {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationProviderClient!!.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        try {
+                            val geocoder = Geocoder(requireActivity(), Locale.getDefault())
+                            val addresses =
+                                geocoder.getFromLocation(location.latitude, location.longitude, 1)
+//                            lattitude!!.text = "Lattitude: " + addresses[0].latitude
+//                            longitude!!.text = "Longitude: " + addresses[0].longitude
+                            Log.e(
+                                ContentValues.TAG,
+                                " addresses[0].latitude${addresses?.get(0)?.latitude}"
+                            )
+                            Log.e(
+                                ContentValues.TAG,
+                                " addresses[0].latitude${addresses?.get(0)?.longitude}"
+                            )
+                            sessionManager.latitude = addresses?.get(0)?.latitude.toString()
+                            sessionManager.longitude = addresses?.get(0)?.longitude.toString()
 
+                            addresses?.get(0)?.getAddressLine(0)
+
+                            val locality = addresses?.get(0)?.locality
+                            val countryName = addresses?.get(0)?.countryName
+                            val countryCode = addresses?.get(0)?.countryCode
+                            val postalCode = addresses?.get(0)?.postalCode
+                            val subLocality = addresses?.get(0)?.subLocality
+                            val subAdminArea = addresses?.get(0)?.subAdminArea
+
+                            currentAddress = "$subLocality, $locality, $countryName"
+
+                           // binding.tvLocation.text = currentAddress
+                            binding.tvLocation.text = addresses?.get(0)?.getAddressLine(0)
+
+                            Log.e(ContentValues.TAG, "locality-$locality")
+                            Log.e(ContentValues.TAG, "countryName-$countryName")
+                            Log.e(ContentValues.TAG, "countryCode-$countryCode")
+                            Log.e(ContentValues.TAG, "postalCode-$postalCode")
+                            Log.e(ContentValues.TAG, "subLocality-$subLocality")
+                            Log.e(ContentValues.TAG, "subAdminArea-$subAdminArea")
+
+                            Log.e(
+                                ContentValues.TAG,
+                                " addresses[0].Address${addresses?.get(0)?.getAddressLine(0)}"
+                            )
+
+                        } catch (e: IOException) {
+                            e.printStackTrace()
+                        }
+                    }
+                }
+        } else {
+            askPermission()
+        }
+    }
+
+    private fun askPermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            REQUEST_CODE
+        )
+    }
+
+
+
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLastLocation()
+            } else {
+                Toast.makeText(
+                    requireContext(), "Please provide the required permission", Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions!!, grantResults)
+    }
+
+    override fun locationOn() {
+        getLastLocation()
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    @SuppressLint("LogNotTimber")
+    override fun currentLocation(location: Location?) {
+        val latitude = location!!.latitude
+        val longitude = location.longitude
+
+        Log.e("getCurrentLocation", ">>>>>>>>>>:$latitude\n$longitude ")
+        GlobalScope.launch {
+            // getLocationDetail.getAddress(location.latitude, location.longitude, "xyz")
+            getLocationDetail.getAddress(location.latitude, location.longitude, "AAA")
+            getLastLocation()
+
+        }
+
+    }
+
+    override fun locationCancelled() {
+        TODO("Not yet implemented")
+    }
+
+    @SuppressLint("LogNotTimber")
+    override fun locationData(locationData: LocationData?) {
+        locationData?.full_address.toString()
+//        val currentAddress1 = locationData?.country.toString()
+//        val Address = currentAddress+currentAddress1
+
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            EasyWayLocation.LOCATION_SETTING_REQUEST_CODE -> easyWayLocation.onActivityResult(
+                resultCode
+            )
+        }
+    }
     private fun isNetworkConnected(): Boolean {
         val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm.activeNetworkInfo != null
@@ -331,8 +496,14 @@ class HomeFragment : Fragment() {
             })
     }
 
+     override fun onResume() {
+         super.onResume()
+         easyWayLocation.startLocation()
+     }
+
     override fun onStart() {
         super.onStart()
+
         if (isOnline(requireContext())) {
             //  myToast(requireActivity(), "Connected")
         } else {

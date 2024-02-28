@@ -9,20 +9,21 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.ManageSlots.model.ModelConsaltation
-import com.example.ehcf_doctor.ManageSlots.model.ModelCreateSlot
 import com.example.ehcf_doctor.ManageSlots.model.ModelDay
+import com.example.ehcf_doctor.ManageSlots.model.ModelGetAddress
 import com.example.ehcf_doctor.ManageSlots.model.My_Model
 import com.example.ehcf_doctor.R
+import com.example.ehcf_doctor.Registration.modelResponse.ModelGender
 import com.example.ehcf_doctor.databinding.ActivityCreateSlotBinding
 import com.example.myrecyview.apiclient.ApiClient
 import retrofit2.Call
@@ -44,11 +45,12 @@ class CreateSlot : AppCompatActivity() {
     var dialog: Dialog? = null
     var selectedDate = ""
     var dayId = ""
+    var address = ""
     var consultationTypeId = ""
     private var startTime = "00:00:00"
     var dayList = ArrayList<ModelDay>()
     var consaltationList = ArrayList<ModelConsaltation>()
-
+    var addressListNew = ArrayList<ModelGender>()
 
     private var endTime = "00:00:00"
     var openingTimeList = ArrayList<String>()
@@ -61,6 +63,7 @@ class CreateSlot : AppCompatActivity() {
         binding = ActivityCreateSlotBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sessionManager = SessionManager(this)
+        apiCallGetAddress()
 
         var view = layoutInflater.inflate(R.layout.time_picker_dialog, null)
         binding.imgBack.setOnClickListener {
@@ -70,7 +73,6 @@ class CreateSlot : AppCompatActivity() {
         selectedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
         Log.e("sessionManager", sessionManager.id.toString())
-
         Log.e("startTime", startTime)
         Log.e("endTime", endTime)
         Log.e("SelectedDate", selectedDate)
@@ -83,7 +85,7 @@ class CreateSlot : AppCompatActivity() {
         dayList.add(ModelDay("Saturday", "6"))
         dayList.add(ModelDay("Sunday", "7"))
 
-        consaltationList.add(ModelConsaltation("Select Consultation Type ", "0"))
+        // consaltationList.add(ModelConsaltation("Select Consultation Type ", "0"))
         consaltationList.add(ModelConsaltation("Tele Consultation", "1"))
         consaltationList.add(ModelConsaltation("Clinic Visit", "2"))
         consaltationList.add(ModelConsaltation("Home Visit", "3"))
@@ -101,19 +103,30 @@ class CreateSlot : AppCompatActivity() {
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
         }
 
-        binding.spinnerDay.adapter = ArrayAdapter<ModelDay>(context, android.R.layout.simple_list_item_1, dayList)
+        binding.spinnerDay.adapter =
+            ArrayAdapter<ModelDay>(context, android.R.layout.simple_list_item_1, dayList)
 
-        binding.spinnerConsaltationType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                if (consaltationList.size > 0) {
-                    consultationTypeId = consaltationList[i].id.toString()
-                    Log.e(ContentValues.TAG, "consultationTypeId: $consultationTypeId")
+        binding.spinnerConsaltationType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    adapterView: AdapterView<*>?,
+                    view: View,
+                    i: Int,
+                    l: Long
+                ) {
+                    if (consaltationList.size > 0) {
+                        consultationTypeId = consaltationList[i].id.toString()
+                        Log.e(ContentValues.TAG, "consultationTypeId: $consultationTypeId")
+                    }
                 }
-            }
 
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-        }
-        binding.spinnerConsaltationType.adapter = ArrayAdapter<ModelConsaltation>(context, android.R.layout.simple_list_item_1, consaltationList)
+                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+            }
+        binding.spinnerConsaltationType.adapter = ArrayAdapter<ModelConsaltation>(
+            context,
+            android.R.layout.simple_list_item_1,
+            consaltationList
+        )
 
 
 
@@ -132,7 +145,10 @@ class CreateSlot : AppCompatActivity() {
                 val date = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(newDate.time)
                 binding.tvDate.text = date
 
-                selectedDate = SimpleDateFormat("E MMMM dd,yyyy hh:mm a", Locale.getDefault()).format(newDate.time)
+                selectedDate = SimpleDateFormat(
+                    "E MMMM dd,yyyy hh:mm a",
+                    Locale.getDefault()
+                ).format(newDate.time)
                 Log.e("selectedDate", selectedDate)
             },
             newCalendar1[Calendar.YEAR],
@@ -222,16 +238,135 @@ class CreateSlot : AppCompatActivity() {
 //                    }
 //                    .show()
 //                return@setOnClickListener
-        //    }
-            else if (consultationTypeId=="0") {
-                myToast(this@CreateSlot,"Select Consultation Type")
-                return@setOnClickListener
-            } else {
+            //    }
+//            else if (consultationTypeId=="0") {
+//                myToast(this@CreateSlot,"Select Consultation Type")
+//                return@setOnClickListener
+            else {
                 apiCall()
 
             }
         }
     }
+
+    private fun apiCallGetAddress() {
+        progressDialog = ProgressDialog(this@CreateSlot)
+        progressDialog!!.setMessage("Loading..")
+        progressDialog!!.setTitle("Please Wait")
+        progressDialog!!.isIndeterminate = false
+        progressDialog!!.setCancelable(true)
+
+        //  progressDialog!!.show()
+
+        ApiClient.apiService.getAddress(sessionManager.id.toString())
+            .enqueue(object : Callback<ModelGetAddress> {
+                @SuppressLint("LogNotTimber", "SuspiciousIndentation")
+                override fun onResponse(
+                    call: Call<ModelGetAddress>, response: Response<ModelGetAddress>
+                ) {
+                    try {
+                        // val addressList =  response.body()!!.result
+
+                        if (response.body()!!.result != null) {
+                            //spinner code start
+                            //   val items = arrayOfNulls<String>(relationListNew.result!!.size)
+
+                            if (response.body()!!.result.address != null) {
+                                addressListNew.add(
+                                    ModelGender(
+                                        response.body()!!.result.address!!,
+                                        1
+                                    )
+                                )
+                            }
+                            if (response.body()!!.result.clinic_address != null) {
+                                addressListNew.add(
+                                    ModelGender(
+                                        response.body()!!.result.clinic_address!!,
+                                        2
+                                    )
+                                )
+
+                            }
+                            if (response.body()!!.result.clinic_address_one != null) {
+                                addressListNew.add(
+                                    ModelGender(
+                                        response.body()!!.result.clinic_address_one!!,
+                                        2
+                                    )
+                                )
+
+                            }
+                            if (response.body()!!.result.clinic_address_two != null) {
+                                addressListNew.add(
+                                    ModelGender(
+                                        response.body()!!.result.clinic_address_two!!,
+                                        3
+                                    )
+                                )
+
+                            }
+                            binding.spinnerAddress.onItemSelectedListener =
+                                object : AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        adapterView: AdapterView<*>?,
+                                        view: View,
+                                        i: Int,
+                                        l: Long
+                                    ) {
+                                        if (addressListNew.size > 0) {
+                                            address = addressListNew[i].name.toString()
+                                            Log.e(ContentValues.TAG, "address: $address")
+                                        }
+                                    }
+
+                                    override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+                                }
+                            binding.spinnerAddress.adapter =
+                                ArrayAdapter<ModelGender>(context, android.R.layout.simple_list_item_1, addressListNew)
+
+                            //
+//                            val adapter: ArrayAdapter<ModelGender?> =
+//                                ArrayAdapter(this@CreateSlot, android.R.layout.simple_list_item_1,
+//                                    addressListNew as List<ModelGender?>
+//                                )
+//                            binding.spinnerAddress.adapter = adapter
+//
+//                            binding.spinnerAddress.adapter = adapter
+////                            binding.spinnerAddress.setSelection(items.indexOf(relationId));
+////                            Log.e("relaytion", relationId)
+//
+//
+//                            progressDialog!!.dismiss()
+//                            binding.spinnerAddress.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//                                override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+//                                    if (addressListNew.size > 0) {
+//                                        dayId = addressListNew[i].id.toString()
+//                                        Log.e(ContentValues.TAG, "gender: $dayId")
+//                                    }
+//                                }
+//
+//                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+//                            }
+
+
+                        }
+                    } catch (e: Exception) {
+                        myToast(this@CreateSlot, e.message.toString())
+                        progressDialog!!.dismiss()
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ModelGetAddress>, t: Throwable) {
+                    myToast(this@CreateSlot, "Something went wrong")
+                    progressDialog!!.dismiss()
+
+                }
+
+            })
+    }
+
 
     private fun apiCall() {
         progressDialog = ProgressDialog(this@CreateSlot)
@@ -241,49 +376,62 @@ class CreateSlot : AppCompatActivity() {
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
 
-        Log.e("StartTime",startTime)
-        Log.e("endTime",endTime)
+        Log.e("StartTime", startTime)
+        Log.e("endTime", endTime)
         Log.e("dayId", dayId.toString())
 
-        ApiClient.apiService.createSlot(sessionManager.id.toString(), startTime, endTime, dayId,consultationTypeId)
+        ApiClient.apiService.createSlot(
+            sessionManager.id.toString(),
+            startTime,
+            endTime,
+            dayId,
+            consultationTypeId,
+            address,
+        )
             .enqueue(object : Callback<My_Model> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
                     //   Call<List<model>>
                     call: Call<My_Model>, response: Response<My_Model>
                 ) {
+                    try {
 
-                    if (response.code()==500){
-                        myToast(this@CreateSlot,"Server Error")
-                        progressDialog!!.dismiss()
-                    }
-                    else if (response.body()!!.status==1) {
-                        myToast(this@CreateSlot, "${response.body()!!.message}")
-                        progressDialog!!.dismiss()
-                        SweetAlertDialog(this@CreateSlot, SweetAlertDialog.SUCCESS_TYPE)
-                            .setTitleText(response.body()!!.message)
-                            .setConfirmText("Ok")
-                            //.setCancelText("Ok")
-                            .showCancelButton(true)
-                            .setConfirmClickListener { sDialog ->
-                                sDialog.cancel()
+                        if (response.code() == 500) {
+                            myToast(this@CreateSlot, "Server Error")
+                            progressDialog!!.dismiss()
+                        } else if (response.body()!!.status == 1) {
+                            myToast(this@CreateSlot, "${response.body()!!.message}")
+                            progressDialog!!.dismiss()
+                            SweetAlertDialog(this@CreateSlot, SweetAlertDialog.SUCCESS_TYPE)
+                                .setTitleText(response.body()!!.message)
+                                .setConfirmText("Ok")
+                                //.setCancelText("Ok")
+                                .showCancelButton(true)
+                                .setConfirmClickListener { sDialog ->
+                                    sDialog.cancel()
 //                                val intent = Intent(applicationContext, ManageSlots::class.java)
 //                                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
 //                                finish()
-                                // startActivity(intent)
-                                startActivity(Intent(this@CreateSlot, MySlot::class.java))
-                            }
-                            .setCancelClickListener { sDialog ->
-                                sDialog.cancel()
-                            }
-                            .show()
-                    } else {
-                        myToast(this@CreateSlot, "${response.body()!!.message}")
+                                    // startActivity(intent)
+                                    startActivity(Intent(this@CreateSlot, MySlot::class.java))
+                                }
+                                .setCancelClickListener { sDialog ->
+                                    sDialog.cancel()
+                                }
+                                .show()
+                        } else {
+                            myToast(this@CreateSlot, "${response.body()!!.message}")
+                            progressDialog!!.dismiss()
+
+                        }
+
+                    } catch (e: Exception) {
+                        myToast(this@CreateSlot, "Something went wrong")
+                        e.printStackTrace()
                         progressDialog!!.dismiss()
-
                     }
-
                 }
+
                 override fun onFailure(call: Call<My_Model>, t: Throwable) {
                     myToast(this@CreateSlot, "${t.message}")
                     progressDialog!!.dismiss()

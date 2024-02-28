@@ -136,6 +136,7 @@ interface ApiInterface {
         @Query("end_time") end_time: String,
         @Query("day") day: String,
         @Query("consultation_type") consultation_type: String,
+        @Query("address") address: String,
     ): Call<My_Model>
 
 
@@ -144,6 +145,11 @@ interface ApiInterface {
         @Query("doctor_id") doctorid: String?,
         @Query("day") day: String?,
     ): Call<ModelSlotList>
+
+    @GET("doctor_address")
+    fun getAddress(
+        @Query("id") doctorid: String?,
+     ): Call<ModelGetAddress>
 
     @POST("delete_slot")
     fun deleteSlot(

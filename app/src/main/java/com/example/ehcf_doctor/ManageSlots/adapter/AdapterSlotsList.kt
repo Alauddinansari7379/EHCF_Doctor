@@ -37,6 +37,7 @@ class AdapterSlotsList(
         holder.startTime.text = convertTo12Hour(list.result[position].start_time)
         holder.endTime.text = convertTo12Hour(list.result[position].end_time)
         // holder.slotId.text= list.result[position].id.toString()
+         holder.address.text= list.result[position].address?.toString()
 
         when (list.result[position].day) {
             "1" -> {
@@ -137,6 +138,7 @@ class AdapterSlotsList(
 
     open class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var startTime: Button = itemView.findViewById(R.id.btnStartTimeSlotL);
+        var address: TextView = itemView.findViewById(R.id.tvAddress)
         var endTime: Button = itemView.findViewById(R.id.btnEndTimeSlotL);
         var delete: TextView = itemView.findViewById(R.id.imgDelete);
         var slotId: TextView = itemView.findViewById(R.id.tvSlotNumber);

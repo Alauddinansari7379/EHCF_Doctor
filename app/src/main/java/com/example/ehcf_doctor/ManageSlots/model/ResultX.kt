@@ -8,6 +8,7 @@ data class ResultX(
     val id: Int,
     var day:String?=null,
     val start_time: String,
+    val address: String?,
     val consultation_type: String,
     val IsActive: String,
     val status: String,
