@@ -232,7 +232,7 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
         dialog = Dialog(requireContext())
         endTime = startTime
         val btnOkDialog = view!!.findViewById<Button>(R.id.btnOkDialogNew)
-        val hour = view!!.findViewById<TextView>(R.id.tvHourTime)
+        val hour = view.findViewById<TextView>(R.id.tvHourTime)
         val minute = view!!.findViewById<TextView>(R.id.tvMinuteTime)
         val second = view!!.findViewById<TextView>(R.id.tvSecondTime)
         dialog = Dialog(requireContext())
@@ -250,6 +250,7 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
 //        Log.e("EndTime", startTime)
 
         remainingTime()
+        @SuppressLint("SuspiciousIndentation")
         fun timeCalculator(seconds: Long) {
             print(seconds)
             hours = (seconds / 3600).toInt().toString()
@@ -259,6 +260,12 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
             hour.text = hours
             minute.text = minutes
             second.text = secondsNew
+              if (second.text.contains("-")){
+                 apiCallGetConsultationAccepted()
+
+             }
+
+
 
             println("Hours: $hours")
             println("Minutes: $minutes")
@@ -272,7 +279,13 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
             dialog?.dismiss()
         }
     }
-    private fun requestAudioPermissions(startTime: String, bookingId: String) {
+
+    override fun videoCall(startTime: String, bookingId: String) {
+        TODO("Not yet implemented")
+    }
+
+
+    private fun requestAudioPermissions(startTime: String, bookingId: String,patientId:String) {
 
 // Check if the microphone permission is granted
         if (ContextCompat.checkSelfPermission(
@@ -287,7 +300,7 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
                 RECORD_AUDIO_PERMISSION_REQUEST_CODE
             )
         } else {
-            start_recording(startTime, bookingId)
+            start_recording(startTime, bookingId,patientId)
             // Permission is already granted
             // You can perform microphone related operations here
         }
@@ -300,7 +313,7 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permission granted, you can perform microphone related operations here
                 } else {
-                    requestAudioPermissions("startTime", bookingId)
+                    requestAudioPermissions("startTime", bookingId,"")
                     // Permission denied, handle accordingly (e.g., show a message or disable microphone functionality)
                 }
                 return
@@ -389,6 +402,35 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
                     activity?.let { myToast(it, "Something went wrong") }
                     binding.shimmer.visibility = View.GONE
                     progressDialog!!.dismiss()
+
+                }
+
+            })
+    }
+    private fun apiCallNotifyToPatient(patientId: String) {
+
+        ApiClient.apiService.notify(patientId)
+            .enqueue(object : Callback<ModelGetConsultation> {
+                @SuppressLint("LogNotTimber")
+                override fun onResponse(
+                    call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
+                ) {
+                    try {
+                        if (response.code() == 200) {
+
+                        }
+                        if (response.code() == 500) {
+                            myToast(requireActivity(), "Server error")
+
+                        }
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                     }
+
+                }
+
+                override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
+                    activity?.let { myToast(it, "Something went wrong") }
 
                 }
 
@@ -580,7 +622,7 @@ private fun recordMeeting(startTime: String, bookingId: String)
 //        }
 //        .show()
 }
-    private fun start_recording(startTime: String, bookingId: String) {
+    private fun start_recording(startTime: String, bookingId: String,patientId:String) {
 //        chronoTimer!!.base = SystemClock.elapsedRealtime()
 //        chronoTimer!!.start()
         val rec_path =requireActivity().getExternalFilesDir("/")!!.absolutePath
@@ -607,6 +649,7 @@ private fun recordMeeting(startTime: String, bookingId: String)
         mediaRecorder!!.start()
         is_recording = true
         myToast(requireActivity(),"Meeting Recording Started")
+        apiCallNotifyToPatient(patientId)
         videoCallFun(startTime,bookingId)
 
     }
@@ -636,7 +679,7 @@ private fun recordMeeting(startTime: String, bookingId: String)
             .show()
     }
 
-    override fun videoCall(startTime: String, bookingId: String) {
+    override fun videoCall(startTime: String, bookingId: String,patientId:String) {
         SweetAlertDialog(requireContext(), SweetAlertDialog.WARNING_TYPE)
           //  .setTitleText("Are you sure want to Start Meeting?")
             .setTitleText("Are you want to Start Meeting?")
@@ -645,7 +688,7 @@ private fun recordMeeting(startTime: String, bookingId: String)
             .showCancelButton(true)
             .setConfirmClickListener { sDialog ->
                 sDialog.cancel()
-                requestAudioPermissions(startTime,bookingId)
+                requestAudioPermissions(startTime,bookingId,patientId)
 
 //                val intent = Intent(applicationContext, SignIn::class.java)
 //                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP

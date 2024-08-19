@@ -1,36 +1,27 @@
 package com.example.ehcf_doctor.Profile.activity
 
-import android.R
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.Profile.modelResponse.*
-import com.example.ehcf_doctor.Registration.activity.TermsAndConditions
 import com.example.ehcf_doctor.Registration.modelResponse.ModelDegreeJava
-import com.example.ehcf_doctor.Registration.modelResponse.ModelGender
 import com.example.ehcf_doctor.databinding.ActivityEducationBinding
 import com.example.myrecyview.apiclient.ApiClient
-import com.giphy.sdk.analytics.GiphyPingbacks.context
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.IOException
 
 class Education : AppCompatActivity() {
     private lateinit var binding: ActivityEducationBinding
@@ -47,11 +38,13 @@ class Education : AppCompatActivity() {
     var clinicAddress1 = ""
     var clinicAddress2 = ""
     var address = ""
+    var street = ""
     var city = ""
     var country = ""
     var state = ""
     var pricing = ""
     private var services = ""
+    private var postalCode = ""
     private var degree = ""
     private var yearOfCom = ""
     private var collegeName = ""
@@ -60,11 +53,12 @@ class Education : AppCompatActivity() {
     private var awards = ""
     private var awardsYear = ""
     private var membership = ""
+    private var openTime = ""
+    private var closeTime = ""
     private var registration = ""
     private var registrationYear = ""
     var degreeList = ModelDegreeJava()
     var yearList = ModelYear()
-
     private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,11 +107,13 @@ class Education : AppCompatActivity() {
         clinicAddress1 = intent.getStringExtra("clinicAddress1").toString()
         clinicAddress2 = intent.getStringExtra("clinicAddress2").toString()
         address = intent.getStringExtra("address").toString()
+        street = intent.getStringExtra("street").toString()
         city = intent.getStringExtra("city").toString()
         country = intent.getStringExtra("country").toString()
         state = intent.getStringExtra("state").toString()
         pricing = intent.getStringExtra("pricing").toString()
         services = intent.getStringExtra("services").toString()
+        postalCode = intent.getStringExtra("postalCode").toString()
         Log.e("specilistId", spclistId)
         Log.e("experience", experience)
         Log.e("genderId", genderId)
@@ -133,6 +129,60 @@ class Education : AppCompatActivity() {
         Log.e("services", services)
 
 
+        val openTimeList = arrayListOf<String>(
+            "01:00:00",
+            "02:00:00",
+            "03:00:00",
+            "04:00:00",
+            "05:00:00",
+            "06:00:00",
+            "07:00:00",
+            "08:00:00",
+            "09:00:00",
+            "10:00:00",
+            "11:00:00",
+            "12:00:00",
+            "13:00:00",
+            "14:00:00",
+            "15:00:00",
+            "16:00:00",
+            "17:00:00",
+            "18:00:00",
+            "19:00:00",
+            "20:00:00",
+            "21:00:00",
+            "22:00:00",
+            "23:00:00",
+            "24:00:00",
+         )
+
+        val closeTimeList = arrayListOf<String>(
+            "01:00:00",
+            "02:00:00",
+            "03:00:00",
+            "04:00:00",
+            "05:00:00",
+            "06:00:00",
+            "07:00:00",
+            "08:00:00",
+            "09:00:00",
+            "10:00:00",
+            "11:00:00",
+            "12:00:00",
+            "13:00:00",
+            "14:00:00",
+            "15:00:00",
+            "16:00:00",
+            "17:00:00",
+            "18:00:00",
+            "19:00:00",
+            "20:00:00",
+            "21:00:00",
+            "22:00:00",
+            "23:00:00",
+            "24:00:00",
+         )
+
 //        degreeList.add(ModelDegree("Select Your Degree"))
 //        degreeList.add(ModelDegree("MBBS"))
 //        degreeList.add(ModelDegree("MS"))
@@ -145,6 +195,63 @@ class Education : AppCompatActivity() {
 //        degreeList.add(ModelDegree("BSMS"))
 //        degreeList.add(ModelDegree("BNYS"))
 
+        binding.spinnerOpen.adapter =
+            ArrayAdapter<String>(
+                context,
+                com.example.ehcf_doctor.R.layout.simple_list_item_1,
+                openTimeList
+            )
+        binding.spinnerClose.adapter =
+            ArrayAdapter<String>(
+                context,
+                com.example.ehcf_doctor.R.layout.simple_list_item_1,
+                closeTimeList
+            )
+        if (sessionManager.openTime!!.isNotEmpty()) {
+            binding.spinnerOpen.setSelection(openTimeList.indexOf(sessionManager.openTime))
+            binding.spinnerClose.setSelection(closeTimeList.indexOf(sessionManager.closeTime))
+        }
+
+        binding.spinnerOpen.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+                if (openTimeList.size > 0) {
+                    openTime = openTimeList[i]
+
+                    Log.e(ContentValues.TAG, "openTime: $openTime")
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
+
+        binding.spinnerClose.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
+                if (closeTimeList.size > 0) {
+                    closeTime = closeTimeList[i]
+
+
+                    Log.e(ContentValues.TAG, "closeTime: $closeTime")
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        }
+
+//
+//// Value you want to set
+//        val valueToSet = sessionManager.openTime
+//
+//// Find the index of the value in the array
+//        val index = openingTimeList(ModelOpenTimeNew).indexOf(valueToSet)
+//
+//// If the value exists in the data array, set the selection to its index
+//        if (index != -1) {
+//            spinner.setSelection(index)
+//        } else {
+//            // Handle the case where the value doesn't exist in the data array
+//            // For example, display an error message or set a default selection
+//        }
+//        binding.spinnerOpen.setSelection(4)
 
         binding.btnUpdate.setOnClickListener {
             if (binding.spinnerDegree.selectedItem.toString() == "Select Your Degree") {
@@ -259,7 +366,7 @@ class Education : AppCompatActivity() {
                                 items.indexOf(
                                     sessionManager.registrationYear.toString()
                                 )
-                            );
+                            )
 
                             progressDialog!!.dismiss()
 
@@ -391,50 +498,50 @@ class Education : AppCompatActivity() {
                 override fun onResponse(
                     call: Call<ModelDegreeJava>, response: Response<ModelDegreeJava>
                 ) {
-                    try{
+                    try {
 
-                    degreeList = response.body()!!;
-                    if (degreeList != null) {
+                        degreeList = response.body()!!;
+                        if (degreeList != null) {
 
-                        //spinner code start
-                        val items = arrayOfNulls<String>(degreeList.result!!.size)
+                            //spinner code start
+                            val items = arrayOfNulls<String>(degreeList.result!!.size)
 
-                        for (i in degreeList.result!!.indices) {
+                            for (i in degreeList.result!!.indices) {
 
-                            items[i] = degreeList.result!![i].degree
-                        }
-                        val adapter: ArrayAdapter<String?> =
-                            ArrayAdapter(
-                                this@Education,
-                                com.example.ehcf_doctor.R.layout.simple_list_item_1,
-                                items
-                            )
-                        var spProvince: SmartMaterialSpinner<String>? = null
-                        var spEmptyItem: SmartMaterialSpinner<String>? = null
-                        binding.spinnerDegree.adapter = adapter
-                        binding.spinnerDegree.setSelection(items.indexOf(sessionManager.qualification.toString()));
-                        //   binding.spinnerDegree.setSelection(sessionManager.qualification.toString().toInt())
-
-                        progressDialog!!.dismiss()
-
-                        binding.spinnerDegree.onItemSelectedListener =
-                            object : AdapterView.OnItemSelectedListener {
-                                override fun onItemSelected(
-                                    adapterView: AdapterView<*>?,
-                                    view: View,
-                                    i: Int,
-                                    l: Long
-                                ) {
-                                    degree = degreeList.result!![i].degree
-                                    degree = degree
-                                    // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
-                                }
-
-                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+                                items[i] = degreeList.result!![i].degree
                             }
-                    }
+                            val adapter: ArrayAdapter<String?> =
+                                ArrayAdapter(
+                                    this@Education,
+                                    com.example.ehcf_doctor.R.layout.simple_list_item_1,
+                                    items
+                                )
+                            var spProvince: SmartMaterialSpinner<String>? = null
+                            var spEmptyItem: SmartMaterialSpinner<String>? = null
+                            binding.spinnerDegree.adapter = adapter
+                            binding.spinnerDegree.setSelection(items.indexOf(sessionManager.qualification.toString()));
+                            //   binding.spinnerDegree.setSelection(sessionManager.qualification.toString().toInt())
 
-                    }catch (e:Exception){
+                            progressDialog!!.dismiss()
+
+                            binding.spinnerDegree.onItemSelectedListener =
+                                object : AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        adapterView: AdapterView<*>?,
+                                        view: View,
+                                        i: Int,
+                                        l: Long
+                                    ) {
+                                        degree = degreeList.result!![i].degree
+                                        degree = degree
+                                        // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
+                                    }
+
+                                    override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+                                }
+                        }
+
+                    } catch (e: Exception) {
                         myToast(this@Education, "Something went wrong")
                         progressDialog!!.dismiss()
                         e.printStackTrace()
@@ -456,7 +563,6 @@ class Education : AppCompatActivity() {
         progressDialog!!.setTitle("Please Wait")
         progressDialog!!.isIndeterminate = false
         progressDialog!!.setCancelable(true)
-
         progressDialog!!.show()
 
         ApiClient.apiService.profileUpdate(
@@ -481,7 +587,13 @@ class Education : AppCompatActivity() {
             registrationYear,
             clinicAddress,
             clinicAddress1,
-            clinicAddress2
+            clinicAddress2,
+            openTime,
+            closeTime,
+            postalCode,
+            street,
+            "NA",
+            "NA"
         )
             .enqueue(object : Callback<ModelProfileUpdate> {
                 @SuppressLint("LogNotTimber")
@@ -512,12 +624,15 @@ class Education : AppCompatActivity() {
                             sessionManager.hospitalName = response.body()!!.result.hos_name
                             sessionManager.city = response.body()!!.result.city
                             sessionManager.state = response.body()!!.result.state
-                            sessionManager.hospitalAddress =
-                                response.body()!!.result.hos_address
+                            sessionManager.hospitalAddress = response.body()!!.result.hos_address
                             sessionManager.registration = response.body()!!.result.registration
                             sessionManager.specialist = response.body()!!.result.specialist
                             sessionManager.yearOfCompletion = response.body()!!.result.yearofcom
                             sessionManager.registrationYear = response.body()!!.result.reg_year
+                            sessionManager.openTime = response.body()!!.result.opening_time
+                            sessionManager.closeTime = response.body()!!.result.closing_time
+                            sessionManager.postalCode = response.body()!!.result.postal_code
+
                             progressDialog!!.dismiss()
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             intent.flags =
@@ -527,8 +642,10 @@ class Education : AppCompatActivity() {
 
                         } else {
                             myToast(this@Education, response.body()!!.message)
+                            progressDialog!!.dismiss()
+
                         }
-                    }catch (e:Exception){
+                    } catch (e: Exception) {
                         myToast(this@Education, "Something went wrong")
                         progressDialog!!.dismiss()
                         e.printStackTrace()

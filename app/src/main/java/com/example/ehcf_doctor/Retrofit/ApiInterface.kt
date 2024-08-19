@@ -71,6 +71,7 @@ interface ApiInterface {
         @Part reg_cer: MultipartBody.Part,
         @Part("desc") desc: RequestBody,
         @Query("follow_up") follow_up: String,
+        @Query("postal_code") postal_code: String,
 
         ): Call<ModelRegistrationNew>
 
@@ -221,8 +222,14 @@ interface ApiInterface {
         @Query("clinic_address") clinic_address: String?,
         @Query("clinic_address_one") clinic_address_one: String?,
         @Query("clinic_address_two") clinic_address_two: String?,
+        @Query("opening_time") opening_time: String,
+        @Query("closing_time") closing_time: String,
+        @Query("postal_code") postal_code: String,
+        @Query("street") street: String,
+        @Query("line1") line1: String,
+        @Query("line2") line2: String,
     ): Call<ModelProfileUpdate>
-
+//street,, added
     @POST("change_online_status")
     fun changeOnlineStatus(
         @Query("id") id: String?,
@@ -280,6 +287,11 @@ interface ApiInterface {
         @Query("doctor_id") doctor_id: String?,
         @Query("slug") slug: String?,
     ): Call<ModelGetConsultation>
+
+    @POST("notify")
+    fun notify(
+        @Query("patient_id") doctor_id: String?,
+     ): Call<ModelGetConsultation>
 
     @POST("search_appointments")
     fun searchAppointments(

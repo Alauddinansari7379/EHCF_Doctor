@@ -161,6 +161,7 @@
                 </TextView>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/layoutAddress"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginTop="5dp"

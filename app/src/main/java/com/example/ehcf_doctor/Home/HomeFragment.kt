@@ -250,7 +250,7 @@ import java.util.*
     }
 
     override fun locationOn() {
-        getLastLocation()
+        //getLastLocation()
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -263,7 +263,7 @@ import java.util.*
         GlobalScope.launch {
             // getLocationDetail.getAddress(location.latitude, location.longitude, "xyz")
             getLocationDetail.getAddress(location.latitude, location.longitude, "AAA")
-            getLastLocation()
+           // getLastLocation()
 
         }
 

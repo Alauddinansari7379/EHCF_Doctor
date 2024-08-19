@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Switch
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -65,12 +66,15 @@ class AdapterSlotsList(
             when (list.result[position].consultation_type) {
                 "1" -> {
                     holder.consultationTypeMySlot.text = "Tele Consultation"
+                    holder.layoutAddress.visibility=View.GONE
                 }
                 "2" -> {
                     holder.consultationTypeMySlot.text = "Clinic Visit"
+                    holder.layoutAddress.visibility=View.VISIBLE
                 }
                 "3" -> {
                     holder.consultationTypeMySlot.text = "Home Visit"
+                    holder.layoutAddress.visibility=View.VISIBLE
                 }
             }
 
@@ -147,6 +151,7 @@ class AdapterSlotsList(
         var cardView: CardView = itemView.findViewById(R.id.cardSlotList);
         var btnupdate: Button = itemView.findViewById(R.id.btnUpdateSlotList);
         var switchActive: Switch = itemView.findViewById(R.id.switchActive)
+        var layoutAddress: LinearLayout = itemView.findViewById(R.id.layoutAddress)
 
     }
 

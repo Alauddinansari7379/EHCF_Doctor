@@ -335,6 +335,8 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
                 if (openingTimeList.size > 0) {
                     openTime = openingTimeList[i].opentime
+                    sessionManager.openTime = openingTimeList[i].opentime
+
 
                     Log.e(ContentValues.TAG, "openTime: $openTime")
                 }
@@ -347,7 +349,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
                 if (closingTimeList.size > 0) {
                     closeTime = closingTimeList[i].closeTime
-
+                    sessionManager.closeTime = closingTimeList[i].closeTime
                     Log.e(ContentValues.TAG, "closeTime: $closeTime")
                 }
             }
@@ -872,30 +874,37 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             description,
             regstrationNumber,
             MultipartBody.Part.createFormData("reg_cer", file.name, body),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"), followUpDay
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
+            followUpDay,
+            binding.edtPostalCodenew.text.toString(),
+
         )
             .enqueue(object : Callback<ModelRegistrationNew> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
                     call: Call<ModelRegistrationNew>, response: Response<ModelRegistrationNew>
                 ) {
-                    if (response.code() == 500) {
-                        myToast(this@RegirstrationTest, "Server Error")
-                    } else if (response.body()!!.status == 1) {
-                        myToast(this@RegirstrationTest, response.body()!!.message)
-                        subscribed()
-                        progressDialog!!.dismiss()
-                        val intent = Intent(applicationContext, SignIn::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        finish()
-                        startActivity(intent)
-                    } else {
-                        myToast(this@RegirstrationTest, "${response.body()!!.message}")
-                        progressDialog!!.dismiss()
+                    try {
+                        if (response.code() == 500) {
+                            myToast(this@RegirstrationTest, "Server Error")
+                        } else if (response.body()!!.status == 1) {
+                            subscribed()
+                            progressDialog!!.dismiss()
+                            myToast(this@RegirstrationTest, response.body()!!.message)
+                            val intent = Intent(applicationContext, SignIn::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            finish()
+                            startActivity(intent)
+                        } else {
+                            myToast(this@RegirstrationTest, response.body()!!.message)
+                            progressDialog!!.dismiss()
 
+                        }
+
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                        progressDialog!!.dismiss()
                     }
-
                 }
 
                 override fun onFailure(call: Call<ModelRegistrationNew>, t: Throwable) {
@@ -959,7 +968,9 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             description,
             regstrationNumber,
             MultipartBody.Part.createFormData("reg_cer", file1.name, body),
-            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"), followUpDay
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), "json"),
+            followUpDay,
+            binding.edtPostalCodenew.text.toString(),
         )
             .enqueue(object : Callback<ModelRegistrationNew> {
                 @SuppressLint("LogNotTimber")

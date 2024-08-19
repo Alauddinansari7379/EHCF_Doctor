@@ -11,8 +11,8 @@ android {
         applicationId "com.Amtech.ehcfdoctor"
         minSdk 24
         targetSdk 33
-        versionCode 2
-        versionName "1.0"
+        versionCode 7
+        versionName "1.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

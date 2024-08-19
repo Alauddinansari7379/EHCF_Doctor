@@ -379,7 +379,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp">
 
-                    <EditText
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtClinicName"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -389,7 +389,7 @@
                         android:padding="10dp"
                         android:textSize="15dp">
 
-                    </EditText>
+                    </androidx.appcompat.widget.AppCompatEditText>
 
                 </LinearLayout>
 
@@ -425,7 +425,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp">
 
-                    <EditText
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/edtClinicAddress"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -435,9 +435,12 @@
                         android:padding="10dp"
                         android:textSize="15dp">
 
-                    </EditText>
+                    </androidx.appcompat.widget.AppCompatEditText>
 
                 </LinearLayout>
+
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -548,7 +551,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginLeft="10dp"
-                            android:text="Address">
+                            android:text="Address Line 1">
 
                         </androidx.appcompat.widget.AppCompatTextView>
 
@@ -582,6 +585,51 @@
                             android:textSize="15dp">
 
                         </EditText>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"
+                            android:text="Street">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="*"
+                            android:textColor="#E91E63">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edtStreet"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:background="@drawable/corner"
+                            android:gravity="start"
+                            android:inputType="textMultiLine"
+                            android:padding="10dp"
+                            android:textSize="15dp">
+
+                        </androidx.appcompat.widget.AppCompatEditText>
 
                     </LinearLayout>
                     <LinearLayout
@@ -724,6 +772,52 @@
 
                     </LinearLayout>
 
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:text="Postal Code">
+
+                    </androidx.appcompat.widget.AppCompatTextView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="*"
+                        android:textColor="#E91E63">
+
+                    </androidx.appcompat.widget.AppCompatTextView>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <EditText
+                        android:id="@+id/edtPostalCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/corner"
+                        android:hint="Postal Code"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:padding="10dp"
+                        android:textSize="15dp">
+
+                    </EditText>
 
                 </LinearLayout>
 

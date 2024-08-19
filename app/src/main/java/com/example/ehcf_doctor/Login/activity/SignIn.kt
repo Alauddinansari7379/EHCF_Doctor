@@ -136,6 +136,9 @@ class SignIn : AppCompatActivity() {
                         sessionManager.hospitalName =response.body()!!.result.hos_name
                         sessionManager.hospitalAddress =response.body()!!.result.hos_address
                         sessionManager.registration =response.body()!!.result.reg_no
+                        sessionManager.openTime =response.body()!!.result.opening_time
+                        sessionManager.closeTime =response.body()!!.result.closing_time
+                        sessionManager.postalCode =response.body()!!.result.postal_code.toString()
 
                         Log.e("Alauddin","sessionManager.fcmToken-${sessionManager.fcmToken}")
                         Log.e("Alauddin","sessionManager.password-${sessionManager.password}")
@@ -175,9 +178,9 @@ class SignIn : AppCompatActivity() {
 
 
         }
-        binding.tvWelComeBack.setOnClickListener{
-            startActivity(Intent(this, AddPrescription::class.java))
-        }
+//        binding.tvWelComeBack.setOnClickListener{
+//            startActivity(Intent(this, AddPrescription::class.java))
+//        }
 
     }
     @SuppressLint("StringFormatInvalid")

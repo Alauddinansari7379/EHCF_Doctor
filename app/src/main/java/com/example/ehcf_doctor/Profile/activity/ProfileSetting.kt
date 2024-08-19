@@ -55,11 +55,13 @@ class ProfileSetting : AppCompatActivity() {
     var clinicAddress1 = ""
     var clinicAddress2 = ""
     var address = ""
+    var street = ""
     var city = ""
     var state = ""
     private var pricing = ""
     var countryName = "India"
     var services = ""
+    var postalCode = ""
 
     private lateinit var binding: ActivityProfileSettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,6 +93,7 @@ class ProfileSetting : AppCompatActivity() {
             binding.edtAddress.setText(sessionManager.address.toString())
             binding.edtPricing.setText(sessionManager.pricing.toString())
             binding.edtServices.setText(sessionManager.services.toString())
+            binding.edtPostalCode.setText(sessionManager.postalCode.toString())
 
         }
 
@@ -133,24 +136,21 @@ class ProfileSetting : AppCompatActivity() {
                 binding.edtExperience.requestFocus()
                 return@setOnClickListener
             }
-            if (binding.edtClinicName.text.isEmpty()) {
+            if (binding.edtClinicName.text!!.isEmpty()) {
                 binding.edtClinicName.error = "Enter ClinicName"
                 binding.edtClinicName.requestFocus()
                 return@setOnClickListener
             }
-            if (binding.edtClinicName.text.isEmpty()) {
-                binding.edtClinicName.error = "Enter Clinic Name"
-                binding.edtClinicName.requestFocus()
-                return@setOnClickListener
-            }
-            if (binding.edtClinicAddress.text.isEmpty()) {
-                binding.edtClinicAddress.error = "Enter Clinic Address"
-                binding.edtClinicAddress.requestFocus()
-                return@setOnClickListener
-            }
+
             if (binding.edtAddress.text.isEmpty()) {
                 binding.edtAddress.error = "Enter Address"
                 binding.edtAddress.requestFocus()
+                return@setOnClickListener
+            }
+
+            if (binding.edtStreet.text!!.isEmpty()) {
+                binding.edtStreet.error = "Enter Street"
+                binding.edtStreet.requestFocus()
                 return@setOnClickListener
             }
             if (binding.spinnerState.selectedItem.toString() == "Select Your State") {
@@ -162,6 +162,11 @@ class ProfileSetting : AppCompatActivity() {
             if (binding.spinnerCity.selectedItem.toString() == "Select Your City") {
                 myToast(this@ProfileSetting, "Please Select Your City!")
                 binding.spinnerCity.requestFocus()
+                return@setOnClickListener
+            }
+            if (binding.edtPostalCode.text.isEmpty()) {
+                binding.edtPostalCode.error = "Enter Postal Code"
+                binding.edtPostalCode.requestFocus()
                 return@setOnClickListener
             }
             if (binding.edtPricing.text.isEmpty()) {
@@ -182,9 +187,11 @@ class ProfileSetting : AppCompatActivity() {
                 clinicAddress1 = binding.edtClinicAddress1.text.toString().trim()
                 clinicAddress2 = binding.edtClinicAddress2.text.toString().trim()
                 address = binding.edtAddress.text.toString().trim()
+                street = binding.edtStreet.text.toString().trim()
                 pricing = binding.edtPricing.text.toString().trim()
                 services = binding.edtServices.text.toString().trim()
                 services = binding.edtServices.text.toString().trim()
+                postalCode = binding.edtPostalCode.text.toString().trim()
 
                 val intent = Intent(context as Activity, Education::class.java)
                 intent.putExtra("specilistId", specilistId).toString()
@@ -195,11 +202,13 @@ class ProfileSetting : AppCompatActivity() {
                 intent.putExtra("clinicAddress1", clinicAddress1).toString()
                 intent.putExtra("clinicAddress2", clinicAddress2).toString()
                 intent.putExtra("address", address).toString()
+                intent.putExtra("street", street).toString()
                 intent.putExtra("city", city).toString()
                 intent.putExtra("country", countryName).toString()
                 intent.putExtra("state", state).toString()
                 intent.putExtra("pricing", pricing).toString()
                 intent.putExtra("services", services).toString()
+                intent.putExtra("postalCode", postalCode).toString()
                 context.startActivity(intent)
             }
         }

@@ -69,6 +69,8 @@ class CreateSlot : AppCompatActivity() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
+        binding.tvStartTime.text=sessionManager.openTime
+        binding.tvEndTime.text=sessionManager.closeTime
         val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
         selectedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
@@ -117,6 +119,12 @@ class CreateSlot : AppCompatActivity() {
                     if (consaltationList.size > 0) {
                         consultationTypeId = consaltationList[i].id.toString()
                         Log.e(ContentValues.TAG, "consultationTypeId: $consultationTypeId")
+                        if (consaltationList[i].id=="1"){
+                            binding.layoutAddress.visibility=View.GONE
+                            address="NA"
+                        }else{
+                            binding.layoutAddress.visibility=View.VISIBLE
+                        }
                     }
                 }
 
@@ -177,11 +185,11 @@ class CreateSlot : AppCompatActivity() {
 
 
         binding.btnCreate.setOnClickListener {
-            val startT = binding.tvStartTime.text.toString()
-            val endT = binding.tvEndTime.text.toString()
-            if (binding.tvStartTime.text == "00:00:00") {
+            val startT = sessionManager.openTime!!.replace(":","").toInt()
+            val endT = binding.tvStartTime.text.toString().replace(":","").toInt()
+            if (sessionManager.openTime!!.replace(":","").toInt() > binding.tvStartTime.text.toString().replace(":","").toInt()) {
                 SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                    .setTitleText("Please select Start Time !")
+                    .setTitleText("The session slabs must be within the time limit of the clinic timings")
                     .setConfirmText("Ok")
                     .showCancelButton(true)
                     .setConfirmClickListener { sDialog ->
@@ -194,9 +202,12 @@ class CreateSlot : AppCompatActivity() {
                     .show()
                 return@setOnClickListener
             }
-            if (binding.tvEndTime.text == "00:00:00") {
+
+            val startT1 = sessionManager.openTime!!.replace(":","").toInt()
+            val endT1 = binding.tvEndTime.text.toString().replace(":","").toInt()
+            if (sessionManager.closeTime!!.replace(":","").toInt() < binding.tvEndTime.text.toString().replace(":","").toInt()) {
                 SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-                    .setTitleText("Please select End Time !")
+                    .setTitleText("The session slabs must be within the time limit of the clinic timings")
                     .setConfirmText("Ok")
                     .showCancelButton(true)
                     .setConfirmClickListener { sDialog ->
@@ -375,6 +386,8 @@ class CreateSlot : AppCompatActivity() {
         progressDialog!!.isIndeterminate = false
         progressDialog!!.setCancelable(true)
         progressDialog!!.show()
+        startTime = binding.tvStartTime.text.toString()
+        endTime = binding.tvEndTime.text.toString()
 
         Log.e("StartTime", startTime)
         Log.e("endTime", endTime)

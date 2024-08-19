@@ -65,6 +65,7 @@
             android:background="@drawable/tabcorner"
             android:backgroundTint="#E7EDF5"
             app:tabGravity="fill"
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
             app:tabIndicator="@drawable/tabcorner"
             app:tabIndicatorColor="@color/main_color"
             app:tabIndicatorGravity="center"

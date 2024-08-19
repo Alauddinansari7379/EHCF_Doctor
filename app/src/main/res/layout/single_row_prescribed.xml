@@ -31,6 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Booking Date-"
+                    android:textSize="12sp"
                     android:textColor="#2A2426"
                     android:textStyle="bold">
 
@@ -40,6 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="July 22, 04:45 AM"
+                    android:textSize="12sp"
                     android:textColor="#2A2426"
                     android:textStyle="bold">
 
@@ -51,6 +53,7 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="10dp"
                     android:gravity="end"
+                    android:textSize="12sp"
                     android:text="Dental"
                     android:textColor="#2A2426"
                     android:textStyle="bold">
@@ -103,6 +106,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="Name"
+                                android:textSize="12sp"
                                 android:textColor="@color/black"
                                 android:textStyle="bold">
 
@@ -117,6 +121,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
+                                android:textSize="12sp"
                                 android:text="Session Start Time-"
                                 android:textColor="@color/black"
                                 android:textStyle="bold">
@@ -128,6 +133,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="16:15"
+                                android:textSize="12sp"
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 
@@ -142,6 +148,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
+                                android:textSize="12sp"
                                 android:text="Session End Time-"
                                 android:textColor="@color/black"
                                 android:textStyle="bold">
@@ -153,6 +160,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:text="16:15"
+                                android:textSize="12sp"
                                 android:textColor="#686868"
                                 android:textStyle="bold">
 
@@ -172,12 +180,13 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnAddReportPrescribedPre"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="30dp"
                         android:layout_marginRight="10dp"
                         app:cardCornerRadius="25dp"
                         android:drawableTint="@color/white"
-                        android:textSize="12dp"
-                        android:padding="10dp"
+                        android:textSize="11sp"
+                        android:padding="5dp"
+                        android:layout_marginBottom="2dp"
                         android:textColor="@color/white"
                         android:textAllCaps="false"
                         android:drawableLeft="@drawable/ic_baseline_add_24"
@@ -188,12 +197,13 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnViewPrescriptionPrescribed"
                         android:layout_width="wrap_content"
-                        android:layout_height="35dp"
+                        android:layout_height="30dp"
                         android:layout_marginRight="10dp"
                         app:cardCornerRadius="25dp"
                         android:drawableTint="@color/white"
-                        android:textSize="12dp"
-                        android:padding="10dp"
+                        android:textSize="11dp"
+                        android:padding="5dp"
+                        android:layout_marginBottom="2dp"
                         android:textColor="@color/white"
                         android:textAllCaps="false"
                         android:drawableLeft="@drawable/ic_baseline_add_24"

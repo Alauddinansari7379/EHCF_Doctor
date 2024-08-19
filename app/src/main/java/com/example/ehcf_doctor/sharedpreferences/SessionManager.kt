@@ -2,6 +2,7 @@ package com.example.ehcf.sharedpreferences
 
 import android.content.Context
 import android.preference.PreferenceManager
+import retrofit2.http.POST
 
 class SessionManager(context: Context?) {
     private val prefs = PreferenceManager.getDefaultSharedPreferences(context)
@@ -54,6 +55,9 @@ class SessionManager(context: Context?) {
         private const val CLINIC_ADDRESS_TWO = "clinic_address_two"
         private const val CITY = "city"
         private const val STATE = "state"
+        private const val OPENTIME = "openTime"
+        private const val CLOSETIME = "closeTime"
+        private const val POSTALCODE = "postalCode"
     }
 
     var isLogin: Boolean
@@ -85,6 +89,23 @@ class SessionManager(context: Context?) {
         get() = prefs.getString(SPECIALIST, "")
         set(specialist) {
             prefs.edit().putString(SPECIALIST, specialist).apply()
+        }
+
+    var openTime: String?
+        get() = prefs.getString(OPENTIME, "")
+        set(openTime) {
+            prefs.edit().putString(OPENTIME, openTime).apply()
+        }
+
+    var closeTime: String?
+        get() = prefs.getString(CLOSETIME, "")
+        set(closeTime) {
+            prefs.edit().putString(CLOSETIME, closeTime).apply()
+        }
+    var postalCode: String?
+        get() = prefs.getString(POSTALCODE, "")
+        set(postalCode) {
+            prefs.edit().putString(POSTALCODE, postalCode).apply()
         }
 
     var yearOfCompletion: String?

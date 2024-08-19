@@ -356,8 +356,7 @@ class AddPatient : AppCompatActivity() {
 //                                Log.e("system", system!!)
 //                                 Log.e("use", use!!)
 //                                Log.e("value", value!!)
-// ruk yeh  shi hai ok ek yaha par waise kaam kiya tha dekho isko ye kaam kar raha tha
-//                             //   println("Resource Type: $resourceType")
+ //                             //   println("Resource Type: $resourceType")
 //                                println("Identifier System: $system")
 //                                println("Identifier Use: $use")
 //                                println("Identifier Value: $value")
@@ -501,7 +500,7 @@ class AddPatient : AppCompatActivity() {
             // countryName = countryCode.substring(1)n
             Log.e("countryName,", "$countryName")
         }
-
+//Alauddin
         binding.btnMoveEzdx.setOnClickListener {
             try {
                 var launcherIntent = packageManager.getLaunchIntentForPackage(ezdxPackageName)

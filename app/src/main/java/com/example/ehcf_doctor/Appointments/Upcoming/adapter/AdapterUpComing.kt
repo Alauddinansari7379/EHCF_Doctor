@@ -77,8 +77,7 @@ class AdapterUpComing(
             }
             holder.btnCheck.setOnClickListener {
                 confirmSlot.popupRemainingTime(list[position].date?.let { it1 ->
-                    changeDateFormatNew(
-                        it1
+                    changeDateFormatNew(it1
                     )
                 } + " " + list[position].start_time)
             }
@@ -162,7 +161,7 @@ class AdapterUpComing(
             }
             holder.btnStartMeeting.setOnClickListener {
                 CompanionCoustmorName = list[position].customer_name.toString()
-                confirmSlot.videoCall(list[position].date + "EHCF" + list[position].start_time, list[position].id)
+                confirmSlot.videoCall(list[position].date + "EHCF" + list[position].start_time, list[position].id , list[position].patient_id)
             }
             holder.btnView.setOnClickListener {
                 val intent = Intent(context as Activity, AppointmentDetalis::class.java)
@@ -211,7 +210,7 @@ class AdapterUpComing(
         fun alretDilogConfirm(bookingId: String, slug: String)
         fun alretDilogReject(bookingId: String, slug: String)
         fun popupRemainingTime(startTime: String)
-        fun videoCall(startTime: String, bookingId: String)
+        fun videoCall(startTime: String, bookingId: String, patientId: String)
         fun alretDilogCompleted(bookingId: String)
 
     }
