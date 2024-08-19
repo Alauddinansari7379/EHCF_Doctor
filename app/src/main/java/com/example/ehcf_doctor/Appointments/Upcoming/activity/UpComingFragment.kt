@@ -243,6 +243,7 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
             (view.parent as ViewGroup).removeView(view) // <- fix
         }
         dialog!!.setContentView(view)
+
         dialog?.setCancelable(true)
         // dialog?.setContentView(view)
         // val d1 = format.parse("2023/03/29 11:04:00")
