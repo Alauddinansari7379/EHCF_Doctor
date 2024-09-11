@@ -10,12 +10,10 @@ import android.view.View
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.HealthCube.Adapter.AdapterExixtingPatientList
-import com.example.ehcf_doctor.HealthCube.Adapter.AdapterPatientList
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityExistingPatientListBinding
-import com.example.ehcf_doctor.databinding.ActivityPatientListBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback

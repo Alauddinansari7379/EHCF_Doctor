@@ -3,13 +3,10 @@ package com.example.ehcf_doctor.Prescription.activity
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.Prescription.adapter.AdapterPrescriptionDetial
 import com.example.ehcf.Prescription.adapter.AdapterPrescriptionDetialDiagonsis
@@ -17,7 +14,7 @@ import com.example.ehcf.Prescription.adapter.AdapterPrescriptionDetialLabTest
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Prescription.model.ModelPreDetJava
 import com.example.ehcf_doctor.databinding.ActivityPrescriptionDetailsBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.rajat.pdfviewer.PdfViewerActivity
 import retrofit2.Call
 import retrofit2.Callback

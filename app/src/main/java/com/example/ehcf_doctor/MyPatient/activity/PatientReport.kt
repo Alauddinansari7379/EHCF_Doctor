@@ -1,10 +1,8 @@
 package com.example.ehcf_doctor.MyPatient.activity
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,10 +10,8 @@ import com.example.ehcf.Helper.myToast
 import com.example.ehcf.Upload.model.ModelGetAllReport
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.MyPatient.adapter.AdapterViewReport
-import com.example.ehcf_doctor.MyPatient.model.ModelAllReport
-import com.example.ehcf_doctor.Prescription.activity.ViewReport
 import com.example.ehcf_doctor.databinding.ActivityPatientReportBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

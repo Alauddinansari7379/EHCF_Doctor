@@ -34,7 +34,7 @@ import com.example.ehcf_doctor.Booking.model.ResultUpcoming
 import com.example.ehcf_doctor.Prescription.activity.AddPrescription
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentUpComingBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.hbisoft.hbrecorder.HBRecorder
 import com.hbisoft.hbrecorder.HBRecorderListener

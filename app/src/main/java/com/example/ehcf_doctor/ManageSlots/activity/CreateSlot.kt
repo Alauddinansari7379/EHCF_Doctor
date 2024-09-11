@@ -25,7 +25,7 @@ import com.example.ehcf_doctor.ManageSlots.model.My_Model
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Registration.modelResponse.ModelGender
 import com.example.ehcf_doctor.databinding.ActivityCreateSlotBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

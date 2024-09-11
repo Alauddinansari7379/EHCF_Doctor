@@ -13,11 +13,9 @@ import androidx.core.os.postDelayed
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.ManageSlots.adapter.AdapterManageSlot
-import com.example.ehcf_doctor.ManageSlots.adapter.AdapterSlotsList
 import com.example.ehcf_doctor.ManageSlots.model.ModelSlotList
 import com.example.ehcf_doctor.databinding.ActivityManageSlotsBinding
-import com.example.myrecyview.apiclient.ApiClient
-import okhttp3.internal.notify
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

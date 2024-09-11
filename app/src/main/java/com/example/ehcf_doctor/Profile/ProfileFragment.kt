@@ -27,12 +27,11 @@ import com.example.ehcf_doctor.Profile.modelResponse.ResetPassResponse
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Registration.activity.UploadRequestBody
 import com.example.ehcf_doctor.databinding.FragmentProfileBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,7 +40,6 @@ import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.util.*
 
 class ProfileFragment : Fragment(), UploadRequestBody.UploadCallback {
     private lateinit var binding: FragmentProfileBinding

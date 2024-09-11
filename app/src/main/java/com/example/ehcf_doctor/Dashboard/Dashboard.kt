@@ -21,7 +21,7 @@ import com.example.ehcf_doctor.Dashboard.adapter.AdapterDashboard
 import com.example.ehcf_doctor.Dashboard.model.ModelDashboard
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.databinding.ActivityDashboardBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

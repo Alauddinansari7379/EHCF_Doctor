@@ -13,7 +13,7 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelAppointmentDatails
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityAppointmentDetalisBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback

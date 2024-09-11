@@ -13,11 +13,10 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
 import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.ForgotPassword.MobileNumber
-import com.example.ehcf_doctor.Prescription.activity.AddPrescription
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Registration.activity.RegirstrationTest
 import com.example.ehcf_doctor.databinding.ActivitySignInBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import retrofit2.Call

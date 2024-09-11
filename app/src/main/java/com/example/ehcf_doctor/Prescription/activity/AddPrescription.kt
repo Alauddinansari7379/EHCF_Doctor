@@ -35,7 +35,7 @@ import com.example.ehcf_doctor.Rating.Rating
 import com.example.ehcf_doctor.Registration.modelResponse.ModelGender
 import com.example.ehcf_doctor.Registration.modelResponse.ModelSpecilList
 import com.example.ehcf_doctor.databinding.ActivityAddPrescriptionBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.*

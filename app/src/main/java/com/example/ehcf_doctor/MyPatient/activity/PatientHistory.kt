@@ -6,18 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.ehcf.Helper.myToast
-import com.example.ehcf.Testing.Interface.ApiInterfaceHelthCube
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterPatientHistory
-import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ModelPatientHistoryX
 import com.example.ehcf_doctor.databinding.ActivityPatientHistoryBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class PatientHistory : AppCompatActivity() {
     private lateinit var binding: ActivityPatientHistoryBinding

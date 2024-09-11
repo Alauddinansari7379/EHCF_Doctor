@@ -19,7 +19,6 @@ import android.util.Log
 import android.view.View
 import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -41,10 +40,7 @@ import com.example.ehcf_doctor.Appointments.Appointments
 import com.example.ehcf_doctor.AudioRecording.Fragment.RecordListFragment
 import com.example.ehcf_doctor.AyuSynk.MainActivity
 import com.example.ehcf_doctor.Dashboard.Dashboard
-import com.example.ehcf_doctor.HealthCube.activity.AppToEdzxJava
-import com.example.ehcf_doctor.HealthCube.activity.AppToEzdxNew
 import com.example.ehcf_doctor.HealthCube.activity.Bluetooth
-import com.example.ehcf_doctor.HealthCube.activity.PatientList
 import com.example.ehcf_doctor.Helper.CustomDatepickerdemo
 import com.example.ehcf_doctor.Invoice.Invoice
 import com.example.ehcf_doctor.Login.activity.SignIn
@@ -58,7 +54,7 @@ import com.example.ehcf_doctor.Profile.activity.ProfileSetting
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.ResetPassword
 import com.example.ehcf_doctor.databinding.ActivityMainDoctorBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar

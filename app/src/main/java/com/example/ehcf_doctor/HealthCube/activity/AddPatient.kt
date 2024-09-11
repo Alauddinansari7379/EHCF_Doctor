@@ -30,10 +30,9 @@ import com.example.ehcf_doctor.HealthCube.Adapter.ItemAdapter
 import com.example.ehcf_doctor.HealthCube.Adapter.ItemAdapter.Companion.selectedTestList
 import com.example.ehcf_doctor.HealthCube.Model.*
 import com.example.ehcf_doctor.databinding.ActivityAddPatientBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.example.ehcf_doctor.HealthCube.RetrofitHealthCube.ApiClientHealthCube
 import com.example.ehcf_doctor.HealthCube.RetrofitHealthCube.ApiInterfaceHealthCube
-import com.example.ehcf_doctor.Login.activity.SignIn
 import com.rajat.pdfviewer.PdfViewerActivity
 import retrofit2.Call
 import retrofit2.Callback

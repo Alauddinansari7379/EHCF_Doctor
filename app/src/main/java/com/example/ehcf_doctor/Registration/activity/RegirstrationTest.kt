@@ -30,7 +30,7 @@ import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Registration.modelResponse.*
 import com.example.ehcf_doctor.databinding.ActivityRegirstrationTestBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar

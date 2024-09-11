@@ -16,7 +16,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf_doctor.ForgotPassword.modelReponse.ModelForgotPass
 import com.example.ehcf_doctor.databinding.ActivityOtpverificationBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -24,9 +24,8 @@ import com.example.ehcf_doctor.ManageSlots.adapter.AdapterSlotsList
 import com.example.ehcf_doctor.ManageSlots.adapter.AdapterSwitchButton
 import com.example.ehcf_doctor.ManageSlots.model.*
 import com.example.ehcf_doctor.databinding.ActivityManageSlotsSeassionBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
-import okhttp3.internal.toImmutableList
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

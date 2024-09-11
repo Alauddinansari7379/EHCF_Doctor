@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
@@ -23,11 +22,9 @@ import com.example.ehcf_doctor.MyPatient.adapter.AdapterMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ModelCommentList
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ResultMyPatient
-import com.example.ehcf_doctor.Prescription.adapter.AdapterPrescribed
-import com.example.ehcf_doctor.Prescription.model.ResultPrePrescribed
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityMyPatientBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
 import org.jitsi.meet.sdk.JitsiMeetActivity
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions

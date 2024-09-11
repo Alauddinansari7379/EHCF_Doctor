@@ -16,11 +16,10 @@ import androidx.viewpager.widget.ViewPager
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Prescription.adapter.AdapterPrescribed
-import com.example.ehcf_doctor.Prescription.adapter.AdapterPrescription
 import com.example.ehcf_doctor.Prescription.model.*
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentPrescribedBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.launch

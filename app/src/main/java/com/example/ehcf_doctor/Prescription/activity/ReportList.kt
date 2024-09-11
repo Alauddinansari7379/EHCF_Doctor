@@ -7,11 +7,9 @@ import android.os.Bundle
 import android.view.View
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.report.model.ModelGetTest
-import com.example.ehcf_doctor.MyPatient.adapter.AdapterViewReport
 import com.example.ehcf_doctor.Prescription.adapter.AdapterViewReportTest
-import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityReportListBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

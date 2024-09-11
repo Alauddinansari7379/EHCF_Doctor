@@ -18,7 +18,7 @@ import com.example.ehcf_doctor.Invoice.adapter.AdapterInvoice
 import com.example.ehcf_doctor.Invoice.model.ModelInvoice
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityInvoiceBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback

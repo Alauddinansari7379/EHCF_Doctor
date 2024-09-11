@@ -3,7 +3,6 @@ package com.example.ehcf_doctor.Home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
-import android.bluetooth.BluetoothDevice
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -38,7 +37,7 @@ import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentHomeBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices

@@ -21,12 +21,9 @@ import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Invoice.adapter.AdapterInvoiceDetial
-import com.example.ehcf_doctor.Invoice.model.ModelInvoice
 import com.example.ehcf_doctor.Invoice.model.ModelInvoiceDetial
-import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityInvoiceDetialBinding
-import com.example.myrecyview.apiclient.ApiClient
-import com.facebook.shimmer.ShimmerFrameLayout
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

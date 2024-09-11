@@ -13,12 +13,11 @@ import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Cancelled.adapter.AdapterCancelled
-import com.example.ehcf_doctor.Appointments.Consulted.adapter.AdapterConsulted
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.Booking.model.ResultUpcoming
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentCancelledBinding
-import com.example.myrecyview.apiclient.ApiClient
+import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback
