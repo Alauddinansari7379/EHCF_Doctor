@@ -14,6 +14,8 @@ object ApiClient {
     private var retrofit: Retrofit? = null
     private val client: Retrofit?
         get() {
+
+            //somenath
             val interceptor = HttpLoggingInterceptor()
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             val apiClient: OkHttpClient = OkHttpClient.Builder()
