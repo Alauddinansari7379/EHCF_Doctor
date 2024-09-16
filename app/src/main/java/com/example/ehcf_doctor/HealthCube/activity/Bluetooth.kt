@@ -2,6 +2,7 @@ package com.example.ehcf_doctor.HealthCube.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.bluetooth.BluetoothAdapter
@@ -21,8 +22,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.ehcf.Helper.currentDate
+import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.HealthCube.Model.ModelTotalCount
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityMainBluethootBinding
@@ -36,7 +39,7 @@ import java.util.*
 
 class Bluetooth : AppCompatActivity() {
     private val TAG = Bluetooth::class.java.simpleName
-    var progressDialog: ProgressDialog? = null
+    private var context: Context = this@Bluetooth
     private lateinit var sessionManager: SessionManager
     private lateinit var binding: ActivityMainBluethootBinding
 
@@ -52,6 +55,8 @@ class Bluetooth : AppCompatActivity() {
     private var mDevicesListView: ListView? = null
     private var mDevicesListViewNew: ListView? = null
     private val mLED1: CheckBox? = null
+    private var count = 0
+    private var count2 = 0
     private var mBTAdapter: BluetoothAdapter? = null
     private var mPairedDevices: Set<BluetoothDevice>? = null
     private var mBTArrayAdapter: ArrayAdapter<String>? = null
@@ -84,7 +89,7 @@ class Bluetooth : AppCompatActivity() {
             onBackPressed()
         }
 
-       binding.tvupdateDate.text= currentDate
+        binding.tvupdateDate.text = currentDate
         //   bluethootPermission()
 
 //        binding.cardSearch.setOnClickListener {
@@ -131,7 +136,7 @@ class Bluetooth : AppCompatActivity() {
 //        btnOkDialog.setOnClickListener {
 //            dialog?.dismiss()
 //        }
-     //   checkBTPermissions()
+        //   checkBTPermissions()
 
 //        if (!mBTAdapter!!.isEnabled) {
 //            bluetoothOn()
@@ -218,12 +223,7 @@ class Bluetooth : AppCompatActivity() {
     }
 
     private fun apiCallMyPatient() {
-        progressDialog = ProgressDialog(this@Bluetooth)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        // progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.healthcubePatientList(sessionManager.id.toString())
             .enqueue(object : Callback<ModelMyPatient> {
@@ -233,17 +233,18 @@ class Bluetooth : AppCompatActivity() {
                 ) {
                     try {
                         if (response.code() == 500) {
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else if (response.body()!!.result.isEmpty()) {
-                            binding.tvTotal.text= response.body()!!.result.size.toString()
-                            Log.e("Size",response.body()!!.result.size.toString())
+                            binding.tvTotal.text = response.body()!!.result.size.toString()
+                            Log.e("Size", response.body()!!.result.size.toString())
                             // myToast(requireActivity(),"No Data Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
-                            binding.tvTotal.text= response.body()!!.result.size.toString()
-                            Log.e("Size",response.body()!!.result.size.toString())
+                            count = 0
+                            binding.tvTotal.text = response.body()!!.result.size.toString()
+                            Log.e("Size", response.body()!!.result.size.toString())
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -252,19 +253,21 @@ class Bluetooth : AppCompatActivity() {
 
 
                 override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallMyPatient()
+                    } else {
+                        myToast(context as Activity, t.message.toString())
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
             })
     }
+
     private fun apiCallTestCount() {
-        progressDialog = ProgressDialog(this@Bluetooth)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        // progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.healthcubeReportCount(sessionManager.id.toString())
             .enqueue(object : Callback<ModelTotalCount> {
@@ -274,16 +277,17 @@ class Bluetooth : AppCompatActivity() {
                 ) {
                     try {
                         if (response.code() == 500) {
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else if (response.code() == 200) {
-                            binding.tvTotelTest.text= response.body()!!.result.toString()
-                             // myToast(requireActivity(),"No Data Found")
-                            progressDialog!!.dismiss()
+                            count2 = 0
+                            binding.tvTotelTest.text = response.body()!!.result.toString()
+                            // myToast(requireActivity(),"No Data Found")
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
-                            binding.tvTotelTest.text= response.body()!!.result.toString()
-                            Log.e("Size",response.body()!!.result.toString())
+                            binding.tvTotelTest.text = response.body()!!.result.toString()
+                            Log.e("Size", response.body()!!.result.toString())
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -292,8 +296,13 @@ class Bluetooth : AppCompatActivity() {
 
 
                 override fun onFailure(call: Call<ModelTotalCount>, t: Throwable) {
-                    progressDialog!!.dismiss()
-
+                    count2++
+                    if (count2 <= 3) {
+                        apiCallTestCount()
+                    } else {
+                        myToast(context as Activity, t.message.toString())
+                    }
+                    AppProgressBar.hideLoaderDialog()
                 }
 
             })

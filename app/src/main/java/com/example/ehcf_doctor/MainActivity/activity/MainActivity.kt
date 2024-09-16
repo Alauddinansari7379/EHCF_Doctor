@@ -41,13 +41,14 @@ import com.example.ehcf_doctor.AudioRecording.Fragment.RecordListFragment
 import com.example.ehcf_doctor.AyuSynk.MainActivity
 import com.example.ehcf_doctor.Dashboard.Dashboard
 import com.example.ehcf_doctor.HealthCube.activity.Bluetooth
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Helper.CustomDatepickerdemo
 import com.example.ehcf_doctor.Invoice.Invoice
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.MainActivity.model.ModelOnline
 import com.example.ehcf_doctor.ManageSlots.activity.CreateSlot
 import com.example.ehcf_doctor.ManageSlots.activity.MySlot
- import com.example.ehcf_doctor.MyPatient.activity.MyPatient
+import com.example.ehcf_doctor.MyPatient.activity.MyPatient
 import com.example.ehcf_doctor.Prescription.activity.PrescriptionMainActivity
 import com.example.ehcf_doctor.PrivacyTerms.PrivacyTerms
 import com.example.ehcf_doctor.Profile.activity.ProfileSetting
@@ -66,19 +67,20 @@ import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
 
 
 class MainActivity : AppCompatActivity() {
-    private  var context:Context=this@MainActivity
+    private var context: Context = this@MainActivity
     private lateinit var binding: ActivityMainDoctorBinding
     private lateinit var sessionManager: SessionManager
     lateinit var navController: NavController
-    var progressDialog : ProgressDialog?=null
     lateinit var bottomNav: SmoothBottomBar
-    var onlineid=1
+    var onlineid = 1
     private val NOTIFICATION_PERMISSION_CODE = 123
     private lateinit var navigationView: NavigationView
     private lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var drawerLayout: DrawerLayout
+    private var count = 0
+    private var count2 = 0
 
-     private val notificationManager: NotificationManager by lazy {
+    private val notificationManager: NotificationManager by lazy {
         getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
@@ -94,34 +96,24 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//
-//        requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-//            refreshUI()
-//            if (it) {
-//              //  myToast(this@MainActivity,"Permission Granted")
-//                //  showDummyNotification()
-//            } else {
-//                Snackbar.make(
-//                    findViewById<View>(android.R.id.content).rootView, "Please grant Notification permission from App Settings",
-//                    Snackbar.LENGTH_LONG
-//                ).show()
-//            }
-//        }
-
 
         requestNotificationPermission()
 
 
         when {
             ContextCompat.checkSelfPermission(
-                this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED -> {
+                this, Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED -> {
                 // You can use the API that requires the permission.
                 Log.e("Notification", "onCreate: PERMISSION GRANTED")
                 // sendNotification(this)
             }
+
             shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
                 Snackbar.make(
-                    findViewById<View>(android.R.id.content).rootView, "Notification blocked", Snackbar.LENGTH_LONG
+                    findViewById<View>(android.R.id.content).rootView,
+                    "Notification blocked",
+                    Snackbar.LENGTH_LONG
                 ).setAction("Settings") {
                     // Responds to click on the action
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -131,6 +123,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }.show()
             }
+
             else -> {
                 // The registered ActivityResultCallback gets the result of this request
                 requestPermissionLauncher.launch(
@@ -141,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 
 
         if (sessionManager.pricing.isNullOrEmpty()) {
-            val d=  SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
+            val d = SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
             d.titleText = "Please Update Profile!"
             d.confirmText = "Ok"
             //  .setCancelable(false)
@@ -150,33 +143,25 @@ class MainActivity : AppCompatActivity() {
                 obj.dismiss()
                 finish()
                 startActivity(intent)
-                startActivity(Intent(this,ProfileSetting::class.java))
+                startActivity(Intent(this, ProfileSetting::class.java))
             }
             d.setCancelable(false)
             d.show()
         }
 
 
-        if (sessionManager.onlineStatus.toString().toInt()==1){
-            binding.btnOnline.visibility=View.VISIBLE
-            binding.btnOffline.visibility=View.GONE
-        } else{
-            binding.btnOnline.visibility=View.GONE
-            binding.btnOffline.visibility=View.VISIBLE
+        if (sessionManager.onlineStatus.toString().toInt() == 1) {
+            binding.btnOnline.visibility = View.VISIBLE
+            binding.btnOffline.visibility = View.GONE
+        } else {
+            binding.btnOnline.visibility = View.GONE
+            binding.btnOffline.visibility = View.VISIBLE
         }
 
         binding.tvTitle.setOnClickListener {
             startActivity(Intent(this@MainActivity, CustomDatepickerdemo::class.java))
 
         }
-
-//        val refreshListener = SwipeRefreshLayout.OnRefreshListener {
-//            overridePendingTransition(0, 0)
-//            finish()
-//            startActivity(intent)
-//            overridePendingTransition(0, 0)
-//        }
-//        binding.swipeRefreshLayout.setOnRefreshListener(refreshListener)
 
 
 
@@ -243,7 +228,7 @@ class MainActivity : AppCompatActivity() {
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
             binding.includedrawar1.tvManageSlots.setOnClickListener {
-               // startActivity(Intent(this, ManageSlots::class.java))
+                // startActivity(Intent(this, ManageSlots::class.java))
                 startActivity(Intent(this, CreateSlot::class.java))
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
@@ -259,7 +244,7 @@ class MainActivity : AppCompatActivity() {
 
             binding.includedrawar1.tvHealthCube.setOnClickListener {
                 startActivity(Intent(this, Bluetooth::class.java))
-               // startActivity(Intent(this, AppToEzdxNew::class.java))
+                // startActivity(Intent(this, AppToEzdxNew::class.java))
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
 
@@ -304,7 +289,8 @@ class MainActivity : AppCompatActivity() {
                         sDialog.cancel()
                         sessionManager.logout()
                         val intent = Intent(applicationContext, SignIn::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                         finish()
                         startActivity(intent)
                     }
@@ -314,27 +300,8 @@ class MainActivity : AppCompatActivity() {
                     .show()
                 drawerLayout.closeDrawer(GravityCompat.START)
             }
-//            binding.includedrawar1.tvRefunds.setOnClickListener {
-//                startActivity(Intent(this, AddNewFamily::class.java))
-//                drawerLayout.closeDrawer(GravityCompat.START)
-//            }
 
         }
-//
-//        navController = findNavController(R.id.hostFragment)
-//        setupBottomNavigation()
-
-        // navigationView = findViewById(R.id.navigationview1)
-        // drawerLayout = findViewById(R.id.drawerlayout1)
-//
-//        val toggle = ActionBarDrawerToggle(this, drawerLayout, binding.toolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-//        toggle.drawerArrowDrawable.color = resources.getColor(R.color.white)
-//        drawerLayout.addDrawerListener(toggle)
-//        toggle.syncState()
-//
-//        navigationView.setNavigationItemSelectedListener(this)
-//
-//        val hView = navigationView.getHeaderView(0)
 
         drawerLayout = binding.drawerlayout1
         // For Navigation UP
@@ -345,11 +312,11 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
     var hasNotificationPermissionGranted = false
 
     private val notificationPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                isGranted ->
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             hasNotificationPermissionGranted = isGranted
             if (!isGranted) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -362,12 +329,20 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(applicationContext, "notification permission granted", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    applicationContext,
+                    "notification permission granted",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             }
         }
+
     private fun showSettingDialog() {
-        MaterialAlertDialogBuilder(this, com.google.android.material.R.style.MaterialAlertDialog_Material3)
+        MaterialAlertDialogBuilder(
+            this,
+            com.google.android.material.R.style.MaterialAlertDialog_Material3
+        )
             .setTitle("Notification Permission")
             .setMessage("Notification permission is required, Please allow notification permission from setting")
             .setPositiveButton("Ok") { _, _ ->
@@ -381,7 +356,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun showNotificationPermissionRationale() {
 
-        MaterialAlertDialogBuilder(this, com.google.android.material.R.style.MaterialAlertDialog_Material3)
+        MaterialAlertDialogBuilder(
+            this,
+            com.google.android.material.R.style.MaterialAlertDialog_Material3
+        )
             .setTitle("Alert")
             .setMessage("Notification permission is required, to show notification")
             .setPositiveButton("Ok") { _, _ ->
@@ -392,24 +370,29 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton("Cancel", null)
             .show()
     }
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission())
-    {
-            isGranted: Boolean ->
-        if (isGranted) {
-            // Permission is granted. Continue the action or workflow in your
-            // app.
-            //  sendNotification(this)
-            // myToast(this@MainActivity,"Permission granted")
-        } else {
-            // Explain to the user that the feature is unavailable because the
-            // features requires a permission that the user has denied. At the
-            // same time, respect the user's decision. Don't link to system
-            // settings in an effort to convince the user to change their
-            // decision.
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission())
+        { isGranted: Boolean ->
+            if (isGranted) {
+                // Permission is granted. Continue the action or workflow in your
+                // app.
+                //  sendNotification(this)
+                // myToast(this@MainActivity,"Permission granted")
+            } else {
+                // Explain to the user that the feature is unavailable because the
+                // features requires a permission that the user has denied. At the
+                // same time, respect the user's decision. Don't link to system
+                // settings in an effort to convince the user to change their
+                // decision.
+            }
         }
-    }
+
     private fun requestNotificationPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NOTIFICATION_POLICY) == PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_NOTIFICATION_POLICY
+            ) == PackageManager.PERMISSION_GRANTED
         ) return
         if (ActivityCompat.shouldShowRequestPermissionRationale(
                 this,
@@ -436,7 +419,11 @@ class MainActivity : AppCompatActivity() {
             // If permission is granted
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Displaying a toast
-                Toast.makeText(this, "Permission granted now you can read the storage", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    "Permission granted now you can read the storage",
+                    Toast.LENGTH_LONG
+                ).show()
             } else {
                 // Displaying another toast if permission is not granted
                 Toast.makeText(this, "Oops you just denied the permission", Toast.LENGTH_LONG)
@@ -444,6 +431,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     @SuppressLint("MissingPermission")
     private fun showDummyNotification() {
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
@@ -456,6 +444,7 @@ class MainActivity : AppCompatActivity() {
             notify(1, builder.build())
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel() {
         val channel = NotificationChannel(
@@ -467,12 +456,14 @@ class MainActivity : AppCompatActivity() {
         }
         notificationManager.createNotificationChannel(channel)
     }
+
     companion object {
         const val CHANNEL_ID = "dummy_channel"
     }
+
     @RequiresApi(Build.VERSION_CODES.N)
     private fun refreshUI() {
-             if (notificationManager.areNotificationsEnabled()) "TRUE" else "FALSE"
+        if (notificationManager.areNotificationsEnabled()) "TRUE" else "FALSE"
     }
 
     var doubleBackToExitPressedOnce = false
@@ -495,101 +486,114 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-private fun apiCallOnline(){
-    progressDialog = ProgressDialog(this@MainActivity)
-    progressDialog!!.setMessage("Loading..")
-    progressDialog!!.setTitle("Please Wait")
-    progressDialog!!.isIndeterminate = false
-    progressDialog!!.setCancelable(true)
-    progressDialog!!.show()
-    ApiClient.apiService.changeOnlineStatus(sessionManager.id.toString(), "1").enqueue(object :
-        Callback<ModelOnline> {
-        @SuppressLint("LogNotTimber")
-        override fun onResponse(
-            call: Call<ModelOnline>,
-            response: Response<ModelOnline>
-        ) {
+    private fun apiCallOnline() {
+        AppProgressBar.showLoaderDialog(context)
+        ApiClient.apiService.changeOnlineStatus(sessionManager.id.toString(), "1").enqueue(object :
+            Callback<ModelOnline> {
+            @SuppressLint("LogNotTimber")
+            override fun onResponse(
+                call: Call<ModelOnline>,
+                response: Response<ModelOnline>
+            ) {
 
-            if (response.code()==200){
-                myToast(this@MainActivity, "Now you are Online !")
-                progressDialog!!.dismiss()
-                sessionManager.onlineStatus ="1"
-                binding.btnOnline.visibility=View.VISIBLE
-                binding.btnOffline.visibility=View.GONE
+                try {
+                    if (response.code() == 200) {
+                        count = 0
+                        myToast(this@MainActivity, "Now you are Online !")
+                        AppProgressBar.hideLoaderDialog()
+                        sessionManager.onlineStatus = "1"
+                        binding.btnOnline.visibility = View.VISIBLE
+                        binding.btnOffline.visibility = View.GONE
 
-            }else if (response.code()==500){
-                myToast(this@MainActivity, "Server Error")
-                progressDialog!!.dismiss()
+                    } else if (response.code() == 500) {
+                        myToast(this@MainActivity, "Server Error")
+                        AppProgressBar.hideLoaderDialog()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    myToast(context as Activity, "Something went wrong")
+                }
+
             }
 
-        }
+            override fun onFailure(call: Call<ModelOnline>, t: Throwable) {
 
-        override fun onFailure(call: Call<ModelOnline>, t: Throwable) {
-            myToast(this@MainActivity, "Something went wrong")
-            progressDialog!!.dismiss()
+                count++
+                if (count <= 3) {
+                    apiCallOnline()
+                } else {
+                    myToast(this@MainActivity, "Something went wrong")
+                }
+                AppProgressBar.hideLoaderDialog()
 
-        }
+            }
 
-    })
-}
+        })
+    }
 
     fun refreshMain() {
-        val intent = Intent(this@MainActivity, com.example.ehcf_doctor.MainActivity.activity.MainActivity::class.java)
+        val intent = Intent(
+            this@MainActivity,
+            com.example.ehcf_doctor.MainActivity.activity.MainActivity::class.java
+        )
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         finish()
         startActivity(intent)
     }
 
-    private fun apiCallOffline(){
-    progressDialog = ProgressDialog(this@MainActivity)
-    progressDialog!!.setMessage("Loading..")
-    progressDialog!!.setTitle("Please Wait")
-    progressDialog!!.isIndeterminate = false
-    progressDialog!!.setCancelable(true)
-    progressDialog!!.show()
+    private fun apiCallOffline() {
+        AppProgressBar.showLoaderDialog(context)
 
-    ApiClient.apiService.changeOnlineStatus(sessionManager.id.toString(), "0").enqueue(object :
-        Callback<ModelOnline> {
-        @SuppressLint("LogNotTimber")
-        override fun onResponse(
-            call: Call<ModelOnline>,
-            response: Response<ModelOnline>
-        )
-        {
-                if (response.code()==200) {
-                    myToast(this@MainActivity, "Now you are Offline !")
-                    progressDialog!!.dismiss()
-                    sessionManager.onlineStatus = "0"
-                    binding.btnOnline.visibility = View.GONE
-                    binding.btnOffline.visibility = View.VISIBLE
-                }
-                    else if(response.code()==500)
-                    {
+        ApiClient.apiService.changeOnlineStatus(sessionManager.id.toString(), "0").enqueue(object :
+            Callback<ModelOnline> {
+            @SuppressLint("LogNotTimber")
+            override fun onResponse(
+                call: Call<ModelOnline>,
+                response: Response<ModelOnline>
+            ) {
+                try {
+                    if (response.code() == 200) {
+                        count2 = 0
+                        myToast(this@MainActivity, "Now you are Offline !")
+                        AppProgressBar.hideLoaderDialog()
+                        sessionManager.onlineStatus = "0"
+                        binding.btnOnline.visibility = View.GONE
+                        binding.btnOffline.visibility = View.VISIBLE
+                    } else if (response.code() == 500) {
                         myToast(this@MainActivity, "Server Error")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
-                    }
-                    else{
+                    } else {
                         myToast(this@MainActivity, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    myToast(context as Activity, "Something went wrong")
+                }
 
 
+            }
 
-        }
-        override fun onFailure(call: Call<ModelOnline>, t: Throwable) {
-            myToast(this@MainActivity, "Something went wrong")
-            progressDialog!!.dismiss()
+            override fun onFailure(call: Call<ModelOnline>, t: Throwable) {
+                count2++
+                if (count2 <= 3) {
+                    apiCallOffline()
+                } else {
+                    myToast(this@MainActivity, "Something went wrong")
+                }
+                AppProgressBar.hideLoaderDialog()
 
-        }
+            }
 
-    })
-}
+        })
+    }
+
     override fun onStart() {
         super.onStart()
-        if (isOnline(context)){
+        if (isOnline(context)) {
             //  myToast(requireActivity(), "Connected")
-        }else{
+        } else {
             val changeReceiver = NetworkChangeReceiver(context)
             changeReceiver.build()
             //  myToast(requireActivity(), "Not C")

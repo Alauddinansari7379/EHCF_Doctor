@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MyPatient.adapter.AdapterCommentList
 import com.example.ehcf_doctor.MyPatient.adapter.AdapterMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ModelCommentList
@@ -40,8 +41,9 @@ import java.util.*
 class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
     private var context: Context = this@MyPatient
     var dialog: Dialog? = null
+    private var count = 0
+    private var count2 = 0
 
-    var progressDialog: ProgressDialog? = null
     private lateinit var sessionManager: SessionManager
     private lateinit var binding: ActivityMyPatientBinding
     var shimmerFrameLayout: ShimmerFrameLayout? = null
@@ -54,7 +56,7 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
         sessionManager = SessionManager(this)
         shimmerFrameLayout = findViewById(R.id.shimmer_myPatient)
         shimmerFrameLayout!!.startShimmer();
-        mainData=ArrayList<ResultMyPatient>()
+        mainData = ArrayList<ResultMyPatient>()
 
         binding.imgBack.setOnClickListener {
             onBackPressed()
@@ -80,7 +82,10 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
     }
 
     private fun callPermission() {
-        if (ContextCompat.checkSelfPermission(this@MyPatient, CALL_PHONE) === PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(
+                this@MyPatient,
+                CALL_PHONE
+            ) === PackageManager.PERMISSION_GRANTED
         ) {
             //  startActivity(callIntent)
             //  myToast(this,"Call Permission Granted")
@@ -90,12 +95,7 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
     }
 
     private fun apiCallMyPatient() {
-        progressDialog = ProgressDialog(this@MyPatient)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        // progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getPatients(sessionManager.id.toString())
             .enqueue(object : Callback<ModelMyPatient> {
@@ -105,37 +105,41 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
                 ) {
                     try {
                         if (response.code() == 200) {
+                            count = 0
                             mainData = response.body()!!.result
                         }
                         if (response.code() == 500) {
                             myToast(this@MyPatient, "Server Error")
                             binding.shimmerMyPatient.visibility = View.GONE
-                            progressDialog!!.dismiss()
-
+                            AppProgressBar.hideLoaderDialog()
                         } else if (response.body()!!.result.isEmpty()) {
                             binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmerMyPatient.visibility = View.GONE
                             // myToast(requireActivity(),"No Data Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
                             setRecyclerViewAdapter(mainData)
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         }
-                    } catch (e: Exception)
-                    {
+                    } catch (e: Exception) {
                         myToast(this@MyPatient, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                         e.printStackTrace()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
-                    myToast(this@MyPatient, "Something went wrong")
-                    binding.shimmerMyPatient.visibility = View.GONE
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallMyPatient()
+                    } else {
+                        myToast(this@MyPatient, "Something went wrong")
+                        binding.shimmerMyPatient.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -148,21 +152,15 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
             binding.recyclerView.visibility = View.VISIBLE
             binding.shimmerMyPatient.visibility = View.GONE
             binding.tvNoDataFound.visibility = View.GONE
-            adapter = AdapterMyPatient(this@MyPatient, data,this@MyPatient)
-            progressDialog!!.dismiss()
+            adapter = AdapterMyPatient(this@MyPatient, data, this@MyPatient)
+            AppProgressBar.hideLoaderDialog()
 
         }
     }
 
 
-
     override fun commentList(id: String) {
-        progressDialog = ProgressDialog(this@MyPatient)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+       AppProgressBar.showLoaderDialog(context)
 
         var view = layoutInflater.inflate(R.layout.comment_list_dialog, null)
         dialog = Dialog(this)
@@ -183,30 +181,36 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
                     try {
                         if (response.body()!!.result.isEmpty()) {
                             myToast(this@MyPatient, "No Review Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                         } else {
+                            count2 = 0
                             recyclerViewCommentList.apply {
                                 shimmerFrameLayout?.startShimmer()
                                 adapter = AdapterCommentList(
                                     this@MyPatient,
                                     response.body()!!,
                                 )
-                                progressDialog!!.dismiss()
+                                AppProgressBar.hideLoaderDialog()
                             }
 
                         }
                     } catch (e: Exception) {
                         myToast(this@MyPatient, "Something went wrong")
                         e.printStackTrace()
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
 
                     }
                 }
 
                 override fun onFailure(call: Call<ModelCommentList>, t: Throwable) {
-                    myToast(this@MyPatient, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count2++
+                    if (count2 <= 3) {
+                        commentList(id)
+                    } else {
+                        myToast(this@MyPatient, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -219,12 +223,6 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
         }
         dialog!!.setContentView(view)
         dialog?.setCancelable(true)
-        // dialog?.setContentView(view)
-        // val d1 = format.parse("2023/03/29 11:04:00")
-//        Log.e("currentDate", currentTime)
-//        Log.e("EndTime", startTime)
-
-
         dialog?.show()
         btnOkDialog.setOnClickListener {
             dialog?.dismiss()
@@ -245,7 +243,7 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
 //                finish()
 //                startActivity(intent)
 
-                videoCallFun( id)
+                videoCallFun(id)
             }
             .setCancelClickListener { sDialog ->
                 sDialog.cancel()

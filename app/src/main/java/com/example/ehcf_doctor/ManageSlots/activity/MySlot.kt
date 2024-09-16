@@ -20,12 +20,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.ManageSlots.adapter.AdapterSlotsList
 import com.example.ehcf_doctor.ManageSlots.adapter.AdapterSwitchButton
 import com.example.ehcf_doctor.ManageSlots.model.*
 import com.example.ehcf_doctor.databinding.ActivityManageSlotsSeassionBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.facebook.shimmer.ShimmerFrameLayout
+import id.zelory.compressor.calculateInSampleSize
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,11 +38,13 @@ import xyz.teamgravity.checkinternet.CheckInternet
 class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
     AdapterSwitchButton.ActiveInactiveSlot {
     private val context: Context = this@MySlot
-    var progressDialog: ProgressDialog? = null
     var relationList = ArrayList<String>()
     private lateinit var sessionManager: SessionManager
     var dayList = ArrayList<ModelDay>()
     var con = true
+    private var count = 0
+    private var count2 = 0
+    private var count3 = 0
     var shimmerFrameLayout: ShimmerFrameLayout? = null
     // var Allocationlist = java.util.ArrayList<>()
 
@@ -63,20 +67,6 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
             apiCallSwitchButton()
 
         }
-
-        // apiCall(dayId)
-
-
-//        binding.mondaySwitch.setOnClickListener {
-//            val dayCode="1"
-//            if (binding.mondaySwitch.isEnabled){
-//                apiCallActiveSlot(dayCode)
-//            }else{
-//                apiCallInActiveSlot(dayCode)
-//            }
-//        }
-
-
         dayList.add(ModelDay("Monday", "1"))
         dayList.add(ModelDay("Tuesday", "2"))
         dayList.add(ModelDay("Wednesday", "3"))
@@ -84,7 +74,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
         dayList.add(ModelDay("Friday", "5"))
         dayList.add(ModelDay("Saturday", "6"))
         dayList.add(ModelDay("Sunday", "7"))
-       // dayList.add(ModelDay("Sunday", "8"))
+        // dayList.add(ModelDay("Sunday", "8"))
 
         binding.cardActiveInactive.setOnClickListener {
 //            binding.layoutActiveInactive.visibility =View.VISIBLE
@@ -161,12 +151,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
 
     @SuppressLint("NotifyDataSetChanged")
     private fun apiCall(dayId: String) {
-        progressDialog = ProgressDialog(this@MySlot)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        // progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getTimeSlot(sessionManager.id.toString(), dayId)
             .enqueue(object : Callback<ModelSlotList> {
@@ -183,18 +168,20 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                             binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmerMySlot.visibility = View.GONE
                             myToast(this@MySlot, "${response.body()!!.message}")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else if (response.body()!!.result.isEmpty()) {
+                            count = 0
                             binding.rvManageSlot.adapter =
                                 AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
                             binding.rvManageSlot.adapter!!.notifyDataSetChanged()
                             binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmerMySlot.visibility = View.GONE
                             myToast(this@MySlot, "No Slot Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
+                            count = 0
                             binding.rvManageSlot.adapter =
                                 AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
                             binding.rvManageSlot.adapter!!.notifyDataSetChanged()
@@ -202,30 +189,25 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                             shimmerFrameLayout?.startShimmer()
                             binding.rvManageSlot.visibility = View.VISIBLE
                             binding.shimmerMySlot.visibility = View.GONE
-                            progressDialog!!.dismiss()
-//                        binding.rvManageSlot.apply {
-//                            binding.tvNoDataFound.visibility = View.GONE
-//                            shimmerFrameLayout?.startShimmer()
-//                            binding.rvManageSlot.visibility = View.VISIBLE
-//                            binding.shimmerMySlot.visibility = View.GONE
-//                            // myToast(this@ShuduleTiming, response.body()!!.message)
-//                            adapter = AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
-//                            progressDialog!!.dismiss()
-//
-//                        }
+                            AppProgressBar.hideLoaderDialog()
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
                         myToast(this@MySlot, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     }
                 }
 
                 override fun onFailure(call: Call<ModelSlotList>, t: Throwable) {
-                    myToast(this@MySlot, "Something went wrong")
-                    binding.shimmerMySlot.visibility = View.GONE
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCall(dayId)
+                    } else {
+                        myToast(this@MySlot, "Something went wrong")
+                        binding.shimmerMySlot.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -235,13 +217,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
 
 
     private fun apiCallSwitchButton() {
-        progressDialog = ProgressDialog(this@MySlot)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        //  progressDialog!!.show()
-
+        AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.switchButton(sessionManager.id.toString())
             .enqueue(object : Callback<ModelSwitechButton> {
                 @SuppressLint("NotifyDataSetChanged")
@@ -254,17 +230,17 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                         binding.shimmerMySlot.visibility = View.GONE
                     } else if (response.body()!!.status == 0) {
                         myToast(this@MySlot, "${response.body()!!.message}")
-                        progressDialog!!.dismiss()
+                       AppProgressBar.hideLoaderDialog()
 
                     } else if (response.body()!!.result.isEmpty()) {
                         binding.rvSwitchButton.adapter =
                             AdapterSwitchButton(this@MySlot, response.body()!!, this@MySlot)
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     } else {
                         binding.rvSwitchButton.adapter =
                             AdapterSwitchButton(this@MySlot, response.body()!!, this@MySlot)
-                        progressDialog!!.dismiss()
+                       AppProgressBar.hideLoaderDialog()
                     }
 
                 }
@@ -281,14 +257,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
     }
 
     private fun callAPIDelete(slotId: String) {
-        progressDialog = ProgressDialog(this@MySlot)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
-
-
+        AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.deleteSlot(slotId).enqueue(object : Callback<ModelDeleteSlot> {
             @SuppressLint("NotifyDataSetChanged")
             override fun onResponse(
@@ -297,6 +266,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
             ) {
                 try {
                     if (response.body()!!.status == 1) {
+                        count2 = 0
                         myToast(this@MySlot, response.body()!!.message)
                         overridePendingTransition(0, 0)
                         finish()
@@ -304,14 +274,14 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                         overridePendingTransition(0, 0)
                         //   binding.rvManageSlot.adapter!!.notifyDataSetChanged()
                         // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     } else {
                         myToast(this@MySlot, response.body()!!.message)
                     }
-                }catch (e:Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
-                    progressDialog!!.dismiss()
+                    AppProgressBar.hideLoaderDialog()
                     myToast(this@MySlot, "Something went wrong")
 
                 }
@@ -319,8 +289,13 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
 
 
             override fun onFailure(call: Call<ModelDeleteSlot>, t: Throwable) {
-                myToast(this@MySlot, "Something went wrong")
-                progressDialog!!.dismiss()
+                count2++
+                if (count2 <= 3) {
+                    callAPIDelete(slotId)
+                } else {
+                    myToast(this@MySlot, "Something went wrong")
+                }
+                AppProgressBar.hideLoaderDialog()
             }
         })
     }
@@ -345,12 +320,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
 
     override fun updateSlotApi(slotId: String) {
 
-        progressDialog = ProgressDialog(this@MySlot)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
 
         ApiClient.apiService.deleteSlot(slotId).enqueue(object : Callback<ModelDeleteSlot> {
@@ -361,9 +331,10 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
             ) {
                 try {
                     if (response.body()!!.status == 1) {
+                        count3 = 0
                         myToast(this@MySlot, response.body()!!.message)
                         // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                         apiCall(dayId)
                     } else {
                         myToast(this@MySlot, response.body()!!.message)
@@ -371,14 +342,21 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                 } catch (e: Exception) {
                     e.printStackTrace()
                     myToast(this@MySlot, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    AppProgressBar.hideLoaderDialog()
                 }
 
             }
 
             override fun onFailure(call: Call<ModelDeleteSlot>, t: Throwable) {
-                myToast(this@MySlot, "Something went wrong")
-                progressDialog!!.dismiss()
+
+                AppProgressBar.hideLoaderDialog()
+                count3++
+                if (count3 <= 3) {
+                    updateSlotApi(slotId)
+                } else {
+                    myToast(this@MySlot, "Something went wrong")
+                }
+                AppProgressBar.hideLoaderDialog()
 
             }
 
@@ -387,12 +365,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
     }
 
     override fun activeASlot(dayCode: String, active: String) {
-        progressDialog = ProgressDialog(this@MySlot)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        //  progressDialog!!.show()
+       AppProgressBar.showLoaderDialog(context)
 
 
         ApiClient.apiService.activeASlot(dayCode, active).enqueue(object : Callback<ModelActive> {
@@ -405,13 +378,13 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                     if (response.body()!!.status == 1) {
                         myToast(this@MySlot, response.body()!!.message)
                         // myToast(requireActivity(),"No Data Found")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     } else {
                         myToast(this@MySlot, response.body()!!.message)
                     }
                 } catch (e: Exception) {
                     myToast(this@MySlot, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    AppProgressBar.hideLoaderDialog()
                     e.printStackTrace()
                 }
             }
@@ -419,7 +392,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
 
             override fun onFailure(call: Call<ModelActive>, t: Throwable) {
                 myToast(this@MySlot, "Something went wrong")
-                progressDialog!!.dismiss()
+                AppProgressBar.hideLoaderDialog()
 
             }
 
@@ -442,12 +415,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
     }
 
     override fun activeSlot(dayCode: String) {
-        progressDialog = ProgressDialog(this@MySlot)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.inactiveSlot(sessionManager.id.toString(), dayCode)
             .enqueue(object : Callback<ModelActive> {
@@ -460,14 +428,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                         if (response.body()!!.status == 1) {
                             myToast(this@MySlot, response.body()!!.message)
                             refresh()
-
-//                    overridePendingTransition(0, 0)
-//                    finish()
-//                    startActivity(intent)
-//                    overridePendingTransition(0, 0)
-//                    //   binding.rvManageSlot.adapter!!.notifyDataSetChanged()
-//                    // myToast(requireActivity(),"No Data Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
                             myToast(this@MySlot, response.body()!!.message)
@@ -475,7 +436,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                     } catch (e: Exception) {
                         e.printStackTrace()
                         myToast(this@MySlot, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     }
                 }
@@ -483,25 +444,17 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
 
                 override fun onFailure(call: Call<ModelActive>, t: Throwable) {
                     myToast(this@MySlot, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
 
             })
-
-
     }
 
     override fun inactiveSlot(dayCode: String) {
 
-        progressDialog = ProgressDialog(this@MySlot)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
-
+AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.activeSlot(sessionManager.id.toString(), dayCode)
             .enqueue(object : Callback<ModelActive> {
                 @SuppressLint("NotifyDataSetChanged")
@@ -513,30 +466,24 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                         if (response.body()!!.status == 1) {
                             myToast(this@MySlot, response.body()!!.message)
                             refresh()
-//                    overridePendingTransition(0, 0)
-//                    finish()
-//                    startActivity(intent)
-//                    overridePendingTransition(0, 0)
-//                    //   binding.rvManageSlot.adapter!!.notifyDataSetChanged()
-//                    // myToast(requireActivity(),"No Data Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
                             myToast(this@MySlot, response.body()!!.message)
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         }
-                    }catch (e:Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                         myToast(this@MySlot, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
 
                 override fun onFailure(call: Call<ModelActive>, t: Throwable) {
                     myToast(this@MySlot, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

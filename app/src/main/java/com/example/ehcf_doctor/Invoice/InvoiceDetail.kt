@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Invoice.adapter.AdapterInvoiceDetial
 import com.example.ehcf_doctor.Invoice.model.ModelInvoiceDetial
 import com.example.ehcf_doctor.databinding.ActivityInvoiceDetialBinding
@@ -30,16 +31,17 @@ import retrofit2.Response
 import java.io.OutputStream
 
 class InvoiceDetail : AppCompatActivity() {
-    private lateinit var binding:ActivityInvoiceDetialBinding
+    private lateinit var binding: ActivityInvoiceDetialBinding
     private val context: Context = this@InvoiceDetail
     var progressDialog: ProgressDialog? = null
     var relationList = ArrayList<String>()
-    var invoiceId=""
+    var invoiceId = ""
     private val PERMISSION_REQUEST_CODE = 1
+    private var count = 0
     private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityInvoiceDetialBinding.inflate(layoutInflater)
+        binding = ActivityInvoiceDetialBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sessionManager = SessionManager(this)
         invoiceId = intent.getStringExtra("invoiceId").toString()
@@ -66,8 +68,8 @@ class InvoiceDetail : AppCompatActivity() {
         }
 
 
-
     }
+
     private fun captureCardViewAsImage(view: View) {
         if (ContextCompat.checkSelfPermission(
                 this,
@@ -92,7 +94,10 @@ class InvoiceDetail : AppCompatActivity() {
             put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Invoices")
+                put(
+                    MediaStore.MediaColumns.RELATIVE_PATH,
+                    Environment.DIRECTORY_PICTURES + "/Invoices"
+                )
                 put(MediaStore.MediaColumns.IS_PENDING, 1)
             }
         }
@@ -112,7 +117,8 @@ class InvoiceDetail : AppCompatActivity() {
                     contentValues.clear()
                     contentValues.put(MediaStore.MediaColumns.IS_PENDING, 0)
                     contentResolver.update(imageUri, contentValues, null, null)
-                    Toast.makeText(context, "Invoice Downloaded Successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Invoice Downloaded Successfully", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -126,7 +132,7 @@ class InvoiceDetail : AppCompatActivity() {
         progressDialog!!.setTitle("Please Wait")
         progressDialog!!.isIndeterminate = false
         progressDialog!!.setCancelable(true)
-         progressDialog!!.show()
+        progressDialog!!.show()
 
         ApiClient.apiService.invoiceDetails(invoiceId)
             .enqueue(object : Callback<ModelInvoiceDetial> {
@@ -149,6 +155,7 @@ class InvoiceDetail : AppCompatActivity() {
                             progressDialog!!.dismiss()
 
                         } else {
+                            count = 0
                             binding.rvManageSlot.adapter =
                                 AdapterInvoiceDetial(this@InvoiceDetail, response.body()!!)
                             binding.rvManageSlot.adapter!!.notifyDataSetChanged()
@@ -165,15 +172,20 @@ class InvoiceDetail : AppCompatActivity() {
 //
 //                        }
                         }
-                    }catch (e:Exception){
+                    } catch (e: Exception) {
                         myToast(this@InvoiceDetail, "Something went wrong")
-                         progressDialog!!.dismiss()
+                        progressDialog!!.dismiss()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelInvoiceDetial>, t: Throwable) {
-                    myToast(this@InvoiceDetail, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallInvoiceDetial()
+                    } else {
+                        myToast(this@InvoiceDetail, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

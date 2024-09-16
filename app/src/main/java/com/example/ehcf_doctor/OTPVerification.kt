@@ -15,6 +15,7 @@ import androidx.core.widget.addTextChangedListener
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf_doctor.ForgotPassword.modelReponse.ModelForgotPass
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.databinding.ActivityOtpverificationBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
 import retrofit2.Call
@@ -25,12 +26,12 @@ import xyz.teamgravity.checkinternet.CheckInternet
 
 class OTPVerification : AppCompatActivity() {
     private lateinit var binding:ActivityOtpverificationBinding
-    var progressDialog: ProgressDialog? =null
     private val context: Context = this@OTPVerification
     var phoneNumber=""
     var id=""
     private var otp=""
     var finalOTP=""
+    private var count = 0
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +39,7 @@ class OTPVerification : AppCompatActivity() {
         setContentView(binding.root)
         timeCounter()
 
-        progressDialog = ProgressDialog(this@OTPVerification)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
+       AppProgressBar.showLoaderDialog(context)
 
         val intent = intent
         phoneNumber = intent.getStringExtra("Mobilenumber").toString()
@@ -100,47 +97,57 @@ class OTPVerification : AppCompatActivity() {
         }
         binding.tvResend.setOnClickListener {
             binding.tvResend.setTextColor(Color.parseColor("#858284"))
-            progressDialog!!.show()
-
-            ApiClient.apiService.forgotPassword(phoneNumber).enqueue(object :
-                Callback<ModelForgotPass> {
-
-                override fun onResponse(
-                    call: Call<ModelForgotPass>, response: Response<ModelForgotPass>
-                ) {
-
-                    // Log.e("Ala","${response.body()!!.result}")
-                    Log.e("Ala","${response.body()!!.message}")
-                    Log.e("Ala","${response.body()!!.status}")
-                    if (response.body()!!.status==1){
-                        myToast(this@OTPVerification,response.body()!!.message)
-
-                        val otp = response.body()!!.result.otp.toString()
-                        val id = response.body()!!.result.id
-                        this@OTPVerification.otp =otp
-                        otpPopup(otp)
-                        progressDialog!!.dismiss()
-                        timeCounter()
-                    }
-                    else{
-                        myToast(this@OTPVerification,"${response.body()!!.message}")
-                        progressDialog!!.dismiss()
-
-                    }
-
-                }
-
-                override fun onFailure(call: Call<ModelForgotPass>, t: Throwable) {
-                    myToast(this@OTPVerification,"Something went wrong")
-                    progressDialog!!.dismiss()
-
-                }
-
-            })
+            AppProgressBar.showLoaderDialog(context)
+            apiCallForgotPassword()
         }
 
 
     }
+
+    private fun apiCallForgotPassword() {
+        ApiClient.apiService.forgotPassword(phoneNumber).enqueue(object :
+            Callback<ModelForgotPass> {
+
+            override fun onResponse(
+                call: Call<ModelForgotPass>, response: Response<ModelForgotPass>
+            ) {
+
+                // Log.e("Ala","${response.body()!!.result}")
+                Log.e("Ala","${response.body()!!.message}")
+                Log.e("Ala","${response.body()!!.status}")
+                if (response.body()!!.status==1){
+                    count = 0
+                    myToast(this@OTPVerification,response.body()!!.message)
+
+                    val otp = response.body()!!.result.otp.toString()
+                    val id = response.body()!!.result.id
+                    this@OTPVerification.otp =otp
+                    otpPopup(otp)
+                    AppProgressBar.hideLoaderDialog()
+                    timeCounter()
+                }
+                else{
+                    myToast(this@OTPVerification,"${response.body()!!.message}")
+                    AppProgressBar.hideLoaderDialog()
+
+                }
+
+            }
+
+            override fun onFailure(call: Call<ModelForgotPass>, t: Throwable) {
+                count++
+                if (count <= 3) {
+                    apiCallForgotPassword()
+                } else {
+                    myToast(this@OTPVerification,"Something went wrong")
+                }
+                AppProgressBar.hideLoaderDialog()
+
+            }
+
+        })
+    }
+
     private fun otpPopup(otp: String) {
         SweetAlertDialog(this@OTPVerification, SweetAlertDialog.SUCCESS_TYPE)
             .setTitleText("Your OTP is $otp")

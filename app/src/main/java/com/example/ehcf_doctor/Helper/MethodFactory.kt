@@ -11,14 +11,12 @@ import android.os.*
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ehcf_doctor.R
-import com.giphy.sdk.analytics.GiphyPingbacks.context
 import java.net.InetAddress
 import java.net.NetworkInterface
 import java.text.DateFormat
@@ -41,16 +39,20 @@ fun myToast(activity: Activity, message: String) {
     myToast.view = layout //setting the view of custom toast layout
     myToast.show()
 }
+fun progrossDilog(context: Context){
 
-fun progrossDilog(context: Context) {
-
-    var progressDialog: ProgressDialog? = null
+    var progressDialog: ProgressDialog? =null
     progressDialog = ProgressDialog(context)
     progressDialog!!.setMessage("Loading..")
     progressDialog!!.setTitle("Please Wait")
     progressDialog!!.isIndeterminate = false
     progressDialog!!.setCancelable(true)
     progressDialog.show()
+}
+fun changeDateFormat4(date: String): String {
+    val inf = SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy")
+    val out = SimpleDateFormat("dd-MM-yyyy")
+    return out.format(inf.parse(date))
 }
 fun convertTo12Hour(Time: String): String? {
     var Time = Time
@@ -70,6 +72,13 @@ fun convertTo12Hour(Time: String): String? {
 }
 
 @RequiresApi(Build.VERSION_CODES.M)
+
+
+
+
+
+
+
 fun isOnline(context: Context): Boolean {
     val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -102,7 +111,6 @@ fun getFinYear(): Int {
     val year: Int = Calendar.getInstance().get(Calendar.YEAR)
     return if (month >= FIRST_FISCAL_MONTH) year else year - 1
 }
-
 fun hideKeyboard(activity: Activity) {
     val imm: InputMethodManager =
         activity.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -115,19 +123,13 @@ fun hideKeyboard(activity: Activity) {
     imm.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
-fun changeDateFormat(date: String): String {
+fun changeDateFormat(date:String):String{
     val inf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
     val out = SimpleDateFormat("dd/MM/yyyy  hh:mm aa")
     return out.format(inf.parse(date))
 }
-
-fun changeDateFormat1(date: String): String {
+fun changeDateFormat1(date:String):String{
     val inf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-    val out = SimpleDateFormat("dd-MM-yyyy")
-    return out.format(inf.parse(date))
-}
-fun changeDateFormat4(date: String): String {
-    val inf = SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy")
     val out = SimpleDateFormat("dd-MM-yyyy")
     return out.format(inf.parse(date))
 }
@@ -137,17 +139,15 @@ fun changeDateFormatNew(date: String): String {
     val out = SimpleDateFormat("yy/MM/dd")
     return out.format(inf.parse(date))
 }
-
-fun changeDateFormat2(date: String): String {
+    fun changeDateFormat5(date: String): String {
+    val inf = SimpleDateFormat("dd-MM-yyyy")
+    val out = SimpleDateFormat("yyyy-MM-dd")
+    return out.format(inf.parse(date))
+}
+fun changeDateFormat2(date:String):String{
     val inf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
     val out = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
     return out.format(inf.parse(date))
-}
-
-fun changeDateFormat3(date: String): String {
-    val inf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
-    val out = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
-    return out.format(inf.parse(date).toString())
 }
 
 var currentDate: String = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
@@ -220,8 +220,7 @@ fun formatToYesterdayOrToday(date: String?): String? {
         date
     }
 }
-
-fun vibrateOnce(context: Context) {
+ fun vibrateOnce(context: Context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         val vibratorManager =
             context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
@@ -233,43 +232,12 @@ fun vibrateOnce(context: Context) {
     }
 }
 
-val toneG = ToneGenerator(AudioManager.STREAM_ALARM, 100)
-fun beep(duration: Int) {
+ val toneG = ToneGenerator(AudioManager.STREAM_ALARM, 100)
+ fun beep(duration: Int) {
     toneG.startTone(ToneGenerator.TONE_DTMF_S, duration)
     val handler = Handler(Looper.getMainLooper())
     handler.postDelayed({
     }, (duration + 500).toLong())
-}
-
-fun remainingTime(startTime:String,endTime:String) {
-    val format = SimpleDateFormat("yy/MM/dd HH:m:ss")
-    var d1: Date? = null
-    var d2: Date? = null
-    try {
-        d1 = format.parse(startTime)
-        d2 = format.parse(endTime)
-    } catch (e: ParseException) {
-        e.printStackTrace()
-    }
-    val diffTime = (d2!!.time - d1!!.time)
-    val diffTimeSeconds = TimeUnit.MILLISECONDS.toSeconds(diffTime)
-
-    Log.e("minnew1", diffTimeSeconds.toString())
-
-    fun timeCalculator(seconds: Long) {
-        // val sc = Scanner(System.`in`)
-        print(seconds)
-        // int input = sc.nextInt();
-        val hours = (seconds / 3600).toInt()
-        val minutes = (seconds % 3600 / 60).toInt()
-        val seconds = (seconds % 3600 % 60).toInt()
-        println("Hours: $hours")
-        println("Minutes: $minutes")
-        println("Seconds: $seconds")
-    }
-
-
-
 }
 
 fun covertTimeToText(dataDate: String): String {
@@ -307,97 +275,6 @@ fun covertTimeToText(dataDate: String): String {
         Log.e("ConvTimeE", e.toString())
     }
     return convTime
-
-//    binding.tvReset.setOnClickListener {
-//        overridePendingTransition(0,0)
-//        finish()
-//        startActivity(intent)
-//        overridePendingTransition(0,0)
-//    }
-//screenshoot Not allow
-    // window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
-
-
-    //mergeAdapter
-    /*
-    private fun apiCallGetConsultation() {
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        progressDialog!!.show()
-
-        ApiClient.apiService.getConsultation(sessionManager.id.toString(),"waiting_for_accept")
-            .enqueue(object : Callback<ModelGetConsultation> {
-                @SuppressLint("LogNotTimber")
-                override fun onResponse(
-                    call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
-                ) {
-                    if (response.body()!!.result.isEmpty()) {
-                        binding.tvNoDataFound.visibility = View.VISIBLE
-                        progressDialog!!.dismiss()
-
-
-                    } else {
-                        binding.rvUpcoming.apply {
-
-                            ApiClient.apiService.getConsultation(sessionManager.id.toString(),"accepted")
-                                .enqueue(object : Callback<ModelGetConsultation> {
-                                    @SuppressLint("LogNotTimber")
-                                    override fun onResponse(
-                                        call: Call<ModelGetConsultation>, response: Response<ModelGetConsultation>
-                                    ) {
-                                        if (response.body()!!.result.isEmpty()) {
-                                            // myToast(requireActivity(),"No Data Found")
-                                            progressDialog!!.dismiss()
-
-                                        } else {
-                                            binding.rvUpcomingAccpted.apply {
-                                               // adapter = AdapterUpComingAccepted(requireContext(), response.body()!!)
-
-                                                val subAdapter2 = AdapterUpComingAccepted(requireContext(), response.body()!!)
-
-                                                mergeAdapter.addAdapter(subAdapter2)
-                                                progressDialog!!.dismiss()
-
-                                            }
-                                        }
-
-                                    }
-
-                                    override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                                        myToast(requireActivity(), "Something went wrong")
-                                        progressDialog!!.dismiss()
-
-                                    }
-
-                                })
-
-                            val subAdapter1 = AdapterUpComing(requireContext(), response.body()!!, this@UpComingFragment)
-
-                            mergeAdapter.addAdapter(subAdapter1)
-
-
-                            binding.tvNoDataFound.visibility = View.GONE
-                            adapter = mergeAdapter
-                            progressDialog!!.dismiss()
-
-                        }
-                    }
-
-                }
-
-                override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    myToast(requireActivity(), "Something went wrong")
-                    progressDialog!!.dismiss()
-
-                }
-
-            })
-    }
-*/
 
 
 }

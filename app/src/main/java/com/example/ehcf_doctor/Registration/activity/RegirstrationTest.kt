@@ -26,6 +26,7 @@ import com.anurag.multiselectionspinner.MultiSelectionSpinnerDialog
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Registration.modelResponse.*
@@ -56,7 +57,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     private val context: Context = this@RegirstrationTest
     private var bloodGroup = ""
     private var phoneNumberWithCode = ""
-    var progressDialog: ProgressDialog? = null
     private var phoneNumberWithCodeNew = ""
     private var selectedImageUri: Uri? = null
     private var genderValue = 0
@@ -103,6 +103,11 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     private var specilList = ModelSpecilList();
     private var languageList = ModelLanguage();
     var test_spinner: Spinner? = null
+    private var count = 0
+    private var count2 = 0
+    private var count3 = 0
+    private var count4 = 0
+    private var count5 = 0
     val contentList: MutableList<String> = ArrayList()
 
     private lateinit var sessionManager: SessionManager
@@ -113,12 +118,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
         binding = ActivityRegirstrationTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sessionManager = SessionManager(this)
-        // test_spinner = findViewById<Spinner>(R.id.spinnerSpecialistTest)
-
-
-//        lifecycleScope.launch {
-//
-//        }
 
         Handler(Looper.getMainLooper()).postDelayed({
             apiCallLanguageSpinner()
@@ -146,7 +145,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
         binding.btnVerify.setOnClickListener {
             if (binding.edtEnterOTP.text.toString() == responseOTP) {
                 binding.layoutPhoneWithCode.setBackgroundResource(R.drawable.corner_green);
-                // binding.edtPhoneNumberWithCode.setBackgroundColor(Color.parseColor("#FF4CAF50"))
                 myToast(this, "Phone Number Verified")
                 varifyed = true
                 binding.layoutOTP.visibility = View.GONE
@@ -248,43 +246,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
         closingTimeList.add(ModelCloseTime("23:00:00"))
         closingTimeList.add(ModelCloseTime("24:00:00"))
 
-
-//            val langauges = "$langauge1,$langauges2,$langauges3"
-//            Log.e("log,", langauges)
-//        degreeList.add(ModelDegree("Select Your Degree"))
-//        degreeList.add(ModelDegree("MBBS"))
-//        degreeList.add(ModelDegree("MS"))
-//        degreeList.add(ModelDegree("MD"))
-//        degreeList.add(ModelDegree("BAMS"))
-//        degreeList.add(ModelDegree("BHMS"))
-//        degreeList.add(ModelDegree("BPT"))
-//        degreeList.add(ModelDegree("B.VSc"))
-//        degreeList.add(ModelDegree("BUMS"))
-//        degreeList.add(ModelDegree("BSMS"))
-//        degreeList.add(ModelDegree("BNYS"))
-//        degreeList.add(ModelDegree("DBS"))
-//
-//        binding.spinnerQualification.adapter =
-//            ArrayAdapter<ModelDegree>(context, R.layout.simple_list_item_1, degreeList)
-//
-//        binding.spinnerQualification.onItemSelectedListener =
-//            object : AdapterView.OnItemSelectedListener {
-//                override fun onItemSelected(
-//                    adapterView: AdapterView<*>?,
-//                    view: View,
-//                    i: Int,
-//                    l: Long
-//                ) {
-//                    if (degreeList.size > 0) {
-//                        qualification = degreeList[i].name
-//                        Log.e(ContentValues.TAG, "qualification: $qualification")
-//                    }
-//                }
-//
-//                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-//            }
-
-
         genderList.add(ModelGender("Select Gender", 0))
         genderList.add(ModelGender("Male", 1))
         genderList.add(ModelGender("Female", 2))
@@ -296,27 +257,11 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
         followUpList.add(ModelGender("9", 9))
         followUpList.add(ModelGender("10", 10))
 
-//        langaugeList.add(ModelLanguages("Select Language", 0))
-//        langaugeList.add(ModelLanguages("English", 1))
-//        langaugeList.add(ModelLanguages("French", 2))
-//        langaugeList.add(ModelLanguages("Spanish", 3))
-//        langaugeList.add(ModelLanguages("Arabic", 4))
-//        langaugeList.add(ModelLanguages("Persian", 5))
-//        langaugeList.add(ModelLanguages("German", 6))
-//        langaugeList.add(ModelLanguages("Russian", 7))
-//        langaugeList.add(ModelLanguages("Tamil", 8))
-//        langaugeList.add(ModelLanguages("Hindi", 9))
-//        langaugeList.add(ModelLanguages("Italian", 10))
-
 
         binding.layoutCamera.setOnClickListener {
-       //     myToast(this,"Work on Progress")
 
             selectValue = "1"
             ImagePicker.with(this).cameraOnly()
-//                                            .createIntent { intent ->
-//                                startForProfileImageResult.launch(intent)
-//                            }
                 .start(REQUEST_CODE_IMAGE)
         }
         binding.layoutGallery.setOnClickListener {
@@ -454,13 +399,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 return@setOnClickListener
             }
 
-
-//            if (binding.spinnerQualification.selectedItem.toString() == "Select Your Degree") {
-//                myToast(this@RegirstrationTest, "Please Select Your Qualification!")
-//                binding.spinnerQualification.requestFocus()
-//                return@setOnClickListener
-//            }
-
             if (binding.edtSlotInterval.text.isEmpty()) {
                 binding.edtSlotInterval.error = "Please enter SlotInterval"
                 binding.edtSlotInterval.requestFocus()
@@ -475,9 +413,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             if (binding.spinnerGender.selectedItem.toString() == "Select Gender") {
                 myToast(this, "Select Gender")
             }
-//            if (binding.spinnerMultiSpinner.epm== "Select Language") {
-//                myToast(this, "Select Language")
-//            }
             if (selectedImageUri == null) {
                 binding.layoutRoot.snackbar("Select Registration Certificate First")
                 return@setOnClickListener
@@ -557,19 +492,11 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     }
 
     private fun opeinImagePDF() {
-//        Intent(Intent.ACTION_PICK).also {
-//            it.type = "image/*"
-//            (MediaStore.ACTION_IMAGE_CAPTURE)
-//            val mimeTypes = arrayOf("image/jpeg", "image/png")
-//            it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
-//            startActivityForResult(it, REQUEST_CODE_IMAGE)
 
         val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
         pdfIntent.type = "application/pdf"
         pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
         startActivityForResult(pdfIntent, REQUEST_CODE_IMAGE)
-
-        //   }
     }
 
     private fun opeinImageChooserNew() {
@@ -579,11 +506,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             val mimeTypes = arrayOf("image/jpeg", "image/png")
             it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
             startActivityForResult(it, REQUEST_CODE_IMAGE)
-
-//            val pdfIntent = Intent(Intent.ACTION_GET_CONTENT)
-//            pdfIntent.type = "application/pdf"
-//            pdfIntent.addCategory(Intent.CATEGORY_OPENABLE)
-//            startActivityForResult(pdfIntent, REQUEST_CODE_IMAGE)
 
         }
     }
@@ -602,7 +524,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             // Log and toast
             val msg = getString(R.string.channel_id, fcmToken)
             Log.e("Token", fcmToken)
-            // Toast.makeText(requireContext(), token, Toast.LENGTH_SHORT).show()
         })
     }
 
@@ -700,14 +621,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
     private fun apiCallOTP(phoneWithCodeNew: String) {
 
-        progressDialog = ProgressDialog(this@RegirstrationTest)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
-
-
+     AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.checkPhone(phoneWithCodeNew)
             .enqueue(object :
                 Callback<ModelOTP> {
@@ -718,7 +632,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 ) {
                     if (response.code() == 500) {
                         myToast(this@RegirstrationTest, "Server Error")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     } else if (response.body()!!.status == 1) {
                         responseOTP = response.body()!!.result.otp
                         myToast(this@RegirstrationTest, "OTP Send Successfully")
@@ -727,13 +641,12 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                         binding.btnSendOTP.isClickable = false
                         binding.btnSendOTP.backgroundTintList =
                             ColorStateList.valueOf(resources.getColor(R.color.shimmer_color));
-                        //  binding.btnSendOTP.setBackgroundColor(Color.parseColor("#9F367A"))
-                        timeCounter()
-                        progressDialog!!.dismiss()
+                         timeCounter()
+                        AppProgressBar.hideLoaderDialog()
                     } else {
 
                         myToast(this@RegirstrationTest, response.body()!!.message)
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
 
                     }
@@ -741,7 +654,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
                 override fun onFailure(call: Call<ModelOTP>, t: Throwable) {
                     myToast(this@RegirstrationTest, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -832,12 +745,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
     @SuppressLint("SuspiciousIndentation")
     private fun apiCallRegister() {
-        progressDialog = ProgressDialog(this@RegirstrationTest)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+       AppProgressBar.showLoaderDialog(context)
 
         val parcelFileDescriptor =
             contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
@@ -888,8 +796,9 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                         if (response.code() == 500) {
                             myToast(this@RegirstrationTest, "Server Error")
                         } else if (response.body()!!.status == 1) {
+                            count = 0
                             subscribed()
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                             myToast(this@RegirstrationTest, response.body()!!.message)
                             val intent = Intent(applicationContext, SignIn::class.java)
                             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -897,31 +806,31 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                             startActivity(intent)
                         } else {
                             myToast(this@RegirstrationTest, response.body()!!.message)
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         }
 
                     }catch (e:Exception){
                         e.printStackTrace()
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelRegistrationNew>, t: Throwable) {
-                    myToast(this@RegirstrationTest, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallRegister()
+                    } else {
+                        myToast(this@RegirstrationTest, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
             })
     }
     private fun apiCallRegisterCamera() {
-        progressDialog = ProgressDialog(this@RegirstrationTest)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+    AppProgressBar.showLoaderDialog(context)
 
         val file: File = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
@@ -933,13 +842,11 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).absolutePath + "/myAppImages/" + selectedImageUri!!.lastPathSegment
         )
 
-        // val fos = FileOutputStream(file1)
 
         val parcelFileDescriptor = contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
 
         val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-        // val file = File(cacheDir, contentResolver.getFileName(selectedImageUri!!))
-        val outputStream = FileOutputStream(file1)
+         val outputStream = FileOutputStream(file1)
         inputStream.copyTo(outputStream)
 
 
@@ -980,9 +887,10 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                     if (response.code() == 500) {
                         myToast(this@RegirstrationTest, "Server Error")
                     } else if (response.body()!!.status == 1) {
+                        count2=0
                         myToast(this@RegirstrationTest, response.body()!!.message)
                         subscribed()
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                         val intent = Intent(applicationContext, SignIn::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -990,29 +898,26 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                         startActivity(intent)
                     } else {
                         myToast(this@RegirstrationTest, "${response.body()!!.message}")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     }
 
                 }
 
                 override fun onFailure(call: Call<ModelRegistrationNew>, t: Throwable) {
-                    myToast(this@RegirstrationTest, "Something went wrong")
-                    progressDialog!!.dismiss()
-
+                    count2++
+                    if (count2 <= 3) {
+                        apiCallRegisterCamera()
+                    } else {
+                        myToast(this@RegirstrationTest, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
                 }
-
             })
     }
 
     private fun apiCallSpecialistSpinner() {
-        progressDialog = ProgressDialog(this@RegirstrationTest)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        //  progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.specialistCategoryTest()
             .enqueue(object : Callback<ModelSpecilList> {
@@ -1024,6 +929,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                     if (response.code() == 500) {
                         myToast(this@RegirstrationTest, "Specialist getting field")
                     } else {
+                        count3 = 0
                         specilList = response.body()!!;
                         if (specilList != null) {
 
@@ -1046,7 +952,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
 
 
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                             binding.spinnerSpecialistTest.onItemSelectedListener =
                                 object : AdapterView.OnItemSelectedListener {
@@ -1058,8 +964,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                                     ) {
                                         val id = specilList.result!![i].id
                                         specilistId = id.toString()
-                                        // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
-                                    }
+                                     }
 
                                     override fun onNothingSelected(adapterView: AdapterView<*>?) {}
                                 }
@@ -1069,8 +974,15 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 }
 
                 override fun onFailure(call: Call<ModelSpecilList>, t: Throwable) {
-                    myToast(this@RegirstrationTest, "Something went wrong")
-                    progressDialog!!.dismiss()
+
+                    AppProgressBar.hideLoaderDialog()
+                    count3++
+                    if (count3 <= 3) {
+                        apiCallSpecialistSpinner()
+                    } else {
+                        myToast(this@RegirstrationTest, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -1078,14 +990,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     }
 
     private fun apiCallQulificationSpinner() {
-        progressDialog = ProgressDialog(this@RegirstrationTest)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        //  progressDialog!!.show()
-
+     AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.getDegree()
             .enqueue(object : Callback<ModelDegreeJava> {
                 @SuppressLint("LogNotTimber")
@@ -1095,6 +1000,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                     if (response.code() == 500) {
                         myToast(this@RegirstrationTest, "Degree list getting field")
                     } else {
+                        count5 = 0
                         degreeList = response.body()!!;
                         if (degreeList != null) {
 
@@ -1116,8 +1022,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                             binding.spinnerDegree.item = items.toMutableList() as List<Any>?
 
 
-
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                             binding.spinnerDegree.onItemSelectedListener =
                                 object : AdapterView.OnItemSelectedListener {
@@ -1129,7 +1034,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                                     ) {
                                         degree = degreeList.result!![i].degree
                                         degree = degree
-                                        // Toast.makeText(this@RegirstrationTest, "" + id, Toast.LENGTH_SHORT).show()
                                     }
 
                                     override fun onNothingSelected(adapterView: AdapterView<*>?) {}
@@ -1140,8 +1044,13 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 }
 
                 override fun onFailure(call: Call<ModelDegreeJava>, t: Throwable) {
-                    myToast(this@RegirstrationTest, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count5++
+                    if (count5 <= 3) {
+                        apiCallQulificationSpinner()
+                    } else {
+                        myToast(this@RegirstrationTest, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -1149,13 +1058,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     }
 
     private fun apiCallLanguageSpinner() {
-//        progressDialog = ProgressDialog(this@RegirstrationTest)
-//        progressDialog!!.setMessage("Loading..")
-//        progressDialog!!.setTitle("Please Wait")
-//        progressDialog!!.isIndeterminate = false
-//        progressDialog!!.setCancelable(true)
-//
-//        progressDialog!!.show()
 
         ApiClient.apiService.languageList()
             .enqueue(object : Callback<ModelLanguage> {
@@ -1184,33 +1086,18 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                                     R.layout.simple_list_item_1,
                                     items
                                 )
-//                        binding.spinnerLanguages.adapter = adapter
-//                        //  progressDialog!!.dismiss()
-//
-//
-//                        binding.spinnerLanguages.onItemSelectedListener =
-//                            object : AdapterView.OnItemSelectedListener {
-//                                override fun onItemSelected(
-//                                    adapterView: AdapterView<*>?,
-//                                    view: View,
-//                                    i: Int,
-//                                    l: Long
-//                                ) {
-//                                    val id = languageList.result!![i].id
-//                                    langaugeId = id.toString()
-//                                    //  Toast.makeText(this@RegirstrationTest, "langauge-" + id, Toast.LENGTH_SHORT).show()
-//                                }
-//
-//                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-//                            }
 
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<ModelLanguage>, t: Throwable) {
-                    myToast(this@RegirstrationTest, "Something went wrong")
-                    //progressDialog!!.dismiss()
+                    count4++
+                    if (count4 <= 3) {
+                        apiCallLanguageSpinner()
+                    } else {
+                        myToast(this@RegirstrationTest, "Something went wrong")
+                    }
 
                 }
 
@@ -1233,12 +1120,6 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
     override fun OnMultiSpinnerItemSelected(chosenItems: MutableList<String>?) {
         for (i in chosenItems!!.indices) {
-//            langauge1 = chosenItems[0]
-//            langauges2 = chosenItems[1]
-//            langauges3 = chosenItems[2]
-//            langauges4 = chosenItems[4]
-//            langauges5 = chosenItems[5]
-
 
         }
         langaugeList.add(chosenItems.toString())

@@ -16,14 +16,15 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ehcf.Helper.Util
 import com.example.ehcf.Helper.changeDateFormat4
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.AutoComplete.AutoSuggestAdapter
 import com.example.ehcf_doctor.AutoComplete.AutoSuggestMedicineAdapter
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Helper.DatePickerDialogWithMaxMinRange
-import com.example.ehcf_doctor.Helper.Util
 import com.example.ehcf_doctor.Prescription.adapter.AdapterDigonisis
 import com.example.ehcf_doctor.Prescription.adapter.AdapterLabTest
 import com.example.ehcf_doctor.Prescription.adapter.AdapterOrderDetails
@@ -34,8 +35,8 @@ import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Rating.Rating
 import com.example.ehcf_doctor.Registration.modelResponse.ModelGender
 import com.example.ehcf_doctor.Registration.modelResponse.ModelSpecilList
-import com.example.ehcf_doctor.databinding.ActivityAddPrescriptionBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityAddPrescriptionBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.*
@@ -59,6 +60,13 @@ class AddPrescription : AppCompatActivity() {
     private var specilList = ModelSpecilList();
     private var testListNew = ModelTestList();
     private var medicineListNew = ModelTestList();
+    private var count = 0
+    private var count2 = 0
+    private var count3 = 0
+    private var count4 = 0
+    private var count5 = 0
+    private var count6 = 0
+    private var count7 = 0
 
     var assessment = ""
     var plan = ""
@@ -77,7 +85,6 @@ class AddPrescription : AppCompatActivity() {
     var testList = ArrayList<ModelGender>()
     private val context: Context = this@AddPrescription
     private lateinit var sessionManager: SessionManager
-    var progressDialog: ProgressDialog? = null
     var isTest = "0"
      private var listOfText= ArrayList<String>()
 
@@ -463,7 +470,7 @@ class AddPrescription : AppCompatActivity() {
                     call: Call<ModelTestList>, response: Response<ModelTestList>
                 ) {
                     try {
-
+                        count = 0
                         testListNew = response.body()!!;
                         if (testListNew != null) {
 
@@ -492,26 +499,22 @@ class AddPrescription : AppCompatActivity() {
                     }catch (e:Exception){
                         e.printStackTrace()
                         myToast(this@AddPrescription, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelTestList>, t: Throwable) {
-                    myToast(this@AddPrescription, "Something went wrong")
-                    progressDialog!!.dismiss()
-
+                    count++
+                    if (count <= 3) {
+                        apiCallTestName()
+                    } else {
+                        myToast(this@AddPrescription, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
                 }
-
             })
     }
     private fun apiCallMedicineName() {
-//        progressDialog = ProgressDialog(this@AddPrescription)
-//        progressDialog!!.setMessage("Loading..")
-//        progressDialog!!.setTitle("Please Wait")
-//        progressDialog!!.isIndeterminate = false
-//        progressDialog!!.setCancelable(true)
-//
-//        progressDialog!!.show()
 
         ApiClient.apiService.medicineName()
             .enqueue(object : Callback<ModelTestList> {
@@ -520,6 +523,7 @@ class AddPrescription : AppCompatActivity() {
                     call: Call<ModelTestList>, response: Response<ModelTestList>
                 ) {
                     try {
+                        count2 = 0
                         medicineListNew = response.body()!!;
                         if (medicineListNew != null) {
 
@@ -548,14 +552,19 @@ class AddPrescription : AppCompatActivity() {
                     }catch (e:Exception){
                         e.printStackTrace()
                         myToast(this@AddPrescription, "Something went wrong")
-                        progressDialog!!.dismiss()
+                       AppProgressBar.hideLoaderDialog()
 
                     }
                 }
 
                 override fun onFailure(call: Call<ModelTestList>, t: Throwable) {
-                    myToast(this@AddPrescription, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count2++
+                    if (count2 <= 3) {
+                        apiCallMedicineName()
+                    } else {
+                        myToast(this@AddPrescription, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -577,15 +586,6 @@ class AddPrescription : AppCompatActivity() {
 
         var listCountryType = object : TypeToken<ArrayList<ModelCityList>>() {}.type
 
-//        val autoSuggestAdapter = AutoSuggestAdapter(this,
-//            android.R.layout.simple_list_item_1, listOfText)
-//
-//        binding.edtTestName.setAdapter(autoSuggestAdapter)
-//        binding.edtTestName.threshold = 1
-
-//        var listOfText= ArrayList<String>()
-//        listOfText.add(it.toString())
-//        Log.e("testName", it.toString())
         Log.e("testName", listCountryType.toString())
 
         return Gson().fromJson(jsonString, listCountryType)
@@ -629,19 +629,6 @@ class AddPrescription : AppCompatActivity() {
             val maxYear: Int
             val maxMonth: Int
             val maxDay: Int
-//            var emptyInvalidDate = true
-//            emptyInvalidDate = !(! binding.tvSelectMaxDatePicker!!.text.toString().equals("", ignoreCase = true) || binding.tvSelectMinDatePicker!!.text.toString() != null
-//                        && ! binding.tvSelectMinDatePicker!!.text.toString().equals("", ignoreCase = true))
-//            emptyInvalidDate = binding.tvSelectMaxDatePicker!!.text.toString().equals(getString(R.string.lbl_select_date), ignoreCase = true) ||
-//                    binding.tvSelectMinDatePicker!!.text.toString().equals(getString(R.string.lbl_select_date), ignoreCase = true)
-//            if (emptyInvalidDate) {
-//                val alert = AlertDialog.Builder(context!!).apply {
-//                    setTitle(getString(R.string.app_name))
-//                    setMessage(getString(R.string.tv_invalidDateMessage))
-//                    setPositiveButton("Ok") { dialog, which -> }
-//                }.show()
-
-//            } else {
             minDay = minDate.split("-").toTypedArray()[0].toInt()
             minMonth = minDate.split("-").toTypedArray()[1].toInt() - 1
             minYear = minDate.split("-").toTypedArray()[2].toInt()
@@ -706,27 +693,6 @@ class AddPrescription : AppCompatActivity() {
         }
     }
 
-//        followUpList.add(ModelGender("Select FollowUp Day", 0))
-//        followUpList.add(ModelGender("7", 7))
-//        followUpList.add(ModelGender("8", 8))
-//        followUpList.add(ModelGender("9", 9))
-//        followUpList.add(ModelGender("10", 10))
-//
-//        binding.spinnerFollowUp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-//                if (followUpList.size > 0) {
-//                    followUpDay = followUpList[i].id.toString()
-//
-//                    Log.e(ContentValues.TAG, "followUpDay: $followUpDay")
-//                }
-//            }
-//
-//            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-//        }
-//        binding.spinnerFollowUp.adapter =
-//            ArrayAdapter<ModelGender>(context, R.layout.simple_list_item_1, followUpList)
-//    }
-
     private fun setRecyclerDataMedicine(
         medicineName: String,
         timing: String,
@@ -759,21 +725,9 @@ class AddPrescription : AppCompatActivity() {
     }
 
     private fun apiCall() {
-        progressDialog = ProgressDialog(this@AddPrescription)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
-
-//        val subjective = binding.edtSubjectiveInformation.text.toString()
-//        val objective = binding.edtObjectiveInformation.text.toString()
-//        val assessment = binding.edtAssessment.text.toString()
-//        val plan = binding.edtPlan.text.toString()
+        AppProgressBar.showLoaderDialog(context)
         val doctorNotes = binding.edtDoctorNotes.text.toString()
         Log.e("test", isTest)
-
-
         ApiClient.apiService.createPrescription(
             bookingId,
             "null",
@@ -797,30 +751,36 @@ class AddPrescription : AppCompatActivity() {
 
                         if (response.code() == 500) {
                             myToast(this@AddPrescription, "Server Error")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                         } else if (response.code() == 200) {
+                            count3 = 0
                             myToast(this@AddPrescription, response.body()!!.result)
                             val preId = response.body()!!.data.id.toString()
                             // Log.e("Iddddddd",preId)
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                             apiCallDiagnosis(preId)
 
                         } else {
                             myToast(this@AddPrescription, "${response.body()!!.result}")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         }
                     } catch (e: Exception) {
                         myToast(this@AddPrescription, "Something went wrong")
                         e.printStackTrace()
-                         progressDialog!!.dismiss()
+                         AppProgressBar.hideLoaderDialog()
                     }
                 }
 
 
                 override fun onFailure(call: Call<ModelPreJava>, t: Throwable) {
-                    myToast(this@AddPrescription, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count3++
+                    if (count3 <= 3) {
+                        apiCall()
+                    } else {
+                        myToast(this@AddPrescription, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -828,12 +788,7 @@ class AddPrescription : AppCompatActivity() {
     }
 
     private fun apiCallMedicine(preId: String) {
-        progressDialog = ProgressDialog(this@AddPrescription)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        // progressDialog!!.show()
+      AppProgressBar.showLoaderDialog(context)
         apiCallLabTest(preId)
 
         for (i in medicineList) {
@@ -859,6 +814,7 @@ class AddPrescription : AppCompatActivity() {
                                 myToast(this@AddPrescription, "Server Error")
                                 // progressDialog!!.dismiss()
                             } else if (response.code() == 200) {
+                                count4 = 0
                                 val intent = Intent(context as Activity, Rating::class.java)
                                     .putExtra("meetingId", bookingId)
                                 (context as Activity).startActivity(intent)
@@ -867,20 +823,26 @@ class AddPrescription : AppCompatActivity() {
 
                             } else {
                                 myToast(this@AddPrescription, "${response.body()!!.message}")
-                                progressDialog!!.dismiss()
+                                AppProgressBar.hideLoaderDialog()
 
                             }
 
                         }catch (e:Exception){
                             e.printStackTrace()
                             myToast(this@AddPrescription, "Something went wrong")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                         }
                     }
 
                     override fun onFailure(call: Call<ModeMedicine>, t: Throwable) {
-                        myToast(this@AddPrescription, "Something went wrong")
-                        // progressDialog!!.dismiss()
+
+                        count4++
+                        if (count4 <= 3) {
+                            apiCallMedicine(preId)
+                        } else {
+                            myToast(this@AddPrescription, "Something went wrong")
+                        }
+                        AppProgressBar.hideLoaderDialog()
 
                     }
 
@@ -889,12 +851,7 @@ class AddPrescription : AppCompatActivity() {
     }
 
     private fun apiCallDiagnosis(preId: String) {
-        progressDialog = ProgressDialog(this@AddPrescription)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        // progressDialog!!.show()
+      AppProgressBar.showLoaderDialog(context)
         apiCallMedicine(preId)
 
         for (i in diagnosisList) {
@@ -916,25 +873,30 @@ class AddPrescription : AppCompatActivity() {
                                 myToast(this@AddPrescription, "Server Error")
                                 // progressDialog!!.dismiss()
                             } else if (response.code() == 200) {
+                                count5 = 0
                                 myToast(this@AddPrescription, response.body()!!.message)
                                 onBackPressed()
                                 //  progressDialog!!.dismiss()
 
                             } else {
                                 myToast(this@AddPrescription, "${response.body()!!.message}")
-                                progressDialog!!.dismiss()
+                                AppProgressBar.hideLoaderDialog()
 
                             }
                         }catch (e:Exception){
                             e.printStackTrace()
                             myToast(this@AddPrescription, "Something went wrong")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                         }
                     }
 
                     override fun onFailure(call: Call<ModeMedicine>, t: Throwable) {
-                        myToast(this@AddPrescription, "Something went wrong")
-                        // progressDialog!!.dismiss()
+                        count5++
+                        if (count5 <= 3) {
+                            apiCallDiagnosis(preId)
+                        } else {
+                            myToast(this@AddPrescription, "Something went wrong")
+                        }
 
                     }
 
@@ -943,12 +905,7 @@ class AddPrescription : AppCompatActivity() {
     }
 
     private fun apiCallLabTest(preId: String) {
-        progressDialog = ProgressDialog(this@AddPrescription)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        // progressDialog!!.show()
+     AppProgressBar.showLoaderDialog(context)
 
         for (i in labTestList) {
             ApiClient.apiService.createLabTest(
@@ -969,6 +926,7 @@ class AddPrescription : AppCompatActivity() {
                                 myToast(this@AddPrescription, "Server Error")
                                 // progressDialog!!.dismiss()
                             } else if (response.code() == 200) {
+                                count6 = 0
                                 myToast(this@AddPrescription, response.body()!!.message)
                                 val intent = Intent(context as Activity, Rating::class.java)
                                     .putExtra("meetingId", bookingId)
@@ -977,20 +935,24 @@ class AddPrescription : AppCompatActivity() {
 
                             } else {
                                 myToast(this@AddPrescription, "${response.body()!!.message}")
-                                progressDialog!!.dismiss()
+                                AppProgressBar.hideLoaderDialog()
 
                             }
 
                         }catch (e:java.lang.Exception){
                             e.printStackTrace()
                             myToast(this@AddPrescription, "Something went wrong")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                         }
                     }
 
                     override fun onFailure(call: Call<ModeMedicine>, t: Throwable) {
-                        myToast(this@AddPrescription, "Something went wrong")
-                        // progressDialog!!.dismiss()
+                        count6++
+                        if (count6 <= 3) {
+                            apiCallLabTest(preId)
+                        } else {
+                            myToast(this@AddPrescription, "Something went wrong")
+                        }
 
                     }
 
@@ -999,17 +961,7 @@ class AddPrescription : AppCompatActivity() {
     }
 
     private fun apiCallModifyPrescrption() {
-        progressDialog = ProgressDialog(this@AddPrescription)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
-
-//        val subjective = binding.edtSubjectiveInformation.text.toString()
-//        val objective = binding.edtObjectiveInformation.text.toString()
-//        val assessment = binding.edtAssessment.text.toString()
-//        val plan = binding.edtPlan.text.toString()
+       AppProgressBar.showLoaderDialog(context)
         val doctorNotes = binding.edtDoctorNotes.text.toString()
         Log.e("test", isTest)
 
@@ -1033,28 +985,35 @@ class AddPrescription : AppCompatActivity() {
 
                         if (response.code() == 500) {
                             myToast(this@AddPrescription, "Server Error")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                         } else if (response.code() == 200) {
+                            count7 = 0
                             myToast(this@AddPrescription, response.body()!!.result)
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                             onBackPressed()
 
                         } else {
                             myToast(this@AddPrescription, "${response.body()!!.result}")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         }
 
                     }catch (e:java.lang.Exception){
                         e.printStackTrace()
                         myToast(this@AddPrescription, "Something went wrong")
-                        progressDialog!!.dismiss()
+                       AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelModify>, t: Throwable) {
-                    myToast(this@AddPrescription, "Something went wrong")
-                    progressDialog!!.dismiss()
+
+                    count7++
+                    if (count7 <= 3) {
+                        apiCallModifyPrescrption()
+                    } else {
+                        myToast(this@AddPrescription, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

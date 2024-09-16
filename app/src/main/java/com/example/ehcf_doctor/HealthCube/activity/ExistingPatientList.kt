@@ -10,6 +10,7 @@ import android.view.View
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.HealthCube.Adapter.AdapterExixtingPatientList
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityExistingPatientListBinding
@@ -24,7 +25,8 @@ class ExistingPatientList : AppCompatActivity() {
     var dialog: Dialog? = null
     var shimmerFrameLayout: ShimmerFrameLayout? = null
 
-    var progressDialog: ProgressDialog? = null
+    private var count = 0
+    private var count2 = 0
     private lateinit var sessionManager: SessionManager
     private lateinit var binding: ActivityExistingPatientListBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +41,6 @@ class ExistingPatientList : AppCompatActivity() {
             onBackPressed()
         }
 
-//        binding.btnRegisterNewP.setOnClickListener {
-//            startActivity(Intent(this@PatientList, AddPatient::class.java))
-//        }
         binding.imgRefresh.setOnClickListener {
             overridePendingTransition(0, 0)
             finish()
@@ -65,32 +64,7 @@ class ExistingPatientList : AppCompatActivity() {
         var Diagnostic = ""
     }
 
-    //    fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<String?>?, grantResults: IntArray
-//    ) {
-//        if (permissions != null) {
-//            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        }
-//        when (requestCode) {
-//            MY_PERMISSIONS_REQUEST_CALL_PHONE -> {
-//
-//                // If request is cancelled, the result arrays are empty.
-//                if (grantResults.size > 0
-//                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-//                ) {
-//
-//                    // permission was granted, yay! Do the phone call
-//                } else {
-//
-//                    // permission denied, boo! Disable the
-//                    // functionality that depends on this permission.
-//                }
-//                return
-//            }
-//        }
-//    }
-//
+
     override fun onResume() {
         super.onResume()
         if (PatientList.Exsting == "1") {
@@ -104,12 +78,7 @@ class ExistingPatientList : AppCompatActivity() {
     }
 
     private fun apiCallMyPatient() {
-        progressDialog = ProgressDialog(this@ExistingPatientList)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        // progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.healthcubeExsistingpatient(sessionManager.id.toString())
             .enqueue(object : Callback<ModelMyPatient> {
@@ -121,27 +90,27 @@ class ExistingPatientList : AppCompatActivity() {
                         if (response.code() == 500) {
                             myToast(this@ExistingPatientList, "Server Error")
                             binding.shimmerMyPatient.visibility = View.GONE
-                            progressDialog!!.dismiss()
-
+                            AppProgressBar.hideLoaderDialog()
                         } else if (response.body()!!.result.isEmpty()) {
                             binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmerMyPatient.visibility = View.GONE
                             // myToast(requireActivity(),"No Data Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                             binding.recyclerView.apply {
                                 shimmerFrameLayout?.startShimmer()
                                 binding.recyclerView.visibility = View.VISIBLE
                                 binding.shimmerMyPatient.visibility = View.GONE
-                                 adapter =
+                                adapter =
                                     AdapterExixtingPatientList(
                                         this@ExistingPatientList,
                                         response.body()!!
                                     )
-                                progressDialog!!.dismiss()
+                                AppProgressBar.hideLoaderDialog()
 
                             }
 
                         } else {
+                            count = 0
                             binding.recyclerView.apply {
                                 shimmerFrameLayout?.startShimmer()
                                 binding.recyclerView.visibility = View.VISIBLE
@@ -152,7 +121,7 @@ class ExistingPatientList : AppCompatActivity() {
                                         this@ExistingPatientList,
                                         response.body()!!
                                     )
-                                progressDialog!!.dismiss()
+                                AppProgressBar.hideLoaderDialog()
 
                             }
                         }
@@ -164,9 +133,14 @@ class ExistingPatientList : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
-                    myToast(this@ExistingPatientList, "Something went wrong")
-                    binding.shimmerMyPatient.visibility = View.GONE
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallMyPatient()
+                    } else {
+                        myToast(this@ExistingPatientList, "Something went wrong")
+                        binding.shimmerMyPatient.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -174,12 +148,7 @@ class ExistingPatientList : AppCompatActivity() {
     }
 
     private fun apiCallSearchMyPatient() {
-        progressDialog = ProgressDialog(this@ExistingPatientList)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
         val patientName = binding.edtSearch.text.toString()
         ApiClient.apiService.searchPatient(sessionManager.id.toString(), patientName)
             .enqueue(object : Callback<ModelMyPatient> {
@@ -191,13 +160,13 @@ class ExistingPatientList : AppCompatActivity() {
                         if (response.code() == 500) {
                             myToast(this@ExistingPatientList, "Server Error")
                             binding.shimmerMyPatient.visibility = View.GONE
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else if (response.body()!!.status == 0) {
                             binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmerMyPatient.visibility = View.GONE
                             myToast(this@ExistingPatientList, "${response.body()!!.message}")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else if (response.body()!!.result.isEmpty()) {
                             binding.recyclerView.adapter =
@@ -209,9 +178,10 @@ class ExistingPatientList : AppCompatActivity() {
                             binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmerMyPatient.visibility = View.GONE
                             myToast(this@ExistingPatientList, "No Patient Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
+                            count2 = 0
                             binding.recyclerView.adapter =
                                 AdapterExixtingPatientList(
                                     this@ExistingPatientList,
@@ -222,17 +192,8 @@ class ExistingPatientList : AppCompatActivity() {
                             shimmerFrameLayout?.startShimmer()
                             binding.recyclerView.visibility = View.VISIBLE
                             binding.shimmerMyPatient.visibility = View.GONE
-                            progressDialog!!.dismiss()
-//                        binding.rvManageSlot.apply {
-//                            binding.tvNoDataFound.visibility = View.GONE
-//                            shimmerFrameLayout?.startShimmer()
-//                            binding.rvManageSlot.visibility = View.VISIBLE
-//                            binding.shimmerMySlot.visibility = View.GONE
-//                            // myToast(this@ShuduleTiming, response.body()!!.message)
-//                            adapter = AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
-//                            progressDialog!!.dismiss()
-//
-//                        }
+                            AppProgressBar.hideLoaderDialog()
+
                         }
                     } catch (e: Exception) {
                         myToast(this@ExistingPatientList, "Something went wrong")
@@ -241,10 +202,15 @@ class ExistingPatientList : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
-                    myToast(this@ExistingPatientList, "Something went wrong")
-                    binding.shimmerMyPatient.visibility = View.GONE
-                    progressDialog!!.dismiss()
 
+                    count2++
+                    if (count2 <= 3) {
+                        apiCallSearchMyPatient()
+                    } else {
+                        myToast(this@ExistingPatientList, "Something went wrong")
+                        binding.shimmerMyPatient.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
                 }
 
             })

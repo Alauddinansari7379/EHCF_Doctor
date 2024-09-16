@@ -2,12 +2,14 @@ package com.example.ehcf_doctor.MyPatient.activity
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterPatientHistory
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MyPatient.model.ModelPatientHistoryX
 import com.example.ehcf_doctor.databinding.ActivityPatientHistoryBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
@@ -17,8 +19,9 @@ import retrofit2.Response
 
 class PatientHistory : AppCompatActivity() {
     private lateinit var binding: ActivityPatientHistoryBinding
-    var progressDialog: ProgressDialog? = null
+    private var context: Context = this@PatientHistory
     var id = ""
+    private var count = 0
     private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,13 +38,7 @@ class PatientHistory : AppCompatActivity() {
     }
 
     private fun apiCall() {
-
-        progressDialog = ProgressDialog(this@PatientHistory)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.patientHistory(id)
             .enqueue(object : Callback<ModelPatientHistoryX> {
@@ -50,48 +47,43 @@ class PatientHistory : AppCompatActivity() {
                     call: Call<ModelPatientHistoryX>, response: Response<ModelPatientHistoryX>
                 ) {
 
-                try {
+                    try {
 
-                    if (response.code() == 500) {
-                        myToast(this@PatientHistory, "Server Error")
+                        if (response.code() == 500) {
+                            myToast(this@PatientHistory, "Server Error")
 
-                    } else if (response.body()!!.result.isEmpty()) {
-                        myToast(this@PatientHistory, "No Appointment Found")
-                        progressDialog!!.dismiss()
+                        } else if (response.body()!!.result.isEmpty()) {
+                            myToast(this@PatientHistory, "No Appointment Found")
+                            AppProgressBar.hideLoaderDialog()
+                        } else {
+                            count = 0
+                            binding.rvPtientHistory.apply {
+                                response.body()!!.result.size.toString()
+                                Log.e("Size", response.body()!!.result.size.toString())
+                                //  myToast(requireActivity(),"Adapter")
+                                adapter =
+                                    AdapterPatientHistory(this@PatientHistory, response.body()!!)
+                                AppProgressBar.hideLoaderDialog()
 
-                    } else {
-                        binding.rvPtientHistory.apply {
-                            response.body()!!.result.size.toString()
-                            Log.e("Size", response.body()!!.result.size.toString())
-                            //  myToast(requireActivity(),"Adapter")
-                            adapter = AdapterPatientHistory(this@PatientHistory, response.body()!!)
-                            progressDialog!!.dismiss()
 
-
+                            }
                         }
-//                        binding.rvManageSlot.apply {
-//                            binding.tvNoDataFound.visibility = View.GONE
-//                            shimmerFrameLayout?.startShimmer()
-//                            binding.rvManageSlot.visibility = View.VISIBLE
-//                            binding.shimmerMySlot.visibility = View.GONE
-//                            // myToast(this@ShuduleTiming, response.body()!!.message)
-//                            adapter = AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
-//                            progressDialog!!.dismiss()
-//
-//                        }
-                    }
-                }
-                    catch (e: Exception) {
-                        progressDialog!!.dismiss()
+                    } catch (e: Exception) {
+                        AppProgressBar.hideLoaderDialog()
                         myToast(this@PatientHistory, "Something went wrong")
                         e.printStackTrace()
                     }
-            }
+                }
 
-            override fun onFailure(call: Call<ModelPatientHistoryX>, t: Throwable) {
-                t.message?.let { myToast(this@PatientHistory, it) }
-            }
-        })
+                override fun onFailure(call: Call<ModelPatientHistoryX>, t: Throwable) {
+                    count++
+                    if (count <= 3) {
+                        apiCall()
+                    } else {
+                        t.message?.let { myToast(this@PatientHistory, it) }
+                    }
+                }
+            })
     }
 }
 

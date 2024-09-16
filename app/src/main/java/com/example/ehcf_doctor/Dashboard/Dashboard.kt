@@ -19,6 +19,7 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.activity.ScreenRecorder
 import com.example.ehcf_doctor.Dashboard.adapter.AdapterDashboard
 import com.example.ehcf_doctor.Dashboard.model.ModelDashboard
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.databinding.ActivityDashboardBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
@@ -36,8 +37,8 @@ class Dashboard : AppCompatActivity() {
     var mydilaog: Dialog? = null
     private lateinit var sessionManager: SessionManager
     private val context: Context = this@Dashboard
-    var progressDialog: ProgressDialog? = null
     var selectedDate = ""
+    private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +71,8 @@ class Dashboard : AppCompatActivity() {
                 newDate[year, monthOfYear] = dayOfMonth
                 DateFormat.getDateInstance().format(newDate.time)
                 // val Date = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(newDate.time)
-               val selectedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(newDate.time)
+                val selectedDate =
+                    SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(newDate.time)
                 val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(newDate.time)
                 binding.tvDate.text = date
                 binding.tvDateTotalPatients.text = date
@@ -109,14 +111,13 @@ class Dashboard : AppCompatActivity() {
     }
 
     private fun apiCallInvoiceDetial(selectedDate: String) {
-        progressDialog = ProgressDialog(this@Dashboard)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-         progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
-        ApiClient.apiService.filterAppointmentByDate(sessionManager.id.toString(), selectedDate, "accepted")
+        ApiClient.apiService.filterAppointmentByDate(
+            sessionManager.id.toString(),
+            selectedDate,
+            "accepted"
+        )
             .enqueue(object : Callback<ModelDashboard> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
@@ -127,17 +128,17 @@ class Dashboard : AppCompatActivity() {
                         myToast(this@Dashboard, "Server Error")
                     } else if (response.body()!!.status == 0) {
                         myToast(this@Dashboard, "${response.body()!!.message}")
-                        progressDialog!!.dismiss()
-
+                        AppProgressBar.hideLoaderDialog()
                     } else if (response.body()!!.result.isEmpty()) {
                         binding.recyclerView.adapter =
                             AdapterDashboard(this@Dashboard, response.body()!!)
                         binding.tvTotalPatient.text = response.body()!!.result.size.toString()
                         myToast(this@Dashboard, "No Appointment Found")
                         binding.recyclerView.adapter!!.notifyDataSetChanged()
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     } else {
+                        count = 0
                         binding.recyclerView.adapter =
                             AdapterDashboard(this@Dashboard, response.body()!!)
                         binding.recyclerView.layoutManager =
@@ -146,7 +147,7 @@ class Dashboard : AppCompatActivity() {
                         binding.recyclerView.adapter!!.notifyDataSetChanged()
                         binding.tvTotalPatient.text = response.body()!!.result.size.toString()
 
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 //                        binding.rvManageSlot.apply {
 //                            binding.tvNoDataFound.visibility = View.GONE
 //                            shimmerFrameLayout?.startShimmer()
@@ -161,8 +162,13 @@ class Dashboard : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ModelDashboard>, t: Throwable) {
-                    myToast(this@Dashboard, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallInvoiceDetial(selectedDate)
+                    } else {
+                        myToast(this@Dashboard, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

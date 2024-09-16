@@ -1,9 +1,9 @@
-package com.example.ehcf_doctor.Helper
+package com.example.ehcf.Helper
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.ehcf_doctor.R
- import java.text.ParseException
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -1,7 +1,6 @@
 package com.example.ehcf_doctor.Helper
 
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
@@ -9,7 +8,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ehcf_doctor.Helper.Util.getDate
+import com.example.ehcf.Helper.Util
+import com.example.ehcf.Helper.Util.getDate
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.CustomDatepickerdemoBinding
 import java.util.*

@@ -11,6 +11,7 @@ import androidx.core.widget.addTextChangedListener
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.HealthCube.Adapter.AdapterPatientList
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ResultMyPatient
 import com.example.ehcf_doctor.R
@@ -27,11 +28,11 @@ class PatientList : AppCompatActivity() {
     private var context: Context = this@PatientList
     var dialog: Dialog? = null
 
-    var progressDialog: ProgressDialog? = null
     private lateinit var sessionManager: SessionManager
     private lateinit var binding: ActivityPatientListBinding
     var shimmerFrameLayout: ShimmerFrameLayout? = null
     private lateinit var mainData: ArrayList<ResultMyPatient>
+    private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,24 +51,12 @@ class PatientList : AppCompatActivity() {
                 it.name!!.contains(str.toString(), ignoreCase = true)
             } as ArrayList<ResultMyPatient>)
         }
-//        binding.btnRegisterNewP.setOnClickListener {
-//            startActivity(Intent(this@PatientList, AddPatient::class.java))
-//        }
         binding.imgRefresh.setOnClickListener {
             overridePendingTransition(0, 0)
             finish()
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
-        /*  binding.imgSearch.setOnClickListener {
-              if (binding.edtSearch.text.isEmpty()) {
-                  binding.edtSearch.error = "Enter Patient Name"
-                  binding.edtSearch.requestFocus()
-              } else {
-                  apiCallSearchMyPatient()
-
-              }
-          }*/
 
         apiCallMyPatient()
     }
@@ -80,12 +69,7 @@ class PatientList : AppCompatActivity() {
 
 
     private fun apiCallMyPatient() {
-        progressDialog = ProgressDialog(this@PatientList)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        // progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.healthcubePatientList(sessionManager.id.toString())
             .enqueue(object : Callback<ModelMyPatient> {
@@ -95,22 +79,22 @@ class PatientList : AppCompatActivity() {
                 ) {
                     try {
                         if (response.code() == 200) {
+                            count = 0
                             mainData = response.body()!!.result
                         }
                         if (response.code() == 500) {
                             myToast(this@PatientList, "Server Error")
                             binding.shimmerMyPatient.visibility = View.GONE
-                            progressDialog!!.dismiss()
-
+                            AppProgressBar.hideLoaderDialog()
                         } else if (response.body()!!.result.isEmpty()) {
                             binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmerMyPatient.visibility = View.GONE
                             // myToast(requireActivity(),"No Data Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
                             setRecyclerViewAdapter(mainData)
-                                 progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
 
                         }
@@ -122,14 +106,20 @@ class PatientList : AppCompatActivity() {
 
 
                 override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
-                    myToast(this@PatientList, "Something went wrong")
-                    binding.shimmerMyPatient.visibility = View.GONE
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallMyPatient()
+                    } else {
+                        myToast(this@PatientList, "Something went wrong")
+                        binding.shimmerMyPatient.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
             })
     }
+
     private fun setRecyclerViewAdapter(data: ArrayList<ResultMyPatient>) {
         binding.recyclerView.apply {
             shimmerFrameLayout?.startShimmer()
@@ -137,84 +127,9 @@ class PatientList : AppCompatActivity() {
             binding.shimmerMyPatient.visibility = View.GONE
             binding.tvNoDataFound.visibility = View.GONE
             adapter = AdapterPatientList(this@PatientList, data)
-            progressDialog!!.dismiss()
+            AppProgressBar.hideLoaderDialog()
 
         }
     }
-
-/*
-     private fun apiCallSearchMyPatient() {
-        progressDialog = ProgressDialog(this@PatientList)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
-        val patientName = binding.edtSearch.text.toString()
-        ApiClient.apiService.searchPatient(sessionManager.id.toString(), patientName)
-            .enqueue(object : Callback<ModelMyPatient> {
-                @SuppressLint("LogNotTimber")
-                override fun onResponse(
-                    call: Call<ModelMyPatient>, response: Response<ModelMyPatient>
-                ) {
-                    try {
-                        if (response.code() == 500) {
-                            myToast(this@PatientList, "Server Error")
-                            binding.shimmerMyPatient.visibility = View.GONE
-                            progressDialog!!.dismiss()
-
-                        } else if (response.body()!!.status == 0) {
-                            binding.tvNoDataFound.visibility = View.VISIBLE
-                            binding.shimmerMyPatient.visibility = View.GONE
-                            myToast(this@PatientList, "${response.body()!!.message}")
-                            progressDialog!!.dismiss()
-
-                        } else if (response.body()!!.result.isEmpty()) {
-                            binding.recyclerView.adapter =
-                                AdapterPatientList(this@PatientList, response.body()!!)
-                            binding.recyclerView.adapter!!.notifyDataSetChanged()
-                            binding.tvNoDataFound.visibility = View.VISIBLE
-                            binding.shimmerMyPatient.visibility = View.GONE
-                            myToast(this@PatientList, "No Patient Found")
-                            progressDialog!!.dismiss()
-
-                        } else {
-                            binding.recyclerView.adapter =
-                                AdapterPatientList(this@PatientList, response.body()!!)
-                            binding.recyclerView.adapter!!.notifyDataSetChanged()
-                            binding.tvNoDataFound.visibility = View.GONE
-                            shimmerFrameLayout?.startShimmer()
-                            binding.recyclerView.visibility = View.VISIBLE
-                            binding.shimmerMyPatient.visibility = View.GONE
-                            progressDialog!!.dismiss()
-//                        binding.rvManageSlot.apply {
-//                            binding.tvNoDataFound.visibility = View.GONE
-//                            shimmerFrameLayout?.startShimmer()
-//                            binding.rvManageSlot.visibility = View.VISIBLE
-//                            binding.shimmerMySlot.visibility = View.GONE
-//                            // myToast(this@ShuduleTiming, response.body()!!.message)
-//                            adapter = AdapterSlotsList(this@MySlot, response.body()!!, this@MySlot)
-//                            progressDialog!!.dismiss()
-//
-//                        }
-                        }
-                    }catch (e:Exception){
-                        e.printStackTrace()
-                        myToast(this@PatientList, "Something went wrong")
-
-                    }
-                }
-
-                override fun onFailure(call: Call<ModelMyPatient>, t: Throwable) {
-                    myToast(this@PatientList, "Something went wrong")
-                    binding.shimmerMyPatient.visibility = View.GONE
-                    progressDialog!!.dismiss()
-
-                }
-
-            })
-    }
-*/
-
 
 }

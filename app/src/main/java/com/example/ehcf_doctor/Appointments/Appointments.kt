@@ -19,6 +19,7 @@ import com.example.ehcf_doctor.Appointments.Cancelled.activity.CancelledFragment
 import com.example.ehcf_doctor.Appointments.Consulted.activity.ConsultedFragment
 import com.example.ehcf_doctor.Appointments.Upcoming.activity.UpComingFragment
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelConfirmSlotRes
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.databinding.ActivityApointmentsBinding
@@ -40,6 +41,7 @@ class Appointments : AppCompatActivity() {
     private lateinit var bar: Toolbar    // creating object of ToolBar
     private var vale = ""
     var bookingId = ""
+    private var count = 0
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,16 +87,6 @@ class Appointments : AppCompatActivity() {
                     1 -> tabs.setSelectedTabIndicatorColor(Color.parseColor("#3A97C5"))
                     2 -> tabs.setSelectedTabIndicatorColor(Color.parseColor("#FF0413"))
                 }
-
-//                if (tab.position == 0) {
-//                    tabs.setSelectedTabIndicatorColor(Color.parseColor("#45369F"))
-//                }
-//                else if (tab.position == 1) {
-//                    tabs.setSelectedTabIndicatorColor(Color.parseColor("#3A97C5"))
-//                }
-//                else {
-//                    tabs.setSelectedTabIndicatorColor(Color.parseColor("#FF0413"))
-//                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}
@@ -154,14 +146,12 @@ class Appointments : AppCompatActivity() {
                        // myToast(this@Appointments,response.body()!!.message)
 
                     } else if (response.body()!!.status == 1) {
+                        count = 0
                         vale=""
                         val intent = Intent(context as Activity, Appointments::class.java)
                         (context as Activity).startActivity(intent)
                      //   refresh()
                         myToast(this@Appointments,response.body()!!.message)
-
-                        //  myToast(requireActivity(),response.body()!!.message)
-                        //  apiCall()
 
                     } else {
                         myToast(this@Appointments,response.body()!!.message)
@@ -170,9 +160,13 @@ class Appointments : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ModelConfirmSlotRes>, t: Throwable) {
-                    myToast(this@Appointments,t.message.toString())
-
-
+                    count++
+                    if (count <= 3) {
+                        completeSlot(bookingId)
+                    } else {
+                        myToast(this@Appointments,t.message.toString())
+                    }
+                    AppProgressBar.hideLoaderDialog()
                 }
 
             })
@@ -188,16 +182,7 @@ class Appointments : AppCompatActivity() {
             //  myToast(requireActivity(), "Not C")
 
         }
-//        CheckInternet().check { connected ->
-//            if (connected) {
-//             //    myToast(requireActivity(),"Connected")
-//            }
-//            else {
-//                val changeReceiver = NetworkChangeReceiver(context)
-//                changeReceiver.build()
-//                //  myToast(requireActivity(),"Check Internet")
-//            }
-//        }
+
     }
 
 }

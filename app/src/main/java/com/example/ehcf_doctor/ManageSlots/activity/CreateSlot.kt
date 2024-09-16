@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.ManageSlots.model.ModelConsaltation
 import com.example.ehcf_doctor.ManageSlots.model.ModelDay
 import com.example.ehcf_doctor.ManageSlots.model.ModelGetAddress
@@ -41,7 +42,6 @@ class CreateSlot : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
     var mydilaog: Dialog? = null
     var datePicker: Dialog? = null
-    var progressDialog: ProgressDialog? = null
     var dialog: Dialog? = null
     var selectedDate = ""
     var dayId = ""
@@ -55,6 +55,8 @@ class CreateSlot : AppCompatActivity() {
     private var endTime = "00:00:00"
     var openingTimeList = ArrayList<String>()
     private var tvTimeCounter: TextView? = null
+    private var count = 0
+    private var count2 = 0
 
 
     @SuppressLint("LogNotTimber")
@@ -69,8 +71,8 @@ class CreateSlot : AppCompatActivity() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
-        binding.tvStartTime.text=sessionManager.openTime
-        binding.tvEndTime.text=sessionManager.closeTime
+        binding.tvStartTime.text = sessionManager.openTime
+        binding.tvEndTime.text = sessionManager.closeTime
         val currentDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
         selectedDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
@@ -119,11 +121,11 @@ class CreateSlot : AppCompatActivity() {
                     if (consaltationList.size > 0) {
                         consultationTypeId = consaltationList[i].id.toString()
                         Log.e(ContentValues.TAG, "consultationTypeId: $consultationTypeId")
-                        if (consaltationList[i].id=="1"){
-                            binding.layoutAddress.visibility=View.GONE
-                            address="NA"
-                        }else{
-                            binding.layoutAddress.visibility=View.VISIBLE
+                        if (consaltationList[i].id == "1") {
+                            binding.layoutAddress.visibility = View.GONE
+                            address = "NA"
+                        } else {
+                            binding.layoutAddress.visibility = View.VISIBLE
                         }
                     }
                 }
@@ -135,9 +137,6 @@ class CreateSlot : AppCompatActivity() {
             android.R.layout.simple_list_item_1,
             consaltationList
         )
-
-
-
 
         binding.tvDate.text = currentDate
 
@@ -185,9 +184,11 @@ class CreateSlot : AppCompatActivity() {
 
 
         binding.btnCreate.setOnClickListener {
-            val startT = sessionManager.openTime!!.replace(":","").toInt()
-            val endT = binding.tvStartTime.text.toString().replace(":","").toInt()
-            if (sessionManager.openTime!!.replace(":","").toInt() > binding.tvStartTime.text.toString().replace(":","").toInt()) {
+            val startT = sessionManager.openTime!!.replace(":", "").toInt()
+            val endT = binding.tvStartTime.text.toString().replace(":", "").toInt()
+            if (sessionManager.openTime!!.replace(":", "")
+                    .toInt() > binding.tvStartTime.text.toString().replace(":", "").toInt()
+            ) {
                 SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("The session slabs must be within the time limit of the clinic timings")
                     .setConfirmText("Ok")
@@ -203,9 +204,11 @@ class CreateSlot : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val startT1 = sessionManager.openTime!!.replace(":","").toInt()
-            val endT1 = binding.tvEndTime.text.toString().replace(":","").toInt()
-            if (sessionManager.closeTime!!.replace(":","").toInt() < binding.tvEndTime.text.toString().replace(":","").toInt()) {
+            val startT1 = sessionManager.openTime!!.replace(":", "").toInt()
+            val endT1 = binding.tvEndTime.text.toString().replace(":", "").toInt()
+            if (sessionManager.closeTime!!.replace(":", "")
+                    .toInt() < binding.tvEndTime.text.toString().replace(":", "").toInt()
+            ) {
                 SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText("The session slabs must be within the time limit of the clinic timings")
                     .setConfirmText("Ok")
@@ -219,41 +222,7 @@ class CreateSlot : AppCompatActivity() {
                     .show()
                 return@setOnClickListener
 
-            }
-
-//            else if (startT == endT && startT < endT) {
-//                SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-//                    .setTitleText("Start Time must be grater End Time !")
-//                    .setConfirmText("Ok")
-//                    .showCancelButton(true)
-//                    .setConfirmClickListener { sDialog ->
-//                        sDialog.cancel()
-//
-//                    }
-//                    .setCancelClickListener { sDialog ->
-//                        sDialog.cancel()
-//                    }
-//                    .show()
-//                return@setOnClickListener
-//            } else if (startT > endT) {
-//                SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
-//                    .setTitleText("End Time must be grater Start Time !")
-//                    .setConfirmText("Ok")
-//                    .showCancelButton(true)
-//                    .setConfirmClickListener { sDialog ->
-//                        sDialog.cancel()
-//
-//                    }
-//                    .setCancelClickListener { sDialog ->
-//                        sDialog.cancel()
-//                    }
-//                    .show()
-//                return@setOnClickListener
-            //    }
-//            else if (consultationTypeId=="0") {
-//                myToast(this@CreateSlot,"Select Consultation Type")
-//                return@setOnClickListener
-            else {
+            } else {
                 apiCall()
 
             }
@@ -261,14 +230,7 @@ class CreateSlot : AppCompatActivity() {
     }
 
     private fun apiCallGetAddress() {
-        progressDialog = ProgressDialog(this@CreateSlot)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        //  progressDialog!!.show()
-
+        AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.getAddress(sessionManager.id.toString())
             .enqueue(object : Callback<ModelGetAddress> {
                 @SuppressLint("LogNotTimber", "SuspiciousIndentation")
@@ -279,6 +241,7 @@ class CreateSlot : AppCompatActivity() {
                         // val addressList =  response.body()!!.result
 
                         if (response.body()!!.result != null) {
+                            count2 = 0
                             //spinner code start
                             //   val items = arrayOfNulls<String>(relationListNew.result!!.size)
 
@@ -334,44 +297,28 @@ class CreateSlot : AppCompatActivity() {
                                     override fun onNothingSelected(adapterView: AdapterView<*>?) {}
                                 }
                             binding.spinnerAddress.adapter =
-                                ArrayAdapter<ModelGender>(context, android.R.layout.simple_list_item_1, addressListNew)
-
-                            //
-//                            val adapter: ArrayAdapter<ModelGender?> =
-//                                ArrayAdapter(this@CreateSlot, android.R.layout.simple_list_item_1,
-//                                    addressListNew as List<ModelGender?>
-//                                )
-//                            binding.spinnerAddress.adapter = adapter
-//
-//                            binding.spinnerAddress.adapter = adapter
-////                            binding.spinnerAddress.setSelection(items.indexOf(relationId));
-////                            Log.e("relaytion", relationId)
-//
-//
-//                            progressDialog!!.dismiss()
-//                            binding.spinnerAddress.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//                                override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-//                                    if (addressListNew.size > 0) {
-//                                        dayId = addressListNew[i].id.toString()
-//                                        Log.e(ContentValues.TAG, "gender: $dayId")
-//                                    }
-//                                }
-//
-//                                override fun onNothingSelected(adapterView: AdapterView<*>?) {}
-//                            }
-
+                                ArrayAdapter<ModelGender>(
+                                    context,
+                                    android.R.layout.simple_list_item_1,
+                                    addressListNew
+                                )
 
                         }
                     } catch (e: Exception) {
                         myToast(this@CreateSlot, e.message.toString())
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
 
                 }
 
                 override fun onFailure(call: Call<ModelGetAddress>, t: Throwable) {
-                    myToast(this@CreateSlot, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count2++
+                    if (count2 <= 3) {
+                        apiCallGetAddress()
+                    } else {
+                        myToast(this@CreateSlot, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -380,12 +327,7 @@ class CreateSlot : AppCompatActivity() {
 
 
     private fun apiCall() {
-        progressDialog = ProgressDialog(this@CreateSlot)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
         startTime = binding.tvStartTime.text.toString()
         endTime = binding.tvEndTime.text.toString()
 
@@ -411,10 +353,11 @@ class CreateSlot : AppCompatActivity() {
 
                         if (response.code() == 500) {
                             myToast(this@CreateSlot, "Server Error")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                         } else if (response.body()!!.status == 1) {
+                            count = 0
                             myToast(this@CreateSlot, "${response.body()!!.message}")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
                             SweetAlertDialog(this@CreateSlot, SweetAlertDialog.SUCCESS_TYPE)
                                 .setTitleText(response.body()!!.message)
                                 .setConfirmText("Ok")
@@ -434,20 +377,25 @@ class CreateSlot : AppCompatActivity() {
                                 .show()
                         } else {
                             myToast(this@CreateSlot, "${response.body()!!.message}")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         }
 
                     } catch (e: Exception) {
                         myToast(this@CreateSlot, "Something went wrong")
                         e.printStackTrace()
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<My_Model>, t: Throwable) {
-                    myToast(this@CreateSlot, "${t.message}")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCall()
+                    } else {
+                        myToast(this@CreateSlot, "${t.message}")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

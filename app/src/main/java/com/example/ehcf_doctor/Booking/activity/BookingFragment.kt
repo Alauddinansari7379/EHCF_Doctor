@@ -15,6 +15,7 @@ import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Booking.adapter.AdapterBooking
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentBookingBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
@@ -31,11 +32,13 @@ class BookingFragment : Fragment() {
     private lateinit var binding: FragmentBookingBinding
     private lateinit var sessionManager: SessionManager
     var mydilaog: Dialog? = null
-    var progressDialog: ProgressDialog? = null
     private var tvTimeCounter: TextView? = null
     var shimmerFrameLayout: ShimmerFrameLayout? = null
 
     var patientName=""
+    private var count = 0
+    private var count2 = 0
+    private var count3 = 0
 
 
 
@@ -78,12 +81,7 @@ class BookingFragment : Fragment() {
         }
     }
     private fun apiCallSearchAppointments(patientName: String) {
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
 
         ApiClient.apiService.searchAppointments(patientName,sessionManager.id.toString(),"")
@@ -101,7 +99,7 @@ class BookingFragment : Fragment() {
                             binding.shimmer.visibility = View.GONE
                             binding.edtSearch.text.clear()
                             myToast(requireActivity(), "${response.body()!!.message}")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else if (response.body()!!.result.isEmpty()) {
                             binding.recyclerView.adapter =
@@ -111,9 +109,10 @@ class BookingFragment : Fragment() {
                             binding.shimmer.visibility = View.GONE
                             binding.edtSearch.text.clear()
                             myToast(requireActivity(), "No Appointment Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
+                            count = 0
                             binding.recyclerView.adapter =
                                 activity?.let { AdapterBooking(it, response.body()!!) }
                             binding.recyclerView.adapter!!.notifyDataSetChanged()
@@ -122,7 +121,7 @@ class BookingFragment : Fragment() {
                             binding.recyclerView.visibility = View.VISIBLE
                             binding.shimmer.visibility = View.GONE
                             binding.edtSearch.text.clear()
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 //                        binding.rvManageSlot.apply {
 //                            binding.tvNoDataFound.visibility = View.GONE
 //                            shimmerFrameLayout?.startShimmer()
@@ -138,14 +137,19 @@ class BookingFragment : Fragment() {
                        e.printStackTrace()
                         myToast(requireActivity(), "Something went wrong")
                         binding.shimmer.visibility = View.GONE
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    myToast(requireActivity(), "Something went wrong")
-                    binding.shimmer.visibility = View.GONE
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallSearchAppointments(patientName)
+                    } else {
+                        myToast(requireActivity(), "Something went wrong")
+                        binding.shimmer.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -153,13 +157,8 @@ class BookingFragment : Fragment() {
     }
 
     private fun apiCallGetConsultation() {
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
+        AppProgressBar.showLoaderDialog(context)
 
-        //  progressDialog!!.show()
 
         ApiClient.apiService.getConsultation(sessionManager.id.toString(), "")
             .enqueue(object : Callback<ModelGetConsultation> {
@@ -176,16 +175,17 @@ class BookingFragment : Fragment() {
                             binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmer.visibility = View.GONE
                             // myToast(requireActivity(),"No Data Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
+                            count2 = 0
                             binding.recyclerView.apply {
                                 shimmerFrameLayout?.startShimmer()
                                 binding.recyclerView.visibility = View.VISIBLE
                                 binding.shimmer.visibility = View.GONE
                                 binding.tvNoDataFound.visibility = View.GONE
                                 adapter = activity?.let { AdapterBooking(it, response.body()!!) }
-                                progressDialog!!.dismiss()
+                                AppProgressBar.hideLoaderDialog()
 
 
                             }
@@ -194,28 +194,27 @@ class BookingFragment : Fragment() {
                         e.printStackTrace()
                         myToast(requireActivity(), "Something went wrong")
                         binding.shimmer.visibility = View.GONE
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
 
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    myToast(requireActivity(), "Something went wrong")
-                    binding.shimmer.visibility = View.GONE
-                    progressDialog!!.dismiss()
+                    count2++
+                    if (count2 <= 3) {
+                        apiCallGetConsultation()
+                    } else {
+                        myToast(requireActivity(), "Something went wrong")
+                        binding.shimmer.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
             })
     }
     private fun apiCallGetConsultation1() {
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-          progressDialog!!.show()
+      AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getConsultation(sessionManager.id.toString(), "")
             .enqueue(object : Callback<ModelGetConsultation> {
@@ -232,16 +231,17 @@ class BookingFragment : Fragment() {
                             binding.tvNoDataFound.visibility = View.VISIBLE
                             binding.shimmer.visibility = View.GONE
                             // myToast(requireActivity(),"No Data Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
+                            count3 = 0
                             binding.recyclerView.apply {
                                 shimmerFrameLayout?.startShimmer()
                                 binding.recyclerView.visibility = View.VISIBLE
                                 binding.shimmer.visibility = View.GONE
                                 binding.tvNoDataFound.visibility = View.GONE
                                 adapter = activity?.let { AdapterBooking(it, response.body()!!) }
-                                progressDialog!!.dismiss()
+                                AppProgressBar.hideLoaderDialog()
 
 
                             }
@@ -251,13 +251,18 @@ class BookingFragment : Fragment() {
                         e.printStackTrace()
                         myToast(requireActivity(), "Something went wrong")
                         binding.shimmer.visibility = View.GONE
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    myToast(requireActivity(), "Something went wrong")
-                    binding.shimmer.visibility = View.GONE
-                    progressDialog!!.dismiss()
+                    count3++
+                    if (count3 <= 3) {
+                        apiCallGetConsultation1()
+                    } else {
+                        myToast(requireActivity(), "Something went wrong")
+                        binding.shimmer.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

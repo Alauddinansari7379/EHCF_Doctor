@@ -11,6 +11,7 @@ import com.example.ehcf.Helper.convertTo12Hour
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelAppointmentDatails
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityAppointmentDetalisBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
@@ -23,9 +24,9 @@ class AppointmentDetalis : AppCompatActivity() {
     private val context: Context = this@AppointmentDetalis
     private lateinit var sessionManager: SessionManager
     var mydilaog: Dialog? = null
-    var progressDialog: ProgressDialog? = null
     var dialog: Dialog? = null
     var bookingId = ""
+    private var count = 0
 
     private lateinit var binding: ActivityAppointmentDetalisBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,12 +45,7 @@ class AppointmentDetalis : AppCompatActivity() {
     }
 
     private fun apiCallAppointmentsDetails() {
-        progressDialog = ProgressDialog(this@AppointmentDetalis)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.consultationDetails(bookingId)
             .enqueue(object : Callback<ModelAppointmentDatails> {
@@ -60,14 +56,13 @@ class AppointmentDetalis : AppCompatActivity() {
                     try {
                         if (response.code() == 500) {
                             myToast(this@AppointmentDetalis, "Server Error")
-                            progressDialog!!.dismiss()
-
+                            AppProgressBar.hideLoaderDialog()
                         } else if (response.body()!!.status == 0) {
                             myToast(this@AppointmentDetalis, response.body()!!.message)
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
-
+                            count = 0
                             binding.tvDate.text = response.body()!!.result.date
                             if (response.body()!!.result.start_time != null) {
                                 binding.tvTime.text =
@@ -84,9 +79,11 @@ class AppointmentDetalis : AppCompatActivity() {
                                 "1" -> {
                                     binding.tvConsultationType.text = "Tele-Consultation"
                                 }
+
                                 "2" -> {
                                     binding.tvConsultationType.text = "Clinic-Visit"
                                 }
+
                                 "3" -> {
                                     binding.tvConsultationType.text = "Home-Visit"
                                 }
@@ -96,9 +93,11 @@ class AppointmentDetalis : AppCompatActivity() {
                                 "1" -> {
                                     binding.tvPaymentMode.text = "Cash On Delivery"
                                 }
+
                                 "2" -> {
                                     binding.tvPaymentMode.text = "Online"
                                 }
+
                                 "5" -> {
                                     binding.tvPaymentMode.text = "Free"
                                 }
@@ -113,33 +112,23 @@ class AppointmentDetalis : AppCompatActivity() {
                                         R.drawable.profile
                                     ).error(R.drawable.profile).into(binding.imgProfile);
                             }
-                            progressDialog!!.dismiss()
-
-//                    if (response.body()!!.result!=null){
-//                        binding.tvNoDataFound.visibility = View.VISIBLE
-//                        // myToast(requireActivity(),"No Appointment Found")
-//                        progressDialog!!.dismiss()
-//
-//                    }else{
-//                        binding.recyclerView.apply {
-//                            binding.tvNoDataFound.visibility = View.GONE
-//                            adapter = AdapterAppointmentsDetails(this@AppointmentDetails, response.body()!!)
-//                            progressDialog!!.dismiss()
-//
-//                        }
-//                    }
-
+                            AppProgressBar.hideLoaderDialog()
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
                         myToast(this@AppointmentDetalis, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelAppointmentDatails>, t: Throwable) {
-                    myToast(this@AppointmentDetalis, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallAppointmentsDetails()
+                    } else {
+                        myToast(this@AppointmentDetalis, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

@@ -12,6 +12,7 @@ import com.example.ehcf.Prescription.adapter.AdapterPrescriptionDetial
 import com.example.ehcf.Prescription.adapter.AdapterPrescriptionDetialDiagonsis
 import com.example.ehcf.Prescription.adapter.AdapterPrescriptionDetialLabTest
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Prescription.model.ModelPreDetJava
 import com.example.ehcf_doctor.databinding.ActivityPrescriptionDetailsBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
@@ -26,7 +27,6 @@ import java.text.SimpleDateFormat
 class PrescriptionDetails : AppCompatActivity() {
     private lateinit var binding: ActivityPrescriptionDetailsBinding
     private var context: Context = this@PrescriptionDetails
-    private var progressDialog: ProgressDialog? = null
     var id = ""
     var customerName = ""
     var memberName = ""
@@ -37,6 +37,7 @@ class PrescriptionDetails : AppCompatActivity() {
     var assesment = ""
     var plan = ""
     var followUp = ""
+    private var count = 0
     private lateinit var sessionManager: SessionManager
 
     var date = ""
@@ -77,22 +78,7 @@ class PrescriptionDetails : AppCompatActivity() {
                     enableDownload = true                    // This param is true by defualt.
                 )
             )
-            // completeSlot(bookingId)
-//                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://ehcf.thedemostore.in/print/$id"))
-//                    startActivity(browserIntent)
-
-
-            //  startActivity(Intent(this@PrescriptionDetails,DownloadPrescription::class.java))
         }
-
-
-//        binding.btnModifyPrescptionDet.setOnClickListener {
-////            val intent = Intent(context as Activity, ViewReport::class.java)
-////                .putExtra("report",)
-////                .putExtra("clickId","1")
-////            context.startActivity(intent)
-//        }
-
 
     }
 
@@ -112,12 +98,7 @@ class PrescriptionDetails : AppCompatActivity() {
     }
 
     private fun apiCallPreDet() {
-        progressDialog = ProgressDialog(this@PrescriptionDetails)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getPrescriptionDetial(id)
             .enqueue(object : Callback<ModelPreDetJava> {
@@ -129,9 +110,9 @@ class PrescriptionDetails : AppCompatActivity() {
 
                         if (response.code() == 500) {
                             myToast(this@PrescriptionDetails, "Server Error")
-                            progressDialog!!.dismiss()
-
+                            AppProgressBar.hideLoaderDialog()
                         } else {
+                            count = 0
                             binding.recyclerView.apply {
                                 adapter = AdapterPrescriptionDetial(
                                     this@PrescriptionDetails,
@@ -167,18 +148,9 @@ class PrescriptionDetails : AppCompatActivity() {
                                     response.body()!!
                                 )
 
-                                progressDialog!!.dismiss()
+                                AppProgressBar.hideLoaderDialog()
 
                             }
-//                        binding.recyclerViewNote.apply {
-//                            adapter = AdapterPrescriptionDetialDoctorNote(
-//                                this@PrescriptionDetails,
-//                                response.body()!!
-//                            )
-//
-//                            progressDialog!!.dismiss()
-
-                            //          }
 
                             binding.recyclerViewLabTest.apply {
                                 adapter = AdapterPrescriptionDetialLabTest(
@@ -186,20 +158,14 @@ class PrescriptionDetails : AppCompatActivity() {
                                     response.body()!!
                                 )
 
-                                progressDialog!!.dismiss()
+                                AppProgressBar.hideLoaderDialog()
 
                             }
-
-//
-//                        Log.e("noteeeeee",response.body()!!.doctorNotes.doctorNotes)
-//                        Log.e("Tag", response.body()!!.Result().doctorNotes.toString())
-//                        binding.Note.text= response.body()!!.Result().doctorNotes.toString()
-//                        progressDialog!!.dismiss()
 
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     }
 
@@ -207,9 +173,13 @@ class PrescriptionDetails : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ModelPreDetJava>, t: Throwable) {
-                    myToast(this@PrescriptionDetails, t.message.toString())
-                    progressDialog!!.dismiss()
-
+                    count++
+                    if (count <= 3) {
+                        apiCallPreDet()
+                    } else {
+                        myToast(this@PrescriptionDetails, t.message.toString())
+                    }
+                    AppProgressBar.hideLoaderDialog()
                 }
 
             })

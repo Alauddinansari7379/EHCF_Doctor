@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.Profile.modelResponse.*
 import com.example.ehcf_doctor.Registration.modelResponse.ModelDegreeJava
@@ -28,7 +29,6 @@ class Education : AppCompatActivity() {
     private val context: Context = this@Education
     private var spclistId = ""
     private var specilistId = ""
-    private var progressDialog: ProgressDialog? = null
     var genderId = ""
     var langaugeId = ""
     var description = ""
@@ -59,6 +59,10 @@ class Education : AppCompatActivity() {
     private var registrationYear = ""
     var degreeList = ModelDegreeJava()
     var yearList = ModelYear()
+    private var count = 0
+    private var count2 = 0
+    private var count3 = 0
+    private var count4 = 0
     private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -325,13 +329,7 @@ class Education : AppCompatActivity() {
     }
 
     private fun apiCallRegistrationYearSpinner() {
-        progressDialog = ProgressDialog(this@Education)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        //  progressDialog!!.show()
+     AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getYear()
             .enqueue(object : Callback<ModelYear> {
@@ -341,6 +339,7 @@ class Education : AppCompatActivity() {
                 ) {
 
                     try {
+                        count2 = 0
                         yearList = response.body()!!;
                         if (degreeList != null) {
 
@@ -368,7 +367,7 @@ class Education : AppCompatActivity() {
                                 )
                             )
 
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
 
                             binding.spinnerRegistrationYear.onItemSelectedListener =
@@ -394,13 +393,18 @@ class Education : AppCompatActivity() {
                     } catch (e: Exception) {
                         e.printStackTrace()
                         myToast(this@Education, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelYear>, t: Throwable) {
-                    myToast(this@Education, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count2++
+                    if (count2 <= 3) {
+                        apiCallRegistrationYearSpinner()
+                    } else {
+                        myToast(this@Education, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -408,14 +412,7 @@ class Education : AppCompatActivity() {
     }
 
     private fun apiCallYearOfComSpinner() {
-        progressDialog = ProgressDialog(this@Education)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        //  progressDialog!!.show()
-
+      AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.getYear()
             .enqueue(object : Callback<ModelYear> {
                 @SuppressLint("LogNotTimber")
@@ -424,6 +421,7 @@ class Education : AppCompatActivity() {
                 ) {
 
                     try {
+                        count3 = 0
                         yearList = response.body()!!;
                         if (degreeList != null) {
 
@@ -446,7 +444,7 @@ class Education : AppCompatActivity() {
 
                             binding.spinnerYearOfCom.setSelection(items.indexOf(sessionManager.yearOfCompletion.toString()));
 
-                            progressDialog!!.dismiss()
+                           AppProgressBar.hideLoaderDialog()
 
                             binding.spinnerYearOfCom.onItemSelectedListener =
                                 object : AdapterView.OnItemSelectedListener {
@@ -469,14 +467,19 @@ class Education : AppCompatActivity() {
                         }
                     } catch (e: Exception) {
                         myToast(this@Education, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                         e.printStackTrace()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelYear>, t: Throwable) {
-                    myToast(this@Education, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count3++
+                    if (count3 <= 3) {
+                        apiCallYearOfComSpinner()
+                    } else {
+                        myToast(this@Education, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -484,13 +487,7 @@ class Education : AppCompatActivity() {
     }
 
     private fun apiCallDegreeSpinner() {
-        progressDialog = ProgressDialog(this@Education)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        //  progressDialog!!.show()
+       AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getDegree()
             .enqueue(object : Callback<ModelDegreeJava> {
@@ -499,7 +496,7 @@ class Education : AppCompatActivity() {
                     call: Call<ModelDegreeJava>, response: Response<ModelDegreeJava>
                 ) {
                     try {
-
+                        count = 0
                         degreeList = response.body()!!;
                         if (degreeList != null) {
 
@@ -522,7 +519,7 @@ class Education : AppCompatActivity() {
                             binding.spinnerDegree.setSelection(items.indexOf(sessionManager.qualification.toString()));
                             //   binding.spinnerDegree.setSelection(sessionManager.qualification.toString().toInt())
 
-                            progressDialog!!.dismiss()
+                           AppProgressBar.hideLoaderDialog()
 
                             binding.spinnerDegree.onItemSelectedListener =
                                 object : AdapterView.OnItemSelectedListener {
@@ -543,14 +540,19 @@ class Education : AppCompatActivity() {
 
                     } catch (e: Exception) {
                         myToast(this@Education, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                         e.printStackTrace()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelDegreeJava>, t: Throwable) {
-                    myToast(this@Education, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallDegreeSpinner()
+                    } else {
+                        myToast(this@Education, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -558,12 +560,7 @@ class Education : AppCompatActivity() {
     }
 
     private fun apiCallProFileUpdate() {
-        progressDialog = ProgressDialog(this@Education)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+      AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.profileUpdate(
             spclistId,
@@ -606,6 +603,7 @@ class Education : AppCompatActivity() {
                         if (response.code() == 500) {
                             myToast(this@Education, "Server Error")
                         } else if (response.body()!!.status == 1) {
+                            count4 = 0
                             myToast(this@Education, response.body()!!.message)
                             sessionManager.clinicAddress =
                                 response.body()!!.result.clinic_address
@@ -633,7 +631,7 @@ class Education : AppCompatActivity() {
                             sessionManager.closeTime = response.body()!!.result.closing_time
                             sessionManager.postalCode = response.body()!!.result.postal_code
 
-                            progressDialog!!.dismiss()
+                           AppProgressBar.hideLoaderDialog()
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             intent.flags =
                                 Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -642,20 +640,26 @@ class Education : AppCompatActivity() {
 
                         } else {
                             myToast(this@Education, response.body()!!.message)
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         }
                     } catch (e: Exception) {
                         myToast(this@Education, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                         e.printStackTrace()
                     }
 
                 }
 
                 override fun onFailure(call: Call<ModelProfileUpdate>, t: Throwable) {
-                    myToast(this@Education, "Something went wrong")
-                    progressDialog!!.dismiss()
+
+                    count4++
+                    if (count4 <= 3) {
+                        apiCallProFileUpdate()
+                    } else {
+                        myToast(this@Education, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

@@ -11,6 +11,7 @@ import android.util.Log
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.ForgotPassword.modelReponse.ModelForgotPass
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.OTPVerification
 import com.example.ehcf_doctor.databinding.ActivityMobileNumberBinding
@@ -22,8 +23,8 @@ import retrofit2.Response
 class MobileNumber : AppCompatActivity() {
     private lateinit var binding: ActivityMobileNumberBinding
     private val context: Context = this@MobileNumber
-    var progressDialog: ProgressDialog? = null
     var phoneNumber = ""
+    private var count = 0
     private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +57,7 @@ class MobileNumber : AppCompatActivity() {
         val   phoneNumberNew = binding.edtPhone.text.toString()
         val code="91"
         phoneNumber = code+phoneNumberNew
-        progressDialog = ProgressDialog(this@MobileNumber)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+       AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.forgotPassword(phoneNumber).enqueue(object :
             Callback<ModelForgotPass> {
@@ -71,9 +67,9 @@ class MobileNumber : AppCompatActivity() {
                 call: Call<ModelForgotPass>, response: Response<ModelForgotPass>
             ) {
                 if (response.body()!!.status == 1) {
-
+                    count = 0
                     myToast(this@MobileNumber, response.body()!!.message)
-                    progressDialog!!.dismiss()
+                    AppProgressBar.hideLoaderDialog()
                     val otp = response.body()!!.result.otp
                     val id = response.body()!!.result.id
 
@@ -86,16 +82,19 @@ class MobileNumber : AppCompatActivity() {
                     context.startActivity(intent)
                 } else {
                     myToast(this@MobileNumber, "Please enter valid phone number")
-                    progressDialog!!.dismiss()
+                    AppProgressBar.hideLoaderDialog()
                 }
 
 
             }
             override fun onFailure(call: Call<ModelForgotPass>, t: Throwable) {
-                myToast(this@MobileNumber,t.message.toString())
-               // myToast(this@MobileNumber, "Something went wrong")
-                progressDialog!!.dismiss()
-
+                count++
+                if (count <= 3) {
+                    apiCallForgotPassword()
+                } else {
+                    myToast(this@MobileNumber,t.message.toString())
+                }
+                AppProgressBar.hideLoaderDialog()
             }
 
         })

@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.postDelayed
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Profile.modelResponse.ModelCity
 import com.example.ehcf_doctor.Profile.modelResponse.ModelCityList
 import com.example.ehcf_doctor.Profile.modelResponse.ModelState
@@ -38,7 +39,6 @@ import java.io.IOException
 class ProfileSetting : AppCompatActivity() {
     private val context: Context = this@ProfileSetting
     private lateinit var sessionManager: SessionManager
-    var progressDialog: ProgressDialog? = null
     private var specilList = ModelSpecilList();
     private var languageList = ModelLanguage();
     var genderList = ArrayList<ModelGender>()
@@ -60,6 +60,9 @@ class ProfileSetting : AppCompatActivity() {
     var countryName = "India"
     var services = ""
     var postalCode = ""
+    private var count = 0
+    private var count2 = 0
+    private var count3 = 0
 
     private lateinit var binding: ActivityProfileSettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -250,13 +253,7 @@ class ProfileSetting : AppCompatActivity() {
     }
 
     private fun apiCallSpecialistSpinner() {
-        progressDialog = ProgressDialog(this@ProfileSetting)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.specialistCategoryTest()
             .enqueue(object : Callback<ModelSpecilList> {
@@ -265,7 +262,7 @@ class ProfileSetting : AppCompatActivity() {
                     call: Call<ModelSpecilList>, response: Response<ModelSpecilList>
                 ) {
                     try {
-
+                        count = 0
                         specilList = response.body()!!;
                         if (specilList != null) {
 
@@ -282,7 +279,7 @@ class ProfileSetting : AppCompatActivity() {
                                     items
                                 )
                             binding.spinnerSpecialist.adapter = adapter
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                             binding.spinnerSpecialist.setSelection(
                                 sessionManager.specialist.toString().toInt() - 1
@@ -308,13 +305,18 @@ class ProfileSetting : AppCompatActivity() {
                         }
                     } catch (e: Exception) {
                         myToast(this@ProfileSetting, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelSpecilList>, t: Throwable) {
-                    myToast(this@ProfileSetting, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallSpecialistSpinner()
+                    } else {
+                        myToast(this@ProfileSetting, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -322,13 +324,7 @@ class ProfileSetting : AppCompatActivity() {
     }
 
     private fun apiCallStateSpinner() {
-        progressDialog = ProgressDialog(this@ProfileSetting)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        // progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getState()
             .enqueue(object : Callback<ModelState> {
@@ -337,7 +333,7 @@ class ProfileSetting : AppCompatActivity() {
                     call: Call<ModelState>, response: Response<ModelState>
                 ) {
                     try {
-
+                        count2 = 0
                         stateList = response.body()!!;
                         if (specilList != null) {
 
@@ -358,7 +354,7 @@ class ProfileSetting : AppCompatActivity() {
                             binding.spinnerState.setSelection(items.indexOf(sessionManager.state.toString()));
                             Log.e("sdsdsd", sessionManager.state.toString())
 
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
 
                             binding.spinnerState.onItemSelectedListener =
@@ -380,13 +376,18 @@ class ProfileSetting : AppCompatActivity() {
                         }
                     } catch (e: Exception) {
                         myToast(this@ProfileSetting, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelState>, t: Throwable) {
-                    myToast(this@ProfileSetting, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count2++
+                    if (count2 <= 3) {
+                        apiCallStateSpinner()
+                    } else {
+                        myToast(this@ProfileSetting, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -394,14 +395,7 @@ class ProfileSetting : AppCompatActivity() {
     }
 
     private fun apiCallCitySpinner() {
-        progressDialog = ProgressDialog(this@ProfileSetting)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        // progressDialog!!.show()
-
+        AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.getCity()
             .enqueue(object : Callback<ModelCity> {
                 @SuppressLint("LogNotTimber")
@@ -411,6 +405,7 @@ class ProfileSetting : AppCompatActivity() {
 
 
                     try {
+                        count3 = 0
                         cityList = response.body()!!;
                         if (cityList != null) {
 
@@ -429,7 +424,7 @@ class ProfileSetting : AppCompatActivity() {
                             binding.spinnerCity.adapter = adapter
                             binding.spinnerCity.setSelection(items.indexOf(sessionManager.city.toString()));
 
-                            progressDialog!!.dismiss()
+                           AppProgressBar.hideLoaderDialog()
 
 
 
@@ -450,15 +445,20 @@ class ProfileSetting : AppCompatActivity() {
                                 }
 
                         }
-                    }catch (e:Exception){
+                    } catch (e: Exception) {
                         myToast(this@ProfileSetting, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelCity>, t: Throwable) {
-                    myToast(this@ProfileSetting, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count3++
+                    if (count3 <= 3) {
+                        apiCallCitySpinner()
+                    } else {
+                        myToast(this@ProfileSetting, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

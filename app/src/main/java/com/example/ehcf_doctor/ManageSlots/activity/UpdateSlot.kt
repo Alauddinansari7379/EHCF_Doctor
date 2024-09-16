@@ -18,6 +18,7 @@ import android.widget.TimePicker
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.ManageSlots.model.ModelUpdateSlot
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityUpdateSlotBinding
@@ -37,10 +38,10 @@ class UpdateSlot : AppCompatActivity() {
     private lateinit var sessionManager: SessionManager
     var mydilaog: Dialog? = null
     var datePicker: Dialog? = null
-    var progressDialog: ProgressDialog? = null
     var dialog: Dialog? = null
     var selectedDate = ""
     var slotId = ""
+    private var count = 0
     private var startTime = "00:00:00"
     private var endTime = "00:00:00"
     var openingTimeList = ArrayList<String>()
@@ -140,13 +141,7 @@ class UpdateSlot : AppCompatActivity() {
 
 
     private fun apiCall() {
-        progressDialog = ProgressDialog(this@UpdateSlot)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        progressDialog!!.show()
+    AppProgressBar.showLoaderDialog(context)
         Log.e("SelectedDate",selectedDate)
 
         ApiClient.apiService.updateSlot(sessionManager.id.toString(),startTime,endTime,"1",slotId)
@@ -160,7 +155,8 @@ class UpdateSlot : AppCompatActivity() {
                         myToast(this@UpdateSlot,"Server Error")
                     }
                    else if (response.body()!!.status==1){
-                        progressDialog!!.dismiss()
+                        count = 0
+                        AppProgressBar.hideLoaderDialog()
                         SweetAlertDialog(this@UpdateSlot, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText("Slot Updated")
                             .setConfirmText("Ok")
@@ -180,15 +176,20 @@ class UpdateSlot : AppCompatActivity() {
                     }
                     else{
                         myToast(this@UpdateSlot,"${response.body()!!.message}")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     }
 
                 }
 
                 override fun onFailure(call: Call<ModelUpdateSlot>, t: Throwable) {
-                    myToast(this@UpdateSlot, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCall()
+                    } else {
+                        myToast(this@UpdateSlot, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

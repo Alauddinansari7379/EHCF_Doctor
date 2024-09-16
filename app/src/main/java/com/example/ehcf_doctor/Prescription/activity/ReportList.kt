@@ -2,11 +2,13 @@ package com.example.ehcf_doctor.Prescription.activity
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.report.model.ModelGetTest
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Prescription.adapter.AdapterViewReportTest
 import com.example.ehcf_doctor.databinding.ActivityReportListBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
@@ -16,8 +18,9 @@ import retrofit2.Response
 
 class ReportList : AppCompatActivity() {
     private lateinit var binding: ActivityReportListBinding
-    var progressDialog: ProgressDialog? = null
+    private var context: Context = this@ReportList
     var id = ""
+    private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +37,7 @@ class ReportList : AppCompatActivity() {
 
 
     private fun apiCallGetTest() {
-        progressDialog = ProgressDialog(this@ReportList)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getTest(id)
             .enqueue(object : Callback<ModelGetTest> {
@@ -51,28 +49,34 @@ class ReportList : AppCompatActivity() {
                         if (response.body()!!.result.isEmpty()) {
                             binding.tvNoDataFound.visibility = View.VISIBLE
                             // myToast(requireActivity(),"No Data Found")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
+                            count = 0
                             binding.recyclerView.apply {
                                 binding.tvNoDataFound.visibility = View.GONE
                                 adapter = AdapterViewReportTest(this@ReportList, response.body()!!)
                             }
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
                         myToast(this@ReportList, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     }
                 }
 
 
                 override fun onFailure(call: Call<ModelGetTest>, t: Throwable) {
-                    myToast(this@ReportList, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallGetTest()
+                    } else {
+                        myToast(this@ReportList, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

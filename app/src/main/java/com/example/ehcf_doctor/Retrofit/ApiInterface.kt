@@ -402,7 +402,7 @@ interface ApiInterface {
         @Query("date") date: String?,
         @Query("slug") slug: String?,
     ): Call<ModelDashboard>
-
+  //somenath mahata
     @POST("invoice_details")
     fun invoiceDetails(
         @Query("invoice_id") invoice_id: String?,
