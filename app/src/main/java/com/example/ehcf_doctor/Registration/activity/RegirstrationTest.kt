@@ -22,6 +22,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.anurag.multiselectionspinner.MultiSelectionSpinnerDialog
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.example.ehcf.Helper.myToast
@@ -38,6 +39,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.ktx.messaging
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -108,6 +110,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     private var count3 = 0
     private var count4 = 0
     private var count5 = 0
+    private var count6 = 0
     val contentList: MutableList<String> = ArrayList()
 
     private lateinit var sessionManager: SessionManager
@@ -265,14 +268,14 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 .start(REQUEST_CODE_IMAGE)
         }
         binding.layoutGallery.setOnClickListener {
-            selectValue="2"
+            selectValue = "2"
             opeinImageChooserNew()
-         }
+        }
 
         binding.layoutPDF.setOnClickListener {
-            selectValue="3"
+            selectValue = "3"
             opeinImagePDF()
-         }
+        }
 
 
 
@@ -478,14 +481,27 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 Log.e("Ala", "confirmPassword-$confirmPassword")
                 Log.e("Ala", "email-$email")
 
-                if(selectValue=="1"){
-                    apiCallRegisterCamera()
+//                if (selectValue == "1") {
+//                    apiCallRegisterCamera()
+//
+//                } else {
+//                    apiCallRegister()
+//
+//                }
 
+                lifecycleScope.launch {
+                    // Run the API call in the background
+                    try {
+                        if (selectValue == "1") {
+                            apiCallRegisterCamera()
+                        } else {
+                            apiCallRegister()
+                        }
+                    } catch (e: Exception) {
+                        Log.e("RegistrationError", "Error during registration: ${e.message}")
+                    }
                 }
-                 else{
-                     apiCallRegister()
 
-                 }
 
             }
         }
@@ -621,7 +637,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
     private fun apiCallOTP(phoneWithCodeNew: String) {
 
-     AppProgressBar.showLoaderDialog(context)
+        AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.checkPhone(phoneWithCodeNew)
             .enqueue(object :
                 Callback<ModelOTP> {
@@ -634,6 +650,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                         myToast(this@RegirstrationTest, "Server Error")
                         AppProgressBar.hideLoaderDialog()
                     } else if (response.body()!!.status == 1) {
+                        count6 = 0
                         responseOTP = response.body()!!.result.otp
                         myToast(this@RegirstrationTest, "OTP Send Successfully")
                         binding.edtEnterOTP.requestFocus()
@@ -641,7 +658,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                         binding.btnSendOTP.isClickable = false
                         binding.btnSendOTP.backgroundTintList =
                             ColorStateList.valueOf(resources.getColor(R.color.shimmer_color));
-                         timeCounter()
+                        timeCounter()
                         AppProgressBar.hideLoaderDialog()
                     } else {
 
@@ -653,9 +670,13 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                 }
 
                 override fun onFailure(call: Call<ModelOTP>, t: Throwable) {
-                    myToast(this@RegirstrationTest, "Something went wrong")
+                    count6++
+                    if (count6 <= 3) {
+                        apiCallOTP(phoneWithCodeNew)
+                    } else {
+                        myToast(this@RegirstrationTest, "Something went wrong")
+                    }
                     AppProgressBar.hideLoaderDialog()
-
                 }
 
             })
@@ -689,23 +710,25 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             when (requestCode) {
                 REQUEST_CODE_IMAGE -> {
                     selectedImageUri = data?.data
-                    when(selectValue){
-                        "1"->{
+                    when (selectValue) {
+                        "1" -> {
                             binding.imageView.visibility = View.VISIBLE
                             binding.layoutchoise.visibility = View.VISIBLE
                             binding.imageView.setImageURI(selectedImageUri)
                         }
-                        "2"->{
+
+                        "2" -> {
                             binding.layoutchoise.visibility = View.VISIBLE
                             binding.imageView.visibility = View.VISIBLE
                             binding.imageView.setImageURI(selectedImageUri)
                         }
-                        "3"->{
+
+                        "3" -> {
                             binding.layoutchoise.visibility = View.VISIBLE
                             binding.imageViewPDF.visibility = View.VISIBLE
                         }
                     }
-                 }
+                }
             }
         }
     }
@@ -745,7 +768,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
     @SuppressLint("SuspiciousIndentation")
     private fun apiCallRegister() {
-       AppProgressBar.showLoaderDialog(context)
+        AppProgressBar.showLoaderDialog(context)
 
         val parcelFileDescriptor =
             contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
@@ -786,7 +809,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
             followUpDay,
             binding.edtPostalCodenew.text.toString(),
 
-        )
+            )
             .enqueue(object : Callback<ModelRegistrationNew> {
                 @SuppressLint("LogNotTimber")
                 override fun onResponse(
@@ -801,7 +824,8 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                             AppProgressBar.hideLoaderDialog()
                             myToast(this@RegirstrationTest, response.body()!!.message)
                             val intent = Intent(applicationContext, SignIn::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                             finish()
                             startActivity(intent)
                         } else {
@@ -810,7 +834,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
                         }
 
-                    }catch (e:Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                         AppProgressBar.hideLoaderDialog()
                     }
@@ -829,12 +853,14 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
 
             })
     }
+
     private fun apiCallRegisterCamera() {
-    AppProgressBar.showLoaderDialog(context)
+        AppProgressBar.showLoaderDialog(context)
 
         val file: File = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                .absolutePath + "/myAppImages/")
+                .absolutePath + "/myAppImages/"
+        )
         if (!file.exists()) {
             file.mkdirs()
         }
@@ -843,10 +869,11 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
         )
 
 
-        val parcelFileDescriptor = contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
+        val parcelFileDescriptor =
+            contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
 
         val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
-         val outputStream = FileOutputStream(file1)
+        val outputStream = FileOutputStream(file1)
         inputStream.copyTo(outputStream)
 
 
@@ -887,7 +914,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                     if (response.code() == 500) {
                         myToast(this@RegirstrationTest, "Server Error")
                     } else if (response.body()!!.status == 1) {
-                        count2=0
+                        count2 = 0
                         myToast(this@RegirstrationTest, response.body()!!.message)
                         subscribed()
                         AppProgressBar.hideLoaderDialog()
@@ -964,7 +991,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
                                     ) {
                                         val id = specilList.result!![i].id
                                         specilistId = id.toString()
-                                     }
+                                    }
 
                                     override fun onNothingSelected(adapterView: AdapterView<*>?) {}
                                 }
@@ -990,7 +1017,7 @@ class RegirstrationTest : AppCompatActivity(), UploadRequestBody.UploadCallback,
     }
 
     private fun apiCallQulificationSpinner() {
-     AppProgressBar.showLoaderDialog(context)
+        AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.getDegree()
             .enqueue(object : Callback<ModelDegreeJava> {
                 @SuppressLint("LogNotTimber")

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityRatingNewBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
@@ -31,15 +32,15 @@ class Rating : AppCompatActivity() {
     lateinit var button: Button
     var meetingId = ""
     var rating = "1"
+    private var count = 0
     private lateinit var sessionManager: SessionManager
-    var progressDialog: ProgressDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRatingNewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.imgBack.setOnClickListener {
-            startActivity(Intent(this@Rating,Appointments::class.java))
-           // onBackPressed()
+            startActivity(Intent(this@Rating, Appointments::class.java))
+            // onBackPressed()
         }
         meetingId = intent.getStringExtra("meetingId").toString()
         Log.e("meetingId", meetingId)
@@ -63,24 +64,21 @@ class Rating : AppCompatActivity() {
                 binding.edtComment.error = "Enter Your Review"
                 return@setOnClickListener
             } else {
-                 apiCallRating()
+                apiCallRating()
             }
         }
 
     }
+
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        startActivity(Intent(this@Rating,Appointments::class.java))
+        startActivity(Intent(this@Rating, Appointments::class.java))
 
     }
+
     private fun apiCallRating() {
-        val comment =binding.edtComment.text.toString()
-        progressDialog = ProgressDialog(this@Rating)
-        progressDialog!!.setMessage("Loading...")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        val comment = binding.edtComment.text.toString()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.rating(meetingId, rating, comment)
             .enqueue(object : Callback<ModelRating> {
@@ -91,14 +89,15 @@ class Rating : AppCompatActivity() {
                     Log.e("Ala", "${response.body()!!}")
                     Log.e("Ala", "${response.body()!!.status}")
                     if (response.body()!!.status == 1) {
+                        count = 0
                         myToast(this@Rating, "Review Submitted")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                         binding.edtComment.text.clear()
                         //  binding.btnSendReview.backgroundTintBlendMode.
                         startActivity(Intent(this@Rating, Appointments::class.java))
 
                     } else {
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                         myToast(this@Rating, response.body()!!.message)
 
                     }
@@ -107,8 +106,13 @@ class Rating : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<ModelRating>, t: Throwable) {
-                    myToast(this@Rating,"Something went wrong")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallRating()
+                    } else {
+                        myToast(this@Rating, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
