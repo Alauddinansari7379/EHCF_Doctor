@@ -257,7 +257,7 @@ class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {
         jitsiMeetUserInfo.email = sessionManager.email
         try {
             val defaultOptions: JitsiMeetConferenceOptions = JitsiMeetConferenceOptions.Builder()
-                .setServerURL(URL("https://jvc.ethicalhealthcare.in/"))
+                .setServerURL(URL("https://jitsi.ethicalhealthcare.in/"))
                 .setRoom(id)
                 .setAudioMuted(false)
                 .setVideoMuted(true)

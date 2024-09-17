@@ -302,7 +302,8 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
         jitsiMeetUserInfo.email = sessionManager.email
         try {
             val defaultOptions: JitsiMeetConferenceOptions = JitsiMeetConferenceOptions.Builder()
-                .setServerURL(URL("https://jvc.ethicalhealthcare.in/"))
+                .setServerURL(URL("https://jitsi.ethicalhealthcare.in/"))
+               // .setServerURL(URL("https://jvc.ethicalhealthcare.in/"))
                 .setRoom(startTime)
                 .setAudioMuted(false)
                 .setVideoMuted(true)
@@ -320,7 +321,9 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
             // refreshValue=true
             ratingPage = true
         } catch (e: MalformedURLException) {
-            e.printStackTrace();
+            e.printStackTrace()
+            Log.e("JitsiMeet", "Error launching Jitsi Meet", e)
+
         }
     }
 

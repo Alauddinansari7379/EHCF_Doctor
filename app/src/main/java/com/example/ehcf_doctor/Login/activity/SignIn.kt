@@ -46,7 +46,6 @@ class SignIn : AppCompatActivity() {
 
         binding.spinnerCountryCode.setOnCountryChangeListener {
             val countryCode = binding.spinnerCountryCode.selectedCountryCodeWithPlus
-
             countryCodeNew = countryCode.substring(1)
             Log.e("Log", "countryCode-$countryCodeNew")
 
@@ -57,8 +56,7 @@ class SignIn : AppCompatActivity() {
             startActivity(Intent(context, MainActivity::class.java))
             finish()
         }
-        AppProgressBar.showLoaderDialog(context)
-        binding.tvForgot.setOnClickListener {
+         binding.tvForgot.setOnClickListener {
             startActivity(Intent(this, MobileNumber::class.java))
         }
         binding.tvSignUp.setOnClickListener {

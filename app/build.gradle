@@ -176,6 +176,7 @@ dependencies {
 
    // Image Picker From Camera
     implementation 'com.github.dhaval2404:imagepicker:2.1'
+    implementation 'org.jitsi.react:jitsi-meet-sdk:5.1.0' // Use the appropriate version
 
 
 
