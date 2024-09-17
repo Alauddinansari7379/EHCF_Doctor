@@ -9,6 +9,7 @@ import android.view.View
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.Upload.model.ModelGetAllReport
 import com.example.ehcf.sharedpreferences.SessionManager
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MyPatient.adapter.AdapterViewReport
 import com.example.ehcf_doctor.databinding.ActivityPatientReportBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
@@ -18,17 +19,17 @@ import retrofit2.Response
 
 class PatientReport : AppCompatActivity() {
     private lateinit var binding: ActivityPatientReportBinding
-    var progressDialog: ProgressDialog? = null
     private var context: Context = this@PatientReport
-    var id=""
+    var id = ""
+    private var count = 0
     private lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPatientReportBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        id=intent.getStringExtra("Id").toString()
+        id = intent.getStringExtra("Id").toString()
         apiCallGetAllReport()
-       // apiCallDoctorProfile()
+        // apiCallDoctorProfile()
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
@@ -37,12 +38,7 @@ class PatientReport : AppCompatActivity() {
     }
 
     private fun apiCallGetAllReport() {
-        progressDialog = ProgressDialog(this@PatientReport)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getReport(id)
             .enqueue(object : Callback<ModelGetAllReport> {
@@ -52,29 +48,33 @@ class PatientReport : AppCompatActivity() {
                 ) {
                     try {
                         if (response.body()!!.result.isEmpty()) {
-                             myToast(this@PatientReport,"No Report Found")
-                            progressDialog!!.dismiss()
-
+                            myToast(this@PatientReport, "No Report Found")
+                            AppProgressBar.hideLoaderDialog()
                         } else {
+                            count = 0
                             binding.recyclerView.apply {
                                 binding.tvNoDataFound.visibility = View.GONE
                                 adapter = AdapterViewReport(response.body()!!, this@PatientReport)
                             }
-                            progressDialog!!.dismiss()
-
+                            AppProgressBar.hideLoaderDialog()
                         }
 
 
-                    }catch (e:Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                         myToast(this@PatientReport, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelGetAllReport>, t: Throwable) {
-                    myToast(this@PatientReport, "Something went wrong")
-                    progressDialog!!.dismiss()
+                    count++
+                    if (count <= 3) {
+                        apiCallGetAllReport()
+                    } else {
+                        myToast(this@PatientReport, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 

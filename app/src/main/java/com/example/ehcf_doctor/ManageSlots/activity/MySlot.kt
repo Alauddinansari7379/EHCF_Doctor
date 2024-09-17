@@ -45,6 +45,10 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
     private var count = 0
     private var count2 = 0
     private var count3 = 0
+    private var count4 = 0
+    private var count5 = 0
+    private var count6 = 0
+    private var count7 = 0
     var shimmerFrameLayout: ShimmerFrameLayout? = null
     // var Allocationlist = java.util.ArrayList<>()
 
@@ -230,23 +234,31 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                         binding.shimmerMySlot.visibility = View.GONE
                     } else if (response.body()!!.status == 0) {
                         myToast(this@MySlot, "${response.body()!!.message}")
-                       AppProgressBar.hideLoaderDialog()
+                        AppProgressBar.hideLoaderDialog()
 
                     } else if (response.body()!!.result.isEmpty()) {
+                        count7 = 0
                         binding.rvSwitchButton.adapter =
                             AdapterSwitchButton(this@MySlot, response.body()!!, this@MySlot)
                         AppProgressBar.hideLoaderDialog()
 
                     } else {
+                        count7 = 0
                         binding.rvSwitchButton.adapter =
                             AdapterSwitchButton(this@MySlot, response.body()!!, this@MySlot)
-                       AppProgressBar.hideLoaderDialog()
+                        AppProgressBar.hideLoaderDialog()
                     }
 
                 }
 
                 override fun onFailure(call: Call<ModelSwitechButton>, t: Throwable) {
-                    myToast(this@MySlot, "Something went wrong")
+                    count7++
+                    if (count7 <= 3) {
+                        apiCallSwitchButton()
+                    } else {
+                        myToast(this@MySlot, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
 
                 }
 
@@ -365,7 +377,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
     }
 
     override fun activeASlot(dayCode: String, active: String) {
-       AppProgressBar.showLoaderDialog(context)
+        AppProgressBar.showLoaderDialog(context)
 
 
         ApiClient.apiService.activeASlot(dayCode, active).enqueue(object : Callback<ModelActive> {
@@ -376,6 +388,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
             ) {
                 try {
                     if (response.body()!!.status == 1) {
+                        count6 = 0
                         myToast(this@MySlot, response.body()!!.message)
                         // myToast(requireActivity(),"No Data Found")
                         AppProgressBar.hideLoaderDialog()
@@ -391,7 +404,12 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
 
 
             override fun onFailure(call: Call<ModelActive>, t: Throwable) {
-                myToast(this@MySlot, "Something went wrong")
+                count6++
+                if (count6 <= 3) {
+                    activeASlot(dayCode, active)
+                } else {
+                    myToast(this@MySlot, "Something went wrong")
+                }
                 AppProgressBar.hideLoaderDialog()
 
             }
@@ -426,6 +444,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
                 ) {
                     try {
                         if (response.body()!!.status == 1) {
+                            count4 = 0
                             myToast(this@MySlot, response.body()!!.message)
                             refresh()
                             AppProgressBar.hideLoaderDialog()
@@ -443,7 +462,12 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
 
 
                 override fun onFailure(call: Call<ModelActive>, t: Throwable) {
-                    myToast(this@MySlot, "Something went wrong")
+                    count4++
+                    if (count4 <= 3) {
+                        activeSlot(dayCode)
+                    } else {
+                        myToast(this@MySlot, "Something went wrong")
+                    }
                     AppProgressBar.hideLoaderDialog()
 
                 }
@@ -454,7 +478,7 @@ class MySlot : AppCompatActivity(), AdapterSlotsList.DeleteSlot,
 
     override fun inactiveSlot(dayCode: String) {
 
-AppProgressBar.showLoaderDialog(context)
+        AppProgressBar.showLoaderDialog(context)
         ApiClient.apiService.activeSlot(sessionManager.id.toString(), dayCode)
             .enqueue(object : Callback<ModelActive> {
                 @SuppressLint("NotifyDataSetChanged")
@@ -464,6 +488,7 @@ AppProgressBar.showLoaderDialog(context)
                 ) {
                     try {
                         if (response.body()!!.status == 1) {
+                            count5 = 0
                             myToast(this@MySlot, response.body()!!.message)
                             refresh()
                             AppProgressBar.hideLoaderDialog()
@@ -482,7 +507,12 @@ AppProgressBar.showLoaderDialog(context)
 
 
                 override fun onFailure(call: Call<ModelActive>, t: Throwable) {
-                    myToast(this@MySlot, "Something went wrong")
+                    count5++
+                    if (count5 <= 3) {
+                        inactiveSlot(dayCode)
+                    } else {
+                        myToast(this@MySlot, "Something went wrong")
+                    }
                     AppProgressBar.hideLoaderDialog()
 
                 }
