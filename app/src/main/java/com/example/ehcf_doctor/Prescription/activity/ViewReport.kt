@@ -16,6 +16,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
+import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.ManageSlots.activity.ManageSlots
 import com.example.ehcf_doctor.Prescription.adapter.AdapterPrescribed
@@ -40,13 +41,14 @@ class ViewReport : AppCompatActivity() {
     var mainHandler = Handler()
     var progressDialog: ProgressDialog? = null
     var reportData=""
+    lateinit var sessionManager: SessionManager
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityViewReportJavaBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+sessionManager = SessionManager(context)
         binding.imgBack.setOnClickListener {
             if (clickId=="1"){
                 startActivity(Intent(this,MainActivity::class.java))
@@ -67,10 +69,9 @@ class ViewReport : AppCompatActivity() {
         reportData=intent.getStringExtra("report").toString()
         clickId=intent.getStringExtra("clickId").toString()
         Log.e("reportData",reportData)
-        val baseUrl="https://ehcf.thedemostore.in/uploads/"
 
         if (reportData.contains("png") || reportData.contains("jpeg") ||  reportData.contains("jpg")) {
-            val url="https://ehcf.thedemostore.in/uploads/$reportData"
+            val url="${sessionManager.imageUrl}$reportData"
             FetchImage(url).start()
            // myToast(this,"No Report Found")
         }else{
@@ -78,7 +79,7 @@ class ViewReport : AppCompatActivity() {
                 // Use 'launchPdfFromPath' if you want to use assets file (enable "fromAssets" flag) / internal directory
                 PdfViewerActivity.launchPdfFromUrl(           //PdfViewerActivity.Companion.launchPdfFromUrl(..   :: incase of JAVA
                     context,
-                    "https://ehcf.thedemostore.in/uploads/$reportData",                                // PDF URL in String format
+                    "${sessionManager.imageUrl}$reportData",                                // PDF URL in String format
                     "Report",                        // PDF Name/Title in String format
                     "pdf directory to save",                  // If nothing specific, Put "" it will save to Downloads
                     enableDownload = true                    // This param is true by defualt.

@@ -1,25 +1,22 @@
 package com.example.ehcf_doctor.Login.activity
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
-import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
-import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.ForgotPassword.MobileNumber
 import com.example.ehcf_doctor.Helper.AppProgressBar
+import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
+import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Registration.activity.RegirstrationTest
-import com.example.ehcf_doctor.ResetPassword
-import com.example.ehcf_doctor.databinding.ActivitySignInBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivitySignInBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import retrofit2.Call
@@ -93,76 +90,82 @@ class SignIn : AppCompatActivity() {
                 call: Call<LoginResponse>,
                 response: Response<LoginResponse>
             ) {
-                if (response.code() == 500) {
-                    myToast(this@SignIn, "Server Error")
-                } else if (response.body()!!.status == 1) {
-                    count = 0
-                    myToast(this@SignIn, response.body()!!.message)
+                try {
+                    if (response.code() == 500) {
+                        myToast(this@SignIn, "Server Error")
+                    } else if (response.body()!!.status == 1) {
+                        count = 0
+                        myToast(this@SignIn, response.body()!!.message)
+                        AppProgressBar.hideLoaderDialog()
+
+                        sessionManager.isLogin = true
+                        sessionManager.fcmToken = response.body()!!.result.fcm_token
+                        sessionManager.onlineStatus = response.body()!!.result.online_status
+                        sessionManager.password = response.body()!!.result.password
+                        sessionManager.doctorName = response.body()!!.result.doctor_name
+                        sessionManager.email = response.body()!!.result.email
+                        sessionManager.phoneNumber = response.body()!!.result.phone_number
+                        sessionManager.phoneWithCode = response.body()!!.result.phone_with_code
+                        sessionManager.gender = response.body()!!.result.gender.toString()
+                        sessionManager.id = response.body()!!.result.id
+                        sessionManager.cID = response.body()!!.result.c_id
+                        sessionManager.sStat = response.body()!!.result.c_stat
+                        sessionManager.status = response.body()!!.result.status
+                        sessionManager.experience = response.body()!!.result.experience
+                        sessionManager.qualification = response.body()!!.result.qualification
+                        sessionManager.uniqueCode = response.body()!!.result.unique_code
+                        sessionManager.hospitalID = response.body()!!.result.hospital_id
+                        sessionManager.specialist = response.body()!!.result.specialist
+                        sessionManager.pricing = response.body()!!.result.pricing
+                        sessionManager.wallet = response.body()!!.result.wallet
+
+                        sessionManager.clinicAddress = response.body()!!.result.clinic_address
+                        sessionManager.clinicAddressOne = response.body()!!.result.clinic_address_one
+                        sessionManager.clinicAddressTwo = response.body()!!.result.clinic_address_two
+                        sessionManager.clinicAddress = response.body()!!.result.clinic_address
+                        sessionManager.pricing = response.body()!!.result.pricing
+                        sessionManager.experience = response.body()!!.result.experience
+                        sessionManager.clinicName = response.body()!!.result.clinic_name
+                        sessionManager.address = response.body()!!.result.address
+                        sessionManager.services = response.body()!!.result.services
+                        sessionManager.college = response.body()!!.result.college
+                        sessionManager.hospitalName = response.body()!!.result.hos_name
+                        sessionManager.hospitalAddress = response.body()!!.result.hos_address
+                        sessionManager.registration = response.body()!!.result.reg_no
+                        sessionManager.openTime = response.body()!!.result.opening_time
+                        sessionManager.closeTime = response.body()!!.result.closing_time
+                        sessionManager.postalCode = response.body()!!.result.postal_code.toString()
+
+                        Log.e("Alauddin", "sessionManager.fcmToken-${sessionManager.fcmToken}")
+                        Log.e("Alauddin", "sessionManager.password-${sessionManager.password}")
+                        Log.e("Alauddin", "sessionManager.doctorName-${sessionManager.doctorName}")
+                        Log.e("Alauddin", "sessionManager.email-${sessionManager.email}")
+                        Log.e("Alauddin", "sessionManager.phoneNumber-${sessionManager.phoneNumber}")
+                        Log.e(
+                            "Alauddin",
+                            "sessionManager.phoneWithCode-${sessionManager.phoneWithCode}"
+                        )
+                        Log.e("Alauddin", "sessionManager.id-${sessionManager.id}")
+                        Log.e("Alauddin", "sessionManager.gender-${sessionManager.gender}")
+                        Log.e("Alauddin", "ssionManager.hospitalID-${sessionManager.hospitalID}")
+                        Log.e("Alauddin", "ssionManager.hospitalID-${sessionManager.hospitalID}")
+                        Log.e("Alauddin", "sessionManager.onlineStatus-${sessionManager.onlineStatus}")
+                        Log.e("Alauddin", "sessionManager.registration-${sessionManager.registration}")
+                        Log.e("Alauddin", "sessionManager.specialist-${sessionManager.specialist}")
+
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        finish()
+                        startActivity(intent)
+
+                    } else {
+                        myToast(this@SignIn, response.body()!!.message)
+                        AppProgressBar.hideLoaderDialog()
+                    }
+                } catch (e: Exception) {
+                   e.printStackTrace()
                     AppProgressBar.hideLoaderDialog()
-
-                    sessionManager.isLogin = true
-                    sessionManager.fcmToken = response.body()!!.result.fcm_token
-                    sessionManager.onlineStatus = response.body()!!.result.online_status
-                    sessionManager.password = response.body()!!.result.password
-                    sessionManager.doctorName = response.body()!!.result.doctor_name
-                    sessionManager.email = response.body()!!.result.email
-                    sessionManager.phoneNumber = response.body()!!.result.phone_number
-                    sessionManager.phoneWithCode = response.body()!!.result.phone_with_code
-                    sessionManager.gender = response.body()!!.result.gender.toString()
-                    sessionManager.id = response.body()!!.result.id
-                    sessionManager.cID = response.body()!!.result.c_id
-                    sessionManager.sStat = response.body()!!.result.c_stat
-                    sessionManager.status = response.body()!!.result.status
-                    sessionManager.experience = response.body()!!.result.experience
-                    sessionManager.qualification = response.body()!!.result.qualification
-                    sessionManager.uniqueCode = response.body()!!.result.unique_code
-                    sessionManager.hospitalID = response.body()!!.result.hospital_id
-                    sessionManager.specialist = response.body()!!.result.specialist
-                    sessionManager.pricing = response.body()!!.result.pricing
-                    sessionManager.wallet = response.body()!!.result.wallet
-
-                    sessionManager.clinicAddress = response.body()!!.result.clinic_address
-                    sessionManager.clinicAddressOne = response.body()!!.result.clinic_address_one
-                    sessionManager.clinicAddressTwo = response.body()!!.result.clinic_address_two
-                    sessionManager.clinicAddress = response.body()!!.result.clinic_address
-                    sessionManager.pricing = response.body()!!.result.pricing
-                    sessionManager.experience = response.body()!!.result.experience
-                    sessionManager.clinicName = response.body()!!.result.clinic_name
-                    sessionManager.address = response.body()!!.result.address
-                    sessionManager.services = response.body()!!.result.services
-                    sessionManager.college = response.body()!!.result.college
-                    sessionManager.hospitalName = response.body()!!.result.hos_name
-                    sessionManager.hospitalAddress = response.body()!!.result.hos_address
-                    sessionManager.registration = response.body()!!.result.reg_no
-                    sessionManager.openTime = response.body()!!.result.opening_time
-                    sessionManager.closeTime = response.body()!!.result.closing_time
-                    sessionManager.postalCode = response.body()!!.result.postal_code.toString()
-
-                    Log.e("Alauddin", "sessionManager.fcmToken-${sessionManager.fcmToken}")
-                    Log.e("Alauddin", "sessionManager.password-${sessionManager.password}")
-                    Log.e("Alauddin", "sessionManager.doctorName-${sessionManager.doctorName}")
-                    Log.e("Alauddin", "sessionManager.email-${sessionManager.email}")
-                    Log.e("Alauddin", "sessionManager.phoneNumber-${sessionManager.phoneNumber}")
-                    Log.e(
-                        "Alauddin",
-                        "sessionManager.phoneWithCode-${sessionManager.phoneWithCode}"
-                    )
-                    Log.e("Alauddin", "sessionManager.id-${sessionManager.id}")
-                    Log.e("Alauddin", "sessionManager.gender-${sessionManager.gender}")
-                    Log.e("Alauddin", "ssionManager.hospitalID-${sessionManager.hospitalID}")
-                    Log.e("Alauddin", "ssionManager.hospitalID-${sessionManager.hospitalID}")
-                    Log.e("Alauddin", "sessionManager.onlineStatus-${sessionManager.onlineStatus}")
-                    Log.e("Alauddin", "sessionManager.registration-${sessionManager.registration}")
-                    Log.e("Alauddin", "sessionManager.specialist-${sessionManager.specialist}")
-
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    finish()
-                    startActivity(intent)
-
-                } else {
-                    myToast(this@SignIn, response.body()!!.message)
-                    AppProgressBar.hideLoaderDialog()
+                    myToast(this@SignIn, "Something went wrong")
                 }
 
             }
@@ -172,7 +175,7 @@ class SignIn : AppCompatActivity() {
                 if (count <= 3) {
                     apiCallLogin(password, phoneNumberNew)
                 } else {
-                    myToast(this@SignIn, "Something went wrong")
+                    myToast(this@SignIn, t.message.toString())
                 }
                 AppProgressBar.hideLoaderDialog()
 

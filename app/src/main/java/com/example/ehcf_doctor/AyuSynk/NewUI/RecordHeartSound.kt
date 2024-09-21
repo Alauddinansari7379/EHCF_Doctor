@@ -1,7 +1,6 @@
 package com.example.ehcf_doctor.AyuSynk.NewUI
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
@@ -37,11 +36,11 @@ import com.ayudevice.ayusynksdk.report.listener.DiagnosisReportUpdateListener
 import com.ayudevice.ayusynksdk.utils.logs.AyuLogsListener
 import com.example.ehcf_doctor.AyuSynk.NewUI.RecordHeartSound.FragmentValue.Companion.recordHeartSound
 import com.example.ehcf_doctor.AyuSynk.utils.GenUtil
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentRecordHeartSoundBinding
 import java.io.File
 import java.io.IOException
-import java.util.*
 
 
 class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelectedListener,
@@ -50,7 +49,7 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
     private lateinit var binding: FragmentRecordHeartSoundBinding
     private var lastRecordedData: ShortArray? = null
     private var recordID = -1
-    var progressDialog : ProgressDialog?=null
+
     private var waitTimer: CountDownTimer? = null
     private var isRecordingPaused = false
     val usb=1
@@ -474,12 +473,7 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
                 shareFile(file)
             }
             R.id.btn_report -> {
-                progressDialog = ProgressDialog(requireContext())
-                progressDialog!!.setMessage("Generating Report")
-                progressDialog!!.setTitle("Please Wait..")
-                progressDialog!!.isIndeterminate = false
-                progressDialog!!.setCancelable(true)
-                progressDialog!!.show()
+                AppProgressBar.showLoaderDialog(context)
 
                 binding!!.btnReport.isEnabled = false
               //  binding!!.progressBarReport.visibility = View.VISIBLE
@@ -570,7 +564,7 @@ class RecordHeartSound :Fragment(), AyuDeviceListener, AdapterView.OnItemSelecte
         binding!!.btnReportShare.tag = soundFile
         binding!!.btnReportShare.backgroundTintList =
             ContextCompat.getColorStateList(requireContext(), R.color.main_color);
-        progressDialog!!.dismiss()
+        AppProgressBar.hideLoaderDialog()
 
         Toast.makeText(context, "Reports generated", Toast.LENGTH_SHORT).show()
     }

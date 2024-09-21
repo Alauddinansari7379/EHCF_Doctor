@@ -3,7 +3,6 @@ package com.example.ehcf_doctor.Dashboard
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -21,8 +20,8 @@ import com.example.ehcf_doctor.Dashboard.adapter.AdapterDashboard
 import com.example.ehcf_doctor.Dashboard.model.ModelDashboard
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Login.activity.SignIn
-import com.example.ehcf_doctor.databinding.ActivityDashboardBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityDashboardBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,7 +29,9 @@ import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
 import xyz.teamgravity.checkinternet.CheckInternet
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class Dashboard : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardBinding

@@ -1,14 +1,13 @@
 package com.example.ehcf_doctor.Appointments.Cancelled.activity
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
@@ -17,14 +16,13 @@ import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.Booking.model.ResultUpcoming
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.FragmentCancelledBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.FragmentCancelledBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
-import java.util.ArrayList
 
 class CancelledFragment : Fragment() {
     private lateinit var binding: FragmentCancelledBinding

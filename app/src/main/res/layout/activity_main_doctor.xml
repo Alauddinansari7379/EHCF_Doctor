@@ -28,7 +28,7 @@
                 android:layout_marginRight="10dp"
                 android:padding="5dp"
                 android:src="@drawable/ic_baseline_dehaze_24"
-                android:backgroundTint="@color/black"
+                android:tint="@color/white"
                 android:background="?actionBarItemBackground">
             </androidx.constraintlayout.utils.widget.ImageFilterButton>
 

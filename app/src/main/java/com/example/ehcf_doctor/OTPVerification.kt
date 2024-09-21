@@ -2,22 +2,21 @@ package com.example.ehcf_doctor
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf_doctor.ForgotPassword.modelReponse.ModelForgotPass
 import com.example.ehcf_doctor.Helper.AppProgressBar
-import com.example.ehcf_doctor.databinding.ActivityOtpverificationBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityOtpverificationBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,9 +37,6 @@ class OTPVerification : AppCompatActivity() {
         binding= ActivityOtpverificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         timeCounter()
-
-       AppProgressBar.showLoaderDialog(context)
-
         val intent = intent
         phoneNumber = intent.getStringExtra("Mobilenumber").toString()
         id = intent.getStringExtra("id").toString()

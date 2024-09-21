@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -29,11 +28,11 @@ import com.example.ehcf_doctor.HealthCube.Adapter.AdapterTestList
 import com.example.ehcf_doctor.HealthCube.Adapter.ItemAdapter
 import com.example.ehcf_doctor.HealthCube.Adapter.ItemAdapter.Companion.selectedTestList
 import com.example.ehcf_doctor.HealthCube.Model.*
-import com.example.ehcf_doctor.databinding.ActivityAddPatientBinding
-import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.example.ehcf_doctor.HealthCube.RetrofitHealthCube.ApiClientHealthCube
 import com.example.ehcf_doctor.HealthCube.RetrofitHealthCube.ApiInterfaceHealthCube
 import com.example.ehcf_doctor.Helper.AppProgressBar
+import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityAddPatientBinding
 import com.rajat.pdfviewer.PdfViewerActivity
 import retrofit2.Call
 import retrofit2.Callback

@@ -2,19 +2,18 @@ package com.example.ehcf_doctor.HealthCube.activity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.HealthCube.Adapter.AdapterExixtingPatientList
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.ActivityExistingPatientListBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityExistingPatientListBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback

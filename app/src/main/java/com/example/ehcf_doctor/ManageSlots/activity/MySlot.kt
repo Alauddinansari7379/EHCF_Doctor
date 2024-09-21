@@ -1,7 +1,6 @@
 package com.example.ehcf_doctor.ManageSlots.activity
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -23,11 +22,14 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.ManageSlots.adapter.AdapterSlotsList
 import com.example.ehcf_doctor.ManageSlots.adapter.AdapterSwitchButton
-import com.example.ehcf_doctor.ManageSlots.model.*
-import com.example.ehcf_doctor.databinding.ActivityManageSlotsSeassionBinding
+import com.example.ehcf_doctor.ManageSlots.model.ModelActive
+import com.example.ehcf_doctor.ManageSlots.model.ModelDay
+import com.example.ehcf_doctor.ManageSlots.model.ModelDeleteSlot
+import com.example.ehcf_doctor.ManageSlots.model.ModelSlotList
+import com.example.ehcf_doctor.ManageSlots.model.ModelSwitechButton
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityManageSlotsSeassionBinding
 import com.facebook.shimmer.ShimmerFrameLayout
-import id.zelory.compressor.calculateInSampleSize
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

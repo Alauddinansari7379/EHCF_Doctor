@@ -2,19 +2,18 @@ package com.example.ehcf_doctor.Appointments.Upcoming.activity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ehcf.Helper.convertTo12Hour
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.model.ModelAppointmentDatails
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.ActivityAppointmentDetalisBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityAppointmentDetalisBinding
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,6 +32,7 @@ class AppointmentDetalis : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAppointmentDetalisBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sessionManager = SessionManager(context)
 
         Log.e("bookingId", bookingId)
         bookingId = intent.getStringExtra("bookingId").toString()
@@ -107,7 +107,7 @@ class AppointmentDetalis : AppCompatActivity() {
                             binding.tvStatus.text = response.body()!!.result.status_for_doctor
                             if (response.body()!!.result.profile_picture != null) {
                                 Picasso.get()
-                                    .load("https://ehcf.thedemostore.in/uploads/${response.body()!!.result.profile_picture}")
+                                    .load("${sessionManager.imageUrl}${response.body()!!.result.profile_picture}")
                                     .placeholder(
                                         R.drawable.profile
                                     ).error(R.drawable.profile).into(binding.imgProfile);

@@ -58,6 +58,7 @@ class SessionManager(context: Context?) {
         private const val OPENTIME = "openTime"
         private const val CLOSETIME = "closeTime"
         private const val POSTALCODE = "postalCode"
+        private const val IMAGEURL = "imageUrl"
     }
 
     var isLogin: Boolean
@@ -89,6 +90,12 @@ class SessionManager(context: Context?) {
         get() = prefs.getString(SPECIALIST, "")
         set(specialist) {
             prefs.edit().putString(SPECIALIST, specialist).apply()
+        }
+
+    var imageUrl: String?
+        get() = prefs.getString(IMAGEURL, "")
+        set(imageUrl) {
+            prefs.edit().putString(IMAGEURL, imageUrl).apply()
         }
 
     var openTime: String?

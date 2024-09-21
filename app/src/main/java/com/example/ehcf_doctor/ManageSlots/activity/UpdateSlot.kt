@@ -3,26 +3,25 @@ package com.example.ehcf_doctor.ManageSlots.activity
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.TimePicker
+import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.ManageSlots.model.ModelUpdateSlot
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.ActivityUpdateSlotBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityUpdateSlotBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,7 +29,9 @@ import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
 import xyz.teamgravity.checkinternet.CheckInternet
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class UpdateSlot : AppCompatActivity() {
     private val context: Context = this@UpdateSlot

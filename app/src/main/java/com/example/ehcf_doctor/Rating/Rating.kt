@@ -1,7 +1,6 @@
 package com.example.ehcf_doctor.Rating
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
@@ -17,8 +16,8 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.ActivityRatingNewBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityRatingNewBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

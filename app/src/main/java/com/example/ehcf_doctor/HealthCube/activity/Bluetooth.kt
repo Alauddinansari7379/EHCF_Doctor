@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
@@ -28,8 +27,8 @@ import com.example.ehcf_doctor.HealthCube.Model.ModelTotalCount
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.ActivityMainBluethootBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityMainBluethootBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

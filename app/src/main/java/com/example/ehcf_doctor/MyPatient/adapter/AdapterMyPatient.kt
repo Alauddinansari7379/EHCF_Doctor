@@ -13,6 +13,7 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.MyPatient.activity.PatientHistory
 import com.example.ehcf_doctor.MyPatient.activity.PatientReport
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
@@ -28,6 +29,7 @@ class AdapterMyPatient(
     val context: Context, private val list: ArrayList<ResultMyPatient>,    val comment:CommentList
 ) :
     RecyclerView.Adapter<AdapterMyPatient.MyViewHolder>() {
+        lateinit var sessionManager: SessionManager
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(context).inflate(R.layout.single_row_my_patient, parent, false)
@@ -38,9 +40,10 @@ class AdapterMyPatient(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         try {
+            sessionManager = SessionManager(context)
             if (list[position].profile_picture!!.isNotEmpty()) {
                 Picasso.get()
-                    .load("https://ehcf.thedemostore.in/uploads/${list[position].profile_picture}")
+                    .load("${sessionManager.imageUrl}${list[position].profile_picture}")
                     .placeholder(R.drawable.profile).error(R.drawable.profile)
                     .into(holder.imgProfile);
 
@@ -69,7 +72,7 @@ class AdapterMyPatient(
             }
             holder.imgPhone.setOnClickListener {
 
-                comment.videoCall(list[position].doctor_id.toString()+"EHCFHIS"+list[position].patient_id)
+                comment.videoCall(list[position].doctor_id.toString()+"EHCFHIS"+list[position].id)
 //             val phone_intent = Intent(Intent.ACTION_CALL)
 //            phone_intent.data = Uri.parse("tel:${list.result[position].phone_number}")
 //            context.startActivity(phone_intent)

@@ -1,7 +1,6 @@
 package com.example.ehcf_doctor.Prescription.activity
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -14,8 +13,8 @@ import com.example.ehcf.Prescription.adapter.AdapterPrescriptionDetialLabTest
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Prescription.model.ModelPreDetJava
-import com.example.ehcf_doctor.databinding.ActivityPrescriptionDetailsBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityPrescriptionDetailsBinding
 import com.rajat.pdfviewer.PdfViewerActivity
 import retrofit2.Call
 import retrofit2.Callback

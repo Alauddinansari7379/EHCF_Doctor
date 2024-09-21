@@ -1,7 +1,6 @@
 package com.example.ehcf_doctor.ManageSlots.activity
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,8 +14,8 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.ManageSlots.adapter.AdapterManageSlot
 import com.example.ehcf_doctor.ManageSlots.model.ModelSlotList
-import com.example.ehcf_doctor.databinding.ActivityManageSlotsBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityManageSlotsBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

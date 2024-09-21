@@ -2,14 +2,13 @@ package com.example.ehcf_doctor.Booking.activity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
@@ -17,8 +16,8 @@ import com.example.ehcf_doctor.Booking.adapter.AdapterBooking
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.FragmentBookingBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.FragmentBookingBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

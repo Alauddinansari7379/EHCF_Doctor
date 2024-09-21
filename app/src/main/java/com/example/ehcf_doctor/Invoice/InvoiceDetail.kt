@@ -2,19 +2,18 @@ package com.example.ehcf_doctor.Invoice
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -23,8 +22,8 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Invoice.adapter.AdapterInvoiceDetial
 import com.example.ehcf_doctor.Invoice.model.ModelInvoiceDetial
-import com.example.ehcf_doctor.databinding.ActivityInvoiceDetialBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityInvoiceDetialBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,7 +32,6 @@ import java.io.OutputStream
 class InvoiceDetail : AppCompatActivity() {
     private lateinit var binding: ActivityInvoiceDetialBinding
     private val context: Context = this@InvoiceDetail
-    var progressDialog: ProgressDialog? = null
     var relationList = ArrayList<String>()
     var invoiceId = ""
     private val PERMISSION_REQUEST_CODE = 1
@@ -127,12 +125,7 @@ class InvoiceDetail : AppCompatActivity() {
     }
 
     private fun apiCallInvoiceDetial() {
-        progressDialog = ProgressDialog(this@InvoiceDetail)
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-        progressDialog!!.show()
+      AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.invoiceDetails(invoiceId)
             .enqueue(object : Callback<ModelInvoiceDetial> {
@@ -146,13 +139,13 @@ class InvoiceDetail : AppCompatActivity() {
                             myToast(this@InvoiceDetail, "Server Error")
                         } else if (response.body()!!.status == 0) {
                             myToast(this@InvoiceDetail, "${response.body()!!.message}")
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else if (response.body()!!.result.isEmpty()) {
                             binding.rvManageSlot.adapter =
                                 AdapterInvoiceDetial(this@InvoiceDetail, response.body()!!)
                             binding.rvManageSlot.adapter!!.notifyDataSetChanged()
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
                             count = 0
@@ -160,7 +153,7 @@ class InvoiceDetail : AppCompatActivity() {
                                 AdapterInvoiceDetial(this@InvoiceDetail, response.body()!!)
                             binding.rvManageSlot.adapter!!.notifyDataSetChanged()
                             binding.rvManageSlot.visibility = View.VISIBLE
-                            progressDialog!!.dismiss()
+                            AppProgressBar.hideLoaderDialog()
 //                        binding.rvManageSlot.apply {
 //                            binding.tvNoDataFound.visibility = View.GONE
 //                            shimmerFrameLayout?.startShimmer()
@@ -174,7 +167,7 @@ class InvoiceDetail : AppCompatActivity() {
                         }
                     } catch (e: Exception) {
                         myToast(this@InvoiceDetail, "Something went wrong")
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 

@@ -3,7 +3,6 @@ package com.example.ehcf_doctor.MyPatient.activity
 import android.Manifest.permission.CALL_PHONE
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -24,8 +23,8 @@ import com.example.ehcf_doctor.MyPatient.model.ModelCommentList
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ResultMyPatient
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.ActivityMyPatientBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityMyPatientBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import org.jitsi.meet.sdk.JitsiMeetActivity
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions
@@ -35,7 +34,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.net.MalformedURLException
 import java.net.URL
-import java.util.*
 
 
 class MyPatient : AppCompatActivity(), AdapterMyPatient.CommentList {

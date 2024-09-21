@@ -3,7 +3,6 @@ package com.example.ehcf_doctor.Profile
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.ContentResolver
 import android.content.Intent
 import android.net.Uri
@@ -11,12 +10,12 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
@@ -27,8 +26,8 @@ import com.example.ehcf_doctor.Profile.modelResponse.ModelUpdateNameEmail
 import com.example.ehcf_doctor.Profile.modelResponse.ResetPassResponse
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.Registration.activity.UploadRequestBody
-import com.example.ehcf_doctor.databinding.FragmentProfileBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.FragmentProfileBinding
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -79,9 +78,9 @@ class ProfileFragment : Fragment(), UploadRequestBody.UploadCallback {
         binding.tvWallet.text = wallet
 
         if (sessionManager.profilePic!!.isNotEmpty()) {
-            Picasso.get().load("https://ehcf.thedemostore.in/uploads/${sessionManager.profilePic}")
+            Picasso.get().load("${sessionManager.imageUrl}${sessionManager.profilePic}")
                 .into(binding.userProfile)
-            Log.e("pofile", "https://ehcf.thedemostore.in/uploads/${sessionManager.profilePic}")
+            Log.e("pofile", "${sessionManager.imageUrl}${sessionManager.profilePic}")
         }
 
 
@@ -198,7 +197,7 @@ class ProfileFragment : Fragment(), UploadRequestBody.UploadCallback {
                                     binding.layoutBtnUpload.visibility = View.GONE
                                     sessionManager.profilePic = response.body()!!.result
                                     Picasso.get()
-                                        .load("https://ehcf.thedemostore.in/uploads/${sessionManager.profilePic}")
+                                        .load("${sessionManager.imageUrl}${sessionManager.profilePic}")
                                         .into(binding.userProfile)
 
                                 }

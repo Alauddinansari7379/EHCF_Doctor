@@ -2,20 +2,19 @@ package com.example.ehcf_doctor.ForgotPassword
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.ForgotPassword.modelReponse.ModelForgotPass
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.OTPVerification
-import com.example.ehcf_doctor.databinding.ActivityMobileNumberBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityMobileNumberBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

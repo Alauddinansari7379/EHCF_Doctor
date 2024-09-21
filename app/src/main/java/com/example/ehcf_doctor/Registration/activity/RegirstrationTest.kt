@@ -2,7 +2,6 @@ package com.example.ehcf_doctor.Registration.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.Context
@@ -10,7 +9,11 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
-import android.os.*
+import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Environment
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.text.Editable
@@ -30,9 +33,17 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.Registration.modelResponse.*
-import com.example.ehcf_doctor.databinding.ActivityRegirstrationTestBinding
+import com.example.ehcf_doctor.Registration.modelResponse.ModelCloseTime
+import com.example.ehcf_doctor.Registration.modelResponse.ModelDegreeJava
+import com.example.ehcf_doctor.Registration.modelResponse.ModelGender
+import com.example.ehcf_doctor.Registration.modelResponse.ModelLanguage
+import com.example.ehcf_doctor.Registration.modelResponse.ModelOTP
+import com.example.ehcf_doctor.Registration.modelResponse.ModelOpenTime
+import com.example.ehcf_doctor.Registration.modelResponse.ModelRegistrationNew
+import com.example.ehcf_doctor.Registration.modelResponse.ModelSpecialist
+import com.example.ehcf_doctor.Registration.modelResponse.ModelSpecilList
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityRegirstrationTestBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar

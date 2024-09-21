@@ -1,18 +1,17 @@
 package com.example.ehcf_doctor.MyPatient.activity
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterPatientHistory
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MyPatient.model.ModelPatientHistoryX
-import com.example.ehcf_doctor.databinding.ActivityPatientHistoryBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityPatientHistoryBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

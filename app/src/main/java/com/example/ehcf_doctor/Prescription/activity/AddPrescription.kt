@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -28,7 +27,13 @@ import com.example.ehcf_doctor.Helper.DatePickerDialogWithMaxMinRange
 import com.example.ehcf_doctor.Prescription.adapter.AdapterDigonisis
 import com.example.ehcf_doctor.Prescription.adapter.AdapterLabTest
 import com.example.ehcf_doctor.Prescription.adapter.AdapterOrderDetails
-import com.example.ehcf_doctor.Prescription.model.*
+import com.example.ehcf_doctor.Prescription.model.ModeMedicine
+import com.example.ehcf_doctor.Prescription.model.ModelDigonsis
+import com.example.ehcf_doctor.Prescription.model.ModelLabTest
+import com.example.ehcf_doctor.Prescription.model.ModelModify
+import com.example.ehcf_doctor.Prescription.model.ModelOrderDetails
+import com.example.ehcf_doctor.Prescription.model.ModelPreJava
+import com.example.ehcf_doctor.Prescription.model.ModelTestList
 import com.example.ehcf_doctor.Profile.modelResponse.ModelCityList
 import com.example.ehcf_doctor.Profile.modelResponse.ModelStateList
 import com.example.ehcf_doctor.R
@@ -39,15 +44,18 @@ import com.example.ehcf_doctor.Retrofit.ApiClient
 import com.example.ehcf_doctor.databinding.ActivityAddPrescriptionBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
 import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class AddPrescription : AppCompatActivity() {
     private lateinit var binding: ActivityAddPrescriptionBinding

@@ -1,25 +1,13 @@
 package com.example.ehcf_doctor.AyuSynk.NewUI
 
-import android.app.ProgressDialog
-import android.content.Intent
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.ayudevice.ayusynksdk.AyuSynk
 import com.ayudevice.ayusynksdk.ble.constants.DeviceConnectionState
@@ -27,20 +15,12 @@ import com.ayudevice.ayusynksdk.ble.constants.DeviceStrength
 import com.ayudevice.ayusynksdk.ble.listener.AyuDeviceListener
 import com.ayudevice.ayusynksdk.denoise.constants.FilterType
 import com.ayudevice.ayusynksdk.onlineLiveStreaming.OnlineLiveStreamListener
-import com.ayudevice.ayusynksdk.playback.AyuFileGenerator
 import com.ayudevice.ayusynksdk.playback.listener.RecorderListener
-import com.ayudevice.ayusynksdk.report.SoundData
 import com.ayudevice.ayusynksdk.report.SoundFile
-import com.ayudevice.ayusynksdk.report.constants.LocationType
-import com.ayudevice.ayusynksdk.report.constants.SoundType
 import com.ayudevice.ayusynksdk.report.listener.DiagnosisReportUpdateListener
 import com.ayudevice.ayusynksdk.utils.logs.AyuLogsListener
-import com.example.ehcf_doctor.AyuSynk.utils.GenUtil
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.ActivityRecorderBinding
-import com.example.ehcf_doctor.databinding.FragmentSelectModuleBinding
-import java.io.File
-import java.io.IOException
 
 class Recorder :Fragment(), AyuDeviceListener, AdapterView.OnItemSelectedListener,
     View.OnClickListener, RecorderListener, OnlineLiveStreamListener, DiagnosisReportUpdateListener,

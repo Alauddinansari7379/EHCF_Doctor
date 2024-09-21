@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ehcf.Helper.convertTo12Hour
+import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
 import com.example.ehcf_doctor.Prescription.activity.AddPrescription
 import com.example.ehcf_doctor.Prescription.model.ModelPendingPre
@@ -28,7 +29,7 @@ class AdapterPrescription(
     val context: Context, private val list: ArrayList<ResultPrePending>
 ) :
     RecyclerView.Adapter<AdapterPrescription.MyViewHolder>() {
-
+lateinit var sessionManager: SessionManager
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
@@ -40,9 +41,10 @@ class AdapterPrescription(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         try {
+            sessionManager = SessionManager(context)
             if (list[position].profile_picture!!.isNotEmpty()) {
                 Picasso.get()
-                    .load("https://ehcf.thedemostore.in/uploads/${list[position].profile_picture}")
+                    .load("${sessionManager.imageUrl}${list[position].profile_picture}")
                     .placeholder(R.drawable.profile).error(R.drawable.profile)
                     .into(holder.imgProfile);
 

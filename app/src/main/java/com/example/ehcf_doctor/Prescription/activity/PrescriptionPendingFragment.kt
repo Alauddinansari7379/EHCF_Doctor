@@ -2,7 +2,6 @@ package com.example.ehcf_doctor.Prescription.activity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,14 +17,13 @@ import com.example.ehcf_doctor.Prescription.adapter.AdapterPrescription
 import com.example.ehcf_doctor.Prescription.model.ModelPendingPre
 import com.example.ehcf_doctor.Prescription.model.ResultPrePending
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.FragmentPrescriptionPendingBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.FragmentPrescriptionPendingBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
-import java.util.ArrayList
 
 
 class PrescriptionPendingFragment : Fragment() {

@@ -3,7 +3,6 @@ package com.example.ehcf_doctor.Profile.activity
 import android.R
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -23,9 +22,11 @@ import com.example.ehcf_doctor.Profile.modelResponse.ModelCity
 import com.example.ehcf_doctor.Profile.modelResponse.ModelCityList
 import com.example.ehcf_doctor.Profile.modelResponse.ModelState
 import com.example.ehcf_doctor.Profile.modelResponse.ModelStateList
-import com.example.ehcf_doctor.Registration.modelResponse.*
-import com.example.ehcf_doctor.databinding.ActivityProfileSettingBinding
+import com.example.ehcf_doctor.Registration.modelResponse.ModelGender
+import com.example.ehcf_doctor.Registration.modelResponse.ModelLanguage
+import com.example.ehcf_doctor.Registration.modelResponse.ModelSpecilList
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityProfileSettingBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import retrofit2.Call

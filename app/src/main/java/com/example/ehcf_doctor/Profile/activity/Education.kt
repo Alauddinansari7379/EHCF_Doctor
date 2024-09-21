@@ -1,7 +1,6 @@
 package com.example.ehcf_doctor.Profile.activity
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -16,10 +15,11 @@ import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MainActivity.activity.MainActivity
-import com.example.ehcf_doctor.Profile.modelResponse.*
+import com.example.ehcf_doctor.Profile.modelResponse.ModelProfileUpdate
+import com.example.ehcf_doctor.Profile.modelResponse.ModelYear
 import com.example.ehcf_doctor.Registration.modelResponse.ModelDegreeJava
-import com.example.ehcf_doctor.databinding.ActivityEducationBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityEducationBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

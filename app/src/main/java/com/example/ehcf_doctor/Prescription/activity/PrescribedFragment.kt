@@ -2,32 +2,31 @@ package com.example.ehcf_doctor.Prescription.activity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toolbar
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Prescription.adapter.AdapterPrescribed
-import com.example.ehcf_doctor.Prescription.model.*
+import com.example.ehcf_doctor.Prescription.model.ModelPrescribed
+import com.example.ehcf_doctor.Prescription.model.ResultPrePrescribed
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.FragmentPrescribedBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.FragmentPrescribedBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.ArrayList
 
 
 class PrescribedFragment : Fragment() {

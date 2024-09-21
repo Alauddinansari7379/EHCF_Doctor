@@ -18,6 +18,7 @@ import com.example.ehcf_doctor.Login.modelResponse.LoginResponse
 import com.example.ehcf_doctor.MainActivity.model.ModelOnline
 import com.example.ehcf_doctor.ManageSlots.model.*
 import com.example.ehcf_doctor.MyPatient.model.ModelAllReport
+import com.example.ehcf_doctor.MyPatient.model.ModelAllReports
 import com.example.ehcf_doctor.MyPatient.model.ModelCommentList
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ModelPatientHistoryX
@@ -439,7 +440,7 @@ interface ApiInterface {
     @POST("get_repo")
     fun getReport(
         @Query("patient_id") patient_id: String?,
-    ): Call<ModelGetAllReport>
+    ): Call<ModelAllReports>
 
     @POST("edit_prescription")
     fun modifyPrescrption(

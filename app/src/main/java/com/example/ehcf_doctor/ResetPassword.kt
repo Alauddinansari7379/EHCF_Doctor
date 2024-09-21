@@ -1,18 +1,17 @@
 package com.example.ehcf_doctor
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.example.ehcf.Helper.myToast
 import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Login.activity.SignIn
 import com.example.ehcf_doctor.Profile.modelResponse.ResetPassResponse
-import com.example.ehcf_doctor.databinding.ActivityResetPasswordBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityResetPasswordBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

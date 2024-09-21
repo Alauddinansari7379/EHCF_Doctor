@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.MediaRecorder
@@ -14,7 +13,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.Chronometer
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
@@ -34,8 +36,8 @@ import com.example.ehcf_doctor.Booking.model.ResultUpcoming
 import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.Prescription.activity.AddPrescription
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.FragmentUpComingBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.FragmentUpComingBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.hbisoft.hbrecorder.HBRecorder
 import com.hbisoft.hbrecorder.HBRecorderListener
@@ -51,7 +53,8 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 

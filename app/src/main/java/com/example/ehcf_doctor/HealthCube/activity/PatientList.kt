@@ -2,7 +2,6 @@ package com.example.ehcf_doctor.HealthCube.activity
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -15,13 +14,12 @@ import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MyPatient.model.ModelMyPatient
 import com.example.ehcf_doctor.MyPatient.model.ResultMyPatient
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.ActivityPatientListBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityPatientListBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.ArrayList
 
 
 class PatientList : AppCompatActivity() {

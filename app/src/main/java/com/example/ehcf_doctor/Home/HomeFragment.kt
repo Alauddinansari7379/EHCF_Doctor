@@ -2,7 +2,7 @@ package com.example.ehcf_doctor.Home
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -15,9 +15,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import com.example.easywaylocation.Listener
-
- import android.view.ViewGroup
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -27,6 +25,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.easywaylocation.EasyWayLocation
 import com.example.easywaylocation.GetLocationDetail
+import com.example.easywaylocation.Listener
 import com.example.easywaylocation.LocationData
 import com.example.ehcf.Helper.isOnline
 import com.example.ehcf.Helper.myToast
@@ -34,10 +33,11 @@ import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.Appointments.Appointments
 import com.example.ehcf_doctor.Appointments.Upcoming.adapter.AdapterHome
 import com.example.ehcf_doctor.Booking.model.ModelGetConsultation
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.MainActivity.activity.MainActivity
 import com.example.ehcf_doctor.R
-import com.example.ehcf_doctor.databinding.FragmentHomeBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.FragmentHomeBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -49,15 +49,15 @@ import retrofit2.Callback
 import retrofit2.Response
 import rezwan.pstu.cse12.youtubeonlinestatus.recievers.NetworkChangeReceiver
 import java.io.IOException
-import java.util.*
+import java.util.Locale
 
 
- class HomeFragment : Fragment(), Listener, LocationData.AddressCallBack {
+class HomeFragment : Fragment(), Listener, LocationData.AddressCallBack {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var sessionManager: SessionManager
     var doctorname = ""
     var id = ""
-    var progressDialog: ProgressDialog? = null
+
     var shimmerFrameLayout: ShimmerFrameLayout? = null
     private val senderID = "YOUR_SENDER_ID"
     private var fusedLocationProviderClient: FusedLocationProviderClient? = null
@@ -66,7 +66,10 @@ import java.util.*
     lateinit var lm: LocationManager
     private val REQUEST_CODE = 100
     private var currentAddress = ""
-
+    private var count = 0
+    private var count2 = 0
+    private var count3 = 0
+    private var count4 = 0
 
 
     override fun onCreateView(
@@ -122,7 +125,8 @@ import java.util.*
         easyWayLocation = EasyWayLocation(requireContext(), false, false, this)
 
 
-        lm =requireContext().getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
+        lm =
+            requireContext().getSystemService(AppCompatActivity.LOCATION_SERVICE) as LocationManager
 
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireContext())
@@ -195,7 +199,7 @@ import java.util.*
 
                             currentAddress = "$subLocality, $locality, $countryName"
 
-                           // binding.tvLocation.text = currentAddress
+                            // binding.tvLocation.text = currentAddress
                             binding.tvLocation.text = addresses?.get(0)?.getAddressLine(0)
 
                             Log.e(ContentValues.TAG, "locality-$locality")
@@ -227,7 +231,6 @@ import java.util.*
             REQUEST_CODE
         )
     }
-
 
 
     @Deprecated("Deprecated in Java")
@@ -262,7 +265,7 @@ import java.util.*
         GlobalScope.launch {
             // getLocationDetail.getAddress(location.latitude, location.longitude, "xyz")
             getLocationDetail.getAddress(location.latitude, location.longitude, "AAA")
-           // getLastLocation()
+            // getLastLocation()
 
         }
 
@@ -289,18 +292,16 @@ import java.util.*
             )
         }
     }
+
     private fun isNetworkConnected(): Boolean {
-        val cm = requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val cm =
+            requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return cm.activeNetworkInfo != null
     }
 
 
     private fun apiCallRejectedBooking() {
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
+        AppProgressBar.showLoaderDialog(context)
 
         //progressDialog!!.show()
 
@@ -318,27 +319,38 @@ import java.util.*
                             Log.e("Size", response.body()!!.result.size.toString())
                             binding.tvRejectedBooking.text =
                                 response.body()!!.result.size.toString()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
+                            count4 = 0
                             response.body()!!.result.size.toString()
                             Log.e("Size", response.body()!!.result.size.toString())
                             binding.tvRejectedBooking.text =
                                 response.body()!!.result.size.toString()
+                            AppProgressBar.hideLoaderDialog()
                         }
 
 
-                    }catch (e:Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                         myToast(requireActivity(), "Something went wrong")
                         binding.shimmer.visibility = View.GONE
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
                     }
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    myToast(requireActivity(), "Something went wrong")
-                    binding.shimmer.visibility = View.GONE
-                    progressDialog!!.dismiss()
+
+
+                    count4++
+                    if (count4 <= 3) {
+                        apiCallRejectedBooking()
+                    } else {
+                        myToast(requireActivity(), "Something went wrong")
+                        binding.shimmer.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
+
 
                 }
 
@@ -347,13 +359,7 @@ import java.util.*
     }
 
     private fun apiCallCompletedBooking() {
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        //  progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getConsultation(sessionManager.id.toString(), "completed")
             .enqueue(object : Callback<ModelGetConsultation> {
@@ -364,6 +370,7 @@ import java.util.*
                     try {
                         if (response.code() == 500) {
 
+
                         } else if (response.body()!!.result.isEmpty()) {
                             binding.shimmer.visibility = View.GONE
                             response.body()!!.result.size.toString()
@@ -371,24 +378,35 @@ import java.util.*
                             binding.tvCompletedBooking.text =
                                 response.body()!!.result.size.toString()
                             // myToast(requireActivity(),"No Data Found")
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
+                            count3 = 0
                             response.body()!!.result.size.toString()
                             Log.e("Size", response.body()!!.result.size.toString())
                             binding.tvCompletedBooking.text =
                                 response.body()!!.result.size.toString()
+                            AppProgressBar.hideLoaderDialog()
                         }
 
 
-                    }catch (e:Exception){
+
+                    } catch (e: Exception) {
                         e.printStackTrace()
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     }
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    progressDialog!!.dismiss()
+                    count3++
+                    if (count3 <= 3) {
+                        apiCallCompletedBooking()
+                    } else {
+                        myToast(context as Activity, "Something went wrong")
+                    }
+                    AppProgressBar.hideLoaderDialog()
+
 
                 }
 
@@ -396,13 +414,7 @@ import java.util.*
     }
 
     private fun apiCallTotalBooking() {
-        progressDialog = ProgressDialog(requireContext())
-        progressDialog!!.setMessage("Loading..")
-        progressDialog!!.setTitle("Please Wait")
-        progressDialog!!.isIndeterminate = false
-        progressDialog!!.setCancelable(true)
-
-        //  progressDialog!!.show()
+        AppProgressBar.showLoaderDialog(context)
 
         ApiClient.apiService.getConsultation(sessionManager.id.toString(), "")
             .enqueue(object : Callback<ModelGetConsultation> {
@@ -417,27 +429,36 @@ import java.util.*
                             response.body()!!.result.size.toString()
                             Log.e("Size", response.body()!!.result.size.toString())
                             binding.tvTotalBooking.text = response.body()!!.result.size.toString()
+                            AppProgressBar.hideLoaderDialog()
 
                         } else {
+                            count2 = 0
                             response.body()!!.result.size.toString()
                             Log.e("Size", response.body()!!.result.size.toString())
                             binding.tvTotalBooking.text = response.body()!!.result.size.toString()
+                            AppProgressBar.hideLoaderDialog()
                         }
 
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     }
-
 
 
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    myToast(requireActivity(), "Something went wrong")
-                    binding.shimmer.visibility = View.GONE
-                    progressDialog!!.dismiss()
+
+                    count2++
+                    if (count2 <= 3) {
+                        apiCallTotalBooking()
+                    } else {
+                        myToast(requireActivity(), "Something went wrong")
+                        binding.shimmer.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
+
 
                 }
 
@@ -456,20 +477,25 @@ import java.util.*
                         if (response.code() == 500) {
                             myToast(requireActivity(), "Server Error")
                             binding.shimmer.visibility = View.GONE
+                            AppProgressBar.hideLoaderDialog()
 
                         } else if (response.body()!!.result.isEmpty()) {
                             binding.shimmer.visibility = View.GONE
+                            AppProgressBar.hideLoaderDialog()
 
                             // myToast(requireActivity(),"No Data Found")
 
                         } else {
+                            count = 0
                             binding.rvUpcoming.apply {
                                 shimmerFrameLayout?.startShimmer()
                                 response.body()!!.result.size.toString()
                                 Log.e("Size", response.body()!!.result.size.toString())
-                                binding.tvPendingBooking.text = response.body()!!.result.size.toString()
+                                binding.tvPendingBooking.text =
+                                    response.body()!!.result.size.toString()
                                 binding.rvUpcoming.visibility = View.VISIBLE
                                 binding.shimmer.visibility = View.GONE
+                                AppProgressBar.hideLoaderDialog()
                                 //  myToast(requireActivity(),"Adapter")
                                 adapter = activity?.let { AdapterHome(it, response.body()!!) }
                             }
@@ -478,7 +504,7 @@ import java.util.*
                     } catch (e: Exception) {
                         e.printStackTrace()
                         e.localizedMessage?.let { Log.e("CatchError", it) }
-                        progressDialog!!.dismiss()
+                        AppProgressBar.hideLoaderDialog()
 
                     }
 
@@ -486,19 +512,26 @@ import java.util.*
                 }
 
                 override fun onFailure(call: Call<ModelGetConsultation>, t: Throwable) {
-                    // myToast(requireActivity(), "Something went wrong")
-                    binding.shimmer.visibility = View.GONE
-                    progressDialog!!.dismiss()
+
+                    count++
+                    if (count <= 3) {
+                        apiCallGetConsultationWating()
+                    } else {
+                        myToast(context as Activity, t.message.toString())
+                        binding.shimmer.visibility = View.GONE
+                    }
+                    AppProgressBar.hideLoaderDialog()
+
 
                 }
 
             })
     }
 
-     override fun onResume() {
-         super.onResume()
-         easyWayLocation.startLocation()
-     }
+    override fun onResume() {
+        super.onResume()
+        easyWayLocation.startLocation()
+    }
 
     override fun onStart() {
         super.onStart()

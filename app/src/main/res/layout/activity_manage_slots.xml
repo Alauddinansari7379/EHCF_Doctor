@@ -36,7 +36,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
-
+android:visibility="gone"
                 android:textColor="@color/black"
                 android:background="@drawable/ic_baseline_notifications_24"
                 android:text="Appointments">
@@ -45,6 +45,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
+                android:visibility="gone"
                 android:backgroundTint="@color/black"
                 android:background="@drawable/ic_baseline_logout_24"
                 android:text="Appointments">

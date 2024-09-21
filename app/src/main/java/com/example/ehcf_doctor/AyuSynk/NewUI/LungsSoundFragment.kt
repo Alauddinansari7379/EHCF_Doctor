@@ -1,16 +1,13 @@
 package com.example.ehcf_doctor.AyuSynk.NewUI
 
 import android.annotation.SuppressLint
-import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings
-import android.text.method.ScrollingMovementMethod
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +17,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.ayudevice.ayusynksdk.AyuSynk
 import com.ayudevice.ayusynksdk.ble.constants.DeviceConnectionState
@@ -37,12 +35,11 @@ import com.ayudevice.ayusynksdk.report.listener.DiagnosisReportUpdateListener
 import com.ayudevice.ayusynksdk.utils.logs.AyuLogsListener
 import com.example.ehcf_doctor.AyuSynk.NewUI.RecordHeartSound.FragmentValue.Companion.recordHeartSound
 import com.example.ehcf_doctor.AyuSynk.utils.GenUtil
+import com.example.ehcf_doctor.Helper.AppProgressBar
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.databinding.FragmentLungsSoundBinding
-import com.example.ehcf_doctor.databinding.FragmentRecordHeartSoundBinding
 import java.io.File
 import java.io.IOException
-import java.util.*
 
 
 class LungsSoundFragment :Fragment(), AyuDeviceListener, AdapterView.OnItemSelectedListener,
@@ -51,7 +48,6 @@ class LungsSoundFragment :Fragment(), AyuDeviceListener, AdapterView.OnItemSelec
     private lateinit var binding: FragmentLungsSoundBinding
     private var lastRecordedData: ShortArray? = null
     private var recordID = -1
-    var progressDialog : ProgressDialog?=null
 
     private var isRecordingPaused = false
     val usb=1
@@ -411,12 +407,7 @@ class LungsSoundFragment :Fragment(), AyuDeviceListener, AdapterView.OnItemSelec
                 shareFile(file)
             }
             R.id.btn_report -> {
-                progressDialog = ProgressDialog(requireContext())
-                progressDialog!!.setMessage("Generating Report")
-                progressDialog!!.setTitle("Please Wait..")
-                progressDialog!!.isIndeterminate = false
-                progressDialog!!.setCancelable(true)
-                progressDialog!!.show()
+                AppProgressBar.showLoaderDialog(context)
 
                 binding!!.btnReport.isEnabled = false
                 //  binding!!.progressBarReport.visibility = View.VISIBLE
@@ -524,7 +515,7 @@ class LungsSoundFragment :Fragment(), AyuDeviceListener, AdapterView.OnItemSelec
         binding!!.btnReportShare.tag = soundFile
         binding!!.btnReportShare.backgroundTintList =
             ContextCompat.getColorStateList(requireContext(), R.color.main_color);
-        progressDialog!!.dismiss()
+        AppProgressBar.hideLoaderDialog()
 
         Toast.makeText(context, "Reports generated", Toast.LENGTH_SHORT).show()
     }

@@ -38,6 +38,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
+                android:visibility="gone"
 
                 android:textColor="@color/black"
                 android:background="@drawable/ic_baseline_notifications_24"
@@ -47,6 +48,7 @@
                 android:id="@+id/imgLogout"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:visibility="gone"
                 android:layout_marginEnd="10dp"
                 android:src="?android:attr/selectableItemBackground"
                 android:backgroundTint="@color/black"

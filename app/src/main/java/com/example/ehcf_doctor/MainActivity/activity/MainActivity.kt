@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -54,8 +53,8 @@ import com.example.ehcf_doctor.PrivacyTerms.PrivacyTerms
 import com.example.ehcf_doctor.Profile.activity.ProfileSetting
 import com.example.ehcf_doctor.R
 import com.example.ehcf_doctor.ResetPassword
-import com.example.ehcf_doctor.databinding.ActivityMainDoctorBinding
 import com.example.ehcf_doctor.Retrofit.ApiClient
+import com.example.ehcf_doctor.databinding.ActivityMainDoctorBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -93,7 +92,9 @@ class MainActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
 
         bottomNav = binding.bottomNavigation1
-
+        if (sessionManager.imageUrl!!.isEmpty()) {
+            sessionManager.imageUrl = "https://ehcf.in/uploads/"
+        }
 
 
 
@@ -159,7 +160,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvTitle.setOnClickListener {
-            startActivity(Intent(this@MainActivity, CustomDatepickerdemo::class.java))
+//            startActivity(Intent(this@MainActivity, CustomDatepickerdemo::class.java))
 
         }
 

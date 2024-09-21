@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ehcf.sharedpreferences.SessionManager
 import com.example.ehcf_doctor.HealthCube.activity.AddPatient
 import com.example.ehcf_doctor.HealthCube.activity.HealthCubeTestHistory
 import com.example.ehcf_doctor.HealthCube.activity.PatientList
@@ -25,6 +26,7 @@ class AdapterPatientList(
     val context: Context, private val list: ArrayList<ResultMyPatient>,
 ) :
     RecyclerView.Adapter<AdapterPatientList.MyViewHolder>() {
+        lateinit var sessionManager: SessionManager
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             LayoutInflater.from(context).inflate(R.layout.single_row_my_patient_list, parent, false)
@@ -35,9 +37,10 @@ class AdapterPatientList(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         try {
+            sessionManager = SessionManager(context)
             if (list[position].profile_picture!=null) {
                 Picasso.get()
-                    .load("https://ehcf.thedemostore.in/uploads/${list[position].profile_picture}")
+                    .load("${sessionManager.imageUrl}${list[position].profile_picture}")
                     .placeholder(R.drawable.profile).error(R.drawable.profile)
                     .into(holder.imgProfile);
             }
