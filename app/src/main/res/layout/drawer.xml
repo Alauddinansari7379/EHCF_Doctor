@@ -21,7 +21,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="230dp"
         android:layout_height="180dp"
-        android:background="@drawable/logonew">
+        android:background="@drawable/logo">
 
     </androidx.appcompat.widget.AppCompatImageView>
 

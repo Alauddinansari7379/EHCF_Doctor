@@ -17,20 +17,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.Toolbar
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/toolBar"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                >
+                android:layout_height="300dp">
+
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="200dp"
-                    android:layout_height="150dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/logonew">
+                    android:background="@drawable/logo">
 
                 </androidx.appcompat.widget.AppCompatImageView>
 
-
-            </androidx.appcompat.widget.Toolbar>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
             <com.google.android.material.card.MaterialCardView

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MCF Doctor</string>
+    <string name="app_name">EHCF Doctor</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="channel_id" translatable="false">EHCF_Doctor-channel</string>

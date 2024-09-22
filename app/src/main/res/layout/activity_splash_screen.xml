@@ -16,9 +16,9 @@
         android:gravity="center"
         android:background="@color/white">
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="130dp"
-            android:background="@drawable/logonew">
+            android:background="@drawable/ehcf_logo">
 
         </androidx.appcompat.widget.AppCompatImageView>
 

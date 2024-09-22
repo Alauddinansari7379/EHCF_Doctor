@@ -1,37 +1,217 @@
 {
   "project_info": {
-    "project_number": "578989039460",
-    "firebase_url": "https://ehcfdoctor-7ac5a-default-rtdb.firebaseio.com",
-    "project_id": "ehcfdoctor-7ac5a",
-    "storage_bucket": "ehcfdoctor-7ac5a.appspot.com"
+    "project_number": "12841086081",
+    "firebase_url": "https://notificationmsg-574c6-default-rtdb.firebaseio.com",
+    "project_id": "notificationmsg-574c6",
+    "storage_bucket": "notificationmsg-574c6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:578989039460:android:ef0bb67baf247328536471",
+        "mobilesdk_app_id": "1:12841086081:android:c8cc1079cebd82cd43f180",
         "android_client_info": {
           "package_name": "com.Amtech.ehcfdoctor"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "578989039460-2i6qtatcihfocmfnfsp7god9c3280581.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBbP6QlZoIn1e28eKQHQGbVKTMionPsoZ4"
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "578989039460-2i6qtatcihfocmfnfsp7god9c3280581.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12841086081:android:74a02b4d0b6978dc43f180",
+        "android_client_info": {
+          "package_name": "com.Amtech.ehcfpatient"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12841086081:android:66243ce75dfdfb0c43f180",
+        "android_client_info": {
+          "package_name": "com.amtech.baseetcustomer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12841086081:android:77b4226bd474e75543f180",
+        "android_client_info": {
+          "package_name": "com.amtech.instantapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12841086081:android:c6680a7c77a9441043f180",
+        "android_client_info": {
+          "package_name": "com.amtech.sellacha"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12841086081:android:c14e432d8d32a06c43f180",
+        "android_client_info": {
+          "package_name": "com.amtech.tlismimoti"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12841086081:android:ad7391e418a0451143f180",
+        "android_client_info": {
+          "package_name": "com.amtech.vendorservices"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12841086081:android:4aca0fd196ffaefe43f180",
+        "android_client_info": {
+          "package_name": "com.android.sellacha"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12841086081:android:dd993c28f5a6d63843f180",
+        "android_client_info": {
+          "package_name": "com.example.notificationmsg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12841086081:android:2b6bf1b3667e2d5a43f180",
+        "android_client_info": {
+          "package_name": "com.sellacha.mehfeel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12841086081:android:a6fa2acde384809443f180",
+        "android_client_info": {
+          "package_name": "com.sellacha.tlismiherbs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-fxJiKh0Lr7kkpn2GCdxh_p9WaC62KZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }
