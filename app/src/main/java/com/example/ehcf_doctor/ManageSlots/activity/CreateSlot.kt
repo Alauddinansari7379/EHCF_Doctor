@@ -182,12 +182,6 @@ class CreateSlot : AppCompatActivity() {
             endTime()
         }
 
-
-
-
-
-
-
         binding.btnCreate.setOnClickListener {
             val startT = sessionManager.openTime!!.replace(":", "").toInt()
             val endT = binding.tvStartTime.text.toString().replace(":", "").toInt()
