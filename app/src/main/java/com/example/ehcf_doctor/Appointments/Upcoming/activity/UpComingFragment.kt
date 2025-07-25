@@ -305,7 +305,7 @@ class UpComingFragment : Fragment(), AdapterUpComing.ConfirmSlot,
         jitsiMeetUserInfo.email = sessionManager.email
         try {
             val defaultOptions: JitsiMeetConferenceOptions = JitsiMeetConferenceOptions.Builder()
-                .setServerURL(URL("https://jitsi.ethicalhealthcare.in/"))
+                .setServerURL(URL("https://meet.itqanethical.com/"))
                // .setServerURL(URL("https://jvc.ethicalhealthcare.in/"))
                 .setRoom(startTime)
                 .setAudioMuted(false)
